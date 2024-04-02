@@ -1,3 +1,4 @@
+from __future__ import annotations
 from dataclasses import dataclass
 import torch as th
 from torch.utils.data import DataLoader
@@ -5,8 +6,9 @@ from pathlib import Path
 import pandas as pd
 from random import sample
 from tqdm.auto import tqdm
+from nnsight.models.UnifiedTransformer import UnifiedTransformer
 
-__all__ = ["process_tokens"]
+DATA_PATH = Path(__file__).resolve().parent.parent / "data"
 
 
 def token_prefixes(token_str: str):
@@ -48,7 +50,7 @@ def process_tokens(token_str: str, tokenizer, lang=None):
 
 
 @th.no_grad
-def logit_lens(nn_model, prompts):
+def logit_lens(nn_model: UnifiedTransformer, prompts):
     """
     Get the probabilities of the next token for the last token of each prompt at each layer using the logit lens.
 
@@ -62,35 +64,48 @@ def logit_lens(nn_model, prompts):
     """
     nn_model.eval()
     tok_prompts = nn_model.tokenizer(prompts, return_tensors="pt", padding=True)
-    # Todo?: This is a hacky way to get the last token index
+    # Todo?: This is a hacky way to get the last token index but it works for both left and right padding
     last_token_index = (
         tok_prompts.attention_mask.flip(1).cumsum(1).bool().int().sum(1).sub(1)
     )
     with nn_model.trace(prompts) as tracer:
         hiddens_l = [
-            layer.output[0][
-                th.arange(len(tok_prompts.input_ids), device=layer.output[0].device),
-                last_token_index.to(layer.output[0].device),
+            layer.output[
+                th.arange(len(tok_prompts.input_ids), device=layer.output.device),
+                last_token_index.to(layer.output.device),
             ].unsqueeze(1)
-            for layer in nn_model.model.layers
+            for layer in nn_model.blocks
         ]
         hiddens = th.cat(hiddens_l, dim=1)
-        rms_out = nn_model.model.norm(hiddens)
-        logits = nn_model.lm_head(rms_out).cpu().save()
-        output = nn_model.lm_head.output.cpu().save()
+        ln_out = nn_model.ln_final(hiddens)
+        logits = nn_model.unembed(ln_out).cpu().save()
+        output = nn_model.unembed.output.cpu().save()
         probs = logits.softmax(-1).cpu().save()
-    assert th.allclose(
+    if not th.allclose(
         logits[:, -1, :],
         output[
             th.arange(len(tok_prompts.input_ids), device=logits.device),
             last_token_index.to(logits.device),
         ],
-    )
+        atol=1e-4,
+    ):
+        diff = (
+            (
+                logits[:, -1, :]
+                - output[
+                    th.arange(len(tok_prompts.input_ids), device=logits.device),
+                    last_token_index.to(logits.device),
+                ]
+            )
+            .abs()
+            .max()
+        )
+        raise RuntimeError(f"Logits and output don't match. Max diff: {diff}")
     return probs
 
 
 def load_lang(lang):
-    path = Path("data") / "langs" / lang / "clean.csv"
+    path = DATA_PATH / "langs" / lang / "clean.csv"
     return pd.read_csv(path)
 
 
@@ -154,9 +169,9 @@ lang2name = {
 class Prompt:
     prompt: str
     target_tokens: list[int]
-    latent_tokens: list[int]
+    latent_tokens: dict[str, list[int]]
     target_string: str
-    latent_string: str
+    latent_strings: dict[str, str | list[str]]
 
     @th.no_grad
     def run(self, nn_model):
@@ -165,8 +180,11 @@ class Prompt:
         """
         probs = logit_lens(nn_model, self.prompt)
         target_probs = probs[:, :, self.target_tokens].sum(dim=2)
-        latent_probs = probs[:, :, self.latent_tokens].sum(dim=2)
-        return target_probs, latent_probs
+        latent_probs = {
+            lang: probs[:, :, tokens].sum(dim=2)
+            for lang, tokens in self.latent_tokens.items()
+        }
+        return target_probs.cpu(), latent_probs.cpu()
 
 
 @th.no_grad
@@ -179,22 +197,25 @@ def run_prompts(nn_model, prompts, batch_size=32):
     """
     # Todo: split in batches
     target_probs = []
-    latent_probs = []
+    latent_probs = {lang: [] for lang in prompts[0].latent_tokens.keys()}
     str_prompts = [prompt.prompt for prompt in prompts]
     dataloader = DataLoader(str_prompts, batch_size=batch_size)
     probs = []
-    for prompt_batch in tqdm(dataloader):
+    for prompt_batch in tqdm(dataloader, total=len(dataloader)):
         probs.append(logit_lens(nn_model, prompt_batch))
     probs = th.cat(probs)
     for i, prompt in enumerate(prompts):
         target_probs.append(probs[i, :, prompt.target_tokens].sum(dim=1))
-        latent_probs.append(probs[i, :, prompt.latent_tokens].sum(dim=1))
-    target_probs = th.stack(target_probs)
-    latent_probs = th.stack(latent_probs)
+        for lang, tokens in prompt.latent_tokens.items():
+            latent_probs[lang].append(probs[i, :, tokens].sum(dim=1))
+    target_probs = th.stack(target_probs).cpu()
+    latent_probs = {lang: th.stack(probs).cpu() for lang, probs in latent_probs.items()}
     return target_probs, latent_probs
 
 
-def translation_prompts(df, tokenizer, input_lang, target_lang, latent_lang, n=5):
+def translation_prompts(
+    df, tokenizer, input_lang, target_lang, latent_langs: str | list[str], n=5
+):
     """
     Get a translation prompt from input_lang to target_lang for each row in the dataframe.
 
@@ -208,11 +229,13 @@ def translation_prompts(df, tokenizer, input_lang, target_lang, latent_lang, n=5
     Returns:
         List of Prompt objects
     """
+    if isinstance(latent_langs, str):
+        latent_langs = [latent_langs]
     assert (
         len(df) > n
     ), f"Not enough translations from {input_lang} to {target_lang} for n={n}"
     prompts = []
-    for idx, row in tqdm(df.iterrows()):
+    for idx, row in tqdm(df.iterrows(), total=len(df)):
         idxs = df.index.tolist()
         idxs.remove(idx)
         fs_idxs = sample(idxs, n)
@@ -222,10 +245,17 @@ def translation_prompts(df, tokenizer, input_lang, target_lang, latent_lang, n=5
             prompt += f'{lang2name[input_lang]}: "{fs_row[input_lang]}" - {lang2name[target_lang]}: "{fs_row[target_lang]}"\n'
         prompt += f'{lang2name[input_lang]}: "{row[input_lang]}" - {lang2name[target_lang]}: "'
         target_tokens = process_tokens(row[target_lang], tokenizer, lang=target_lang)
-        latent_tokens = process_tokens(row[latent_lang], tokenizer, lang=latent_lang)
+        latent_tokens = {
+            lang: process_tokens(row[lang], tokenizer, lang=lang)
+            for lang in latent_langs
+        }
         prompts.append(
             Prompt(
-                prompt, target_tokens, latent_tokens, row[target_lang], row[latent_lang]
+                prompt,
+                target_tokens,
+                latent_tokens,
+                row[target_lang],
+                {lang: row[lang] for lang in latent_langs},
             )
         )
     return prompts
