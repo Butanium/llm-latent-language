@@ -34,19 +34,22 @@ def unicode_prefix_tokid(zh_char, tokenizer):
     return None
 
 
-def process_tokens(token_str: str, tokenizer, lang=None):
-    with_prefixes = token_prefixes(token_str)
-    with_spaces = add_spaces(with_prefixes)
-    with_capitalizations = capitalizations(with_spaces)
+def process_tokens(words: str | list[str], tokenizer, lang=None):
+    if isinstance(words, str):
+        words = [words]
     final_tokens = []
-    for tok in with_capitalizations:
-        if tok in tokenizer.get_vocab():
-            final_tokens.append(tokenizer.get_vocab()[tok])
-    if lang in ["zh", "ru"]:
-        tokid = unicode_prefix_tokid(token_str, tokenizer)
-        if tokid is not None:
-            final_tokens.append(tokid)
-    return final_tokens
+    for word in words:
+        with_prefixes = token_prefixes(word)
+        with_spaces = add_spaces(with_prefixes)
+        with_capitalizations = capitalizations(with_spaces)
+        for cap_word in with_capitalizations:
+            if cap_word in tokenizer.get_vocab():
+                final_tokens.append(tokenizer.get_vocab()[cap_word])
+        if lang in ["zh", "ru"]:
+            tokid = unicode_prefix_tokid(word, tokenizer)
+            if tokid is not None:
+                final_tokens.append(tokid)
+    return list(set(final_tokens))
 
 
 @th.no_grad
@@ -162,6 +165,7 @@ lang2name = {
     "ru": "Русский",
     "en": "English",
     "zh": "中文",
+    "es": "Español",
 }
 
 
@@ -214,7 +218,13 @@ def run_prompts(nn_model, prompts, batch_size=32):
 
 
 def translation_prompts(
-    df, tokenizer, input_lang, target_lang, latent_langs: str | list[str], n=5
+    df,
+    tokenizer,
+    input_lang,
+    target_lang,
+    latent_langs: str | list[str],
+    n=5,
+    only_best=False,
 ):
     """
     Get a translation prompt from input_lang to target_lang for each row in the dataframe.
@@ -225,6 +235,7 @@ def translation_prompts(
         input_lang: Language to translate from
         target_lang: Language to translate to
         n: Number of few-shot examples for each translation
+        only_best: If True, only use the best translation for each row
 
     Returns:
         List of Prompt objects
@@ -242,20 +253,32 @@ def translation_prompts(
         prompt = ""
         for fs_idx in fs_idxs:
             fs_row = df.loc[fs_idx]
-            prompt += f'{lang2name[input_lang]}: "{fs_row[input_lang]}" - {lang2name[target_lang]}: "{fs_row[target_lang]}"\n'
-        prompt += f'{lang2name[input_lang]}: "{row[input_lang]}" - {lang2name[target_lang]}: "'
-        target_tokens = process_tokens(row[target_lang], tokenizer, lang=target_lang)
-        latent_tokens = {
-            lang: process_tokens(row[lang], tokenizer, lang=lang)
-            for lang in latent_langs
-        }
+            in_word = fs_row[input_lang]
+            target_word = fs_row[target_lang]
+            if isinstance(target_word, list):
+                target_word = target_word[0]
+            prompt += f'{lang2name[input_lang]}: "{in_word}" - {lang2name[target_lang]}: "{target_word}"\n'
+        in_word = row[input_lang]
+        prompt += f'{lang2name[input_lang]}: "{in_word}" - {lang2name[target_lang]}: "'
+        target_words = row[target_lang]
+        if only_best and isinstance(target_words, list):
+            target_words = target_words[0]
+        target_tokens = process_tokens(target_words, tokenizer, lang=target_lang)
+        latent_tokens = {}
+        latent_words = {}
+        for lang in latent_langs:
+            l_words = row[lang]
+            if only_best and isinstance(l_words, list):
+                l_words = l_words[0]
+            latent_words[lang] = l_words
+            latent_tokens[lang] = process_tokens(l_words, tokenizer, lang=lang)
         prompts.append(
             Prompt(
                 prompt,
                 target_tokens,
                 latent_tokens,
-                row[target_lang],
-                {lang: row[lang] for lang in latent_langs},
+                target_words,
+                latent_words,
             )
         )
     return prompts

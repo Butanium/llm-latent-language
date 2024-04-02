@@ -320,3 +320,50 @@ class StopToken(StoppingCriteria):
             or tokenizer.decode(i).endswith(string)
         ]
         return StopToken(stop_tokens)
+
+
+from munch import Munch
+def convert_to_munch(data):
+    if isinstance(data, dict):
+        return Munch({k: convert_to_munch(v) for k, v in data.items()})
+    elif isinstance(data, list):
+        return [convert_to_munch(item) for item in data]
+    else:
+        return data
+
+from wrpy import WordReference
+
+from cache_decorator import Cache
+@Cache()  
+def cached_wr(source_lang, target_lang, word):
+    return WordReference(source_lang, target_lang).translate(word)
+
+
+def wr_translate(source_lang, target_lang, word, single_word=False, noun_only=True):
+    wr = WordReference(source_lang, target_lang)
+    response = convert_to_munch(cached_wr(source_lang, target_lang, word))
+    translations = []
+    # only take the principal and secondary translations
+    entries = response.translations[0].entries
+    if len(response.translations) > 1:
+        entries.extend(response.translations[1].entries)
+    for ent in entries:  
+        for trans in ent.to_word:
+            if noun_only and (ent.from_word.grammar == "" or ent.from_word.grammar[0] != 'n'):
+                continue
+            for w in trans.meaning.split(","):
+                w = w.strip()
+                if len(w.split(" ")) > 1 and single_word:
+                    continue
+                translations.append(w)
+    return list(dict.fromkeys(translations))
+
+
+
+
+from transformer_lens.loading_from_pretrained import OFFICIAL_MODEL_NAMES, MODEL_ALIASES
+def add_model_to_transformer_lens(official_name, alias=None):
+    if alias is None:
+        alias = official_name
+    OFFICIAL_MODEL_NAMES.append(official_name)
+    MODEL_ALIASES[official_name] = [alias]
