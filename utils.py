@@ -339,30 +339,49 @@ def cached_wr(source_lang, target_lang, word):
     return WordReference(source_lang, target_lang).translate(word)
 
 
+import regex
 def wr_translate(source_lang, target_lang, word, single_word=False, noun_only=True):
-    wr = WordReference(source_lang, target_lang)
     response = convert_to_munch(cached_wr(source_lang, target_lang, word))
     translations = []
     # only take the principal and secondary translations
+    if len(response.translations) == 0:
+        return []
     entries = response.translations[0].entries
-    if len(response.translations) > 1:
+    if len(response.translations) > 1 and response.translations[1].title == 'Additional Translations':
         entries.extend(response.translations[1].entries)
     for ent in entries:  
         for trans in ent.to_word:
+            trans = trans.meaning.replace("，", ", ")
             if noun_only and (ent.from_word.grammar == "" or ent.from_word.grammar[0] != 'n'):
                 continue
-            for w in trans.meaning.split(","):
-                w = w.strip()
-                if len(w.split(" ")) > 1 and single_word:
-                    continue
-                translations.append(w)
-    return list(dict.fromkeys(translations))
+            if target_lang != "zh":
+                for w in trans.split(","):
+                    w = w.strip()
+                    if len(w.split(" ")) > 1 and single_word:
+                        continue
+                    if w.isnumeric():
+                        continue
+                    translations.append(w)
+            else:
+                if "TCTraditional" in trans:
+                    split = trans.split("TCTraditional")
+                    assert len(split) == 2
+                    trans = split[0]
+                translations.extend(regex.findall(r'\p{Han}+', trans))
+
+
+
+    translations = list(dict.fromkeys(translations))  # remove duplicates
+    return translations
 
 
 
 
 from transformer_lens.loading_from_pretrained import OFFICIAL_MODEL_NAMES, MODEL_ALIASES
 def add_model_to_transformer_lens(official_name, alias=None):
+    """
+    Hacky way to add a model to transformer_lens even if it's not in the official list.
+    """
     if alias is None:
         alias = official_name
     OFFICIAL_MODEL_NAMES.append(official_name)

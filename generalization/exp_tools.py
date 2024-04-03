@@ -53,7 +53,7 @@ def process_tokens(words: str | list[str], tokenizer, lang=None):
 
 
 @th.no_grad
-def logit_lens(nn_model: UnifiedTransformer, prompts):
+def logit_lens(nn_model: UnifiedTransformer, prompts, scan=True):
     """
     Get the probabilities of the next token for the last token of each prompt at each layer using the logit lens.
 
@@ -71,7 +71,7 @@ def logit_lens(nn_model: UnifiedTransformer, prompts):
     last_token_index = (
         tok_prompts.attention_mask.flip(1).cumsum(1).bool().int().sum(1).sub(1)
     )
-    with nn_model.trace(prompts) as tracer:
+    with nn_model.trace(prompts, scan=scan) as tracer:
         hiddens_l = [
             layer.output[
                 th.arange(len(tok_prompts.input_ids), device=layer.output.device),
@@ -166,6 +166,7 @@ lang2name = {
     "en": "English",
     "zh": "中文",
     "es": "Español",
+    "ko": "한국어",
 }
 
 
@@ -205,8 +206,10 @@ def run_prompts(nn_model, prompts, batch_size=32):
     str_prompts = [prompt.prompt for prompt in prompts]
     dataloader = DataLoader(str_prompts, batch_size=batch_size)
     probs = []
+    scan = True
     for prompt_batch in tqdm(dataloader, total=len(dataloader)):
-        probs.append(logit_lens(nn_model, prompt_batch))
+        probs.append(logit_lens(nn_model, prompt_batch, scan=scan))
+        scan = False
     probs = th.cat(probs)
     for i, prompt in enumerate(prompts):
         target_probs.append(probs[i, :, prompt.target_tokens].sum(dim=1))
