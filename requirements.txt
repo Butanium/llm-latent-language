@@ -1,20 +1,12 @@
-torch
-torchvision
-torch
-torchvision
-torchaudio
-pandas
-dataclasses 
-numpy 
-matplotlib
-seaborn
-tqdm 
-scipy 
-transformers
-accelerate
+transformer-lens @ git+https://github.com/neelnanda-io/TransformerLens.git
 bitsandbytes
-pytz
-PyYAML
-safetensors
+dataclasses
+jupyter
 papermill
-ipykernel
+seaborn
+scipy
+# New
+wrpy
+nnsight
+munch
+cache_decorator

@@ -4,11 +4,15 @@ import torch as th
 from torch.utils.data import DataLoader
 from pathlib import Path
 import pandas as pd
-from random import sample
 from tqdm.auto import tqdm
 from nnsight.models.UnifiedTransformer import UnifiedTransformer
 
 DATA_PATH = Path(__file__).resolve().parent.parent / "data"
+
+
+def load_lang(lang):
+    path = DATA_PATH / "langs" / lang / "clean.csv"
+    return pd.read_csv(path)
 
 
 def token_prefixes(token_str: str):
@@ -107,69 +111,6 @@ def logit_lens(nn_model: UnifiedTransformer, prompts, scan=True):
     return probs
 
 
-def load_lang(lang):
-    path = DATA_PATH / "langs" / lang / "clean.csv"
-    return pd.read_csv(path)
-
-
-def get_translations(
-    langs, tokenizer=None, multi_token_only=False, single_token_only=False
-):
-    """
-    Load translations from multiple languages and filter by token type if necessary
-    """
-    assert not (
-        multi_token_only and single_token_only
-    ), "Cannot have both multi_token_only and single_token_only"
-    assert tokenizer is not None or not (
-        multi_token_only or single_token_only
-    ), "Cannot filter tokens without a tokenizer"
-    dfs = [load_lang(lang) for lang in langs]
-    dfs_dict = {f"{lang}": df for lang, df in zip(langs, dfs)}
-    merged_df = pd.DataFrame(
-        {
-            name: df.set_index("word_original")["word_translation"]
-            for name, df in dfs_dict.items()
-        }
-    )
-    if "en" not in langs:
-        merged_df = (
-            merged_df.dropna(how="any")
-            .reset_index()
-            .rename(columns={"word_original": "en"})
-        )
-    else:
-        merged_df = merged_df.dropna(how="any").reset_index(drop=True)
-    print(f"Found {len(merged_df)} translations")
-    if not multi_token_only and not single_token_only:
-        return merged_df
-    for idx, row in merged_df.iterrows():
-        for lang in langs:
-            if (
-                row[lang] in tokenizer.get_vocab()
-                or "▁" + row[lang] in tokenizer.get_vocab()
-            ):
-                if multi_token_only:
-                    merged_df.drop(idx, inplace=True)
-                    break
-            elif single_token_only:
-                merged_df.drop(idx, inplace=True)
-                break
-    print(f"Filtered to {len(merged_df)} translations")
-    return merged_df
-
-
-lang2name = {
-    "fr": "Français",
-    "de": "Deutsch",
-    "ru": "Русский",
-    "en": "English",
-    "zh": "中文",
-    "es": "Español",
-    "ko": "한국어",
-}
-
-
 @dataclass
 class Prompt:
     prompt: str
@@ -218,70 +159,3 @@ def run_prompts(nn_model, prompts, batch_size=32):
     target_probs = th.stack(target_probs).cpu()
     latent_probs = {lang: th.stack(probs).cpu() for lang, probs in latent_probs.items()}
     return target_probs, latent_probs
-
-
-def translation_prompts(
-    df,
-    tokenizer,
-    input_lang,
-    target_lang,
-    latent_langs: str | list[str],
-    n=5,
-    only_best=False,
-):
-    """
-    Get a translation prompt from input_lang to target_lang for each row in the dataframe.
-
-    Args:
-        df: DataFrame containing translations
-        tokenizer: Huggingface tokenizer
-        input_lang: Language to translate from
-        target_lang: Language to translate to
-        n: Number of few-shot examples for each translation
-        only_best: If True, only use the best translation for each row
-
-    Returns:
-        List of Prompt objects
-    """
-    if isinstance(latent_langs, str):
-        latent_langs = [latent_langs]
-    assert (
-        len(df) > n
-    ), f"Not enough translations from {input_lang} to {target_lang} for n={n}"
-    prompts = []
-    for idx, row in tqdm(df.iterrows(), total=len(df)):
-        idxs = df.index.tolist()
-        idxs.remove(idx)
-        fs_idxs = sample(idxs, n)
-        prompt = ""
-        for fs_idx in fs_idxs:
-            fs_row = df.loc[fs_idx]
-            in_word = fs_row[input_lang]
-            target_word = fs_row[target_lang]
-            if isinstance(target_word, list):
-                target_word = target_word[0]
-            prompt += f'{lang2name[input_lang]}: "{in_word}" - {lang2name[target_lang]}: "{target_word}"\n'
-        in_word = row[input_lang]
-        prompt += f'{lang2name[input_lang]}: "{in_word}" - {lang2name[target_lang]}: "'
-        target_words = row[target_lang]
-        if only_best and isinstance(target_words, list):
-            target_words = target_words[0]
-        target_tokens = process_tokens(target_words, tokenizer, lang=target_lang)
-        latent_tokens = {}
-        latent_words = {}
-        for lang in latent_langs:
-            l_words = row[lang]
-            if only_best and isinstance(l_words, list):
-                l_words = l_words[0]
-            latent_words[lang] = l_words
-            latent_tokens[lang] = process_tokens(l_words, tokenizer, lang=lang)
-        prompts.append(
-            Prompt(
-                prompt,
-                target_tokens,
-                latent_tokens,
-                target_words,
-                latent_words,
-            )
-        )
-    return prompts
