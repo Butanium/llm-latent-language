@@ -6,6 +6,8 @@ from pathlib import Path
 import pandas as pd
 from tqdm.auto import tqdm
 from nnsight.models.UnifiedTransformer import UnifiedTransformer
+from transformer_lens import HookedTransformerKeyValueCache as KeyValueCache
+from utils import expend_tl_cache
 
 DATA_PATH = Path(__file__).resolve().parent.parent / "data"
 
@@ -57,7 +59,7 @@ def process_tokens(words: str | list[str], tokenizer, lang=None):
 
 
 @th.no_grad
-def logit_lens(nn_model: UnifiedTransformer, prompts, scan=True):
+def logit_lens(nn_model: UnifiedTransformer, prompts: list[str] | str, scan=True):
     """
     Get the probabilities of the next token for the last token of each prompt at each layer using the logit lens.
 
@@ -111,6 +113,73 @@ def logit_lens(nn_model: UnifiedTransformer, prompts, scan=True):
     return probs
 
 
+def patchscope_prompt(words, rel="→", sep="; "):
+    return sep.join([w + rel + w for w in words]) + sep
+
+
+@th.no_grad
+def patchscope(
+    nn_model: UnifiedTransformer,
+    prompts: list[str] | str,
+    patch_prompt=None,
+    scan=True,
+    rel="→",
+    sep="; ",
+    placeholder="_",
+):
+    assert (
+        len(nn_model.tokenizer(placeholder, add_special_tokens=False).input_ids) == 1
+    ), "Placeholder must be a single token"
+    nn_model.eval()
+    if patch_prompt is None:
+        patch_prompt = patchscope_prompt(["hello", "123", "cow"], rel=rel, sep=sep)
+    tok_prompts = nn_model.tokenizer(prompts, return_tensors="pt", padding=True)
+    # Todo?: This is a hacky way to get the last token index but it works for both left and right padding
+    last_token_index = (
+        tok_prompts.attention_mask.flip(1).cumsum(1).bool().int().sum(1).sub(1)
+    )
+    # Collect the hidden states of the last token of each prompt at each layer
+    with nn_model.trace(prompts, scan=scan) as tracer:
+        hiddens_l = [
+            layer.output[
+                th.arange(len(tok_prompts.input_ids), device=layer.output.device),
+                last_token_index.to(layer.output.device),
+            ].unsqueeze(1)
+            for layer in nn_model.blocks
+        ]
+        hiddens = th.cat(hiddens_l, dim=1).save()
+    kv_cache = KeyValueCache.init_cache(nn_model.cfg, nn_model.cfg.device)
+    # Precompute the patch prompt activations
+    with nn_model.trace(patch_prompt, past_kv_cache=kv_cache, scan=scan):
+        pass
+    kv_cache.freeze()
+    if isinstance(prompts, str):
+        prompts = [prompts]
+    # For each prompt, we will do n_layers patching so we need to expand the cache accordingly
+    n_layers = nn_model.cfg.n_layers
+    expend_tl_cache(kv_cache, len(prompts) * n_layers)
+    # Collect the patch activations for each prompt at each layer
+    with nn_model.trace(
+        [placeholder + rel] * (len(prompts) * n_layers), past_kv_cache=kv_cache,
+    ) as tracer:
+        # if True:
+        #     layer = 0
+        #     nn_model.blocks[layer].output[0:8, layer] = hiddens[0:8, layer] 
+        for layer in range(n_layers):
+            nn_model.blocks[layer].output[
+                layer * len(prompts) : (layer + 1) * len(prompts), 0
+            ] = hiddens[:, layer] # TODO : DEBUG
+        output = nn_model.unembed.output.cpu().save()
+        probs = output.softmax(-1).save()
+        block_act = nn_model.blocks[0].output.cpu().save()
+    return probs.reshape(n_layers, len(prompts), -1).transpose(0, 1)
+
+
+method_to_fn = {
+    "logit_lens": logit_lens,
+    "patchscope": patchscope,
+}
+
 @dataclass
 class Prompt:
     prompt: str
@@ -120,11 +189,12 @@ class Prompt:
     latent_strings: dict[str, str | list[str]]
 
     @th.no_grad
-    def run(self, nn_model):
+    def run(self, nn_model, method: "logit_lens" | "patchscope" = "logit_lens"):
         """
         Run the prompt through the model and return the probabilities of the next token for both the target and latent languages.
         """
-        probs = logit_lens(nn_model, self.prompt)
+        get_probs = method_to_fn[method]
+        probs = get_probs(nn_model, self.prompt)
         target_probs = probs[:, :, self.target_tokens].sum(dim=2)
         latent_probs = {
             lang: probs[:, :, tokens].sum(dim=2)
@@ -134,7 +204,9 @@ class Prompt:
 
 
 @th.no_grad
-def run_prompts(nn_model, prompts, batch_size=32):
+def run_prompts(
+    nn_model, prompts, batch_size=32, method: "logit_lens" | "patchscope" = "logit_lens"
+):
     """
     Run a list of prompts through the model and return the probabilities of the next token for both the target and latent languages.
 
@@ -148,8 +220,9 @@ def run_prompts(nn_model, prompts, batch_size=32):
     dataloader = DataLoader(str_prompts, batch_size=batch_size)
     probs = []
     scan = True
+    get_probs = method_to_fn[method]
     for prompt_batch in tqdm(dataloader, total=len(dataloader)):
-        probs.append(logit_lens(nn_model, prompt_batch, scan=scan))
+        probs.append(get_probs(nn_model, prompt_batch, scan=scan))
         scan = False
     probs = th.cat(probs)
     for i, prompt in enumerate(prompts):

@@ -322,19 +322,8 @@ class StopToken(StoppingCriteria):
         return StopToken(stop_tokens)
 
 
-from munch import Munch
-
-
-def convert_to_munch(data):
-    if isinstance(data, dict):
-        return Munch({k: convert_to_munch(v) for k, v in data.items()})
-    elif isinstance(data, list):
-        return [convert_to_munch(item) for item in data]
-    else:
-        return data
-
-
 from transformer_lens.loading_from_pretrained import OFFICIAL_MODEL_NAMES, MODEL_ALIASES
+from transformer_lens import HookedTransformerKeyValueCache as KeyValueCache
 
 
 def add_model_to_transformer_lens(official_name, alias=None):
@@ -345,3 +334,18 @@ def add_model_to_transformer_lens(official_name, alias=None):
         alias = official_name
     OFFICIAL_MODEL_NAMES.append(official_name)
     MODEL_ALIASES[official_name] = [alias]
+
+
+def expend_tl_cache(cache: KeyValueCache, batch_size: int):
+    """
+    Expend the cache to the given batch size.
+    """
+    for entry in cache:
+        entry.past_keys = entry.past_keys.expand(batch_size, *entry.past_keys.shape[1:])
+        entry.past_values = entry.past_values.expand(
+            batch_size, *entry.past_values.shape[1:]
+        )
+    cache.previous_attention_mask = cache.previous_attention_mask.expand(
+        batch_size, *cache.previous_attention_mask.shape[1:]
+    )
+    return cache
