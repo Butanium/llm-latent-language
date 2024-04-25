@@ -10,3 +10,4 @@ wrpy
 nnsight
 munch
 cache_decorator
+babelnet --install-option="--ignore-requires-python"
