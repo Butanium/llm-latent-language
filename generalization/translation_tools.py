@@ -86,7 +86,7 @@ def wr_translate(source_lang, target_lang, word, single_word=False, noun_only=Tr
     return translations
 
 
-def get_wr_dataset(input_lang, output_langs):
+def get_wr_dataset(input_lang, output_langs, num_words=None):
     """
     Load translations from multiple languages and filter by token type if necessary
     """
@@ -97,6 +97,8 @@ def get_wr_dataset(input_lang, output_langs):
     df = pd.DataFrame(dic)
     df = df[df.map(lambda x: x != []).all(axis=1)]
     print(f"Found {len(df)} translations")
+    if num_words is not None:
+        df = df.sample(num_words)
     return df
 
 
@@ -104,7 +106,7 @@ import babelnet as bn
 from babelnet.sense import BabelLemmaType, BabelSense
 from babelnet import BabelSynset
 
-id_to_lang = {
+id_to_bn_lang = {
     "en": bn.Language("English"),
     "es": bn.Language("Spanish"),
     "fr": bn.Language("French"),
@@ -115,7 +117,7 @@ id_to_lang = {
     "zh": bn.Language("Simplified Chinese"),
     "ko": bn.Language("Korean"),
 }
-lang_to_id = {v: k for k, v in id_to_lang.items()}
+lang_to_id = {v: k for k, v in id_to_bn_lang.items()}
 
 
 @Cache()
@@ -123,8 +125,8 @@ def cached_bn_senses(word, **kwargs):
     return bn.get_senses(word, **kwargs)
 
 def bn_translate(source_lang, target_langs, word, noun_only=True):
-    bn_source_lang = id_to_lang[source_lang]
-    bn_target_langs = [id_to_lang[lang] for lang in target_langs]
+    bn_source_lang = id_to_bn_lang[source_lang]
+    bn_target_langs = [id_to_bn_lang[lang] for lang in target_langs]
 
     def sense_filter(sense: BabelSense):
         if sense._lemma.lemma_type != BabelLemmaType.HIGH_QUALITY:
@@ -194,12 +196,12 @@ def get_bn_dataset(source_lang, target_langs, num_words=None):
 
 
 def filter_translations(
-    translation_df, tokenizer=None, multi_token_only=False, single_token_only=False
+    translation_df, tok_vocab=None, multi_token_only=False, single_token_only=False
 ):
     assert not (
         multi_token_only and single_token_only
     ), "Cannot have both multi_token_only and single_token_only"
-    assert tokenizer is not None or not (
+    assert tok_vocab is not None or not (
         multi_token_only or single_token_only
     ), "Cannot filter tokens without a tokenizer"
     if not multi_token_only and not single_token_only:
@@ -207,8 +209,8 @@ def filter_translations(
     for idx, row in translation_df.iterrows():
         for lang in translation_df.columns:
             if (
-                row[lang] in tokenizer.get_vocab()
-                or "▁" + row[lang] in tokenizer.get_vocab()
+                row[lang] in tok_vocab
+                or "▁" + row[lang] in tok_vocab
             ):
                 if multi_token_only:
                     translation_df.drop(idx, inplace=True)
@@ -254,6 +256,7 @@ def translation_prompts(
     Returns:
         List of Prompt objects
     """
+    tok_vocab = tokenizer.get_vocab()
     if isinstance(latent_langs, str):
         latent_langs = [latent_langs]
     assert (
@@ -277,7 +280,7 @@ def translation_prompts(
         target_words = row[target_lang]
         if only_best and isinstance(target_words, list):
             target_words = target_words[0]
-        target_tokens = process_tokens(target_words, tokenizer, lang=target_lang)
+        target_tokens = process_tokens(target_words, tok_vocab, lang=target_lang)
         latent_tokens = {}
         latent_words = {}
         for lang in latent_langs:
@@ -285,7 +288,7 @@ def translation_prompts(
             if only_best and isinstance(l_words, list):
                 l_words = l_words[0]
             latent_words[lang] = l_words
-            latent_tokens[lang] = process_tokens(l_words, tokenizer, lang=lang)
+            latent_tokens[lang] = process_tokens(l_words, tok_vocab, lang=lang)
         prompts.append(
             Prompt(
                 prompt,
