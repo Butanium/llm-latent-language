@@ -14,6 +14,7 @@ import seaborn as sns
 from scipy.stats import bootstrap
 import numpy as np
 import pandas as pd
+import torch as th
 from transformers import StoppingCriteria
 
 
@@ -332,8 +333,11 @@ def add_model_to_transformer_lens(official_name, alias=None):
     """
     if alias is None:
         alias = official_name
-    OFFICIAL_MODEL_NAMES.append(official_name)
-    MODEL_ALIASES[official_name] = [alias]
+    if official_name not in OFFICIAL_MODEL_NAMES:
+        OFFICIAL_MODEL_NAMES.append(official_name)
+        MODEL_ALIASES[official_name] = [alias]
+    else:
+        print(f"Model {official_name} already in the official transformer lens models.")
 
 
 def expend_tl_cache(cache: KeyValueCache, batch_size: int):
@@ -349,3 +353,50 @@ def expend_tl_cache(cache: KeyValueCache, batch_size: int):
         batch_size, *cache.previous_attention_mask.shape[1:]
     )
     return cache
+
+def plot_topk_tokens(probs, nn_model, k=4, title=None, dynamic_size=True, use_token_ids=False):
+    """
+    Plot the top k tokens for each layer
+    :param probs: Probability tensor of shape (num_layers, vocab_size)
+    :param k: Number of top tokens to plot
+    :param title: Title of the plot
+    :param dynamic_size: If True, the size of the plot will be adjusted based on the length of the tokens
+    """
+    num_layers = len(nn_model.model.layers)
+    top_tokens = th.topk(probs, k=k, dim=-1)
+    top_probs = top_tokens.values
+    if not use_token_ids:
+        top_token_indices = [
+            ["'"+nn_model.tokenizer.convert_ids_to_tokens(t.item())+"'" for t in l] for l in top_tokens.indices
+        ]
+    else:
+        top_token_indices = [[str(t.item()) for t in l] for l in top_tokens.indices]
+    cmap = sns.diverging_palette(255, 0, as_cmap=True)
+    max_token_length = max(
+        [len(token) for sublist in top_token_indices for token in sublist]
+    )
+    print(max_token_length)
+    if dynamic_size:
+        plt.figure(figsize=(max_token_length * k * 0.25, num_layers / 2))
+    else:
+        plt.figure(figsize=(15, 10))
+    ax = sns.heatmap(
+        top_probs.detach().numpy(),
+        annot=top_token_indices,
+        fmt="",
+        cmap=cmap,
+        linewidths=0.5,
+        cbar_kws={"label": "Probability"},
+    )
+    if title is None:
+        plt.title(f"Top {k} Tokens Heatmap")
+    else:
+        plt.title(f"Top {k} Tokens Heatmap - {title}")
+    plt.xlabel("Tokens")
+    plt.ylabel("Layers")
+
+    plt.yticks(np.arange(num_layers) + 0.5, range(num_layers))
+
+    # plt.tight_layout()  # Adjust subplot parameters to fit the figure area
+    plt.show()
+
