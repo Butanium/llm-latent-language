@@ -124,6 +124,7 @@ lang_to_id = {v: k for k, v in id_to_bn_lang.items()}
 def cached_bn_senses(word, **kwargs):
     return bn.get_senses(word, **kwargs)
 
+
 def bn_translate(source_lang, target_langs, word, noun_only=True):
     bn_source_lang = id_to_bn_lang[source_lang]
     bn_target_langs = [id_to_bn_lang[lang] for lang in target_langs]
@@ -181,7 +182,7 @@ def get_bn_dataset(source_lang, target_langs, num_words=None):
             print(f"Error with {word}: {e}")
             if "babelnet" not in str(e):
                 raise e
-                
+
     # if source_lang in target_langs:
     #     for i, source_words in enumerate(translations[source_lang]):
     #         if source_words[i] in translations[source_lang][i]:
@@ -208,10 +209,7 @@ def filter_translations(
         return translation_df
     for idx, row in translation_df.iterrows():
         for lang in translation_df.columns:
-            if (
-                row[lang] in tok_vocab
-                or "▁" + row[lang] in tok_vocab
-            ):
+            if row[lang] in tok_vocab or "▁" + row[lang] in tok_vocab:
                 if multi_token_only:
                     translation_df.drop(idx, inplace=True)
                     break
