@@ -288,7 +288,7 @@ def extract_dictionary(x):
         return None
 
 
-class StopToken(StoppingCriteria):
+class StopOnTokens(StoppingCriteria):
     def __init__(self, stop_tokens):
         """
         Args:
@@ -298,7 +298,7 @@ class StopToken(StoppingCriteria):
             stop_tokens = [stop_tokens]
         self.stop_tokens = stop_tokens
 
-    def __call__(self, input_ids, scores, **kwargs):
+    def __call__(self, input_ids, _scores, **_kwargs):
         if input_ids[0][-1] in self.stop_tokens:
             return True  # Stop generation
         return False  # Continue generation
@@ -313,14 +313,46 @@ class StopToken(StoppingCriteria):
         """
         Initialize the stop tokens as all the tokens that start or end with the given string.
         """
-
         stop_tokens = [
             i
             for i in range(tokenizer.vocab_size)
             if tokenizer.decode(i).startswith(string)
             or tokenizer.decode(i).endswith(string)
+            or string in tokenizer.decode(i) 
         ]
-        return StopToken(stop_tokens)
+        return StopOnTokens(stop_tokens)
+
+
+class StopOnSequence(StoppingCriteria):
+    def __init__(self, stop_sequence):
+        """
+        Args:
+            stop_sequence (List[int]): The sequence to stop generation at.
+        """
+        self.stop_sequence = stop_sequence
+        self.state = 0
+
+    def __call__(self, input_ids, _scores, **_kwargs):
+        if input_ids[0][-1] == self.stop_sequence[self.state]:
+            self.state += 1
+            if self.state == len(self.stop_sequence):
+                return True
+        else:
+            self.state = 0
+        return False
+
+    def __len__(self):
+        return 1
+
+    def __iter__(self):
+        yield self
+
+    def from_string(string, tokenizer):
+        """
+        Initialize the stop tokens as all the tokens that start or end with the given string.
+        """
+        stop_sequence = [tokenizer(string, add_special_tokens=False)]
+        return StopOnSequence(stop_sequence)
 
 
 from transformer_lens.loading_from_pretrained import OFFICIAL_MODEL_NAMES, MODEL_ALIASES
@@ -354,7 +386,10 @@ def expend_tl_cache(cache: KeyValueCache, batch_size: int):
     )
     return cache
 
-def plot_topk_tokens(probs, nn_model, k=4, title=None, dynamic_size=True, use_token_ids=False):
+
+def plot_topk_tokens(
+    probs, nn_model, k=4, title=None, dynamic_size=True, use_token_ids=False
+):
     """
     Plot the top k tokens for each layer
     :param probs: Probability tensor of shape (num_layers, vocab_size)
@@ -367,7 +402,8 @@ def plot_topk_tokens(probs, nn_model, k=4, title=None, dynamic_size=True, use_to
     top_probs = top_tokens.values
     if not use_token_ids:
         top_token_indices = [
-            ["'"+nn_model.tokenizer.convert_ids_to_tokens(t.item())+"'" for t in l] for l in top_tokens.indices
+            ["'" + nn_model.tokenizer.convert_ids_to_tokens(t.item()) + "'" for t in l]
+            for l in top_tokens.indices
         ]
     else:
         top_token_indices = [[str(t.item()) for t in l] for l in top_tokens.indices]
@@ -375,7 +411,6 @@ def plot_topk_tokens(probs, nn_model, k=4, title=None, dynamic_size=True, use_to
     max_token_length = max(
         [len(token) for sublist in top_token_indices for token in sublist]
     )
-    print(max_token_length)
     if dynamic_size:
         plt.figure(figsize=(max_token_length * k * 0.25, num_layers / 2))
     else:
@@ -399,4 +434,3 @@ def plot_topk_tokens(probs, nn_model, k=4, title=None, dynamic_size=True, use_to
 
     # plt.tight_layout()  # Adjust subplot parameters to fit the figure area
     plt.show()
-
