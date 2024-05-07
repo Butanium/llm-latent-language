@@ -11,6 +11,7 @@ from transformer_lens import HookedTransformerKeyValueCache as KeyValueCache
 from utils import expend_tl_cache
 from typing import Callable
 from nnsight import logger
+
 logger.disabled = True
 from typing import Literal
 
@@ -27,11 +28,16 @@ def token_prefixes(token_str: str):
     tokens = [token_str[:i] for i in range(1, n + 1)]
     return tokens
 
+
 SPACE_TOKENS = ["▁", "Ġ"]
+
+
 def add_spaces(tokens):
     return sum([[s + token for token in tokens] for s in SPACE_TOKENS], []) + tokens
 
+
 # TODO?: Add capitalization
+
 
 def unicode_prefix_tokid(zh_char, tok_vocab):
     start = zh_char.encode().__str__()[2:-1].split("\\x")[1]
@@ -59,9 +65,10 @@ def process_tokens(words: str | list[str], tok_vocab, lang=None):
     return list(set(final_tokens))
 
 
-
 @th.no_grad
-def logit_lens(nn_model: UnifiedTransformer, prompts: list[str] | str, scan=True, remote=False):
+def logit_lens(
+    nn_model: UnifiedTransformer, prompts: list[str] | str, scan=True, remote=False
+):
     """
     Get the probabilities of the next token for the last token of each prompt at each layer using the logit lens.
 
@@ -87,14 +94,19 @@ def logit_lens(nn_model: UnifiedTransformer, prompts: list[str] | str, scan=True
             ].unsqueeze(1)
             for layer in nn_model.blocks
         ]
-        hiddens = th.cat(hiddens_l, dim=1)
-        ln_out = nn_model.ln_final(hiddens)
-        logits = nn_model.unembed(ln_out).cpu().save()
-        probs = logits.softmax(-1).cpu().save()
+        probs_l = []
+        for hiddens in hiddens_l:
+            ln_out = nn_model.ln_final(hiddens)
+            logits = nn_model.unembed(ln_out)
+            probs_l.append(logits.squeeze(1).softmax(-1).cpu())
+        probs = th.stack(probs_l).transpose(0, 1).save()
     return probs
 
+
 @th.no_grad
-def logit_lens_llama(nn_model: LanguageModel, prompts: list[str] | str, scan=True, remote=False):
+def logit_lens_llama(
+    nn_model: LanguageModel, prompts: list[str] | str, scan=True, remote=False
+):
     """
     Same as logit_lens but for Llama models directly instead of Transformer_lens models.
     Get the probabilities of the next token for the last token of each prompt at each layer using the logit lens.
@@ -118,12 +130,12 @@ def logit_lens_llama(nn_model: LanguageModel, prompts: list[str] | str, scan=Tru
             layer.output[0][
                 th.arange(len(tok_prompts.input_ids)),
                 last_token_index,
-            ].cpu()
+            ]
             for layer in nn_model.model.layers
         ]
         probs_l = []
         for hiddens in hiddens_l:
-            ln_out = nn_model.model.norm(hiddens.to(nn_model.model.norm.input[0].device[0]))
+            ln_out = nn_model.model.norm(hiddens)
             logits = nn_model.lm_head(ln_out)
             probs = logits.softmax(-1).cpu()
             probs_l.append(probs)
@@ -133,6 +145,7 @@ def logit_lens_llama(nn_model: LanguageModel, prompts: list[str] | str, scan=Tru
 
 def patchscope_prompt(words, rel="→", sep="; "):
     return sep.join([w + rel + w for w in words]) + sep
+
 
 """ TODO: Fix implementation
 @th.no_grad
@@ -195,6 +208,7 @@ method_to_fn = {
     # "patchscope": patchscope,
 }
 
+
 @dataclass
 class Prompt:
     prompt: str
@@ -204,7 +218,11 @@ class Prompt:
     latent_strings: dict[str, str | list[str]]
 
     @th.no_grad
-    def run(self, nn_model, method: Literal["logit_lens", "patchscope", "logit_lens_llama"] = "logit_lens"):
+    def run(
+        self,
+        nn_model,
+        method: Literal["logit_lens", "patchscope", "logit_lens_llama"] = "logit_lens",
+    ):
         """
         Run the prompt through the model and return the probabilities of the next token for both the target and latent languages.
         """
@@ -220,7 +238,12 @@ class Prompt:
 
 @th.no_grad
 def run_prompts(
-    nn_model, prompts, batch_size=32, method: Literal["logit_lens", "patchscope", "logit_lens_llama"] | Callable = "logit_lens"
+    nn_model,
+    prompts,
+    batch_size=32,
+    method: (
+        Literal["logit_lens", "patchscope", "logit_lens_llama"] | Callable
+    ) = "logit_lens",
 ):
     """
     Run a list of prompts through the model and return the probabilities of the next token for both the target and latent languages.

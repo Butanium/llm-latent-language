@@ -11,7 +11,6 @@ import os
 import pytz
 from matplotlib import pyplot as plt
 import seaborn as sns
-from scipy.stats import bootstrap
 import numpy as np
 import pandas as pd
 import torch as th
@@ -19,8 +18,7 @@ from transformers import StoppingCriteria
 
 
 plt.rcParams.update({"font.size": 16})
-
-plt_params = {"linewidth": 2.2}
+plt_params = {"linewidth": 2.7, "alpha": 0.8}
 
 
 def plot_ci_plus_heatmap(
@@ -31,7 +29,7 @@ def plot_ci_plus_heatmap(
     linestyle="-",
     tik_step=10,
     method="gaussian",
-    do_lines=True,
+    init=True,
     do_colorbar=False,
     shift=0.5,
     nums=[0.99, 0.18, 0.025, 0.6],
@@ -52,7 +50,7 @@ def plot_ci_plus_heatmap(
         linestyle=linestyle,
         tik_step=tik_step,
         method=method,
-        do_lines=do_lines,
+        init=init,
         plt_params=plt_params,
     )
 
@@ -80,12 +78,6 @@ def plot_ci_plus_heatmap(
     return fig, ax, ax2
 
 
-def process_axis(ax, ylabel_font=13, xlabel_font=13):
-    ax.spines[["right", "top"]].set_visible(False)
-    # ax.set_ylabel(ylabel, fontsize=ylabel_font)
-    # ax.set_xlabel(xlabel, fontsize=xlabel_font)
-
-
 def plot_ci(
     ax,
     data,
@@ -93,44 +85,22 @@ def plot_ci(
     color="blue",
     linestyle="-",
     tik_step=10,
-    method="gaussian",
-    do_lines=True,
+    init=True,
     plt_params=plt_params,
 ):
-    if do_lines:
+    if init:
         upper = max(round(data.shape[1] / 10) * 10 + 1, data.shape[1] + 1)
         ax.set_xticks(np.arange(0, upper, tik_step))
         for i in range(0, upper, tik_step):
-            ax.axvline(i, color="black", linestyle="--", alpha=0.2, linewidth=1)
-    if method == "gaussian":
-        mean = data.mean(dim=0)
-        std = data.std(dim=0)
-        data_ci = {
-            "x": np.arange(data.shape[1]) + 1,
-            "y": mean,
-            "y_upper": mean + (1.96 / (data.shape[0] ** 0.5)) * std,
-            "y_lower": mean - (1.96 / (data.shape[0] ** 0.5)) * std,
-        }
-    elif method == "np":
-        data_ci = {
-            "x": np.arange(data.shape[1]) + 1,
-            "y": np.quantile(data, 0.5, axis=0),
-            "y_upper": np.quantile(data, 0.95, axis=0),
-            "y_lower": np.quantile(data, 0.05, axis=0),
-        }
-    elif method == "bootstrap":
-        bootstrap_ci = bootstrap(
-            (data,), np.mean, confidence_level=0.95, method="percentile"
-        )
-        data_ci = {
-            "x": np.arange(data.shape[1]) + 1,
-            "y": data.mean(axis=0),
-            "y_upper": bootstrap_ci.confidence_interval.high,
-            "y_lower": bootstrap_ci.confidence_interval.low,
-        }
-
-    else:
-        raise ValueError("method not implemented")
+            ax.axvline(i, color="black", linestyle="--", alpha=0.5, linewidth=1)
+    mean = data.mean(dim=0)
+    std = data.std(dim=0)
+    data_ci = {
+        "x": np.arange(data.shape[1]) + 1,
+        "y": mean,
+        "y_upper": mean + (1.96 / (data.shape[0] ** 0.5)) * std,
+        "y_lower": mean - (1.96 / (data.shape[0] ** 0.5)) * std,
+    }
 
     df = pd.DataFrame(data_ci)
     # Create the line plot with confidence intervals
@@ -138,7 +108,8 @@ def plot_ci(
         df["x"], df["y"], label=label, color=color, linestyle=linestyle, **plt_params
     )
     ax.fill_between(df["x"], df["y_lower"], df["y_upper"], color=color, alpha=0.3)
-    process_axis(ax)
+    if init:
+        ax.spines[["right", "top"]].set_visible(False)
 
 
 def yaml_to_dict(yaml_file):
@@ -318,7 +289,7 @@ class StopOnTokens(StoppingCriteria):
             for i in range(tokenizer.vocab_size)
             if tokenizer.decode(i).startswith(string)
             or tokenizer.decode(i).endswith(string)
-            or string in tokenizer.decode(i) 
+            or string in tokenizer.decode(i)
         ]
         return StopOnTokens(stop_tokens)
 
