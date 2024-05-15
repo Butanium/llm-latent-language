@@ -10,4 +10,6 @@ wrpy
 nnsight
 munch
 cache_decorator
-babelnet --install-option="--ignore-requires-python"
+cloudpickle<3  # Babelnet requires cloudpickle<3
+babelnet -C="--ignore-requires-python"
+emoji

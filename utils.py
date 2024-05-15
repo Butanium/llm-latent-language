@@ -10,6 +10,7 @@ from datetime import datetime
 import os
 import pytz
 from matplotlib import pyplot as plt
+import matplotlib as mpl
 import seaborn as sns
 import numpy as np
 import pandas as pd
@@ -358,6 +359,10 @@ def expend_tl_cache(cache: KeyValueCache, batch_size: int):
     return cache
 
 
+from nnsight import LanguageModel
+from nnsight.models.UnifiedTransformer import UnifiedTransformer
+
+
 def plot_topk_tokens(
     probs, nn_model, k=4, title=None, dynamic_size=True, use_token_ids=False
 ):
@@ -368,7 +373,14 @@ def plot_topk_tokens(
     :param title: Title of the plot
     :param dynamic_size: If True, the size of the plot will be adjusted based on the length of the tokens
     """
-    num_layers = len(nn_model.model.layers)
+    if isinstance(nn_model, UnifiedTransformer):
+        num_layers = len(nn_model.blocks)
+    elif isinstance(nn_model, LanguageModel):
+        num_layers = len(nn_model.model.layers)
+    else:
+        raise ValueError(
+            "nn_model must be an instance of LanguageModel or UnifiedTransformer"
+        )
     top_tokens = th.topk(probs, k=k, dim=-1)
     top_probs = top_tokens.values
     if not use_token_ids:
@@ -378,30 +390,31 @@ def plot_topk_tokens(
         ]
     else:
         top_token_indices = [[str(t.item()) for t in l] for l in top_tokens.indices]
-    cmap = sns.diverging_palette(255, 0, as_cmap=True)
-    max_token_length = max(
-        [len(token) for sublist in top_token_indices for token in sublist]
-    )
-    if dynamic_size:
-        plt.figure(figsize=(max_token_length * k * 0.25, num_layers / 2))
-    else:
-        plt.figure(figsize=(15, 10))
-    ax = sns.heatmap(
-        top_probs.detach().numpy(),
-        annot=top_token_indices,
-        fmt="",
-        cmap=cmap,
-        linewidths=0.5,
-        cbar_kws={"label": "Probability"},
-    )
-    if title is None:
-        plt.title(f"Top {k} Tokens Heatmap")
-    else:
-        plt.title(f"Top {k} Tokens Heatmap - {title}")
-    plt.xlabel("Tokens")
-    plt.ylabel("Layers")
+    with mpl.rc_context(rc={"font.sans-serif": ["SimSun", "Arial"]}):
+        cmap = sns.diverging_palette(255, 0, as_cmap=True)
+        max_token_length = max(
+            [len(token) for sublist in top_token_indices for token in sublist]
+        )
+        if dynamic_size:
+            plt.figure(figsize=(max_token_length * k * 0.25, num_layers / 2))
+        else:
+            plt.figure(figsize=(15, 10))
+        ax = sns.heatmap(
+            top_probs.detach().numpy(),
+            annot=top_token_indices,
+            fmt="",
+            cmap=cmap,
+            linewidths=0.5,
+            cbar_kws={"label": "Probability"},
+        )
+        if title is None:
+            plt.title(f"Top {k} Tokens Heatmap")
+        else:
+            plt.title(f"Top {k} Tokens Heatmap - {title}")
+        plt.xlabel("Tokens")
+        plt.ylabel("Layers")
 
-    plt.yticks(np.arange(num_layers) + 0.5, range(num_layers))
+        plt.yticks(np.arange(num_layers) + 0.5, range(num_layers))
 
-    # plt.tight_layout()  # Adjust subplot parameters to fit the figure area
-    plt.show()
+        # plt.tight_layout()  # Adjust subplot parameters to fit the figure area
+        plt.show()
