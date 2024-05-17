@@ -10,11 +10,10 @@ from nnsight import LanguageModel
 from transformer_lens import HookedTransformerKeyValueCache as KeyValueCache
 from utils import expend_tl_cache
 from typing import Callable
-from nnsight import logger
 from warnings import warn
 from typing import Optional, Union
+import re
 
-logger.disabled = True
 from typing import Literal
 
 DATA_PATH = Path(__file__).resolve().parent.parent / "data"
@@ -31,7 +30,7 @@ def token_prefixes(token_str: str):
     return tokens
 
 
-SPACE_TOKENS = ["▁", "Ġ"]
+SPACE_TOKENS = ["▁", "Ġ", " "]
 
 
 def add_spaces(tokens):
@@ -41,36 +40,72 @@ def add_spaces(tokens):
 # TODO?: Add capitalization
 
 
-def unicode_prefix_tokid(zh_char, tok_vocab):
-    try:
-        start = zh_char.encode().__str__()[2:-1].split("\\x")[1]
-    except IndexError:
-        warn(
-            f"Could not encode character {zh_char}, probably not a valid special character"
-        )
-        return None
-    unicode_format = "<0x%s>"
-    start_key = unicode_format % start.upper()
-    if start_key in tok_vocab:
-        return tok_vocab[start_key]
-    return None
+def byte_string_to_list(input_string):
+    # Find all parts of the string: either substrings or hex codes
+    parts = re.split(r"(\\x[0-9a-fA-F]{2})", input_string)
+    result = []
+    for part in parts:
+        if re.match(r"\\x[0-9a-fA-F]{2}", part):
+            # Convert hex code to integer
+            result.append(int(part[2:], 16))
+        else:
+            if part:  # Skip empty strings
+                result.append(part)
+    return result
 
 
-def process_tokens(words: str | list[str], tok_vocab, lang=None):
+def unicode_prefixes(tok_str):
+    encoded = str(tok_str.encode())[2:-1]
+    if "\\x" not in encoded:
+        return []  # No bytes in the string
+    chr_list = byte_string_to_list(encoded)
+    if isinstance(chr_list[0], int):
+        first_byte_token = [
+            f"<{hex(chr_list[0]).upper()}>"
+        ]  # For llama2 like tokenizer, this is how bytes are represented
+    else:
+        first_byte_token = []
+    # We need to convert back to latin1 to get the character
+    for i, b in enumerate(chr_list):
+        # those bytes are not valid latin1 characters and are shifted by 162 in Llama3 and Qwen
+        if isinstance(b, str):
+            continue
+        if b >= 127 and b <= 160:
+            chr_list[i] += 162
+        chr_list[i] = chr(chr_list[i])
+    # Convert back to string
+    vocab_str = "".join(
+        chr_list
+    )  # This is the string that will be in the tokenizer vocab for Qwen and Llama3
+    return first_byte_token + token_prefixes(vocab_str)
+
+
+def process_tokens(words: str | list[str], tok_vocab):
+    if isinstance(words, str):
+        words = [words]
+    final_tokens = []
+    for word in words:
+        with_prefixes = token_prefixes(word) + unicode_prefixes(word)
+        with_spaces = add_spaces(with_prefixes)
+        for word in with_spaces:
+            if word in tok_vocab:
+                final_tokens.append(tok_vocab[word])
+    return list(set(final_tokens))
+
+
+def __process_tokens_with_tokenization(words: str | list[str], tokenizer):  # todo: remove if not useful
     if isinstance(words, str):
         words = [words]
     final_tokens = []
     for word in words:
         with_prefixes = token_prefixes(word)
         with_spaces = add_spaces(with_prefixes)
-        for cap_word in with_spaces:
-            if cap_word in tok_vocab:
-                final_tokens.append(tok_vocab[cap_word])
-        if lang in ["zh", "ru"]:
-            tokid = unicode_prefix_tokid(word, tok_vocab)
-            if tokid is not None:
-                final_tokens.append(tokid)
-    return list(set(final_tokens))
+        tokenizations = tokenizer(with_spaces, add_special_tokens=False).input_ids
+        final_tokens += [t[0] for t in tokenizations if len(t) == 1]
+    space_ids = set(
+        [t[0] for t in tokenizer(SPACE_TOKENS, add_special_tokens=False).input_ids]
+    )
+    return list(set(final_tokens) - space_ids)
 
 
 @th.no_grad
