@@ -42,7 +42,7 @@ def build_bn_dataset(input_lang):
         for prompt, (_, row) in zip(prompts, df.iterrows()):
             json_dic[str(row[input_lang])] = prompt
         with open(f"../data/langs/{input_lang}/{target_lang}_prompts.json", "w") as f:
-            json.dump(json_dic, f)
+            json.dump(json_dic, f, indent=4)
     print(f"Done {input_lang}")
 
 
