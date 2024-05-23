@@ -1,96 +1,472 @@
 {
-    "['book']": "English: \"net\" - Eesti: \"Internet\"\nEnglish: \"kind\" - Eesti: \"sort\"\nEnglish: \"official\" - Eesti: \"ametnik\"\nEnglish: \"tower\" - Eesti: \"torn\"\nEnglish: \"one\" - Eesti: \"\u00fcks\"\nEnglish: \"book\" - Eesti: \"",
-    "['cloud']": "English: \"bridge\" - Eesti: \"sild\"\nEnglish: \"light\" - Eesti: \"valgus\"\nEnglish: \"machine\" - Eesti: \"auto\"\nEnglish: \"child\" - Eesti: \"alaealine\"\nEnglish: \"wood\" - Eesti: \"laas\"\nEnglish: \"cloud\" - Eesti: \"",
-    "['bag', 'purse', 'handbag', 'pocketbook', 'sack', 'paper bag', 'carrier bag', 'poke', 'plastic shopping bag', 'case', 'suitcase', 'traveling bag', 'travelling bag', 'grip']": "English: \"snow\" - Eesti: \"lumi\"\nEnglish: \"official\" - Eesti: \"ametnik\"\nEnglish: \"square\" - Eesti: \"ruut\"\nEnglish: \"face\" - Eesti: \"n\u00e4gu\"\nEnglish: \"gold\" - Eesti: \"kuld\"\nEnglish: \"bag\" - Eesti: \"",
-    "['mountain', 'mount']": "English: \"painting\" - Eesti: \"maal\"\nEnglish: \"book\" - Eesti: \"raamat\"\nEnglish: \"sea\" - Eesti: \"Maailmameri\"\nEnglish: \"square\" - Eesti: \"ruut\"\nEnglish: \"net\" - Eesti: \"Internet\"\nEnglish: \"mountain\" - Eesti: \"",
-    "['cloth', 'fabric', 'textile', 'material']": "English: \"water\" - Eesti: \"vesi\"\nEnglish: \"rock\" - Eesti: \"rokk\"\nEnglish: \"ocean\" - Eesti: \"ookean\"\nEnglish: \"tail\" - Eesti: \"saba\"\nEnglish: \"tower\" - Eesti: \"torn\"\nEnglish: \"cloth\" - Eesti: \"",
-    "['heart', 'ticker', 'pump', 'Diaphragmatic surface of heart', 'human heart', 'cardiac chamber', 'affectionateness', 'philia', 'fondness', 'warmheartedness', 'affection', 'tenderness', 'warmness', 'affectio', 'eye', 'center', 'centre', 'middle']": "English: \"person\" - Eesti: \"inimene\"\nEnglish: \"east\" - Eesti: \"idakaar\"\nEnglish: \"day\" - Eesti: \"\u00f6\u00f6p\u00e4ev\"\nEnglish: \"cloth\" - Eesti: \"tekstiil\"\nEnglish: \"tower\" - Eesti: \"torn\"\nEnglish: \"heart\" - Eesti: \"",
-    "['day', 'twenty-four hour period', 'solar day', 'twenty-four hours', 'mean solar day']": "English: \"history\" - Eesti: \"ajalugu\"\nEnglish: \"meeting\" - Eesti: \"konverents\"\nEnglish: \"ball\" - Eesti: \"pesapall\"\nEnglish: \"ground\" - Eesti: \"maa\"\nEnglish: \"bridge\" - Eesti: \"sild\"\nEnglish: \"day\" - Eesti: \"",
-    "['star', 'asterisk', 'superstar', 'maven', 'intenditore', 'wiz', 'champion', 'whiz', 'mavin', 'hotshot', 'wizard', 'adept', 'genius', 'ace', 'virtuoso', 'sensation', 'whizz', 'Maven', 'principal', 'lead']": "English: \"song\" - Eesti: \"laul\"\nEnglish: \"south\" - Eesti: \"L\u00f5una\"\nEnglish: \"fruit\" - Eesti: \"vili\"\nEnglish: \"six\" - Eesti: \"kuus\"\nEnglish: \"painting\" - Eesti: \"maal\"\nEnglish: \"star\" - Eesti: \"",
-    "['spring', 'outpouring', 'outflow', 'fountain', 'natural spring', 'season', 'time of year', 'springtime']": "English: \"platform\" - Eesti: \"sillutis\"\nEnglish: \"net\" - Eesti: \"Internet\"\nEnglish: \"six\" - Eesti: \"kuus\"\nEnglish: \"dance\" - Eesti: \"tants\"\nEnglish: \"line\" - Eesti: \"video\"\nEnglish: \"spring\" - Eesti: \"",
-    "['moon', 'Luna']": "English: \"rock\" - Eesti: \"rokk\"\nEnglish: \"ten\" - Eesti: \"k\u00fcmme\"\nEnglish: \"tea\" - Eesti: \"tee\"\nEnglish: \"sun\" - Eesti: \"P\u00e4ike\"\nEnglish: \"mountain\" - Eesti: \"m\u00e4gi\"\nEnglish: \"moon\" - Eesti: \"",
-    "['wood', 'forrest', 'forest', 'woods', 'W\u00e4lder', 'sap-wood', 'sapwood', 'alburnum']": "English: \"judge\" - Eesti: \"kohtunik\"\nEnglish: \"day\" - Eesti: \"\u00f6\u00f6p\u00e4ev\"\nEnglish: \"pair\" - Eesti: \"J\u00e4rjestatud paar\"\nEnglish: \"horse\" - Eesti: \"hobune\"\nEnglish: \"speech\" - Eesti: \"keel\"\nEnglish: \"wood\" - Eesti: \"",
-    "['village', 'hamlet']": "English: \"wave\" - Eesti: \"merelaine\"\nEnglish: \"book\" - Eesti: \"raamat\"\nEnglish: \"painting\" - Eesti: \"maal\"\nEnglish: \"friend\" - Eesti: \"s\u00f5prus\"\nEnglish: \"color\" - Eesti: \"must\"\nEnglish: \"village\" - Eesti: \"",
-    "['forest', 'forrest', 'wood', 'woods', 'W\u00e4lder']": "English: \"machine\" - Eesti: \"auto\"\nEnglish: \"version\" - Eesti: \"t\u00f5lkimine\"\nEnglish: \"door\" - Eesti: \"uks\"\nEnglish: \"song\" - Eesti: \"laul\"\nEnglish: \"village\" - Eesti: \"k\u00fcla\"\nEnglish: \"forest\" - Eesti: \"",
-    "['fruit', 'fleshy fruit']": "English: \"six\" - Eesti: \"kuus\"\nEnglish: \"point\" - Eesti: \"punkt\"\nEnglish: \"star\" - Eesti: \"t\u00e4ht\"\nEnglish: \"cloth\" - Eesti: \"tekstiil\"\nEnglish: \"lake\" - Eesti: \"j\u00e4rv\"\nEnglish: \"fruit\" - Eesti: \"",
-    "['song', 'vocal']": "English: \"machine\" - Eesti: \"auto\"\nEnglish: \"hair\" - Eesti: \"karv\"\nEnglish: \"bag\" - Eesti: \"k\u00e4ekott\"\nEnglish: \"lake\" - Eesti: \"j\u00e4rv\"\nEnglish: \"water\" - Eesti: \"vesi\"\nEnglish: \"song\" - Eesti: \"",
-    "['water', 'body of water', 'waterbody', 'ice', 'water ice']": "English: \"star\" - Eesti: \"t\u00e4ht\"\nEnglish: \"friend\" - Eesti: \"s\u00f5prus\"\nEnglish: \"word\" - Eesti: \"s\u00f5na\"\nEnglish: \"structure\" - Eesti: \"mudel\"\nEnglish: \"square\" - Eesti: \"ruut\"\nEnglish: \"water\" - Eesti: \"",
-    "['river', 'stream', 'watercourse', 'brook', 'lake system']": "English: \"day\" - Eesti: \"\u00f6\u00f6p\u00e4ev\"\nEnglish: \"head\" - Eesti: \"nous\"\nEnglish: \"history\" - Eesti: \"ajalugu\"\nEnglish: \"language\" - Eesti: \"keel\"\nEnglish: \"generation\" - Eesti: \"p\u00f5lvkond\"\nEnglish: \"river\" - Eesti: \"",
-    "['law', 'jurisprudence', 'police', 'police force', 'constabulary', 'Constabulary']": "English: \"face\" - Eesti: \"n\u00e4gu\"\nEnglish: \"snow\" - Eesti: \"lumi\"\nEnglish: \"forest\" - Eesti: \"laas\"\nEnglish: \"light\" - Eesti: \"valgus\"\nEnglish: \"eye\" - Eesti: \"silm\"\nEnglish: \"law\" - Eesti: \"",
-    "['wave', 'sea wave', 'ocean surface wave', 'moving ridge', 'wind wave']": "English: \"face\" - Eesti: \"n\u00e4gu\"\nEnglish: \"house\" - Eesti: \"hoone\"\nEnglish: \"ten\" - Eesti: \"k\u00fcmme\"\nEnglish: \"spring\" - Eesti: \"allikas\"\nEnglish: \"forest\" - Eesti: \"laas\"\nEnglish: \"wave\" - Eesti: \"",
-    "['ocean', 'sea', 'body of water', 'bounding main', 'marine environment']": "English: \"structure\" - Eesti: \"mudel\"\nEnglish: \"day\" - Eesti: \"\u00f6\u00f6p\u00e4ev\"\nEnglish: \"platform\" - Eesti: \"sillutis\"\nEnglish: \"eye\" - Eesti: \"silm\"\nEnglish: \"eight\" - Eesti: \"kaheksa\"\nEnglish: \"ocean\" - Eesti: \"",
-    "['cave']": "English: \"head\" - Eesti: \"nous\"\nEnglish: \"water\" - Eesti: \"vesi\"\nEnglish: \"two\" - Eesti: \"kaks\"\nEnglish: \"bag\" - Eesti: \"k\u00e4ekott\"\nEnglish: \"color\" - Eesti: \"must\"\nEnglish: \"cave\" - Eesti: \"",
-    "['sea', 'body of water', 'bounding main', 'ocean', 'marine environment']": "English: \"tower\" - Eesti: \"torn\"\nEnglish: \"shop\" - Eesti: \"pood\"\nEnglish: \"bag\" - Eesti: \"k\u00e4ekott\"\nEnglish: \"village\" - Eesti: \"k\u00fcla\"\nEnglish: \"head\" - Eesti: \"nous\"\nEnglish: \"sea\" - Eesti: \"",
-    "['lake']": "English: \"dance\" - Eesti: \"tants\"\nEnglish: \"bridge\" - Eesti: \"sild\"\nEnglish: \"eight\" - Eesti: \"kaheksa\"\nEnglish: \"river\" - Eesti: \"j\u00f5gi\"\nEnglish: \"horse\" - Eesti: \"hobune\"\nEnglish: \"lake\" - Eesti: \"",
-    "['fire', 'flame', 'flaming']": "English: \"spring\" - Eesti: \"allikas\"\nEnglish: \"horse\" - Eesti: \"hobune\"\nEnglish: \"wave\" - Eesti: \"merelaine\"\nEnglish: \"site\" - Eesti: \"veebisait\"\nEnglish: \"shop\" - Eesti: \"pood\"\nEnglish: \"fire\" - Eesti: \"",
-    "['point', 'period', 'full stop', 'dot', 'stop', 'full point', 'score', 'item']": "English: \"foot\" - Eesti: \"Labajalg\"\nEnglish: \"one\" - Eesti: \"\u00fcks\"\nEnglish: \"person\" - Eesti: \"inimene\"\nEnglish: \"speed\" - Eesti: \"kiirus\"\nEnglish: \"judge\" - Eesti: \"kohtunik\"\nEnglish: \"point\" - Eesti: \"",
-    "['version', 'translation', 'compilation', 'interlingual rendition', 'rendering', 'translated work', 'interpretation', 'reading']": "English: \"fruit\" - Eesti: \"vili\"\nEnglish: \"thousand\" - Eesti: \"Tuhat\"\nEnglish: \"generation\" - Eesti: \"p\u00f5lvkond\"\nEnglish: \"water\" - Eesti: \"vesi\"\nEnglish: \"south\" - Eesti: \"L\u00f5una\"\nEnglish: \"version\" - Eesti: \"",
-    "['ball', 'baseball', 'baseball game', 'association football ball', 'sphere', 'globe', 'orb', 'bullet', 'slug', 'Slug', 'formal', 'Football', 'football']": "English: \"cave\" - Eesti: \"koobas\"\nEnglish: \"version\" - Eesti: \"t\u00f5lkimine\"\nEnglish: \"two\" - Eesti: \"kaks\"\nEnglish: \"official\" - Eesti: \"ametnik\"\nEnglish: \"generation\" - Eesti: \"p\u00f5lvkond\"\nEnglish: \"ball\" - Eesti: \"",
-    "['painting', 'image', 'picture', 'artist', 'painter', 'art of painting']": "English: \"field\" - Eesti: \"tasandik\"\nEnglish: \"valley\" - Eesti: \"org\"\nEnglish: \"one\" - Eesti: \"\u00fcks\"\nEnglish: \"speech\" - Eesti: \"keel\"\nEnglish: \"bridge\" - Eesti: \"sild\"\nEnglish: \"painting\" - Eesti: \"",
-    "['rice', 'rice farmer', 'rice grower', 'Rice gadu']": "English: \"eye\" - Eesti: \"silm\"\nEnglish: \"one\" - Eesti: \"\u00fcks\"\nEnglish: \"sea\" - Eesti: \"Maailmameri\"\nEnglish: \"cloud\" - Eesti: \"pilv\"\nEnglish: \"star\" - Eesti: \"t\u00e4ht\"\nEnglish: \"rice\" - Eesti: \"",
-    "['red', 'redness']": "English: \"sun\" - Eesti: \"P\u00e4ike\"\nEnglish: \"south\" - Eesti: \"L\u00f5una\"\nEnglish: \"school\" - Eesti: \"\u00fclikool\"\nEnglish: \"structure\" - Eesti: \"mudel\"\nEnglish: \"ocean\" - Eesti: \"ookean\"\nEnglish: \"red\" - Eesti: \"",
-    "['line', 'television', 'video', 'TV', 'telecasting', 'videotape recording', 'work', 'occupation', 'employment', 'job', 'business', 'line of work', 'day job', 'sentence', 'straight line', 'tune', 'strain', 'melody', 'air', 'melodic line', 'melodic phrase', 'string', 'twine', 'telephone line', 'telephone circuit', 'phone line', 'subscriber line', 'band', 'stripe', 'banding']": "English: \"platform\" - Eesti: \"sillutis\"\nEnglish: \"meeting\" - Eesti: \"konverents\"\nEnglish: \"eight\" - Eesti: \"kaheksa\"\nEnglish: \"wave\" - Eesti: \"merelaine\"\nEnglish: \"valley\" - Eesti: \"org\"\nEnglish: \"line\" - Eesti: \"",
-    "['net', 'network', 'Internet', 'computer network', 'internet', 'cyberspace', 'mesh', 'meshwork', 'meshing', 'knitting stitch', 'profit', 'lucre', 'profits', 'earnings', 'net income', 'net profit']": "English: \"day\" - Eesti: \"\u00f6\u00f6p\u00e4ev\"\nEnglish: \"kind\" - Eesti: \"sort\"\nEnglish: \"platform\" - Eesti: \"sillutis\"\nEnglish: \"tower\" - Eesti: \"torn\"\nEnglish: \"site\" - Eesti: \"veebisait\"\nEnglish: \"net\" - Eesti: \"",
-    "['tea', 'dinner', 'evening meal', 'supper', 'tea leaf']": "English: \"fire\" - Eesti: \"p\u00f5leng\"\nEnglish: \"foot\" - Eesti: \"Labajalg\"\nEnglish: \"five\" - Eesti: \"viis\"\nEnglish: \"thousand\" - Eesti: \"Tuhat\"\nEnglish: \"moon\" - Eesti: \"Kuu\"\nEnglish: \"tea\" - Eesti: \"",
-    "['foot', 'human foot', 'pes', 'Pes', 'groundwork', 'understructure', 'fundament', 'base', 'substructure', 'foundation']": "English: \"mountain\" - Eesti: \"m\u00e4gi\"\nEnglish: \"horse\" - Eesti: \"hobune\"\nEnglish: \"ground\" - Eesti: \"maa\"\nEnglish: \"day\" - Eesti: \"\u00f6\u00f6p\u00e4ev\"\nEnglish: \"gold\" - Eesti: \"kuld\"\nEnglish: \"foot\" - Eesti: \"",
-    "['gold', 'Au', 'amber', 'golden brown']": "English: \"tower\" - Eesti: \"torn\"\nEnglish: \"office\" - Eesti: \"kontor\"\nEnglish: \"six\" - Eesti: \"kuus\"\nEnglish: \"horse\" - Eesti: \"hobune\"\nEnglish: \"mountain\" - Eesti: \"m\u00e4gi\"\nEnglish: \"gold\" - Eesti: \"",
-    "['door', 'door case', 'doorcase', 'door frame', 'doorway', 'doorframe']": "English: \"time\" - Eesti: \"aeg\"\nEnglish: \"day\" - Eesti: \"\u00f6\u00f6p\u00e4ev\"\nEnglish: \"city\" - Eesti: \"linn\"\nEnglish: \"six\" - Eesti: \"kuus\"\nEnglish: \"field\" - Eesti: \"tasandik\"\nEnglish: \"door\" - Eesti: \"",
-    "['snow', 'snow cover', 'snowfall', 'snow mantle']": "English: \"version\" - Eesti: \"t\u00f5lkimine\"\nEnglish: \"line\" - Eesti: \"video\"\nEnglish: \"fruit\" - Eesti: \"vili\"\nEnglish: \"wood\" - Eesti: \"laas\"\nEnglish: \"village\" - Eesti: \"k\u00fcla\"\nEnglish: \"snow\" - Eesti: \"",
-    "['horse', 'Equus caballus']": "English: \"painting\" - Eesti: \"maal\"\nEnglish: \"north\" - Eesti: \"p\u00f5hi\"\nEnglish: \"field\" - Eesti: \"tasandik\"\nEnglish: \"snow\" - Eesti: \"lumi\"\nEnglish: \"generation\" - Eesti: \"p\u00f5lvkond\"\nEnglish: \"horse\" - Eesti: \"",
-    "['one', 'ace', 'unity', 'I', 'single', 'Numero Uno']": "English: \"hair\" - Eesti: \"karv\"\nEnglish: \"village\" - Eesti: \"k\u00fcla\"\nEnglish: \"forest\" - Eesti: \"laas\"\nEnglish: \"net\" - Eesti: \"Internet\"\nEnglish: \"horse\" - Eesti: \"hobune\"\nEnglish: \"one\" - Eesti: \"",
-    "['two', 'deuce', 'II']": "English: \"tea\" - Eesti: \"tee\"\nEnglish: \"light\" - Eesti: \"valgus\"\nEnglish: \"moon\" - Eesti: \"Kuu\"\nEnglish: \"color\" - Eesti: \"must\"\nEnglish: \"wave\" - Eesti: \"merelaine\"\nEnglish: \"two\" - Eesti: \"",
-    "['five', 'fin', 'fivesome', 'quintet', 'cinque', 'quint', 'pentad', 'V', 'Phoebe', 'quintuplet', 'Little Phoebe']": "English: \"field\" - Eesti: \"tasandik\"\nEnglish: \"speech\" - Eesti: \"keel\"\nEnglish: \"fire\" - Eesti: \"p\u00f5leng\"\nEnglish: \"cloud\" - Eesti: \"pilv\"\nEnglish: \"hair\" - Eesti: \"karv\"\nEnglish: \"five\" - Eesti: \"",
-    "['six', 'half a dozen', 'sextuplet', 'VI', 'Captain Hicks', 'sise', 'sextet', 'hexad', 'sixer', 'sestet']": "English: \"point\" - Eesti: \"punkt\"\nEnglish: \"light\" - Eesti: \"valgus\"\nEnglish: \"rock\" - Eesti: \"rokk\"\nEnglish: \"tower\" - Eesti: \"torn\"\nEnglish: \"door\" - Eesti: \"uks\"\nEnglish: \"six\" - Eesti: \"",
-    "['eight', 'octonary', 'ogdoad', 'VIII', 'octet', 'eighter', 'eighter from Decatur', 'octad']": "English: \"face\" - Eesti: \"n\u00e4gu\"\nEnglish: \"forest\" - Eesti: \"laas\"\nEnglish: \"dance\" - Eesti: \"tants\"\nEnglish: \"day\" - Eesti: \"\u00f6\u00f6p\u00e4ev\"\nEnglish: \"speech\" - Eesti: \"keel\"\nEnglish: \"eight\" - Eesti: \"",
-    "['ten', 'decade', 'tenner', 'X']": "English: \"person\" - Eesti: \"inimene\"\nEnglish: \"star\" - Eesti: \"t\u00e4ht\"\nEnglish: \"east\" - Eesti: \"idakaar\"\nEnglish: \"day\" - Eesti: \"\u00f6\u00f6p\u00e4ev\"\nEnglish: \"water\" - Eesti: \"vesi\"\nEnglish: \"ten\" - Eesti: \"",
-    "['head', 'brain', 'mind', 'nous', 'psyche', 'Nous', 'caput', 'leader', 'director', 'boss', 'chief', 'managing director', 'manager', 'top dog', 'question']": "English: \"wave\" - Eesti: \"merelaine\"\nEnglish: \"seat\" - Eesti: \"iste\"\nEnglish: \"friend\" - Eesti: \"s\u00f5prus\"\nEnglish: \"power\" - Eesti: \"poliitiline v\u00f5im\"\nEnglish: \"valley\" - Eesti: \"org\"\nEnglish: \"head\" - Eesti: \"",
-    "['shop', 'boutique', 'store', 'retail outlet']": "English: \"meeting\" - Eesti: \"konverents\"\nEnglish: \"summer\" - Eesti: \"suvi\"\nEnglish: \"mother\" - Eesti: \"ema\"\nEnglish: \"speed\" - Eesti: \"kiirus\"\nEnglish: \"color\" - Eesti: \"must\"\nEnglish: \"shop\" - Eesti: \"",
-    "['eye', 'eyes', 'eyeball', 'eye ball', 'optic', 'oculus', 'heart', 'center', 'centre', 'middle']": "English: \"foot\" - Eesti: \"Labajalg\"\nEnglish: \"rock\" - Eesti: \"rokk\"\nEnglish: \"ground\" - Eesti: \"maa\"\nEnglish: \"hair\" - Eesti: \"karv\"\nEnglish: \"fire\" - Eesti: \"p\u00f5leng\"\nEnglish: \"eye\" - Eesti: \"",
-    "['field', 'plain', 'champaign', 'acre', 'subject', 'discipline', 'study', 'subject area', 'subject field', 'field of study', 'bailiwick']": "English: \"sea\" - Eesti: \"Maailmameri\"\nEnglish: \"tea\" - Eesti: \"tee\"\nEnglish: \"star\" - Eesti: \"t\u00e4ht\"\nEnglish: \"light\" - Eesti: \"valgus\"\nEnglish: \"shop\" - Eesti: \"pood\"\nEnglish: \"field\" - Eesti: \"",
-    "['site', 'Web site', 'website', 'internet site', 'web site', 'locus', 'locale', 'location', 'locality', 'geographic location']": "English: \"south\" - Eesti: \"L\u00f5una\"\nEnglish: \"song\" - Eesti: \"laul\"\nEnglish: \"wood\" - Eesti: \"laas\"\nEnglish: \"red\" - Eesti: \"punane\"\nEnglish: \"two\" - Eesti: \"kaks\"\nEnglish: \"site\" - Eesti: \"",
-    "['dance', 'dancing', 'saltation', 'terpsichore']": "English: \"rice\" - Eesti: \"riis\"\nEnglish: \"official\" - Eesti: \"ametnik\"\nEnglish: \"day\" - Eesti: \"\u00f6\u00f6p\u00e4ev\"\nEnglish: \"cave\" - Eesti: \"koobas\"\nEnglish: \"machine\" - Eesti: \"auto\"\nEnglish: \"dance\" - Eesti: \"",
-    "['word', 'give-and-take', 'discussion']": "English: \"structure\" - Eesti: \"mudel\"\nEnglish: \"cloth\" - Eesti: \"tekstiil\"\nEnglish: \"two\" - Eesti: \"kaks\"\nEnglish: \"head\" - Eesti: \"nous\"\nEnglish: \"eye\" - Eesti: \"silm\"\nEnglish: \"word\" - Eesti: \"",
-    "['pair', 'brace', 'ordered pair']": "English: \"eye\" - Eesti: \"silm\"\nEnglish: \"gold\" - Eesti: \"kuld\"\nEnglish: \"tail\" - Eesti: \"saba\"\nEnglish: \"language\" - Eesti: \"keel\"\nEnglish: \"painting\" - Eesti: \"maal\"\nEnglish: \"pair\" - Eesti: \"",
-    "['seat']": "English: \"judge\" - Eesti: \"kohtunik\"\nEnglish: \"house\" - Eesti: \"hoone\"\nEnglish: \"cloud\" - Eesti: \"pilv\"\nEnglish: \"star\" - Eesti: \"t\u00e4ht\"\nEnglish: \"dance\" - Eesti: \"tants\"\nEnglish: \"seat\" - Eesti: \"",
-    "['light', 'light source', 'visible light', 'visible radiation', 'sill', 'window ledge', 'window', 'window sill', 'ledge-sill', 'lamp', 'cigarette lighter', 'lighter', 'pocket lighter', 'igniter', 'ignitor']": "English: \"rice\" - Eesti: \"riis\"\nEnglish: \"dance\" - Eesti: \"tants\"\nEnglish: \"five\" - Eesti: \"viis\"\nEnglish: \"mother\" - Eesti: \"ema\"\nEnglish: \"eye\" - Eesti: \"silm\"\nEnglish: \"light\" - Eesti: \"",
-    "['thousand', 'one thousand', 'K', 'G', 'chiliad', 'yard', 'M', 'grand', 'thou']": "English: \"hair\" - Eesti: \"karv\"\nEnglish: \"cloth\" - Eesti: \"tekstiil\"\nEnglish: \"painting\" - Eesti: \"maal\"\nEnglish: \"door\" - Eesti: \"uks\"\nEnglish: \"speed\" - Eesti: \"kiirus\"\nEnglish: \"thousand\" - Eesti: \"",
-    "['north', 'northward', 'N', 'due north']": "English: \"law\" - Eesti: \"\u00f5igus\"\nEnglish: \"bridge\" - Eesti: \"sild\"\nEnglish: \"mother\" - Eesti: \"ema\"\nEnglish: \"dance\" - Eesti: \"tants\"\nEnglish: \"river\" - Eesti: \"j\u00f5gi\"\nEnglish: \"north\" - Eesti: \"",
-    "['machine', 'car', 'automobile', 'auto', 'motorcar', 'motor car', 'device']": "English: \"time\" - Eesti: \"aeg\"\nEnglish: \"dance\" - Eesti: \"tants\"\nEnglish: \"eye\" - Eesti: \"silm\"\nEnglish: \"shop\" - Eesti: \"pood\"\nEnglish: \"seat\" - Eesti: \"iste\"\nEnglish: \"machine\" - Eesti: \"",
-    "['time', 'tense', 'grammatical tense']": "English: \"eight\" - Eesti: \"kaheksa\"\nEnglish: \"song\" - Eesti: \"laul\"\nEnglish: \"ten\" - Eesti: \"k\u00fcmme\"\nEnglish: \"mother\" - Eesti: \"ema\"\nEnglish: \"office\" - Eesti: \"kontor\"\nEnglish: \"time\" - Eesti: \"",
-    "['friend', 'camaraderie', 'comradeship', 'comradery', 'chumminess', 'comradeliness', 'friendship', 'friendly relationship']": "English: \"color\" - Eesti: \"must\"\nEnglish: \"power\" - Eesti: \"poliitiline v\u00f5im\"\nEnglish: \"forest\" - Eesti: \"laas\"\nEnglish: \"light\" - Eesti: \"valgus\"\nEnglish: \"lake\" - Eesti: \"j\u00e4rv\"\nEnglish: \"friend\" - Eesti: \"",
-    "['color', 'black', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors']": "English: \"kind\" - Eesti: \"sort\"\nEnglish: \"sun\" - Eesti: \"P\u00e4ike\"\nEnglish: \"song\" - Eesti: \"laul\"\nEnglish: \"fruit\" - Eesti: \"vili\"\nEnglish: \"friend\" - Eesti: \"s\u00f5prus\"\nEnglish: \"color\" - Eesti: \"",
-    "['kind', 'sort', 'form', 'variety']": "English: \"ten\" - Eesti: \"k\u00fcmme\"\nEnglish: \"machine\" - Eesti: \"auto\"\nEnglish: \"six\" - Eesti: \"kuus\"\nEnglish: \"word\" - Eesti: \"s\u00f5na\"\nEnglish: \"sun\" - Eesti: \"P\u00e4ike\"\nEnglish: \"kind\" - Eesti: \"",
-    "['judge', 'jurist', 'justice']": "English: \"sea\" - Eesti: \"Maailmameri\"\nEnglish: \"language\" - Eesti: \"keel\"\nEnglish: \"tower\" - Eesti: \"torn\"\nEnglish: \"sun\" - Eesti: \"P\u00e4ike\"\nEnglish: \"east\" - Eesti: \"idakaar\"\nEnglish: \"judge\" - Eesti: \"",
-    "['school', 'university', 'academy', 'faculty', 'staff', 'honorary society']": "English: \"one\" - Eesti: \"\u00fcks\"\nEnglish: \"kind\" - Eesti: \"sort\"\nEnglish: \"thousand\" - Eesti: \"Tuhat\"\nEnglish: \"rock\" - Eesti: \"rokk\"\nEnglish: \"ball\" - Eesti: \"pesapall\"\nEnglish: \"school\" - Eesti: \"",
-    "['structure', 'model', 'construction']": "English: \"day\" - Eesti: \"\u00f6\u00f6p\u00e4ev\"\nEnglish: \"speed\" - Eesti: \"kiirus\"\nEnglish: \"platform\" - Eesti: \"sillutis\"\nEnglish: \"river\" - Eesti: \"j\u00f5gi\"\nEnglish: \"house\" - Eesti: \"hoone\"\nEnglish: \"structure\" - Eesti: \"",
-    "['tie', 'necktie']": "English: \"summer\" - Eesti: \"suvi\"\nEnglish: \"color\" - Eesti: \"must\"\nEnglish: \"judge\" - Eesti: \"kohtunik\"\nEnglish: \"rice\" - Eesti: \"riis\"\nEnglish: \"water\" - Eesti: \"vesi\"\nEnglish: \"tie\" - Eesti: \"",
-    "['face', 'human face', 'air', 'appearance', 'manner', 'demeanor', 'look', 'expression', 'mien', 'bearing', 'demeanour', 'facial expression', 'aspect']": "English: \"painting\" - Eesti: \"maal\"\nEnglish: \"rice\" - Eesti: \"riis\"\nEnglish: \"village\" - Eesti: \"k\u00fcla\"\nEnglish: \"head\" - Eesti: \"nous\"\nEnglish: \"hair\" - Eesti: \"karv\"\nEnglish: \"face\" - Eesti: \"",
-    "['bridge', 'span', 'list of Roman bridges']": "English: \"time\" - Eesti: \"aeg\"\nEnglish: \"water\" - Eesti: \"vesi\"\nEnglish: \"one\" - Eesti: \"\u00fcks\"\nEnglish: \"kind\" - Eesti: \"sort\"\nEnglish: \"net\" - Eesti: \"Internet\"\nEnglish: \"bridge\" - Eesti: \"",
-    "['group', 'organizational', 'organisational', 'organization', 'organisation', 'musical organization', 'musical organisation', 'musical group', 'musical ensemble', 'moiety', 'functional group', 'chemical group', 'radical', 'team', 'rock band', 'rock group', 'grouping']": "English: \"five\" - Eesti: \"viis\"\nEnglish: \"meeting\" - Eesti: \"konverents\"\nEnglish: \"cave\" - Eesti: \"koobas\"\nEnglish: \"hair\" - Eesti: \"karv\"\nEnglish: \"ground\" - Eesti: \"maa\"\nEnglish: \"group\" - Eesti: \"",
-    "['platform', 'pavement', 'sidewalk', 'footway']": "English: \"line\" - Eesti: \"video\"\nEnglish: \"fire\" - Eesti: \"p\u00f5leng\"\nEnglish: \"tail\" - Eesti: \"saba\"\nEnglish: \"ground\" - Eesti: \"maa\"\nEnglish: \"official\" - Eesti: \"ametnik\"\nEnglish: \"platform\" - Eesti: \"",
-    "['house', 'home', 'dwelling', 'theater', 'theatre', 'playhouse', 'business firm', 'casino', 'establishment', 'firm', 'gambling casino', 'household', 'family', 'menage', 'private household', 'habitation', 'dwelling house', 'abode', 'domicile', 'Flotten, Hemmet och Sandl\u00e5dan', 'residence', 'auditorium', 'enterprise', 'concern', 'corporation', 'partnership', 'venture', 'company']": "English: \"river\" - Eesti: \"j\u00f5gi\"\nEnglish: \"line\" - Eesti: \"video\"\nEnglish: \"water\" - Eesti: \"vesi\"\nEnglish: \"thousand\" - Eesti: \"Tuhat\"\nEnglish: \"field\" - Eesti: \"tasandik\"\nEnglish: \"house\" - Eesti: \"",
-    "['sun', 'Sunday', \"Lord's Day\", 'Dominicus']": "English: \"mother\" - Eesti: \"ema\"\nEnglish: \"thousand\" - Eesti: \"Tuhat\"\nEnglish: \"eye\" - Eesti: \"silm\"\nEnglish: \"generation\" - Eesti: \"p\u00f5lvkond\"\nEnglish: \"platform\" - Eesti: \"sillutis\"\nEnglish: \"sun\" - Eesti: \"",
-    "['meeting', 'convention', 'group meeting', 'rally']": "English: \"platform\" - Eesti: \"sillutis\"\nEnglish: \"light\" - Eesti: \"valgus\"\nEnglish: \"gold\" - Eesti: \"kuld\"\nEnglish: \"tower\" - Eesti: \"torn\"\nEnglish: \"cloth\" - Eesti: \"tekstiil\"\nEnglish: \"meeting\" - Eesti: \"",
-    "['history', 'historical development']": "English: \"star\" - Eesti: \"t\u00e4ht\"\nEnglish: \"lake\" - Eesti: \"j\u00e4rv\"\nEnglish: \"line\" - Eesti: \"video\"\nEnglish: \"village\" - Eesti: \"k\u00fcla\"\nEnglish: \"speed\" - Eesti: \"kiirus\"\nEnglish: \"history\" - Eesti: \"",
-    "['valley', 'dale', 'vale']": "English: \"cloud\" - Eesti: \"pilv\"\nEnglish: \"point\" - Eesti: \"punkt\"\nEnglish: \"power\" - Eesti: \"poliitiline v\u00f5im\"\nEnglish: \"platform\" - Eesti: \"sillutis\"\nEnglish: \"water\" - Eesti: \"vesi\"\nEnglish: \"valley\" - Eesti: \"",
-    "['square', 'foursquare', 'second power']": "English: \"rock\" - Eesti: \"rokk\"\nEnglish: \"ten\" - Eesti: \"k\u00fcmme\"\nEnglish: \"face\" - Eesti: \"n\u00e4gu\"\nEnglish: \"star\" - Eesti: \"t\u00e4ht\"\nEnglish: \"cloth\" - Eesti: \"tekstiil\"\nEnglish: \"square\" - Eesti: \"",
-    "['generation']": "English: \"machine\" - Eesti: \"auto\"\nEnglish: \"village\" - Eesti: \"k\u00fcla\"\nEnglish: \"seat\" - Eesti: \"iste\"\nEnglish: \"time\" - Eesti: \"aeg\"\nEnglish: \"line\" - Eesti: \"video\"\nEnglish: \"generation\" - Eesti: \"",
-    "['south', 'southward', 'due south', 'S']": "English: \"color\" - Eesti: \"must\"\nEnglish: \"lake\" - Eesti: \"j\u00e4rv\"\nEnglish: \"tea\" - Eesti: \"tee\"\nEnglish: \"group\" - Eesti: \"organisatsioon\"\nEnglish: \"speech\" - Eesti: \"keel\"\nEnglish: \"south\" - Eesti: \"",
-    "['city', 'urban center', 'metropolis', 'city/town']": "English: \"line\" - Eesti: \"video\"\nEnglish: \"history\" - Eesti: \"ajalugu\"\nEnglish: \"law\" - Eesti: \"\u00f5igus\"\nEnglish: \"ocean\" - Eesti: \"ookean\"\nEnglish: \"point\" - Eesti: \"punkt\"\nEnglish: \"city\" - Eesti: \"",
-    "['language', 'human language', 'linguistic communication', 'spoken language', 'speech', 'oral communication', 'spoken communication', 'voice communication', 'speech communication']": "English: \"cloth\" - Eesti: \"tekstiil\"\nEnglish: \"ball\" - Eesti: \"pesapall\"\nEnglish: \"pair\" - Eesti: \"J\u00e4rjestatud paar\"\nEnglish: \"north\" - Eesti: \"p\u00f5hi\"\nEnglish: \"rock\" - Eesti: \"rokk\"\nEnglish: \"language\" - Eesti: \"",
-    "['speed', 'velocity', 'fastness', 'swiftness', 'rate', 'ratio']": "English: \"rock\" - Eesti: \"rokk\"\nEnglish: \"kind\" - Eesti: \"sort\"\nEnglish: \"ocean\" - Eesti: \"ookean\"\nEnglish: \"city\" - Eesti: \"linn\"\nEnglish: \"rice\" - Eesti: \"riis\"\nEnglish: \"speed\" - Eesti: \"",
-    "['ground', 'land', 'terra firma', 'earth', 'solid ground', 'dry land', 'land mass', 'soil', 'dirt', 'reason', 'occasion', 'background']": "English: \"bridge\" - Eesti: \"sild\"\nEnglish: \"rock\" - Eesti: \"rokk\"\nEnglish: \"color\" - Eesti: \"must\"\nEnglish: \"power\" - Eesti: \"poliitiline v\u00f5im\"\nEnglish: \"face\" - Eesti: \"n\u00e4gu\"\nEnglish: \"ground\" - Eesti: \"",
-    "['tail']": "English: \"friend\" - Eesti: \"s\u00f5prus\"\nEnglish: \"fruit\" - Eesti: \"vili\"\nEnglish: \"speech\" - Eesti: \"keel\"\nEnglish: \"spring\" - Eesti: \"allikas\"\nEnglish: \"door\" - Eesti: \"uks\"\nEnglish: \"tail\" - Eesti: \"",
-    "['mother', 'female parent', 'motherhood', 'parents', 'parent', 'parenthood']": "English: \"spring\" - Eesti: \"allikas\"\nEnglish: \"snow\" - Eesti: \"lumi\"\nEnglish: \"tea\" - Eesti: \"tee\"\nEnglish: \"house\" - Eesti: \"hoone\"\nEnglish: \"eight\" - Eesti: \"kaheksa\"\nEnglish: \"mother\" - Eesti: \"",
-    "['east', 'E', 'eastward', 'due east']": "English: \"tower\" - Eesti: \"torn\"\nEnglish: \"wave\" - Eesti: \"merelaine\"\nEnglish: \"bridge\" - Eesti: \"sild\"\nEnglish: \"head\" - Eesti: \"nous\"\nEnglish: \"site\" - Eesti: \"veebisait\"\nEnglish: \"east\" - Eesti: \"",
-    "['speech', 'language', 'human language', 'linguistic communication', 'spoken language', 'oral communication', 'spoken communication', 'voice communication', 'speech communication', 'lecture', 'lecturing']": "English: \"friend\" - Eesti: \"s\u00f5prus\"\nEnglish: \"sun\" - Eesti: \"P\u00e4ike\"\nEnglish: \"group\" - Eesti: \"organisatsioon\"\nEnglish: \"pair\" - Eesti: \"J\u00e4rjestatud paar\"\nEnglish: \"judge\" - Eesti: \"kohtunik\"\nEnglish: \"speech\" - Eesti: \"",
-    "['child', 'fry', 'french fry', 'minor', 'chip', 'youngster', 'shaver', 'small fry', 'kid', 'nestling', 'tiddler', 'tike', 'tyke', 'nipper', 'daughter', 'girl', 'children']": "English: \"eight\" - Eesti: \"kaheksa\"\nEnglish: \"judge\" - Eesti: \"kohtunik\"\nEnglish: \"tea\" - Eesti: \"tee\"\nEnglish: \"snow\" - Eesti: \"lumi\"\nEnglish: \"one\" - Eesti: \"\u00fcks\"\nEnglish: \"child\" - Eesti: \"",
-    "['tower']": "English: \"cave\" - Eesti: \"koobas\"\nEnglish: \"meeting\" - Eesti: \"konverents\"\nEnglish: \"north\" - Eesti: \"p\u00f5hi\"\nEnglish: \"sea\" - Eesti: \"Maailmameri\"\nEnglish: \"generation\" - Eesti: \"p\u00f5lvkond\"\nEnglish: \"tower\" - Eesti: \"",
-    "['hair', 'pilus']": "English: \"official\" - Eesti: \"ametnik\"\nEnglish: \"cave\" - Eesti: \"koobas\"\nEnglish: \"color\" - Eesti: \"must\"\nEnglish: \"language\" - Eesti: \"keel\"\nEnglish: \"generation\" - Eesti: \"p\u00f5lvkond\"\nEnglish: \"hair\" - Eesti: \"",
-    "['person', 'homo', 'human being', 'hominid', 'human', 'man', 'Homo', 'Homo sapiens sapiens', 'someone', 'mortal', 'individual', 'somebody', 'soul']": "English: \"house\" - Eesti: \"hoone\"\nEnglish: \"red\" - Eesti: \"punane\"\nEnglish: \"official\" - Eesti: \"ametnik\"\nEnglish: \"star\" - Eesti: \"t\u00e4ht\"\nEnglish: \"seat\" - Eesti: \"iste\"\nEnglish: \"person\" - Eesti: \"",
-    "['official', 'functionary', 'referee', 'umpire', 'tennis official', 'basketball official', 'tennis umpire']": "English: \"hair\" - Eesti: \"karv\"\nEnglish: \"seat\" - Eesti: \"iste\"\nEnglish: \"law\" - Eesti: \"\u00f5igus\"\nEnglish: \"song\" - Eesti: \"laul\"\nEnglish: \"language\" - Eesti: \"keel\"\nEnglish: \"official\" - Eesti: \"",
-    "['office', 'agency', 'authority', 'federal agency', 'government agency', 'bureau', 'government office', 'business office', 'position', 'place', 'spot', 'post', 'situation', 'berth', 'billet']": "English: \"summer\" - Eesti: \"suvi\"\nEnglish: \"tie\" - Eesti: \"lips\"\nEnglish: \"machine\" - Eesti: \"auto\"\nEnglish: \"spring\" - Eesti: \"allikas\"\nEnglish: \"school\" - Eesti: \"\u00fclikool\"\nEnglish: \"office\" - Eesti: \"",
-    "['rock', 'rock music', \"rock 'n' roll\", \"rock'n'roll\", 'rock and roll', 'rock-and-roll', 'stone', 'pebble']": "English: \"net\" - Eesti: \"Internet\"\nEnglish: \"school\" - Eesti: \"\u00fclikool\"\nEnglish: \"gold\" - Eesti: \"kuld\"\nEnglish: \"ocean\" - Eesti: \"ookean\"\nEnglish: \"heart\" - Eesti: \"s\u00fcda\"\nEnglish: \"rock\" - Eesti: \"",
-    "['power', 'political power', 'powerfulness', 'muscular strength', 'strength', 'might', 'physical strength', 'mightiness']": "English: \"line\" - Eesti: \"video\"\nEnglish: \"village\" - Eesti: \"k\u00fcla\"\nEnglish: \"five\" - Eesti: \"viis\"\nEnglish: \"version\" - Eesti: \"t\u00f5lkimine\"\nEnglish: \"summer\" - Eesti: \"suvi\"\nEnglish: \"power\" - Eesti: \"",
-    "['summer', 'summertime', 'summer season']": "English: \"office\" - Eesti: \"kontor\"\nEnglish: \"sea\" - Eesti: \"Maailmameri\"\nEnglish: \"version\" - Eesti: \"t\u00f5lkimine\"\nEnglish: \"wood\" - Eesti: \"laas\"\nEnglish: \"person\" - Eesti: \"inimene\"\nEnglish: \"summer\" - Eesti: \""
+    "['book']": {
+        "prompt": "English: \"eight\" - Eesti: \"kaheksa\"\nEnglish: \"word\" - Eesti: \"s\u00f5na\"\nEnglish: \"lake\" - Eesti: \"j\u00e4rv\"\nEnglish: \"house\" - Eesti: \"hoone\"\nEnglish: \"tie\" - Eesti: \"lips\"\nEnglish: \"book\" - Eesti: \"",
+        "target": "['raamat']",
+        "word original": "book"
+    },
+    "['cloud']": {
+        "prompt": "English: \"lake\" - Eesti: \"j\u00e4rv\"\nEnglish: \"judge\" - Eesti: \"kohtunik\"\nEnglish: \"site\" - Eesti: \"veebisait\"\nEnglish: \"rock\" - Eesti: \"rokk\"\nEnglish: \"machine\" - Eesti: \"auto\"\nEnglish: \"cloud\" - Eesti: \"",
+        "target": "['pilv', 'Pilv']",
+        "word original": "cloud"
+    },
+    "['bag', 'purse', 'handbag', 'pocketbook', 'sack', 'paper bag', 'carrier bag', 'poke', 'plastic shopping bag', 'case', 'suitcase', 'traveling bag', 'travelling bag', 'grip']": {
+        "prompt": "English: \"office\" - Eesti: \"kontor\"\nEnglish: \"line\" - Eesti: \"video\"\nEnglish: \"cave\" - Eesti: \"koobas\"\nEnglish: \"cloth\" - Eesti: \"tekstiil\"\nEnglish: \"person\" - Eesti: \"inimene\"\nEnglish: \"bag\" - Eesti: \"",
+        "target": "['k\u00e4ekott', 'Kott', 'Paberkott', 'kott', 'kilekott', 'kohver']",
+        "word original": "bag"
+    },
+    "['mountain', 'mount']": {
+        "prompt": "English: \"machine\" - Eesti: \"auto\"\nEnglish: \"lake\" - Eesti: \"j\u00e4rv\"\nEnglish: \"red\" - Eesti: \"punane\"\nEnglish: \"wave\" - Eesti: \"merelaine\"\nEnglish: \"book\" - Eesti: \"raamat\"\nEnglish: \"mountain\" - Eesti: \"",
+        "target": "['m\u00e4gi']",
+        "word original": "mountain"
+    },
+    "['cloth', 'fabric', 'textile', 'material']": {
+        "prompt": "English: \"mother\" - Eesti: \"ema\"\nEnglish: \"sun\" - Eesti: \"P\u00e4ike\"\nEnglish: \"word\" - Eesti: \"s\u00f5na\"\nEnglish: \"ground\" - Eesti: \"maa\"\nEnglish: \"shop\" - Eesti: \"pood\"\nEnglish: \"cloth\" - Eesti: \"",
+        "target": "['tekstiil', 'riie', 'kangas']",
+        "word original": "cloth"
+    },
+    "['heart', 'ticker', 'pump', 'Diaphragmatic surface of heart', 'human heart', 'cardiac chamber', 'affectionateness', 'philia', 'fondness', 'warmheartedness', 'affection', 'tenderness', 'warmness', 'affectio', 'eye', 'center', 'centre', 'middle']": {
+        "prompt": "English: \"thousand\" - Eesti: \"Tuhat\"\nEnglish: \"north\" - Eesti: \"p\u00f5hi\"\nEnglish: \"version\" - Eesti: \"t\u00f5lkimine\"\nEnglish: \"tea\" - Eesti: \"tee\"\nEnglish: \"group\" - Eesti: \"organisatsioon\"\nEnglish: \"heart\" - Eesti: \"",
+        "target": "['s\u00fcda', 'Afektsioon']",
+        "word original": "heart"
+    },
+    "['day', 'twenty-four hour period', 'solar day', 'twenty-four hours', 'mean solar day']": {
+        "prompt": "English: \"mother\" - Eesti: \"ema\"\nEnglish: \"cloth\" - Eesti: \"tekstiil\"\nEnglish: \"valley\" - Eesti: \"org\"\nEnglish: \"red\" - Eesti: \"punane\"\nEnglish: \"mountain\" - Eesti: \"m\u00e4gi\"\nEnglish: \"day\" - Eesti: \"",
+        "target": "['\u00f6\u00f6p\u00e4ev']",
+        "word original": "day"
+    },
+    "['star', 'asterisk', 'superstar', 'maven', 'intenditore', 'wiz', 'champion', 'whiz', 'mavin', 'hotshot', 'wizard', 'adept', 'genius', 'ace', 'virtuoso', 'sensation', 'whizz', 'Maven', 'principal', 'lead']": {
+        "prompt": "English: \"snow\" - Eesti: \"lumi\"\nEnglish: \"shop\" - Eesti: \"pood\"\nEnglish: \"spring\" - Eesti: \"allikas\"\nEnglish: \"two\" - Eesti: \"kaks\"\nEnglish: \"mother\" - Eesti: \"ema\"\nEnglish: \"star\" - Eesti: \"",
+        "target": "['t\u00e4ht', 't\u00e4rn', '*', 'T\u00e4ht', 'superstaar', 'sepp', 'talent', 'adept', 'staar', 'Adept', 'kuulsus', 'filmit\u00e4ht', 'lavat\u00e4ht']",
+        "word original": "star"
+    },
+    "['spring', 'outpouring', 'outflow', 'fountain', 'natural spring', 'season', 'time of year', 'springtime']": {
+        "prompt": "English: \"shop\" - Eesti: \"pood\"\nEnglish: \"tower\" - Eesti: \"torn\"\nEnglish: \"bridge\" - Eesti: \"sild\"\nEnglish: \"dance\" - Eesti: \"tants\"\nEnglish: \"group\" - Eesti: \"organisatsioon\"\nEnglish: \"spring\" - Eesti: \"",
+        "target": "['allikas', 'l\u00e4te', 'veesilm', 'sesoon', 'aastaaeg', 'hooaeg', 'aastaajad', 'kevad', 'vedru', 'Vedru']",
+        "word original": "spring"
+    },
+    "['moon', 'Luna']": {
+        "prompt": "English: \"five\" - Eesti: \"viis\"\nEnglish: \"bag\" - Eesti: \"k\u00e4ekott\"\nEnglish: \"version\" - Eesti: \"t\u00f5lkimine\"\nEnglish: \"shop\" - Eesti: \"pood\"\nEnglish: \"ground\" - Eesti: \"maa\"\nEnglish: \"moon\" - Eesti: \"",
+        "target": "['Kuu']",
+        "word original": "moon"
+    },
+    "['wood', 'forrest', 'forest', 'woods', 'W\u00e4lder', 'sap-wood', 'sapwood', 'alburnum']": {
+        "prompt": "English: \"red\" - Eesti: \"punane\"\nEnglish: \"judge\" - Eesti: \"kohtunik\"\nEnglish: \"point\" - Eesti: \"punkt\"\nEnglish: \"tie\" - Eesti: \"lips\"\nEnglish: \"rock\" - Eesti: \"rokk\"\nEnglish: \"wood\" - Eesti: \"",
+        "target": "['laas', 'mets', 'W\u00e4lder', 'puit', 'puu']",
+        "word original": "wood"
+    },
+    "['village', 'hamlet']": {
+        "prompt": "English: \"bridge\" - Eesti: \"sild\"\nEnglish: \"head\" - Eesti: \"nous\"\nEnglish: \"net\" - Eesti: \"Internet\"\nEnglish: \"two\" - Eesti: \"kaks\"\nEnglish: \"cloth\" - Eesti: \"tekstiil\"\nEnglish: \"village\" - Eesti: \"",
+        "target": "['k\u00fcla']",
+        "word original": "village"
+    },
+    "['forest', 'forrest', 'wood', 'woods', 'W\u00e4lder']": {
+        "prompt": "English: \"city\" - Eesti: \"linn\"\nEnglish: \"school\" - Eesti: \"\u00fclikool\"\nEnglish: \"bag\" - Eesti: \"k\u00e4ekott\"\nEnglish: \"hair\" - Eesti: \"karv\"\nEnglish: \"water\" - Eesti: \"vesi\"\nEnglish: \"forest\" - Eesti: \"",
+        "target": "['laas', 'mets', 'W\u00e4lder']",
+        "word original": "forest"
+    },
+    "['fruit', 'fleshy fruit']": {
+        "prompt": "English: \"speech\" - Eesti: \"keel\"\nEnglish: \"person\" - Eesti: \"inimene\"\nEnglish: \"water\" - Eesti: \"vesi\"\nEnglish: \"color\" - Eesti: \"must\"\nEnglish: \"snow\" - Eesti: \"lumi\"\nEnglish: \"fruit\" - Eesti: \"",
+        "target": "['vili', 'puuvili']",
+        "word original": "fruit"
+    },
+    "['song', 'vocal']": {
+        "prompt": "English: \"tail\" - Eesti: \"saba\"\nEnglish: \"history\" - Eesti: \"ajalugu\"\nEnglish: \"office\" - Eesti: \"kontor\"\nEnglish: \"time\" - Eesti: \"aeg\"\nEnglish: \"water\" - Eesti: \"vesi\"\nEnglish: \"song\" - Eesti: \"",
+        "target": "['laul']",
+        "word original": "song"
+    },
+    "['water', 'body of water', 'waterbody', 'ice', 'water ice']": {
+        "prompt": "English: \"power\" - Eesti: \"poliitiline v\u00f5im\"\nEnglish: \"village\" - Eesti: \"k\u00fcla\"\nEnglish: \"platform\" - Eesti: \"sillutis\"\nEnglish: \"lake\" - Eesti: \"j\u00e4rv\"\nEnglish: \"law\" - Eesti: \"\u00f5igus\"\nEnglish: \"water\" - Eesti: \"",
+        "target": "['vesi', 'veekogu', 'j\u00e4\u00e4']",
+        "word original": "water"
+    },
+    "['river', 'stream', 'watercourse', 'brook', 'lake system']": {
+        "prompt": "English: \"door\" - Eesti: \"uks\"\nEnglish: \"rock\" - Eesti: \"rokk\"\nEnglish: \"language\" - Eesti: \"keel\"\nEnglish: \"red\" - Eesti: \"punane\"\nEnglish: \"square\" - Eesti: \"ruut\"\nEnglish: \"river\" - Eesti: \"",
+        "target": "['j\u00f5gi', 'vooluveekogu', 'oja', 'Oja']",
+        "word original": "river"
+    },
+    "['law', 'jurisprudence', 'police', 'police force', 'constabulary', 'Constabulary']": {
+        "prompt": "English: \"hair\" - Eesti: \"karv\"\nEnglish: \"ten\" - Eesti: \"k\u00fcmme\"\nEnglish: \"six\" - Eesti: \"kuus\"\nEnglish: \"eight\" - Eesti: \"kaheksa\"\nEnglish: \"child\" - Eesti: \"alaealine\"\nEnglish: \"law\" - Eesti: \"",
+        "target": "['\u00f5igus', 'seadus', 'politsei', 'Politsei']",
+        "word original": "law"
+    },
+    "['wave', 'sea wave', 'ocean surface wave', 'moving ridge', 'wind wave']": {
+        "prompt": "English: \"sea\" - Eesti: \"Maailmameri\"\nEnglish: \"forest\" - Eesti: \"laas\"\nEnglish: \"fire\" - Eesti: \"p\u00f5leng\"\nEnglish: \"ten\" - Eesti: \"k\u00fcmme\"\nEnglish: \"speed\" - Eesti: \"kiirus\"\nEnglish: \"wave\" - Eesti: \"",
+        "target": "['merelaine', 'Veelained', 'veelained']",
+        "word original": "wave"
+    },
+    "['ocean', 'sea', 'body of water', 'bounding main', 'marine environment']": {
+        "prompt": "English: \"child\" - Eesti: \"alaealine\"\nEnglish: \"five\" - Eesti: \"viis\"\nEnglish: \"site\" - Eesti: \"veebisait\"\nEnglish: \"line\" - Eesti: \"video\"\nEnglish: \"city\" - Eesti: \"linn\"\nEnglish: \"ocean\" - Eesti: \"",
+        "target": "['ookean', 'merekeskkond']",
+        "word original": "ocean"
+    },
+    "['cave']": {
+        "prompt": "English: \"meeting\" - Eesti: \"konverents\"\nEnglish: \"judge\" - Eesti: \"kohtunik\"\nEnglish: \"ten\" - Eesti: \"k\u00fcmme\"\nEnglish: \"version\" - Eesti: \"t\u00f5lkimine\"\nEnglish: \"fire\" - Eesti: \"p\u00f5leng\"\nEnglish: \"cave\" - Eesti: \"",
+        "target": "['koobas']",
+        "word original": "cave"
+    },
+    "['sea', 'body of water', 'bounding main', 'ocean', 'marine environment']": {
+        "prompt": "English: \"cloth\" - Eesti: \"tekstiil\"\nEnglish: \"ocean\" - Eesti: \"ookean\"\nEnglish: \"horse\" - Eesti: \"hobune\"\nEnglish: \"friend\" - Eesti: \"s\u00f5prus\"\nEnglish: \"thousand\" - Eesti: \"Tuhat\"\nEnglish: \"sea\" - Eesti: \"",
+        "target": "['Maailmameri', 'meri', 'ookean', 'merekeskkond']",
+        "word original": "sea"
+    },
+    "['lake']": {
+        "prompt": "English: \"machine\" - Eesti: \"auto\"\nEnglish: \"five\" - Eesti: \"viis\"\nEnglish: \"cloud\" - Eesti: \"pilv\"\nEnglish: \"person\" - Eesti: \"inimene\"\nEnglish: \"red\" - Eesti: \"punane\"\nEnglish: \"lake\" - Eesti: \"",
+        "target": "['j\u00e4rv']",
+        "word original": "lake"
+    },
+    "['fire', 'flame', 'flaming']": {
+        "prompt": "English: \"horse\" - Eesti: \"hobune\"\nEnglish: \"song\" - Eesti: \"laul\"\nEnglish: \"face\" - Eesti: \"n\u00e4gu\"\nEnglish: \"two\" - Eesti: \"kaks\"\nEnglish: \"city\" - Eesti: \"linn\"\nEnglish: \"fire\" - Eesti: \"",
+        "target": "['p\u00f5leng', 'leek', 'Tuli', 'tuli', 'Leek']",
+        "word original": "fire"
+    },
+    "['point', 'period', 'full stop', 'dot', 'stop', 'full point', 'score', 'item']": {
+        "prompt": "English: \"bag\" - Eesti: \"k\u00e4ekott\"\nEnglish: \"book\" - Eesti: \"raamat\"\nEnglish: \"line\" - Eesti: \"video\"\nEnglish: \"valley\" - Eesti: \"org\"\nEnglish: \"power\" - Eesti: \"poliitiline v\u00f5im\"\nEnglish: \"point\" - Eesti: \"",
+        "target": "['punkt', 'skoor, punktiseis']",
+        "word original": "point"
+    },
+    "['version', 'translation', 'compilation', 'interlingual rendition', 'rendering', 'translated work', 'interpretation', 'reading']": {
+        "prompt": "English: \"lake\" - Eesti: \"j\u00e4rv\"\nEnglish: \"door\" - Eesti: \"uks\"\nEnglish: \"wood\" - Eesti: \"laas\"\nEnglish: \"friend\" - Eesti: \"s\u00f5prus\"\nEnglish: \"structure\" - Eesti: \"mudel\"\nEnglish: \"version\" - Eesti: \"",
+        "target": "['t\u00f5lkimine', 't\u00f5lge']",
+        "word original": "version"
+    },
+    "['ball', 'baseball', 'baseball game', 'association football ball', 'sphere', 'globe', 'orb', 'bullet', 'slug', 'Slug', 'formal', 'Football', 'football']": {
+        "prompt": "English: \"person\" - Eesti: \"inimene\"\nEnglish: \"color\" - Eesti: \"must\"\nEnglish: \"river\" - Eesti: \"j\u00f5gi\"\nEnglish: \"heart\" - Eesti: \"s\u00fcda\"\nEnglish: \"lake\" - Eesti: \"j\u00e4rv\"\nEnglish: \"ball\" - Eesti: \"",
+        "target": "['pesapall', 'pall', 'kera', 'sf\u00e4\u00e4r', 'Kuul', 'kuul', 'jalgpall']",
+        "word original": "ball"
+    },
+    "['painting', 'image', 'picture', 'artist', 'painter', 'art of painting']": {
+        "prompt": "English: \"machine\" - Eesti: \"auto\"\nEnglish: \"bag\" - Eesti: \"k\u00e4ekott\"\nEnglish: \"summer\" - Eesti: \"suvi\"\nEnglish: \"history\" - Eesti: \"ajalugu\"\nEnglish: \"sea\" - Eesti: \"Maailmameri\"\nEnglish: \"painting\" - Eesti: \"",
+        "target": "['maal', 'maalimine', 'maalikunst']",
+        "word original": "painting"
+    },
+    "['rice', 'rice farmer', 'rice grower', 'Rice gadu']": {
+        "prompt": "English: \"valley\" - Eesti: \"org\"\nEnglish: \"mountain\" - Eesti: \"m\u00e4gi\"\nEnglish: \"point\" - Eesti: \"punkt\"\nEnglish: \"snow\" - Eesti: \"lumi\"\nEnglish: \"five\" - Eesti: \"viis\"\nEnglish: \"rice\" - Eesti: \"",
+        "target": "['riis']",
+        "word original": "rice"
+    },
+    "['red', 'redness']": {
+        "prompt": "English: \"wood\" - Eesti: \"laas\"\nEnglish: \"east\" - Eesti: \"idakaar\"\nEnglish: \"ten\" - Eesti: \"k\u00fcmme\"\nEnglish: \"head\" - Eesti: \"nous\"\nEnglish: \"house\" - Eesti: \"hoone\"\nEnglish: \"red\" - Eesti: \"",
+        "target": "['punane']",
+        "word original": "red"
+    },
+    "['line', 'television', 'video', 'TV', 'telecasting', 'videotape recording', 'work', 'occupation', 'employment', 'job', 'business', 'line of work', 'day job', 'sentence', 'straight line', 'tune', 'strain', 'melody', 'air', 'melodic line', 'melodic phrase', 'string', 'twine', 'telephone line', 'telephone circuit', 'phone line', 'subscriber line', 'band', 'stripe', 'banding']": {
+        "prompt": "English: \"river\" - Eesti: \"j\u00f5gi\"\nEnglish: \"office\" - Eesti: \"kontor\"\nEnglish: \"bag\" - Eesti: \"k\u00e4ekott\"\nEnglish: \"thousand\" - Eesti: \"Tuhat\"\nEnglish: \"heart\" - Eesti: \"s\u00fcda\"\nEnglish: \"line\" - Eesti: \"",
+        "target": "['video', 'televisioon', 'elukutse', '\u00e4rindus', 'amet', 'kutse', 'ettev\u00f5te', 't\u00f6\u00f6', '\u00e4ri', 'tegevusala', 'lause', 'sirge', 'meloodia', 'Meloodia', 'n\u00f6\u00f6r', 'N\u00f6\u00f6r', 'niit', 'Telefoniliin', 'telefoniliin', 'Triibuline', 'Rida']",
+        "word original": "line"
+    },
+    "['net', 'network', 'Internet', 'computer network', 'internet', 'cyberspace', 'mesh', 'meshwork', 'meshing', 'knitting stitch', 'profit', 'lucre', 'profits', 'earnings', 'net income', 'net profit']": {
+        "prompt": "English: \"judge\" - Eesti: \"kohtunik\"\nEnglish: \"machine\" - Eesti: \"auto\"\nEnglish: \"meeting\" - Eesti: \"konverents\"\nEnglish: \"field\" - Eesti: \"tasandik\"\nEnglish: \"language\" - Eesti: \"keel\"\nEnglish: \"net\" - Eesti: \"",
+        "target": "['Internet', 'veeb', 'nett', 'k\u00fcberruum', 'K\u00fcbermaailm', 'v\u00f5rk', 'internet', 'k\u00fcbermaailm', 'Netosissetulek', 'Kasum']",
+        "word original": "net"
+    },
+    "['tea', 'dinner', 'evening meal', 'supper', 'tea leaf']": {
+        "prompt": "English: \"light\" - Eesti: \"valgus\"\nEnglish: \"summer\" - Eesti: \"suvi\"\nEnglish: \"structure\" - Eesti: \"mudel\"\nEnglish: \"north\" - Eesti: \"p\u00f5hi\"\nEnglish: \"child\" - Eesti: \"alaealine\"\nEnglish: \"tea\" - Eesti: \"",
+        "target": "['tee']",
+        "word original": "tea"
+    },
+    "['foot', 'human foot', 'pes', 'Pes', 'groundwork', 'understructure', 'fundament', 'base', 'substructure', 'foundation']": {
+        "prompt": "English: \"word\" - Eesti: \"s\u00f5na\"\nEnglish: \"door\" - Eesti: \"uks\"\nEnglish: \"structure\" - Eesti: \"mudel\"\nEnglish: \"face\" - Eesti: \"n\u00e4gu\"\nEnglish: \"water\" - Eesti: \"vesi\"\nEnglish: \"foot\" - Eesti: \"",
+        "target": "['Labajalg', 'vundament', 'Vundament']",
+        "word original": "foot"
+    },
+    "['gold', 'Au', 'amber', 'golden brown']": {
+        "prompt": "English: \"judge\" - Eesti: \"kohtunik\"\nEnglish: \"cloth\" - Eesti: \"tekstiil\"\nEnglish: \"tie\" - Eesti: \"lips\"\nEnglish: \"word\" - Eesti: \"s\u00f5na\"\nEnglish: \"official\" - Eesti: \"ametnik\"\nEnglish: \"gold\" - Eesti: \"",
+        "target": "['kuld', 'merevaikkollane', 'Merevaikkollane']",
+        "word original": "gold"
+    },
+    "['door', 'door case', 'doorcase', 'door frame', 'doorway', 'doorframe']": {
+        "prompt": "English: \"day\" - Eesti: \"\u00f6\u00f6p\u00e4ev\"\nEnglish: \"eye\" - Eesti: \"silm\"\nEnglish: \"point\" - Eesti: \"punkt\"\nEnglish: \"speech\" - Eesti: \"keel\"\nEnglish: \"head\" - Eesti: \"nous\"\nEnglish: \"door\" - Eesti: \"",
+        "target": "['uks']",
+        "word original": "door"
+    },
+    "['snow', 'snow cover', 'snowfall', 'snow mantle']": {
+        "prompt": "English: \"village\" - Eesti: \"k\u00fcla\"\nEnglish: \"point\" - Eesti: \"punkt\"\nEnglish: \"rock\" - Eesti: \"rokk\"\nEnglish: \"foot\" - Eesti: \"Labajalg\"\nEnglish: \"friend\" - Eesti: \"s\u00f5prus\"\nEnglish: \"snow\" - Eesti: \"",
+        "target": "['lumi']",
+        "word original": "snow"
+    },
+    "['horse', 'Equus caballus']": {
+        "prompt": "English: \"wave\" - Eesti: \"merelaine\"\nEnglish: \"structure\" - Eesti: \"mudel\"\nEnglish: \"ball\" - Eesti: \"pesapall\"\nEnglish: \"fruit\" - Eesti: \"vili\"\nEnglish: \"cloth\" - Eesti: \"tekstiil\"\nEnglish: \"horse\" - Eesti: \"",
+        "target": "['hobune']",
+        "word original": "horse"
+    },
+    "['one', 'ace', 'unity', 'I', 'single', 'Numero Uno']": {
+        "prompt": "English: \"point\" - Eesti: \"punkt\"\nEnglish: \"cloth\" - Eesti: \"tekstiil\"\nEnglish: \"version\" - Eesti: \"t\u00f5lkimine\"\nEnglish: \"red\" - Eesti: \"punane\"\nEnglish: \"water\" - Eesti: \"vesi\"\nEnglish: \"one\" - Eesti: \"",
+        "target": "['\u00fcks', '\u00dcks']",
+        "word original": "one"
+    },
+    "['two', 'deuce', 'II']": {
+        "prompt": "English: \"school\" - Eesti: \"\u00fclikool\"\nEnglish: \"hair\" - Eesti: \"karv\"\nEnglish: \"fire\" - Eesti: \"p\u00f5leng\"\nEnglish: \"speech\" - Eesti: \"keel\"\nEnglish: \"generation\" - Eesti: \"p\u00f5lvkond\"\nEnglish: \"two\" - Eesti: \"",
+        "target": "['kaks', 'Kaks']",
+        "word original": "two"
+    },
+    "['five', 'fin', 'fivesome', 'quintet', 'cinque', 'quint', 'pentad', 'V', 'Phoebe', 'quintuplet', 'Little Phoebe']": {
+        "prompt": "English: \"site\" - Eesti: \"veebisait\"\nEnglish: \"six\" - Eesti: \"kuus\"\nEnglish: \"summer\" - Eesti: \"suvi\"\nEnglish: \"group\" - Eesti: \"organisatsioon\"\nEnglish: \"dance\" - Eesti: \"tants\"\nEnglish: \"five\" - Eesti: \"",
+        "target": "['viis', 'Viis']",
+        "word original": "five"
+    },
+    "['six', 'half a dozen', 'sextuplet', 'VI', 'Captain Hicks', 'sise', 'sextet', 'hexad', 'sixer', 'sestet']": {
+        "prompt": "English: \"rock\" - Eesti: \"rokk\"\nEnglish: \"tie\" - Eesti: \"lips\"\nEnglish: \"power\" - Eesti: \"poliitiline v\u00f5im\"\nEnglish: \"cave\" - Eesti: \"koobas\"\nEnglish: \"child\" - Eesti: \"alaealine\"\nEnglish: \"six\" - Eesti: \"",
+        "target": "['kuus', 'Kuus']",
+        "word original": "six"
+    },
+    "['eight', 'octonary', 'ogdoad', 'VIII', 'octet', 'eighter', 'eighter from Decatur', 'octad']": {
+        "prompt": "English: \"heart\" - Eesti: \"s\u00fcda\"\nEnglish: \"office\" - Eesti: \"kontor\"\nEnglish: \"sun\" - Eesti: \"P\u00e4ike\"\nEnglish: \"light\" - Eesti: \"valgus\"\nEnglish: \"book\" - Eesti: \"raamat\"\nEnglish: \"eight\" - Eesti: \"",
+        "target": "['kaheksa', 'Kaheksa']",
+        "word original": "eight"
+    },
+    "['ten', 'decade', 'tenner', 'X']": {
+        "prompt": "English: \"foot\" - Eesti: \"Labajalg\"\nEnglish: \"six\" - Eesti: \"kuus\"\nEnglish: \"hair\" - Eesti: \"karv\"\nEnglish: \"tie\" - Eesti: \"lips\"\nEnglish: \"dance\" - Eesti: \"tants\"\nEnglish: \"ten\" - Eesti: \"",
+        "target": "['k\u00fcmme']",
+        "word original": "ten"
+    },
+    "['head', 'brain', 'mind', 'nous', 'psyche', 'Nous', 'caput', 'leader', 'director', 'boss', 'chief', 'managing director', 'manager', 'top dog', 'question']": {
+        "prompt": "English: \"sea\" - Eesti: \"Maailmameri\"\nEnglish: \"shop\" - Eesti: \"pood\"\nEnglish: \"lake\" - Eesti: \"j\u00e4rv\"\nEnglish: \"dance\" - Eesti: \"tants\"\nEnglish: \"site\" - Eesti: \"veebisait\"\nEnglish: \"head\" - Eesti: \"",
+        "target": "['nous', 'ps\u00fc\u00fchika', 'Ps\u00fc\u00fchika', 'Nous', 'vaim', 'Vaim', 'pea', 'direktor']",
+        "word original": "head"
+    },
+    "['shop', 'boutique', 'store', 'retail outlet']": {
+        "prompt": "English: \"sea\" - Eesti: \"Maailmameri\"\nEnglish: \"site\" - Eesti: \"veebisait\"\nEnglish: \"official\" - Eesti: \"ametnik\"\nEnglish: \"person\" - Eesti: \"inimene\"\nEnglish: \"line\" - Eesti: \"video\"\nEnglish: \"shop\" - Eesti: \"",
+        "target": "['pood', 'kauplus']",
+        "word original": "shop"
+    },
+    "['eye', 'eyes', 'eyeball', 'eye ball', 'optic', 'oculus', 'heart', 'center', 'centre', 'middle']": {
+        "prompt": "English: \"door\" - Eesti: \"uks\"\nEnglish: \"version\" - Eesti: \"t\u00f5lkimine\"\nEnglish: \"east\" - Eesti: \"idakaar\"\nEnglish: \"one\" - Eesti: \"\u00fcks\"\nEnglish: \"forest\" - Eesti: \"laas\"\nEnglish: \"eye\" - Eesti: \"",
+        "target": "['silm', 'silmamuna']",
+        "word original": "eye"
+    },
+    "['field', 'plain', 'champaign', 'acre', 'subject', 'discipline', 'study', 'subject area', 'subject field', 'field of study', 'bailiwick']": {
+        "prompt": "English: \"red\" - Eesti: \"punane\"\nEnglish: \"ten\" - Eesti: \"k\u00fcmme\"\nEnglish: \"thousand\" - Eesti: \"Tuhat\"\nEnglish: \"light\" - Eesti: \"valgus\"\nEnglish: \"tie\" - Eesti: \"lips\"\nEnglish: \"field\" - Eesti: \"",
+        "target": "['tasandik', 'p\u00f5ld', 'nurm', 'v\u00e4li']",
+        "word original": "field"
+    },
+    "['site', 'Web site', 'website', 'internet site', 'web site', 'locus', 'locale', 'location', 'locality', 'geographic location']": {
+        "prompt": "English: \"five\" - Eesti: \"viis\"\nEnglish: \"judge\" - Eesti: \"kohtunik\"\nEnglish: \"tower\" - Eesti: \"torn\"\nEnglish: \"head\" - Eesti: \"nous\"\nEnglish: \"language\" - Eesti: \"keel\"\nEnglish: \"site\" - Eesti: \"",
+        "target": "['veebisait', 'asukoht', 'geograafiline asend', 'ruum']",
+        "word original": "site"
+    },
+    "['dance', 'dancing', 'saltation', 'terpsichore']": {
+        "prompt": "English: \"sea\" - Eesti: \"Maailmameri\"\nEnglish: \"power\" - Eesti: \"poliitiline v\u00f5im\"\nEnglish: \"door\" - Eesti: \"uks\"\nEnglish: \"fruit\" - Eesti: \"vili\"\nEnglish: \"forest\" - Eesti: \"laas\"\nEnglish: \"dance\" - Eesti: \"",
+        "target": "['tants']",
+        "word original": "dance"
+    },
+    "['word', 'give-and-take', 'discussion']": {
+        "prompt": "English: \"door\" - Eesti: \"uks\"\nEnglish: \"sun\" - Eesti: \"P\u00e4ike\"\nEnglish: \"cloud\" - Eesti: \"pilv\"\nEnglish: \"snow\" - Eesti: \"lumi\"\nEnglish: \"seat\" - Eesti: \"iste\"\nEnglish: \"word\" - Eesti: \"",
+        "target": "['s\u00f5na']",
+        "word original": "word"
+    },
+    "['pair', 'brace', 'ordered pair']": {
+        "prompt": "English: \"fire\" - Eesti: \"p\u00f5leng\"\nEnglish: \"red\" - Eesti: \"punane\"\nEnglish: \"valley\" - Eesti: \"org\"\nEnglish: \"ten\" - Eesti: \"k\u00fcmme\"\nEnglish: \"shop\" - Eesti: \"pood\"\nEnglish: \"pair\" - Eesti: \"",
+        "target": "['J\u00e4rjestatud paar', 'j\u00e4rjestatud paar', 'paar']",
+        "word original": "pair"
+    },
+    "['seat']": {
+        "prompt": "English: \"history\" - Eesti: \"ajalugu\"\nEnglish: \"cloud\" - Eesti: \"pilv\"\nEnglish: \"word\" - Eesti: \"s\u00f5na\"\nEnglish: \"five\" - Eesti: \"viis\"\nEnglish: \"structure\" - Eesti: \"mudel\"\nEnglish: \"seat\" - Eesti: \"",
+        "target": "['iste']",
+        "word original": "seat"
+    },
+    "['light', 'light source', 'visible light', 'visible radiation', 'sill', 'window ledge', 'window', 'window sill', 'ledge-sill', 'lamp', 'cigarette lighter', 'lighter', 'pocket lighter', 'igniter', 'ignitor']": {
+        "prompt": "English: \"rock\" - Eesti: \"rokk\"\nEnglish: \"five\" - Eesti: \"viis\"\nEnglish: \"ground\" - Eesti: \"maa\"\nEnglish: \"face\" - Eesti: \"n\u00e4gu\"\nEnglish: \"tie\" - Eesti: \"lips\"\nEnglish: \"light\" - Eesti: \"",
+        "target": "['valgus', 'aken', 'lamp', 'tulemasin', 'V\u00e4lgumihkel', 'v\u00e4lgumihkel']",
+        "word original": "light"
+    },
+    "['thousand', 'one thousand', 'K', 'G', 'chiliad', 'yard', 'M', 'grand', 'thou']": {
+        "prompt": "English: \"seat\" - Eesti: \"iste\"\nEnglish: \"fire\" - Eesti: \"p\u00f5leng\"\nEnglish: \"tower\" - Eesti: \"torn\"\nEnglish: \"square\" - Eesti: \"ruut\"\nEnglish: \"site\" - Eesti: \"veebisait\"\nEnglish: \"thousand\" - Eesti: \"",
+        "target": "['Tuhat', 'tuhat']",
+        "word original": "thousand"
+    },
+    "['north', 'northward', 'N', 'due north']": {
+        "prompt": "English: \"seat\" - Eesti: \"iste\"\nEnglish: \"tie\" - Eesti: \"lips\"\nEnglish: \"cave\" - Eesti: \"koobas\"\nEnglish: \"wood\" - Eesti: \"laas\"\nEnglish: \"square\" - Eesti: \"ruut\"\nEnglish: \"north\" - Eesti: \"",
+        "target": "['p\u00f5hi']",
+        "word original": "north"
+    },
+    "['machine', 'car', 'automobile', 'auto', 'motorcar', 'motor car', 'device']": {
+        "prompt": "English: \"fruit\" - Eesti: \"vili\"\nEnglish: \"summer\" - Eesti: \"suvi\"\nEnglish: \"history\" - Eesti: \"ajalugu\"\nEnglish: \"book\" - Eesti: \"raamat\"\nEnglish: \"six\" - Eesti: \"kuus\"\nEnglish: \"machine\" - Eesti: \"",
+        "target": "['auto', 'automobiil', 'masin', 'seade', 'aparaat']",
+        "word original": "machine"
+    },
+    "['time', 'tense', 'grammatical tense']": {
+        "prompt": "English: \"light\" - Eesti: \"valgus\"\nEnglish: \"group\" - Eesti: \"organisatsioon\"\nEnglish: \"cloud\" - Eesti: \"pilv\"\nEnglish: \"tea\" - Eesti: \"tee\"\nEnglish: \"mother\" - Eesti: \"ema\"\nEnglish: \"time\" - Eesti: \"",
+        "target": "['aeg']",
+        "word original": "time"
+    },
+    "['friend', 'camaraderie', 'comradeship', 'comradery', 'chumminess', 'comradeliness', 'friendship', 'friendly relationship']": {
+        "prompt": "English: \"forest\" - Eesti: \"laas\"\nEnglish: \"heart\" - Eesti: \"s\u00fcda\"\nEnglish: \"fruit\" - Eesti: \"vili\"\nEnglish: \"light\" - Eesti: \"valgus\"\nEnglish: \"power\" - Eesti: \"poliitiline v\u00f5im\"\nEnglish: \"friend\" - Eesti: \"",
+        "target": "['s\u00f5prus']",
+        "word original": "friend"
+    },
+    "['color', 'black', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors']": {
+        "prompt": "English: \"law\" - Eesti: \"\u00f5igus\"\nEnglish: \"cloud\" - Eesti: \"pilv\"\nEnglish: \"book\" - Eesti: \"raamat\"\nEnglish: \"version\" - Eesti: \"t\u00f5lkimine\"\nEnglish: \"net\" - Eesti: \"Internet\"\nEnglish: \"color\" - Eesti: \"",
+        "target": "['must', 'v\u00e4rv', 'v\u00e4rvus', 'V\u00e4rvuste loendid']",
+        "word original": "color"
+    },
+    "['kind', 'sort', 'form', 'variety']": {
+        "prompt": "English: \"bridge\" - Eesti: \"sild\"\nEnglish: \"ocean\" - Eesti: \"ookean\"\nEnglish: \"pair\" - Eesti: \"J\u00e4rjestatud paar\"\nEnglish: \"day\" - Eesti: \"\u00f6\u00f6p\u00e4ev\"\nEnglish: \"snow\" - Eesti: \"lumi\"\nEnglish: \"kind\" - Eesti: \"",
+        "target": "['sort', 't\u00f5ug', 'liik']",
+        "word original": "kind"
+    },
+    "['judge', 'jurist', 'justice']": {
+        "prompt": "English: \"speech\" - Eesti: \"keel\"\nEnglish: \"village\" - Eesti: \"k\u00fcla\"\nEnglish: \"gold\" - Eesti: \"kuld\"\nEnglish: \"red\" - Eesti: \"punane\"\nEnglish: \"time\" - Eesti: \"aeg\"\nEnglish: \"judge\" - Eesti: \"",
+        "target": "['kohtunik']",
+        "word original": "judge"
+    },
+    "['school', 'university', 'academy', 'faculty', 'staff', 'honorary society']": {
+        "prompt": "English: \"ocean\" - Eesti: \"ookean\"\nEnglish: \"cloth\" - Eesti: \"tekstiil\"\nEnglish: \"rock\" - Eesti: \"rokk\"\nEnglish: \"face\" - Eesti: \"n\u00e4gu\"\nEnglish: \"water\" - Eesti: \"vesi\"\nEnglish: \"school\" - Eesti: \"",
+        "target": "['\u00fclikool', 'kool', 'teaduskond', 'akadeemia']",
+        "word original": "school"
+    },
+    "['structure', 'model', 'construction']": {
+        "prompt": "English: \"bag\" - Eesti: \"k\u00e4ekott\"\nEnglish: \"river\" - Eesti: \"j\u00f5gi\"\nEnglish: \"word\" - Eesti: \"s\u00f5na\"\nEnglish: \"snow\" - Eesti: \"lumi\"\nEnglish: \"speed\" - Eesti: \"kiirus\"\nEnglish: \"structure\" - Eesti: \"",
+        "target": "['mudel', 'struktuur']",
+        "word original": "structure"
+    },
+    "['tie', 'necktie']": {
+        "prompt": "English: \"tail\" - Eesti: \"saba\"\nEnglish: \"head\" - Eesti: \"nous\"\nEnglish: \"tea\" - Eesti: \"tee\"\nEnglish: \"site\" - Eesti: \"veebisait\"\nEnglish: \"generation\" - Eesti: \"p\u00f5lvkond\"\nEnglish: \"tie\" - Eesti: \"",
+        "target": "['lips', 'Viik', 'viik']",
+        "word original": "tie"
+    },
+    "['face', 'human face', 'air', 'appearance', 'manner', 'demeanor', 'look', 'expression', 'mien', 'bearing', 'demeanour', 'facial expression', 'aspect']": {
+        "prompt": "English: \"spring\" - Eesti: \"allikas\"\nEnglish: \"valley\" - Eesti: \"org\"\nEnglish: \"north\" - Eesti: \"p\u00f5hi\"\nEnglish: \"platform\" - Eesti: \"sillutis\"\nEnglish: \"dance\" - Eesti: \"tants\"\nEnglish: \"face\" - Eesti: \"",
+        "target": "['n\u00e4gu', 'N\u00e4gu']",
+        "word original": "face"
+    },
+    "['bridge', 'span', 'list of Roman bridges']": {
+        "prompt": "English: \"person\" - Eesti: \"inimene\"\nEnglish: \"door\" - Eesti: \"uks\"\nEnglish: \"wood\" - Eesti: \"laas\"\nEnglish: \"generation\" - Eesti: \"p\u00f5lvkond\"\nEnglish: \"field\" - Eesti: \"tasandik\"\nEnglish: \"bridge\" - Eesti: \"",
+        "target": "['sild']",
+        "word original": "bridge"
+    },
+    "['group', 'organizational', 'organisational', 'organization', 'organisation', 'musical organization', 'musical organisation', 'musical group', 'musical ensemble', 'moiety', 'functional group', 'chemical group', 'radical', 'team', 'rock band', 'rock group', 'grouping']": {
+        "prompt": "English: \"ball\" - Eesti: \"pesapall\"\nEnglish: \"bridge\" - Eesti: \"sild\"\nEnglish: \"red\" - Eesti: \"punane\"\nEnglish: \"star\" - Eesti: \"t\u00e4ht\"\nEnglish: \"door\" - Eesti: \"uks\"\nEnglish: \"group\" - Eesti: \"",
+        "target": "['organisatsioon', '\u00fching', 'ansambel', 'funktsionaalr\u00fchm', 'Funktsionaalr\u00fchm']",
+        "word original": "group"
+    },
+    "['platform', 'pavement', 'sidewalk', 'footway']": {
+        "prompt": "English: \"rock\" - Eesti: \"rokk\"\nEnglish: \"cloth\" - Eesti: \"tekstiil\"\nEnglish: \"sun\" - Eesti: \"P\u00e4ike\"\nEnglish: \"school\" - Eesti: \"\u00fclikool\"\nEnglish: \"tail\" - Eesti: \"saba\"\nEnglish: \"platform\" - Eesti: \"",
+        "target": "['sillutis', 'k\u00f5nnitee', 'perroon', 'platvorm']",
+        "word original": "platform"
+    },
+    "['house', 'home', 'dwelling', 'theater', 'theatre', 'playhouse', 'business firm', 'casino', 'establishment', 'firm', 'gambling casino', 'household', 'family', 'menage', 'private household', 'habitation', 'dwelling house', 'abode', 'domicile', 'Flotten, Hemmet och Sandl\u00e5dan', 'residence', 'auditorium', 'enterprise', 'concern', 'corporation', 'partnership', 'venture', 'company']": {
+        "prompt": "English: \"history\" - Eesti: \"ajalugu\"\nEnglish: \"structure\" - Eesti: \"mudel\"\nEnglish: \"field\" - Eesti: \"tasandik\"\nEnglish: \"village\" - Eesti: \"k\u00fcla\"\nEnglish: \"summer\" - Eesti: \"suvi\"\nEnglish: \"house\" - Eesti: \"",
+        "target": "['hoone', 'maja', 'teatrihoone', 'kasiino', 'majapidamine', 'Majapidamine', 's\u00fcnnikodu', 'saal', 'ettev\u00f5te', 'firma']",
+        "word original": "house"
+    },
+    "['sun', 'Sunday', \"Lord's Day\", 'Dominicus']": {
+        "prompt": "English: \"two\" - Eesti: \"kaks\"\nEnglish: \"tail\" - Eesti: \"saba\"\nEnglish: \"speed\" - Eesti: \"kiirus\"\nEnglish: \"door\" - Eesti: \"uks\"\nEnglish: \"gold\" - Eesti: \"kuld\"\nEnglish: \"sun\" - Eesti: \"",
+        "target": "['P\u00e4ike', 'p\u00e4ike', 'p\u00fchap\u00e4ev']",
+        "word original": "sun"
+    },
+    "['meeting', 'convention', 'group meeting', 'rally']": {
+        "prompt": "English: \"office\" - Eesti: \"kontor\"\nEnglish: \"machine\" - Eesti: \"auto\"\nEnglish: \"site\" - Eesti: \"veebisait\"\nEnglish: \"language\" - Eesti: \"keel\"\nEnglish: \"bag\" - Eesti: \"k\u00e4ekott\"\nEnglish: \"meeting\" - Eesti: \"",
+        "target": "['konverents', 'Koosolek', 'koosolek']",
+        "word original": "meeting"
+    },
+    "['history', 'historical development']": {
+        "prompt": "English: \"net\" - Eesti: \"Internet\"\nEnglish: \"mother\" - Eesti: \"ema\"\nEnglish: \"house\" - Eesti: \"hoone\"\nEnglish: \"kind\" - Eesti: \"sort\"\nEnglish: \"tie\" - Eesti: \"lips\"\nEnglish: \"history\" - Eesti: \"",
+        "target": "['ajalugu']",
+        "word original": "history"
+    },
+    "['valley', 'dale', 'vale']": {
+        "prompt": "English: \"bag\" - Eesti: \"k\u00e4ekott\"\nEnglish: \"speed\" - Eesti: \"kiirus\"\nEnglish: \"hair\" - Eesti: \"karv\"\nEnglish: \"heart\" - Eesti: \"s\u00fcda\"\nEnglish: \"net\" - Eesti: \"Internet\"\nEnglish: \"valley\" - Eesti: \"",
+        "target": "['org']",
+        "word original": "valley"
+    },
+    "['square', 'foursquare', 'second power']": {
+        "prompt": "English: \"ten\" - Eesti: \"k\u00fcmme\"\nEnglish: \"eight\" - Eesti: \"kaheksa\"\nEnglish: \"platform\" - Eesti: \"sillutis\"\nEnglish: \"house\" - Eesti: \"hoone\"\nEnglish: \"lake\" - Eesti: \"j\u00e4rv\"\nEnglish: \"square\" - Eesti: \"",
+        "target": "['ruut', 'Ruut']",
+        "word original": "square"
+    },
+    "['generation']": {
+        "prompt": "English: \"net\" - Eesti: \"Internet\"\nEnglish: \"square\" - Eesti: \"ruut\"\nEnglish: \"two\" - Eesti: \"kaks\"\nEnglish: \"north\" - Eesti: \"p\u00f5hi\"\nEnglish: \"thousand\" - Eesti: \"Tuhat\"\nEnglish: \"generation\" - Eesti: \"",
+        "target": "['p\u00f5lvkond']",
+        "word original": "generation"
+    },
+    "['south', 'southward', 'due south', 'S']": {
+        "prompt": "English: \"spring\" - Eesti: \"allikas\"\nEnglish: \"eye\" - Eesti: \"silm\"\nEnglish: \"rock\" - Eesti: \"rokk\"\nEnglish: \"fruit\" - Eesti: \"vili\"\nEnglish: \"foot\" - Eesti: \"Labajalg\"\nEnglish: \"south\" - Eesti: \"",
+        "target": "['L\u00f5una', 'l\u00f5una']",
+        "word original": "south"
+    },
+    "['city', 'urban center', 'metropolis', 'city/town']": {
+        "prompt": "English: \"head\" - Eesti: \"nous\"\nEnglish: \"seat\" - Eesti: \"iste\"\nEnglish: \"book\" - Eesti: \"raamat\"\nEnglish: \"tie\" - Eesti: \"lips\"\nEnglish: \"bridge\" - Eesti: \"sild\"\nEnglish: \"city\" - Eesti: \"",
+        "target": "['linn', 'pealinn', 'suurlinn', 'Suurlinn']",
+        "word original": "city"
+    },
+    "['language', 'human language', 'linguistic communication', 'spoken language', 'speech', 'oral communication', 'spoken communication', 'voice communication', 'speech communication']": {
+        "prompt": "English: \"cloth\" - Eesti: \"tekstiil\"\nEnglish: \"wood\" - Eesti: \"laas\"\nEnglish: \"tail\" - Eesti: \"saba\"\nEnglish: \"fire\" - Eesti: \"p\u00f5leng\"\nEnglish: \"star\" - Eesti: \"t\u00e4ht\"\nEnglish: \"language\" - Eesti: \"",
+        "target": "['keel', 'K\u00f5ne', 'Suuline keel', 'suuline keel', 'k\u00f5ne']",
+        "word original": "language"
+    },
+    "['speed', 'velocity', 'fastness', 'swiftness', 'rate', 'ratio']": {
+        "prompt": "English: \"head\" - Eesti: \"nous\"\nEnglish: \"ten\" - Eesti: \"k\u00fcmme\"\nEnglish: \"tower\" - Eesti: \"torn\"\nEnglish: \"fire\" - Eesti: \"p\u00f5leng\"\nEnglish: \"village\" - Eesti: \"k\u00fcla\"\nEnglish: \"speed\" - Eesti: \"",
+        "target": "['kiirus', 'Keskmine kiirus', 'keskmine kiirus', 'muutumiskiirus']",
+        "word original": "speed"
+    },
+    "['ground', 'land', 'terra firma', 'earth', 'solid ground', 'dry land', 'land mass', 'soil', 'dirt', 'reason', 'occasion', 'background']": {
+        "prompt": "English: \"version\" - Eesti: \"t\u00f5lkimine\"\nEnglish: \"friend\" - Eesti: \"s\u00f5prus\"\nEnglish: \"east\" - Eesti: \"idakaar\"\nEnglish: \"moon\" - Eesti: \"Kuu\"\nEnglish: \"song\" - Eesti: \"laul\"\nEnglish: \"ground\" - Eesti: \"",
+        "target": "['maa', 'maismaa']",
+        "word original": "ground"
+    },
+    "['tail']": {
+        "prompt": "English: \"foot\" - Eesti: \"Labajalg\"\nEnglish: \"seat\" - Eesti: \"iste\"\nEnglish: \"line\" - Eesti: \"video\"\nEnglish: \"fruit\" - Eesti: \"vili\"\nEnglish: \"hair\" - Eesti: \"karv\"\nEnglish: \"tail\" - Eesti: \"",
+        "target": "['saba']",
+        "word original": "tail"
+    },
+    "['mother', 'female parent', 'motherhood', 'parents', 'parent', 'parenthood']": {
+        "prompt": "English: \"tea\" - Eesti: \"tee\"\nEnglish: \"red\" - Eesti: \"punane\"\nEnglish: \"field\" - Eesti: \"tasandik\"\nEnglish: \"river\" - Eesti: \"j\u00f5gi\"\nEnglish: \"hair\" - Eesti: \"karv\"\nEnglish: \"mother\" - Eesti: \"",
+        "target": "['ema', 'vanemad']",
+        "word original": "mother"
+    },
+    "['east', 'E', 'eastward', 'due east']": {
+        "prompt": "English: \"pair\" - Eesti: \"J\u00e4rjestatud paar\"\nEnglish: \"sea\" - Eesti: \"Maailmameri\"\nEnglish: \"house\" - Eesti: \"hoone\"\nEnglish: \"rock\" - Eesti: \"rokk\"\nEnglish: \"mother\" - Eesti: \"ema\"\nEnglish: \"east\" - Eesti: \"",
+        "target": "['idakaar', 'ida', 'Ida']",
+        "word original": "east"
+    },
+    "['speech', 'language', 'human language', 'linguistic communication', 'spoken language', 'oral communication', 'spoken communication', 'voice communication', 'speech communication', 'lecture', 'lecturing']": {
+        "prompt": "English: \"cloth\" - Eesti: \"tekstiil\"\nEnglish: \"word\" - Eesti: \"s\u00f5na\"\nEnglish: \"history\" - Eesti: \"ajalugu\"\nEnglish: \"meeting\" - Eesti: \"konverents\"\nEnglish: \"tie\" - Eesti: \"lips\"\nEnglish: \"speech\" - Eesti: \"",
+        "target": "['keel', 'K\u00f5ne', 'Suuline keel', 'suuline keel', 'k\u00f5ne', 'loeng']",
+        "word original": "speech"
+    },
+    "['child', 'fry', 'french fry', 'minor', 'chip', 'youngster', 'shaver', 'small fry', 'kid', 'nestling', 'tiddler', 'tike', 'tyke', 'nipper', 'daughter', 'girl', 'children']": {
+        "prompt": "English: \"cloth\" - Eesti: \"tekstiil\"\nEnglish: \"kind\" - Eesti: \"sort\"\nEnglish: \"tie\" - Eesti: \"lips\"\nEnglish: \"village\" - Eesti: \"k\u00fcla\"\nEnglish: \"site\" - Eesti: \"veebisait\"\nEnglish: \"child\" - Eesti: \"",
+        "target": "['alaealine', 'laps', 'alaealisus', 't\u00fctar', 'lapsed']",
+        "word original": "child"
+    },
+    "['tower']": {
+        "prompt": "English: \"one\" - Eesti: \"\u00fcks\"\nEnglish: \"bag\" - Eesti: \"k\u00e4ekott\"\nEnglish: \"water\" - Eesti: \"vesi\"\nEnglish: \"light\" - Eesti: \"valgus\"\nEnglish: \"version\" - Eesti: \"t\u00f5lkimine\"\nEnglish: \"tower\" - Eesti: \"",
+        "target": "['torn']",
+        "word original": "tower"
+    },
+    "['hair', 'pilus']": {
+        "prompt": "English: \"platform\" - Eesti: \"sillutis\"\nEnglish: \"one\" - Eesti: \"\u00fcks\"\nEnglish: \"law\" - Eesti: \"\u00f5igus\"\nEnglish: \"sea\" - Eesti: \"Maailmameri\"\nEnglish: \"seat\" - Eesti: \"iste\"\nEnglish: \"hair\" - Eesti: \"",
+        "target": "['karv', 'karvad', 'juuksed']",
+        "word original": "hair"
+    },
+    "['person', 'homo', 'human being', 'hominid', 'human', 'man', 'Homo', 'Homo sapiens sapiens', 'someone', 'mortal', 'individual', 'somebody', 'soul']": {
+        "prompt": "English: \"color\" - Eesti: \"must\"\nEnglish: \"six\" - Eesti: \"kuus\"\nEnglish: \"language\" - Eesti: \"keel\"\nEnglish: \"red\" - Eesti: \"punane\"\nEnglish: \"generation\" - Eesti: \"p\u00f5lvkond\"\nEnglish: \"person\" - Eesti: \"",
+        "target": "['inimene', 'Inimene', 'Homo sapiens sapiens', 'isik', 'indiviid']",
+        "word original": "person"
+    },
+    "['official', 'functionary', 'referee', 'umpire', 'tennis official', 'basketball official', 'tennis umpire']": {
+        "prompt": "English: \"structure\" - Eesti: \"mudel\"\nEnglish: \"tower\" - Eesti: \"torn\"\nEnglish: \"child\" - Eesti: \"alaealine\"\nEnglish: \"red\" - Eesti: \"punane\"\nEnglish: \"forest\" - Eesti: \"laas\"\nEnglish: \"official\" - Eesti: \"",
+        "target": "['ametnik', 'vahekohtunik', 'korvpallikohtunik', 'tennisekohtunik']",
+        "word original": "official"
+    },
+    "['office', 'agency', 'authority', 'federal agency', 'government agency', 'bureau', 'government office', 'business office', 'position', 'place', 'spot', 'post', 'situation', 'berth', 'billet']": {
+        "prompt": "English: \"rice\" - Eesti: \"riis\"\nEnglish: \"judge\" - Eesti: \"kohtunik\"\nEnglish: \"house\" - Eesti: \"hoone\"\nEnglish: \"shop\" - Eesti: \"pood\"\nEnglish: \"eye\" - Eesti: \"silm\"\nEnglish: \"office\" - Eesti: \"",
+        "target": "['kontor', 'b\u00fcroo', 'asutus', 'Kontor']",
+        "word original": "office"
+    },
+    "['rock', 'rock music', \"rock 'n' roll\", \"rock'n'roll\", 'rock and roll', 'rock-and-roll', 'stone', 'pebble']": {
+        "prompt": "English: \"ocean\" - Eesti: \"ookean\"\nEnglish: \"ball\" - Eesti: \"pesapall\"\nEnglish: \"song\" - Eesti: \"laul\"\nEnglish: \"red\" - Eesti: \"punane\"\nEnglish: \"ten\" - Eesti: \"k\u00fcmme\"\nEnglish: \"rock\" - Eesti: \"",
+        "target": "['rokk', \"rock'n'roll\", 'rokkmuusika', 'kivim', 'kivi']",
+        "word original": "rock"
+    },
+    "['power', 'political power', 'powerfulness', 'muscular strength', 'strength', 'might', 'physical strength', 'mightiness']": {
+        "prompt": "English: \"tower\" - Eesti: \"torn\"\nEnglish: \"seat\" - Eesti: \"iste\"\nEnglish: \"gold\" - Eesti: \"kuld\"\nEnglish: \"time\" - Eesti: \"aeg\"\nEnglish: \"cloud\" - Eesti: \"pilv\"\nEnglish: \"power\" - Eesti: \"",
+        "target": "['poliitiline v\u00f5im', 'v\u00f5im', 'V\u00f5im', 'v\u00f5imsus', 'V\u00f5imsus']",
+        "word original": "power"
+    },
+    "['summer', 'summertime', 'summer season']": {
+        "prompt": "English: \"law\" - Eesti: \"\u00f5igus\"\nEnglish: \"bag\" - Eesti: \"k\u00e4ekott\"\nEnglish: \"song\" - Eesti: \"laul\"\nEnglish: \"time\" - Eesti: \"aeg\"\nEnglish: \"five\" - Eesti: \"viis\"\nEnglish: \"summer\" - Eesti: \"",
+        "target": "['suvi']",
+        "word original": "summer"
+    }
 }
