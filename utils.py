@@ -16,7 +16,21 @@ import numpy as np
 import pandas as pd
 import torch as th
 from transformers import StoppingCriteria
+from matplotlib import markers, font_manager
+from pathlib import Path
+from transformer_lens.loading_from_pretrained import OFFICIAL_MODEL_NAMES, MODEL_ALIASES
+from transformer_lens import HookedTransformerKeyValueCache as KeyValueCache
 
+from nnsight import LanguageModel
+from nnsight.models.UnifiedTransformer import UnifiedTransformer
+from contextlib import nullcontext
+
+PATH = Path(os.path.dirname(os.path.realpath(__file__)))
+
+markers_list = [None] + list(markers.MarkerStyle.markers.keys())
+simsun_path = PATH / "data/SimSun.ttf"
+font_manager.fontManager.addfont(str(simsun_path))
+simsun = font_manager.FontProperties(fname=str(simsun_path)).get_name()
 
 plt.rcParams.update({"font.size": 16})
 plt_params = {"linewidth": 2.7, "alpha": 0.8}
@@ -111,6 +125,24 @@ def plot_ci(
     ax.fill_between(df["x"], df["y_lower"], df["y_upper"], color=color, alpha=0.3)
     if init:
         ax.spines[["right", "top"]].set_visible(False)
+
+
+def plot_k(
+    axes, data, label, k=4, color="blue", tik_step=10, plt_params=plt_params, init=True
+):
+    if len(axes) < k:
+        raise ValueError("Number of axes must be greater or equal to k")
+
+    for i in range(k):
+        ax = axes[i]
+        if init:
+            upper = max(round(data.shape[1] / 10) * 10 + 1, data.shape[1] + 1)
+            ax.set_xticks(np.arange(0, upper, tik_step))
+            for j in range(0, upper, tik_step):
+                ax.axvline(j, color="black", linestyle="--", alpha=0.5, linewidth=1)
+        ax.plot(data[i], label=label, color=color, **plt_params)
+        if init:
+            ax.spines[["right", "top"]].set_visible(False)
 
 
 def yaml_to_dict(yaml_file):
@@ -327,10 +359,6 @@ class StopOnSequence(StoppingCriteria):
         return StopOnSequence(stop_sequence)
 
 
-from transformer_lens.loading_from_pretrained import OFFICIAL_MODEL_NAMES, MODEL_ALIASES
-from transformer_lens import HookedTransformerKeyValueCache as KeyValueCache
-
-
 def add_model_to_transformer_lens(official_name, alias=None):
     """
     Hacky way to add a model to transformer_lens even if it's not in the official list.
@@ -359,12 +387,14 @@ def expend_tl_cache(cache: KeyValueCache, batch_size: int):
     return cache
 
 
-from nnsight import LanguageModel
-from nnsight.models.UnifiedTransformer import UnifiedTransformer
-
-
 def plot_topk_tokens(
-    probs, nn_model, k=4, title=None, dynamic_size=True, use_token_ids=False
+    next_token_probs,
+    nn_model,
+    k=4,
+    title=None,
+    dynamic_size=True,
+    use_token_ids=False,
+    file=None,
 ):
     """
     Plot the top k tokens for each layer
@@ -381,40 +411,83 @@ def plot_topk_tokens(
         raise ValueError(
             "nn_model must be an instance of LanguageModel or UnifiedTransformer"
         )
-    top_tokens = th.topk(probs, k=k, dim=-1)
-    top_probs = top_tokens.values
-    if not use_token_ids:
-        top_token_indices = [
-            ["'" + nn_model.tokenizer.convert_ids_to_tokens(t.item()) + "'" for t in l]
-            for l in top_tokens.indices
-        ]
-    else:
-        top_token_indices = [[str(t.item()) for t in l] for l in top_tokens.indices]
-    with mpl.rc_context(rc={"font.sans-serif": ["SimSun", "Arial"]}):
-        cmap = sns.diverging_palette(255, 0, as_cmap=True)
-        max_token_length = max(
+    if next_token_probs.dim() == 1:
+        next_token_probs = next_token_probs.unsqueeze(0)
+    max_token_length_sum = 0
+    top_token_indices_list = []
+    top_probs_list = []
+    for probs in next_token_probs:
+        top_tokens = th.topk(probs, k=k, dim=-1)
+        top_probs = top_tokens.values
+        if not use_token_ids:
+            top_token_indices = [
+                [
+                    "'" + nn_model.tokenizer.convert_ids_to_tokens(t.item()) + "'"
+                    for t in l
+                ]
+                for l in top_tokens.indices
+            ]
+        else:
+            top_token_indices = [[str(t.item()) for t in l] for l in top_tokens.indices]
+        top_token_indices_list.append(top_token_indices)
+        top_probs_list.append(top_probs)
+    for top_token_indices in top_token_indices_list:
+        max_token_length_sum += max(
             [len(token) for sublist in top_token_indices for token in sublist]
         )
+    has_chinese = any(
+        any("\u4e00" <= c <= "\u9fff" for c in token)
+        for top_token_indices in top_token_indices_list
+        for sublist in top_token_indices
+        for token in sublist
+    )
+
+    context = (
+        mpl.rc_context(rc={"font.sans-serif": [simsun, "Arial"]})
+        if has_chinese
+        else nullcontext()
+    )
+    with context:
         if dynamic_size:
-            plt.figure(figsize=(max_token_length * k * 0.25, num_layers / 2))
+            fig, axes = plt.subplots(
+                1,
+                len(next_token_probs),
+                figsize=(max_token_length_sum * k * 0.25, num_layers / 2),
+            )
         else:
-            plt.figure(figsize=(15, 10))
-        ax = sns.heatmap(
-            top_probs.detach().numpy(),
-            annot=top_token_indices,
-            fmt="",
-            cmap=cmap,
-            linewidths=0.5,
-            cbar_kws={"label": "Probability"},
-        )
+            fig, axes = plt.subplots(
+                1, len(next_token_probs), figsize=(15 * len(next_token_probs), 10)
+            )
+        for ax, top_probs, top_token_indices in zip(
+            axes, top_probs_list, top_token_indices_list
+        ):
+            cmap = sns.diverging_palette(255, 0, as_cmap=True)
+            sns.heatmap(
+                top_probs.detach().numpy(),
+                annot=top_token_indices,
+                fmt="",
+                cmap=cmap,
+                linewidths=0.5,
+                cbar_kws={"label": "Probability"},
+                ax=ax,
+            )
+            ax.set_xlabel("Tokens")
+            ax.set_ylabel("Layers")
+            ax.set_yticks(np.arange(num_layers) + 0.5, range(num_layers))
         if title is None:
-            plt.title(f"Top {k} Tokens Heatmap")
+            fig.suptitle(f"Top {k} Tokens Heatmap")
         else:
-            plt.title(f"Top {k} Tokens Heatmap - {title}")
-        plt.xlabel("Tokens")
-        plt.ylabel("Layers")
+            fig.suptitle(f"Top {k} Tokens Heatmap - {title}")
 
-        plt.yticks(np.arange(num_layers) + 0.5, range(num_layers))
-
-        # plt.tight_layout()  # Adjust subplot parameters to fit the figure area
+        plt.tight_layout()
+        if file is not None:
+            fig.savefig(file, bbox_inches="tight", dpi=300)
+        fig.show()
         plt.show()
+
+
+def ulist(lst):
+    """
+    Returns a list with unique elements from the input list.
+    """
+    return list(dict.fromkeys(lst))

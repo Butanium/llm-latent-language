@@ -1,20 +1,13 @@
-import os
 import sys
 
 sys.path.append("..")
-import torch as th
-import numpy as np
-import pandas as pd
 import json
-from tqdm.auto import tqdm
-from pathlib import Path
-import itertools
 
 langs = ["fr", "de", "ru", "en", "zh", "es"]
 out_langs = langs + ["ja", "ko", "et", "fi", "nl", "hi"]
 from translation_tools import prompts_from_df
 
-from translation_tools import get_bn_dataset as get_translations
+from translation_tools import generate_bn_dataset as get_translations
 
 
 def build_bn_dataset(input_lang):
@@ -40,7 +33,11 @@ def build_bn_dataset(input_lang):
         )
         json_dic = {}
         for prompt, (_, row) in zip(prompts, df.iterrows()):
-            json_dic[str(row[input_lang])] = prompt
+            json_dic[str(row[input_lang])] = {
+                "prompt": prompt,
+                "target": str(row[target_lang]),
+                "word original": str(row["word_original"]),
+            }
         with open(f"../data/langs/{input_lang}/{target_lang}_prompts.json", "w") as f:
             json.dump(json_dic, f, indent=4)
     print(f"Done {input_lang}")
