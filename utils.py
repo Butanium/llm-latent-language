@@ -411,7 +411,7 @@ def plot_topk_tokens(
         raise ValueError(
             "nn_model must be an instance of LanguageModel or UnifiedTransformer"
         )
-    if next_token_probs.dim() == 1:
+    if next_token_probs.dim() == 2:
         next_token_probs = next_token_probs.unsqueeze(0)
     max_token_length_sum = 0
     top_token_indices_list = []
@@ -458,6 +458,8 @@ def plot_topk_tokens(
             fig, axes = plt.subplots(
                 1, len(next_token_probs), figsize=(15 * len(next_token_probs), 10)
             )
+        if len(next_token_probs) == 1:
+            axes = [axes]
         for ax, top_probs, top_token_indices in zip(
             axes, top_probs_list, top_token_indices_list
         ):
