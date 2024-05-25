@@ -305,6 +305,8 @@ lang2name = {
     "et": "Eesti",
     "fi": "Suomi",
     "hi": "हिन्दी",
+    "A": "A",
+    "B": "B",
 }
 
 
@@ -337,7 +339,7 @@ def translation_prompts(
     tokenizer,
     input_lang: str,
     target_lang: str,
-    latent_langs: str | list[str],
+    latent_langs: str | list[str] | None = None,
     n=5,
     only_best=False,
     augment_tokens=True,
@@ -360,6 +362,8 @@ def translation_prompts(
     tok_vocab = tokenizer.get_vocab()
     if isinstance(latent_langs, str):
         latent_langs = [latent_langs]
+    if latent_langs is None:
+        latent_langs = []
     assert (
         len(df) > n
     ), f"Not enough translations from {input_lang} to {target_lang} for n={n}"

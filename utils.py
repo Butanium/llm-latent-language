@@ -24,6 +24,8 @@ from transformer_lens import HookedTransformerKeyValueCache as KeyValueCache
 from nnsight import LanguageModel
 from nnsight.models.UnifiedTransformer import UnifiedTransformer
 from contextlib import nullcontext
+from IPython.display import display
+
 
 PATH = Path(os.path.dirname(os.path.realpath(__file__)))
 
@@ -389,7 +391,7 @@ def expend_tl_cache(cache: KeyValueCache, batch_size: int):
 
 def plot_topk_tokens(
     next_token_probs,
-    nn_model,
+    tokenizer,
     k=4,
     title=None,
     dynamic_size=True,
@@ -403,16 +405,13 @@ def plot_topk_tokens(
     :param title: Title of the plot
     :param dynamic_size: If True, the size of the plot will be adjusted based on the length of the tokens
     """
-    if isinstance(nn_model, UnifiedTransformer):
-        num_layers = len(nn_model.blocks)
-    elif isinstance(nn_model, LanguageModel):
-        num_layers = len(nn_model.model.layers)
-    else:
-        raise ValueError(
-            "nn_model must be an instance of LanguageModel or UnifiedTransformer"
-        )
+    if isinstance(tokenizer, LanguageModel) or isinstance(tokenizer, UnifiedTransformer):
+        tokenizer = tokenizer.tokenizer
+    if next_token_probs.dim() == 1:
+        next_token_probs = next_token_probs.unsqueeze(0)
     if next_token_probs.dim() == 2:
         next_token_probs = next_token_probs.unsqueeze(0)
+    num_layers = next_token_probs.shape[1]
     max_token_length_sum = 0
     top_token_indices_list = []
     top_probs_list = []
@@ -422,7 +421,7 @@ def plot_topk_tokens(
         if not use_token_ids:
             top_token_indices = [
                 [
-                    "'" + nn_model.tokenizer.convert_ids_to_tokens(t.item()) + "'"
+                    "'" + tokenizer.convert_ids_to_tokens(t.item()) + "'"
                     for t in l
                 ]
                 for l in top_tokens.indices
@@ -493,3 +492,14 @@ def ulist(lst):
     Returns a list with unique elements from the input list.
     """
     return list(dict.fromkeys(lst))
+
+def display_df(df):
+    with pd.option_context(
+        "display.max_colwidth",
+        None,
+        "display.max_columns",
+        None,
+        "display.max_rows",
+        None,
+    ):
+        display(df)
