@@ -13,7 +13,7 @@ from typing import Callable
 from warnings import warn
 from typing import Optional, Union
 import re
-
+from interventions import *
 from typing import Literal
 
 DATA_PATH = Path(__file__).resolve().parent.parent / "data"
@@ -98,29 +98,31 @@ def process_tokens_with_tokenization(words: str | list[str], tokenizer):
         words = [words]
     final_tokens = []
     for word in words:
-        hacky_token = tokenizer("🍐", add_special_tokens=False).input_ids
-        length = len(hacky_token)
-        tokens = tokenizer("🍐" + word, add_special_tokens=False).input_ids
-        assert (
-            tokens[:length] == hacky_token
-        ), "I didn't expect this to happen, please check this code"
-        if len(tokens) > length:
-            final_tokens.append(tokens[length])
-        tokens = tokenizer(word, add_special_tokens=False).input_ids
-        word_token_with_start_of_word = tokens[0]
-        word_token_with_start_of_word2 = tokenizer(
+        # If you get the value error even with add_prefix_space=False, 
+        # you can use the following hacky code to get the token without the prefix
+        # hacky_token = tokenizer("🍐", add_special_tokens=False).input_ids
+        # length = len(hacky_token)
+        # tokens = tokenizer("🍐" + word, add_special_tokens=False).input_ids
+        # assert (
+        #     tokens[:length] == hacky_token
+        # ), "I didn't expect this to happen, please check this code"
+        # if len(tokens) > length:
+        #     final_tokens.append(tokens[length])
+
+        token = tokenizer(word, add_special_tokens=False).input_ids[0]
+        token_with_start_of_word = tokenizer(
             " " + word, add_special_tokens=False
         ).input_ids[0]
+        if token == token_with_start_of_word:
+            raise ValueError(
+                "Seems like you use a tokenizer that wasn't initialized with add_prefix_space=False. Not good :("
+            )
+        final_tokens.append(token)
         if (
-            word_token_with_start_of_word
+            token_with_start_of_word
             != tokenizer(" ", add_special_tokens=False).input_ids[0]
         ):
-            final_tokens.append(word_token_with_start_of_word)
-        if (
-            word_token_with_start_of_word2
-            != tokenizer(" ", add_special_tokens=False).input_ids[0]
-        ):
-            final_tokens.append(word_token_with_start_of_word2)
+            final_tokens.append(token_with_start_of_word)
     return ulist(final_tokens)
 
 
@@ -211,84 +213,8 @@ def logit_lens_llama(
     return probs
 
 
-@dataclass
-class PatchscopePrompt:
-    prompt: str
-    index_to_patch: int
-
-
-def repeat_prompt(
-    nn_model=None, words=None, rel=" ", sep="\n", placeholder="?"
-) -> PatchscopePrompt:
-    """
-    Prompt used in the patchscopes paper to predict the next token.
-    https://github.com/PAIR-code/interpretability/blob/master/patchscopes/code/next_token_prediction.ipynb
-    """
-    if words is None:
-        words = [
-            "king",
-            "1135",
-            "hello",
-        ]
-    assert nn_model is None or (
-        len(nn_model.tokenizer.tokenize(placeholder)) == 1
-    ), "Using a placeholder that is not a single token sounds like a bad idea"
-    prompt = sep.join([w + rel + w for w in words]) + sep + placeholder
-    index_to_patch = -1
-    return PatchscopePrompt(prompt, index_to_patch)
-
-
-@dataclass
-class BatchPatchscopePrompt:
-    prompts: list[str]
-    index_to_patch: th.Tensor
-
-    @classmethod
-    def from_patchscope_prompts(cls, prompts_: list[PatchscopePrompt], tokenizer=None):
-        prompts = [p.prompt for p in prompts_]
-        index_to_patch = th.tensor([p.index_to_patch for p in prompts_])
-        if index_to_patch.min() < 0:
-            if tokenizer is None:
-                raise ValueError(
-                    "If using negative index_to_patch, a tokenizer must be provided"
-                )
-        return cls(prompts, index_to_patch)
-
-    @classmethod
-    def from_patchscope_prompt(cls, prompt: PatchscopePrompt, batch_size: int):
-        prompts = [prompt.prompt] * batch_size
-        index_to_patch = th.tensor([prompt.index_to_patch] * batch_size)
-        return cls(prompts, index_to_patch)
-
-    @classmethod
-    def from_prompts(
-        cls, prompts: str | list[str], index_to_patch: int | list[int] | th.Tensor
-    ):
-        if isinstance(prompts, str):
-            prompts = [prompts]
-        if isinstance(index_to_patch, int):
-            index_to_patch = th.tensor([index_to_patch] * len(prompts))
-        elif isinstance(index_to_patch, list):
-            index_to_patch = th.tensor(index_to_patch)
-        elif not isinstance(index_to_patch, th.Tensor):
-            raise ValueError(
-                f"index_to_patch must be an int, a list of ints or a tensor, got {type(index_to_patch)}"
-            )
-        return cls(prompts, index_to_patch)
-
-    def __len__(self):
-        return len(self.prompts)
-
-    def __getitem__(self, idx):
-        return PatchscopePrompt(self.prompts[idx], self.index_to_patch[idx])
-
-    def __iter__(self):
-        for i in range(len(self)):
-            yield self[i]
-
-
 def description_prompt(placeholder="?"):
-    return PatchscopePrompt(
+    return TargetPrompt(
         f"""Jensen Huang is the CEO of NVIDIA, a technology company
 New York City is the largest city in the United States
 Johnny Depp is a famous actor known for his role in Pirates of the Caribbean
@@ -301,397 +227,6 @@ A spoon is a utensil used for eating food
 {placeholder}""",
         -1,
     )
-
-
-@th.no_grad
-def patchscope_lens(
-    nn_model: UnifiedTransformer,
-    source_prompts: list[str] | str,
-    target_patch_prompts: (
-        BatchPatchscopePrompt | list[PatchscopePrompt] | PatchscopePrompt | None
-    ) = None,
-    scan=True,
-    remote=False,
-):
-    """
-    Replace the hidden state of the patch_prompt.index_to_patch token in the patch_prompt.prompt with the hidden state of the last token of each prompt at each layer.
-    Returns the probabilities of the next token in patch_prompt for each prompt for each layer intervention.
-    Args:
-        nn_model: The NNSight TL model
-        source_prompts: List of prompts or a single prompt to get the hidden states of the last token
-        target_patch_prompt: A PatchScopePrompt object containing the prompt to patch and the index of the token to patch
-        scan: If looping over this function, set to False after the first call to speed up subsequent calls
-        remote: If True, the function will run on the nndif server. See `nnsight.net/status` to check which models are available.
-    Returns:
-        A tensor of shape (num_prompts, num_layers, vocab_size) containing the probabilities
-        of the next token for each prompt at each layer. Tensor is on the CPU.
-    """
-    if target_patch_prompts is None:
-        target_patch_prompts = repeat_prompt()
-    if isinstance(target_patch_prompts, PatchscopePrompt):
-        target_patch_prompts = BatchPatchscopePrompt.from_patchscope_prompt(
-            target_patch_prompts, len(source_prompts)
-        )
-    elif isinstance(target_patch_prompts, list):
-        target_patch_prompts = BatchPatchscopePrompt.from_patchscope_prompts(
-            target_patch_prompts
-        )
-    elif not isinstance(target_patch_prompts, BatchPatchscopePrompt):
-        raise ValueError(
-            f"patch_prompts must be a PatchScopePrompt, a list of PatchScopePrompt or a BatchPatchScopePrompt, got {type(target_patch_prompts)}"
-        )
-    if len(target_patch_prompts) != len(source_prompts):
-        raise ValueError(
-            f"Number of prompts ({len(source_prompts)}) does not match number of patch prompts ({len(target_patch_prompts)})"
-        )
-    nn_model.eval()
-    tok_prompts = nn_model.tokenizer(source_prompts, return_tensors="pt", padding=True)
-    # Todo?: This is a hacky way to get the last token index but it works for both left and right padding
-    last_token_index = (
-        tok_prompts.attention_mask.flip(1).cumsum(1).bool().int().sum(1).sub(1)
-    )
-    # Collect the hidden states of the last token of each prompt at each layer
-    if isinstance(source_prompts, str):
-        source_prompts = [source_prompts]
-    probs_l = []
-    with nn_model.trace(source_prompts, scan=scan, remote=remote) as tracer:
-        hiddens = [
-            layer.output[
-                th.arange(len(tok_prompts.input_ids)),
-                last_token_index,
-            ].save()
-            for layer in nn_model.blocks
-        ]
-        # For each prompt, we will do n_layers patching so we need to expand the cache accordingly
-    n_layers = len(nn_model.blocks)
-    # Collect the patch activations for each prompt at each layer
-    for layer in range(n_layers):
-        with nn_model.trace(
-            target_patch_prompts.prompts,
-            scan=layer == 0,
-            remote=remote,
-        ):
-            nn_model.blocks[layer].output[
-                th.arange(len(source_prompts)), target_patch_prompts.index_to_patch
-            ] = hiddens[layer]
-            output = nn_model.unembed.output
-            probs = output[:, -1, :].softmax(-1).cpu().save()
-            probs_l.append(probs)
-    probs = th.cat(probs_l, dim=0)
-    return probs.reshape(n_layers, len(source_prompts), -1).transpose(0, 1)
-
-
-@th.no_grad
-def patchscope_generate(
-    nn_model: UnifiedTransformer,
-    prompts: list[str] | str,
-    patch_prompt: PatchscopePrompt,
-    max_length=50,
-    layers=None,
-    stop_tokens: Optional[Union[int, list[int]]] = None,
-    scan=True,
-    remote=False,
-    max_batch_size=32,
-):
-    """
-    Replace the hidden state of the patch_prompt.index_to_patch token in the patch_prompt.prompt with the hidden state of the last token of each prompt at each layer.
-    Returns the probabilities of the next token in patch_prompt for each prompt for each layer intervention.
-    Args:
-        nn_model: The NNSight TL model
-        prompts: List of prompts or a single prompt to get the hidden states of the last token
-        patch_prompt: A PatchScopePrompt object containing the prompt to patch and the index of the token to patch
-        layers: List of layers to intervene on. If None, all layers are intervened on.
-        stop_tokens: The tokens to stop generation at. If None, generation will stop at the end of the prompt.
-        scan: If looping over this function, set to False after the first call to speed up subsequent calls
-        remote: If True, the function will run on the nndif server. See `nnsight.net/status` to check which models are available.
-        max_batch_size: The maximum number of prompts to intervene on at once.
-
-    Returns:
-        A tensor of shape (num_prompts, num_layers, vocab_size) containing the probabilities
-        of the next token for each prompt at each layer. Tensor is on the CPU.
-    """
-    if isinstance(prompts, str):
-        prompts = [prompts]
-    if len(prompts) > max_batch_size:
-        warn(
-            f"Number of prompts ({len(prompts)}) exceeds max_batch_size ({max_batch_size}). This may cause memory errors."
-        )
-    if isinstance(stop_tokens, int):
-        stop_tokens = [stop_tokens]
-    if stop_tokens is not None:
-        stop_tokens.append(nn_model.tokenizer.eos_token_id)
-    nn_model.eval()
-    n_layers = len(nn_model.blocks)
-    if layers is None:
-        layers = list(range(n_layers))
-    tok_prompts = nn_model.tokenizer(prompts, return_tensors="pt", padding=True)
-    # Todo?: This is a hacky way to get the last token index but it works for both left and right padding
-    last_token_index = (
-        tok_prompts.attention_mask.flip(1).cumsum(1).bool().int().sum(1).sub(1)
-    )
-    # Collect the hidden states of the last token of each prompt at each layer
-    with nn_model.trace(prompts, scan=scan, remote=remote):
-        hiddens = [
-            layer.output[
-                th.arange(len(tok_prompts.input_ids)),
-                last_token_index,
-            ].save()
-            for layer in nn_model.blocks
-        ]
-    generations = {}
-    gen_kwargs = dict(
-        remote=remote, max_new_tokens=max_length, eos_token_id=stop_tokens
-    )
-    layer_loader = DataLoader(layers, batch_size=max(max_batch_size // len(prompts), 1))
-    for layer_batch in layer_loader:
-        with nn_model.generate(**gen_kwargs) as tracer:
-            for layer in layer_batch:
-                layer = layer.item()
-                with tracer.invoke(
-                    [patch_prompt.prompt] * len(prompts), scan=(scan and layer == 0)
-                ):
-                    nn_model.blocks[layer].output[:, patch_prompt.index_to_patch] = (
-                        hiddens[layer]
-                    )
-                    gen = nn_model.generator.output.save()
-                    generations[layer] = gen
-    for k, v in generations.items():
-        generations[k] = v.cpu()
-    return generations
-
-
-@th.no_grad
-def patchscope_lens_llama(
-    nn_model: LanguageModel,
-    source_prompts: list[str] | str,
-    target_patch_prompts: (
-        BatchPatchscopePrompt | list[PatchscopePrompt] | PatchscopePrompt | None
-    ) = None,
-    scan=True,
-    remote=False,
-):
-    """
-    Replace the hidden state of the patch_prompt.index_to_patch token in the patch_prompt.prompt with the hidden state of the last token of each prompt at each layer.
-    Returns the probabilities of the next token in patch_prompt for each prompt for each layer intervention.
-    Args:
-        nn_model: The NNSight LanguageModel with llama architecture
-        source_prompts: List of prompts or a single prompt to get the hidden states of the last token
-        target_patch_prompt: A PatchScopePrompt object containing the prompt to patch and the index of the token to patch
-        scan: If looping over this function, set to False after the first call to speed up subsequent calls
-        remote: If True, the function will run on the nndif server. See `nnsight.net/status` to check which models are available.
-    Returns:
-        A tensor of shape (num_prompts, num_layers, vocab_size) containing the probabilities
-        of the next token for each prompt at each layer. Tensor is on the CPU.
-    """
-    if isinstance(source_prompts, str):
-        source_prompts = [source_prompts]
-    if target_patch_prompts is None:
-        target_patch_prompts = repeat_prompt()
-    if isinstance(target_patch_prompts, PatchscopePrompt):
-        target_patch_prompts = BatchPatchscopePrompt.from_patchscope_prompt(
-            target_patch_prompts, len(source_prompts)
-        )
-    elif isinstance(target_patch_prompts, list):
-        target_patch_prompts = BatchPatchscopePrompt.from_patchscope_prompts(
-            target_patch_prompts
-        )
-    elif not isinstance(target_patch_prompts, BatchPatchscopePrompt):
-        raise ValueError(
-            f"patch_prompts must be a PatchScopePrompt, a list of PatchScopePrompt or a BatchPatchScopePrompt, got {type(target_patch_prompts)}"
-        )
-    if len(target_patch_prompts) != len(source_prompts):
-        raise ValueError(
-            f"Number of prompts ({len(source_prompts)}) does not match number of patch prompts ({len(target_patch_prompts)})"
-        )
-    nn_model.eval()
-    tok_prompts = nn_model.tokenizer(source_prompts, return_tensors="pt", padding=True)
-    # Todo?: This is a hacky way to get the last token index but it works for both left and right padding
-    last_token_index = (
-        tok_prompts.attention_mask.flip(1).cumsum(1).bool().int().sum(1).sub(1)
-    )
-    # Collect the hidden states of the last token of each prompt at each layer
-    probs_l = []
-    with nn_model.trace(source_prompts, scan=scan, remote=remote) as tracer:
-        hiddens = [
-            layer.output[0][
-                th.arange(len(tok_prompts.input_ids)),
-                last_token_index,
-            ]
-            .cpu()
-            .save()
-            for layer in nn_model.model.layers
-        ]
-        # For each prompt, we will do n_layers patching so we need to expand the cache accordingly
-    n_layers = len(nn_model.model.layers)
-    # Collect the patch activations for each prompt at each layer
-    for layer in range(n_layers):
-        with nn_model.trace(
-            target_patch_prompts.prompts,
-            scan=layer == 0,
-            remote=remote,
-        ):
-            nn_model.model.layers[layer].output[0][
-                th.arange(len(source_prompts)), target_patch_prompts.index_to_patch
-            ] = hiddens[layer]
-            output = nn_model.lm_head.output
-            probs = output[:, -1, :].softmax(-1).cpu().save()
-            probs_l.append(probs)
-    probs = th.cat(probs_l, dim=0)
-    return probs.reshape(n_layers, len(source_prompts), -1).transpose(0, 1)
-
-@th.no_grad
-def attn_patchscope_lens_llama(
-    nn_model: LanguageModel,
-    source_prompts: list[str] | str,
-    target_patch_prompts: (
-        BatchPatchscopePrompt | list[PatchscopePrompt] | PatchscopePrompt | None
-    ) = None,
-    scan=True,
-    remote=False,
-):
-    """
-    Replace the hidden state of the patch_prompt.index_to_patch token in the patch_prompt.prompt with the hidden state of the last token of each prompt at each layer.
-    Returns the probabilities of the next token in patch_prompt for each prompt for each layer intervention.
-    Args:
-        nn_model: The NNSight LanguageModel with llama architecture
-        source_prompts: List of prompts or a single prompt to get the hidden states of the last token
-        target_patch_prompt: A PatchScopePrompt object containing the prompt to patch and the index of the token to patch
-        scan: If looping over this function, set to False after the first call to speed up subsequent calls
-        remote: If True, the function will run on the nndif server. See `nnsight.net/status` to check which models are available.
-    Returns:
-        A tensor of shape (num_prompts, num_layers, vocab_size) containing the probabilities
-        of the next token for each prompt at each layer. Tensor is on the CPU.
-    """
-    if isinstance(source_prompts, str):
-        source_prompts = [source_prompts]
-    if target_patch_prompts is None:
-        target_patch_prompts = repeat_prompt()
-    if isinstance(target_patch_prompts, PatchscopePrompt):
-        target_patch_prompts = BatchPatchscopePrompt.from_patchscope_prompt(
-            target_patch_prompts, len(source_prompts)
-        )
-    elif isinstance(target_patch_prompts, list):
-        target_patch_prompts = BatchPatchscopePrompt.from_patchscope_prompts(
-            target_patch_prompts
-        )
-    elif not isinstance(target_patch_prompts, BatchPatchscopePrompt):
-        raise ValueError(
-            f"patch_prompts must be a PatchScopePrompt, a list of PatchScopePrompt or a BatchPatchScopePrompt, got {type(target_patch_prompts)}"
-        )
-    if len(target_patch_prompts) != len(source_prompts):
-        raise ValueError(
-            f"Number of prompts ({len(source_prompts)}) does not match number of patch prompts ({len(target_patch_prompts)})"
-        )
-    nn_model.eval()
-    tok_prompts = nn_model.tokenizer(source_prompts, return_tensors="pt", padding=True)
-    # Todo?: This is a hacky way to get the last token index but it works for both left and right padding
-    last_token_index = (
-        tok_prompts.attention_mask.flip(1).cumsum(1).bool().int().sum(1).sub(1)
-    )
-    # Collect the hidden states of the last token of each prompt at each layer
-    probs_l = []
-    with nn_model.trace(source_prompts, scan=scan, remote=remote) as tracer:
-        hiddens = [
-            layer.self_attn.output[0][
-                th.arange(len(tok_prompts.input_ids)),
-                last_token_index,
-            ].cpu().save()
-            for layer in nn_model.model.layers
-        ]
-        # For each prompt, we will do n_layers patching so we need to expand the cache accordingly
-    n_layers = len(nn_model.model.layers)
-    # Collect the patch activations for each prompt at each layer
-    for layer in range(n_layers):
-        with nn_model.trace(
-            target_patch_prompts.prompts,
-            scan=layer == 0,
-            remote=remote,
-        ):  
-            for patch_idx in range(layer, min(layer+5, n_layers)):
-                nn_model.model.layers[patch_idx].self_attn.output[0][
-                    th.arange(len(source_prompts)), target_patch_prompts.index_to_patch
-                ] = hiddens[patch_idx]
-            output = nn_model.lm_head.output
-            probs = output[:, -1, :].softmax(-1).cpu().save()
-            probs_l.append(probs)
-    probs = th.cat(probs_l, dim=0)
-    return probs.reshape(n_layers, len(source_prompts), -1).transpose(0, 1)
-
-
-@th.no_grad
-def patchscope_generate_llama(
-    nn_model: LanguageModel,
-    prompts: list[str] | str,
-    target_patch_prompt: PatchscopePrompt,
-    max_length: int = 50,
-    layers=None,
-    stopping_criteria=None,
-    scan=True,
-    remote=False,
-    max_batch_size=32,
-):
-    """
-    Replace the hidden state of the patch_prompt.index_to_patch token in the patch_prompt.prompt with the hidden state of the last token of each prompt at each layer.
-    Returns the probabilities of the next token in patch_prompt for each prompt for each layer intervention.
-    Args:
-        nn_model: The NNSight LanguageModel with llama architecture
-        prompts: List of prompts or a single prompt to get the hidden states of the last token
-        patch_prompt: A PatchScopePrompt object containing the prompt to patch and the index of the token to patch
-        layers: List of layers to intervene on. If None, all layers are intervened on.
-        stopping_criteria: The HF stopping criteria which stops generation when it is met for ALL prompts
-        scan: If looping over this function, set to False after the first call to speed up subsequent calls
-        remote: If True, the function will run on the nndif server. See `nnsight.net/status` to check which models are available.
-        max_batch_size: The maximum number of prompts to intervene on at once.
-
-    Returns:
-        A tensor of shape (num_prompts, num_layers, vocab_size) containing the probabilities
-        of the next token for each prompt at each layer. Tensor is on the CPU.
-    """
-    if isinstance(prompts, str):
-        prompts = [prompts]
-    if len(prompts) > max_batch_size:
-        warn(
-            f"Number of prompts ({len(prompts)}) exceeds max_batch_size ({max_batch_size}). This may cause memory errors."
-        )
-    nn_model.eval()
-    n_layers = len(nn_model.model.layers)
-    if layers is None:
-        layers = list(range(n_layers))
-    tok_prompts = nn_model.tokenizer(prompts, return_tensors="pt", padding=True)
-    # Todo?: This is a hacky way to get the last token index but it works for both left and right padding
-    last_token_index = (
-        tok_prompts.attention_mask.flip(1).cumsum(1).bool().int().sum(1).sub(1)
-    )
-    # Collect the hidden states of the last token of each prompt at each layer
-    with nn_model.trace(prompts, scan=scan, remote=remote):
-        hiddens = [
-            layer.output[0][
-                th.arange(len(tok_prompts.input_ids)),
-                last_token_index,
-            ].save()
-            for layer in nn_model.model.layers
-        ]
-    generations = {}
-    gen_kwargs = dict(
-        remote=remote, max_new_tokens=max_length, stopping_criteria=stopping_criteria
-    )
-    layer_loader = DataLoader(layers, batch_size=max(max_batch_size // len(prompts), 1))
-    for layer_batch in layer_loader:
-        with nn_model.generate(**gen_kwargs) as tracer:
-            for layer in layer_batch:
-                layer = layer.item()
-                with tracer.invoke(
-                    [target_patch_prompt.prompt] * len(prompts),
-                    scan=(scan and layer == 0),
-                ):
-                    nn_model.model.layers[layer].output[0][
-                        :, target_patch_prompt.index_to_patch
-                    ] = hiddens[layer]
-                    gen = nn_model.generator.output.save()
-                    generations[layer] = gen
-    for k, v in generations.items():
-        generations[k] = v.cpu()
-    return generations
 
 
 def _next_token_probs_unsqueeze(nn_model, prompt, scan=True):
@@ -741,6 +276,7 @@ def run_prompts(
     prompts,
     batch_size=32,
     method: str | Callable = "logit_lens",
+    method_kwargs=None,
 ):
     """
     Run a list of prompts through the model and return the probabilities of the next token for both the target and latent languages.
@@ -756,8 +292,10 @@ def run_prompts(
         get_probs = method_to_fn[method]
     else:
         get_probs = method
+    if method_kwargs is None:
+        method_kwargs = {}
     for prompt_batch in tqdm(dataloader, total=len(dataloader), desc="Running prompts"):
-        probs.append(get_probs(nn_model, prompt_batch, scan=scan))
+        probs.append(get_probs(nn_model, prompt_batch, scan=scan, **method_kwargs))
         scan = False
     probs = th.cat(probs)
     target_probs = []
@@ -769,3 +307,15 @@ def run_prompts(
     target_probs = th.stack(target_probs).cpu()
     latent_probs = {lang: th.stack(probs).cpu() for lang, probs in latent_probs.items()}
     return target_probs, latent_probs
+
+
+def prompts_to_df(prompts):
+    dic = {}
+    for i, prompt in enumerate(prompts):
+        dic[i] = {
+            "prompt": prompt.prompt,
+            "target_string": prompt.target_string,
+        }
+        for lang, string in prompt.latent_strings.items():
+            dic[i][lang] = string
+    return pd.DataFrame.from_dict(dic)
