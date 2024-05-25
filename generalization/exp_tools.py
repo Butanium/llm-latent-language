@@ -539,6 +539,84 @@ def patchscope_lens_llama(
     probs = th.cat(probs_l, dim=0)
     return probs.reshape(n_layers, len(source_prompts), -1).transpose(0, 1)
 
+@th.no_grad
+def attn_patchscope_lens_llama(
+    nn_model: LanguageModel,
+    source_prompts: list[str] | str,
+    target_patch_prompts: (
+        BatchPatchscopePrompt | list[PatchscopePrompt] | PatchscopePrompt | None
+    ) = None,
+    scan=True,
+    remote=False,
+):
+    """
+    Replace the hidden state of the patch_prompt.index_to_patch token in the patch_prompt.prompt with the hidden state of the last token of each prompt at each layer.
+    Returns the probabilities of the next token in patch_prompt for each prompt for each layer intervention.
+    Args:
+        nn_model: The NNSight LanguageModel with llama architecture
+        source_prompts: List of prompts or a single prompt to get the hidden states of the last token
+        target_patch_prompt: A PatchScopePrompt object containing the prompt to patch and the index of the token to patch
+        scan: If looping over this function, set to False after the first call to speed up subsequent calls
+        remote: If True, the function will run on the nndif server. See `nnsight.net/status` to check which models are available.
+    Returns:
+        A tensor of shape (num_prompts, num_layers, vocab_size) containing the probabilities
+        of the next token for each prompt at each layer. Tensor is on the CPU.
+    """
+    if isinstance(source_prompts, str):
+        source_prompts = [source_prompts]
+    if target_patch_prompts is None:
+        target_patch_prompts = repeat_prompt()
+    if isinstance(target_patch_prompts, PatchscopePrompt):
+        target_patch_prompts = BatchPatchscopePrompt.from_patchscope_prompt(
+            target_patch_prompts, len(source_prompts)
+        )
+    elif isinstance(target_patch_prompts, list):
+        target_patch_prompts = BatchPatchscopePrompt.from_patchscope_prompts(
+            target_patch_prompts
+        )
+    elif not isinstance(target_patch_prompts, BatchPatchscopePrompt):
+        raise ValueError(
+            f"patch_prompts must be a PatchScopePrompt, a list of PatchScopePrompt or a BatchPatchScopePrompt, got {type(target_patch_prompts)}"
+        )
+    if len(target_patch_prompts) != len(source_prompts):
+        raise ValueError(
+            f"Number of prompts ({len(source_prompts)}) does not match number of patch prompts ({len(target_patch_prompts)})"
+        )
+    nn_model.eval()
+    tok_prompts = nn_model.tokenizer(source_prompts, return_tensors="pt", padding=True)
+    # Todo?: This is a hacky way to get the last token index but it works for both left and right padding
+    last_token_index = (
+        tok_prompts.attention_mask.flip(1).cumsum(1).bool().int().sum(1).sub(1)
+    )
+    # Collect the hidden states of the last token of each prompt at each layer
+    probs_l = []
+    with nn_model.trace(source_prompts, scan=scan, remote=remote) as tracer:
+        hiddens = [
+            layer.self_attn.output[0][
+                th.arange(len(tok_prompts.input_ids)),
+                last_token_index,
+            ].cpu().save()
+            for layer in nn_model.model.layers
+        ]
+        # For each prompt, we will do n_layers patching so we need to expand the cache accordingly
+    n_layers = len(nn_model.model.layers)
+    # Collect the patch activations for each prompt at each layer
+    for layer in range(n_layers):
+        with nn_model.trace(
+            target_patch_prompts.prompts,
+            scan=layer == 0,
+            remote=remote,
+        ):  
+            for patch_idx in range(layer, min(layer+5, n_layers)):
+                nn_model.model.layers[patch_idx].self_attn.output[0][
+                    th.arange(len(source_prompts)), target_patch_prompts.index_to_patch
+                ] = hiddens[patch_idx]
+            output = nn_model.lm_head.output
+            probs = output[:, -1, :].softmax(-1).cpu().save()
+            probs_l.append(probs)
+    probs = th.cat(probs_l, dim=0)
+    return probs.reshape(n_layers, len(source_prompts), -1).transpose(0, 1)
+
 
 @th.no_grad
 def patchscope_generate_llama(
