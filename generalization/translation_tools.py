@@ -1,5 +1,11 @@
 from __future__ import annotations
-from exp_tools import Prompt, load_lang, process_tokens, DATA_PATH
+from exp_tools import (
+    Prompt,
+    load_lang,
+    process_tokens,
+    DATA_PATH,
+    process_tokens_with_tokenization,
+)
 import pandas as pd
 from random import sample
 from tqdm.auto import tqdm
@@ -334,6 +340,7 @@ def translation_prompts(
     latent_langs: str | list[str],
     n=5,
     only_best=False,
+    augment_tokens=True,
 ) -> list[Prompt]:
     """
     Get a translation prompt from input_lang to target_lang for each row in the dataframe.
@@ -345,6 +352,7 @@ def translation_prompts(
         target_lang: Language to translate to
         n: Number of few-shot examples for each translation
         only_best: If True, only use the best translation for each row
+        augment_tokens: If True, take the subwords, _word for each word
 
     Returns:
         List of Prompt objects
@@ -361,7 +369,10 @@ def translation_prompts(
         target_words = row[target_lang]
         if only_best and isinstance(target_words, list):
             target_words = target_words[0]
-        target_tokens = process_tokens(target_words, tok_vocab)
+        if augment_tokens:
+            target_tokens = process_tokens(target_words, tok_vocab)
+        else:
+            target_tokens = process_tokens_with_tokenization(target_words, tokenizer)
         latent_tokens = {}
         latent_words = {}
         for lang in latent_langs:
@@ -369,14 +380,22 @@ def translation_prompts(
             if only_best and isinstance(l_words, list):
                 l_words = l_words[0]
             latent_words[lang] = l_words
-            latent_tokens[lang] = process_tokens(l_words, tok_vocab)
-        prompts.append(
-            Prompt(
-                prompt,
-                target_tokens,
-                latent_tokens,
-                target_words,
-                latent_words,
+            if augment_tokens:
+                latent_tokens[lang] = process_tokens(l_words, tok_vocab)
+            else:
+                latent_tokens[lang] = process_tokens_with_tokenization(
+                    l_words, tokenizer
+                )
+        if len(target_tokens) and all(
+            len(latent_tokens_) for latent_tokens_ in latent_tokens.values()
+        ):
+            prompts.append(
+                Prompt(
+                    prompt,
+                    target_tokens,
+                    latent_tokens,
+                    target_words,
+                    latent_words,
+                )
             )
-        )
     return prompts

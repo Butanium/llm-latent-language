@@ -8,7 +8,7 @@ from tqdm.auto import tqdm
 from nnsight.models.UnifiedTransformer import UnifiedTransformer
 from nnsight import LanguageModel
 from transformer_lens import HookedTransformerKeyValueCache as KeyValueCache
-from utils import expend_tl_cache
+from utils import expend_tl_cache, ulist
 from typing import Callable
 from warnings import warn
 from typing import Optional, Union
@@ -90,24 +90,38 @@ def process_tokens(words: str | list[str], tok_vocab):
         for word in with_spaces:
             if word in tok_vocab:
                 final_tokens.append(tok_vocab[word])
-    return list(set(final_tokens))
+    return ulist(final_tokens)
 
 
-def process_tokens_with_tokenization(
-    words: str | list[str], tokenizer
-):  # todo: remove if not useful
+def process_tokens_with_tokenization(words: str | list[str], tokenizer):
     if isinstance(words, str):
         words = [words]
     final_tokens = []
     for word in words:
-        with_prefixes = token_prefixes(word)
-        with_spaces = add_spaces(with_prefixes)
-        tokenizations = tokenizer(with_spaces, add_special_tokens=False).input_ids
-        final_tokens += [t[0] for t in tokenizations if len(t) == 1]
-    space_ids = set(
-        [t[0] for t in tokenizer(SPACE_TOKENS, add_special_tokens=False).input_ids]
-    )
-    return list(set(final_tokens) - space_ids)
+        hacky_token = tokenizer("🍐", add_special_tokens=False).input_ids
+        length = len(hacky_token)
+        tokens = tokenizer("🍐" + word, add_special_tokens=False).input_ids
+        assert (
+            tokens[:length] == hacky_token
+        ), "I didn't expect this to happen, please check this code"
+        if len(tokens) > length:
+            final_tokens.append(tokens[length])
+        tokens = tokenizer(word, add_special_tokens=False).input_ids
+        word_token_with_start_of_word = tokens[0]
+        word_token_with_start_of_word2 = tokenizer(
+            " " + word, add_special_tokens=False
+        ).input_ids[0]
+        if (
+            word_token_with_start_of_word
+            != tokenizer(" ", add_special_tokens=False).input_ids[0]
+        ):
+            final_tokens.append(word_token_with_start_of_word)
+        if (
+            word_token_with_start_of_word2
+            != tokenizer(" ", add_special_tokens=False).input_ids[0]
+        ):
+            final_tokens.append(word_token_with_start_of_word2)
+    return ulist(final_tokens)
 
 
 def next_token_probs(
@@ -502,7 +516,9 @@ def patchscope_lens_llama(
             layer.output[0][
                 th.arange(len(tok_prompts.input_ids)),
                 last_token_index,
-            ].cpu().save()
+            ]
+            .cpu()
+            .save()
             for layer in nn_model.model.layers
         ]
         # For each prompt, we will do n_layers patching so we need to expand the cache accordingly
