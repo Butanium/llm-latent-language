@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+from typing import Optional
 from exp_tools import (
     Prompt,
     load_lang,
@@ -242,7 +244,7 @@ def generate_bn_dataset(source_lang, target_langs, num_words=None):
 
 
 def get_bn_dataset(
-    source_lang: str, target_langs: str | list[str], num_words=None, do_sample=True
+    source_lang: str, target_langs: str | list[str], num_words: Optional[int]=None, do_sample=True
 ):
     if isinstance(target_langs, str):
         target_langs = [target_langs]

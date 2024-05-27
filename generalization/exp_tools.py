@@ -19,6 +19,29 @@ from typing import Literal
 DATA_PATH = Path(__file__).resolve().parent.parent / "data"
 
 
+def load_model(model_name: str, trust_remote_code=False, use_tl=False, **kwargs_):
+    """
+    Load a model into nnsight. If use_tl is True, a TransformerLens model is loaded.
+    Default device is "auto" and default torch_dtype is th.float16.
+    """
+    kwargs = dict(torch_dtype=th.float16, trust_remote_code=trust_remote_code)
+    if use_tl:
+        kwargs["device"] = "cuda" if th.cuda.is_available() else "cpu"
+        kwargs["processing"] = False
+        kwargs.update(kwargs_)
+        return UnifiedTransformer(model_name, **kwargs)
+    else:
+        kwargs["device_map"] = "auto"
+        tokenizer_kwargs = kwargs_.pop("tokenizer_kwargs", {})
+        tokenizer_kwargs.update(
+            dict(add_prefix_space=False, trust_remote_code=trust_remote_code)
+        )
+        kwargs.update(kwargs_)
+        return LanguageModel(
+            model_name, tokenizer_kwargs=tokenizer_kwargs, **kwargs
+        )
+
+
 def load_lang(lang):
     path = DATA_PATH / "langs" / lang / "clean.csv"
     return pd.read_csv(path)
@@ -98,7 +121,7 @@ def process_tokens_with_tokenization(words: str | list[str], tokenizer):
         words = [words]
     final_tokens = []
     for word in words:
-        # If you get the value error even with add_prefix_space=False, 
+        # If you get the value error even with add_prefix_space=False,
         # you can use the following hacky code to get the token without the prefix
         # hacky_token = tokenizer("🍐", add_special_tokens=False).input_ids
         # length = len(hacky_token)
@@ -173,6 +196,7 @@ def logit_lens(
     return probs
 
 
+# TODO: merge with logit_lens
 @th.no_grad
 def logit_lens_llama(
     nn_model: LanguageModel, prompts: list[str] | str, scan=True, remote=False
@@ -239,7 +263,6 @@ method_to_fn = {
     "logit_lens": logit_lens,
     "logit_lens_llama": logit_lens_llama,
     "patchscope_lens": patchscope_lens,
-    "patchscope_lens_llama": patchscope_lens_llama,
 }
 
 
@@ -268,6 +291,18 @@ class Prompt:
             for lang, tokens in self.latent_tokens.items()
         }
         return target_probs.cpu(), latent_probs.cpu()
+
+    def has_no_collisions(self, ignore_langs: Optional[str | list[str]] = None):
+        tokens = self.target_tokens
+        if isinstance(ignore_langs, str):
+            ignore_langs = [ignore_langs]
+        if ignore_langs is None:
+            ignore_langs = []
+        for lang, lang_tokens in self.latent_tokens.items():
+            if lang in ignore_langs:
+                continue
+            tokens += lang_tokens
+        return len(tokens) == len(set(tokens))
 
 
 @th.no_grad
@@ -309,7 +344,11 @@ def run_prompts(
     return target_probs, latent_probs
 
 
-def prompts_to_df(prompts):
+def prompts_to_str(prompts):
+    return [prompt.prompt for prompt in prompts]
+
+
+def prompts_to_df(prompts, tokenizer=None):
     dic = {}
     for i, prompt in enumerate(prompts):
         dic[i] = {
@@ -317,5 +356,15 @@ def prompts_to_df(prompts):
             "target_string": prompt.target_string,
         }
         for lang, string in prompt.latent_strings.items():
-            dic[i][lang] = string
+            dic[i][lang + "_string"] = string
+        if tokenizer is not None:
+            dic[i]["target_tokens"] = tokenizer.convert_ids_to_tokens(
+                prompt.target_tokens
+            )
+            for lang, tokens in prompt.latent_tokens.items():
+                dic[i][lang + "_tokens"] = tokenizer.convert_ids_to_tokens(tokens)
     return pd.DataFrame.from_dict(dic)
+
+
+def filter_prompts(prompts, ignore_langs: Optional[str | list[str]] = None):
+    return [prompt for prompt in prompts if prompt.has_no_collisions(ignore_langs)]

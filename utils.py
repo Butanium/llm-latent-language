@@ -395,6 +395,7 @@ def plot_topk_tokens(
     k=4,
     title=None,
     dynamic_size=True,
+    dynamic_color_scale=False,
     use_token_ids=False,
     file=None,
 ):
@@ -405,7 +406,9 @@ def plot_topk_tokens(
     :param title: Title of the plot
     :param dynamic_size: If True, the size of the plot will be adjusted based on the length of the tokens
     """
-    if isinstance(tokenizer, LanguageModel) or isinstance(tokenizer, UnifiedTransformer):
+    if isinstance(tokenizer, LanguageModel) or isinstance(
+        tokenizer, UnifiedTransformer
+    ):
         tokenizer = tokenizer.tokenizer
     if next_token_probs.dim() == 1:
         next_token_probs = next_token_probs.unsqueeze(0)
@@ -420,10 +423,7 @@ def plot_topk_tokens(
         top_probs = top_tokens.values
         if not use_token_ids:
             top_token_indices = [
-                [
-                    "'" + tokenizer.convert_ids_to_tokens(t.item()) + "'"
-                    for t in l
-                ]
+                ["'" + tokenizer.convert_ids_to_tokens(t.item()) + "'" for t in l]
                 for l in top_tokens.indices
             ]
         else:
@@ -459,10 +459,13 @@ def plot_topk_tokens(
             )
         if len(next_token_probs) == 1:
             axes = [axes]
-        for ax, top_probs, top_token_indices in zip(
-            axes, top_probs_list, top_token_indices_list
+        for i, (ax, top_probs, top_token_indices) in enumerate(
+            zip(axes, top_probs_list, top_token_indices_list)
         ):
             cmap = sns.diverging_palette(255, 0, as_cmap=True)
+            sns_kwargs = {}
+            if not dynamic_color_scale:
+                sns_kwargs.update(dict(vmin=0, vmax=1, cbar=i == len(axes) - 1))
             sns.heatmap(
                 top_probs.detach().numpy(),
                 annot=top_token_indices,
@@ -471,6 +474,7 @@ def plot_topk_tokens(
                 linewidths=0.5,
                 cbar_kws={"label": "Probability"},
                 ax=ax,
+                **sns_kwargs,
             )
             ax.set_xlabel("Tokens")
             ax.set_ylabel("Layers")
@@ -492,6 +496,7 @@ def ulist(lst):
     Returns a list with unique elements from the input list.
     """
     return list(dict.fromkeys(lst))
+
 
 def display_df(df):
     with pd.option_context(
