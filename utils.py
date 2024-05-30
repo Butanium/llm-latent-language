@@ -104,6 +104,7 @@ def plot_ci(
     tik_step=10,
     init=True,
     plt_params=plt_params,
+    marker="o",
 ):
     if init:
         upper = max(round(data.shape[1] / 10) * 10 + 1, data.shape[1] + 1)
@@ -113,7 +114,7 @@ def plot_ci(
     mean = data.mean(dim=0)
     std = data.std(dim=0)
     data_ci = {
-        "x": np.arange(data.shape[1]) + 1,
+        "x": np.arange(data.shape[1]),
         "y": mean,
         "y_upper": mean + (1.96 / (data.shape[0] ** 0.5)) * std,
         "y_lower": mean - (1.96 / (data.shape[0] ** 0.5)) * std,
@@ -122,7 +123,7 @@ def plot_ci(
     df = pd.DataFrame(data_ci)
     # Create the line plot with confidence intervals
     ax.plot(
-        df["x"], df["y"], label=label, color=color, linestyle=linestyle, **plt_params
+        df["x"], df["y"], label=label, color=color, linestyle=linestyle, marker=marker, **plt_params
     )
     ax.fill_between(df["x"], df["y_lower"], df["y_upper"], color=color, alpha=0.3)
     if init:
@@ -130,7 +131,7 @@ def plot_ci(
 
 
 def plot_k(
-    axes, data, label, k=4, color="blue", tik_step=10, plt_params=plt_params, init=True
+    axes, data, label, k=4, color="blue", tik_step=10, plt_params=plt_params, init=True, same_scale=True
 ):
     if len(axes) < k:
         raise ValueError("Number of axes must be greater or equal to k")
@@ -145,6 +146,8 @@ def plot_k(
         ax.plot(data[i], label=label, color=color, **plt_params)
         if init:
             ax.spines[["right", "top"]].set_visible(False)
+        if same_scale and init:
+            ax.set_ylim(0, 1)
 
 
 def yaml_to_dict(yaml_file):
