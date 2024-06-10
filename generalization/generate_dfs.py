@@ -3,14 +3,14 @@ import sys
 sys.path.append("..")
 import json
 
-langs = ["fr", "de", "ru", "en", "zh", "es"]
-out_langs = langs + ["ja", "ko", "et", "fi", "nl", "hi"]
+
 from translation_tools import prompts_from_df
-
+from concurrent.futures import ThreadPoolExecutor
 from translation_tools import generate_bn_dataset as get_translations
+from argparse import ArgumentParser
 
 
-def build_bn_dataset(input_lang):
+def build_bn_dataset(input_lang, out_langs):
     """
     Patchscope with source hidden from:
     index -1 and Prompt = source_input_lang: A -> source_target_lang:
@@ -43,14 +43,20 @@ def build_bn_dataset(input_lang):
     print(f"Done {input_lang}")
 
 
-from concurrent.futures import ThreadPoolExecutor
+if __name__ == "__main__":
+    parser = ArgumentParser()
+    langs = ["fr", "de", "ru", "en", "zh", "es"]
+    out_langs = langs + ["ja", "ko", "et", "fi", "nl", "hi", "it"]
+    parser.add_argument("--langs", "-l", nargs="+", default=langs)
+    parser.add_argument("--out_langs", "-o", nargs="+", default=out_langs)
+    args = parser.parse_args()
+    langs = args.langs
+    out_langs = args.out_langs
 
+    def process_item(input_lang):
+        build_bn_dataset(input_lang, out_langs)
 
-def process_item(input_lang):
-    build_bn_dataset(input_lang)
+    with ThreadPoolExecutor(max_workers=30) as executor:
+        results = list(executor.map(process_item, langs))
 
-
-with ThreadPoolExecutor(max_workers=30) as executor:
-    results = list(executor.map(process_item, langs))
-
-print("Done")
+    print("Done")

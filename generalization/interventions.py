@@ -8,7 +8,6 @@ from tqdm.auto import tqdm
 from nnsight.models.UnifiedTransformer import UnifiedTransformer
 from nnsight import LanguageModel
 from transformer_lens import HookedTransformerKeyValueCache as KeyValueCache
-from utils import expend_tl_cache, ulist
 from typing import Union
 from warnings import warn
 from typing import Optional, Union, Callable
@@ -378,7 +377,7 @@ def patch_attention_lens(
     return probs.reshape(n_layers, len(source_prompts), -1).transpose(0, 1)
 
 
-def patch_object_lens(
+def patch_object_attn_lens(
     nn_model,
     source_prompts,
     target_prompts,
@@ -397,29 +396,27 @@ def patch_object_lens(
     def get_act(model, layer):
         return get_attention(model, layer).input[1]["hidden_states"]
 
+    source_hiddens = collect_activations(
+        nn_model,
+        source_prompts,
+        get_activations=get_act,
+    )
+    clean_inputs = []
+    with nn_model.trace(target_prompts, scan=scan):
+        for layer in range(num_layers):
+            clean_inputs.append(get_layer(nn_model, layer).input)
     for layer in range(num_layers):
         next_layers = list(range(layer, min(num_layers, layer + num_patches)))
-        source_hiddens = collect_activations(
-            nn_model,
-            source_prompts,
-            layers=next_layers,
-            get_activations=get_act,
-        )
         corr_attn = []
-        with nn_model.trace(scan=layer == 0 and scan) as tracer:
-            clean_inputs = []
-            with tracer.invoke(target_prompts):
-                for next_layer in next_layers:
-                    clean_inputs.append(get_layer(nn_model, next_layer).input)
-            with tracer.invoke(target_prompts):
-                for i, next_layer in enumerate(next_layers):
-                    get_layer(nn_model, next_layer).input = clean_inputs[i]
-                    get_attention(nn_model, next_layer).input[1]["hidden_states"][
-                        :, attn_idx_patch
-                    ] = source_hiddens[i]
-                    corr_attn.append(
-                        get_attention_output(nn_model, next_layer)[:, -1].save()
-                    )
+        with nn_model.trace(target_prompts, scan=layer == 0 and scan):
+            for next_layer in next_layers:
+                get_layer(nn_model, next_layer).input = clean_inputs[next_layer]
+                get_attention(nn_model, next_layer).input[1]["hidden_states"][
+                    :, attn_idx_patch
+                ] = source_hiddens[next_layer]
+                corr_attn.append(
+                    get_attention_output(nn_model, next_layer)[:, -1].save()
+                )
         with nn_model.trace(target_prompts, scan=layer == 0 and scan):
             for i, next_layer in enumerate(next_layers):
                 get_attention(nn_model, next_layer).output[0][:, -1] = corr_attn[i]
@@ -428,5 +425,40 @@ def patch_object_lens(
     return (
         th.cat(probs_l, dim=0)
         .reshape(num_layers, len(target_prompts), -1)  # todo num_layers
+        .transpose(0, 1)
+    )
+
+
+def object_lens(
+    nn_model,
+    source_prompts,
+    target_prompts,
+    idx,
+    steering_vectors=None,
+    num_patches=-1,
+    scan=True,
+):
+    if isinstance(target_prompts, str):
+        target_prompts = [target_prompts]
+    num_layers = get_num_layers(nn_model)
+    if num_patches == -1:
+        num_patches = num_layers
+    hiddens = collect_activations(
+        nn_model,
+        source_prompts,
+    )
+    if steering_vectors is not None:
+        for i, (h, s) in enumerate(zip(hiddens, steering_vectors)):
+            hiddens[i] = h + s
+    probs_l = []
+    for layer in range(num_layers):
+        with nn_model.trace(target_prompts, scan=layer == 0 and scan):
+            for target_layer in range(layer, min(layer + num_patches, num_layers)):
+                get_layer_output(nn_model, target_layer)[:, idx] = hiddens[target_layer]
+            probs = get_next_token_probs(nn_model).cpu().save()
+            probs_l.append(probs)
+    return (
+        th.cat(probs_l, dim=0)
+        .reshape(num_layers, len(target_prompts), -1)
         .transpose(0, 1)
     )

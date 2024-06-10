@@ -8,7 +8,7 @@ from tqdm.auto import tqdm
 from nnsight.models.UnifiedTransformer import UnifiedTransformer
 from nnsight import LanguageModel
 from transformer_lens import HookedTransformerKeyValueCache as KeyValueCache
-from utils import expend_tl_cache, ulist
+from utils import ulist
 from typing import Callable
 from warnings import warn
 from typing import Optional, Union
@@ -37,9 +37,7 @@ def load_model(model_name: str, trust_remote_code=False, use_tl=False, **kwargs_
             dict(add_prefix_space=False, trust_remote_code=trust_remote_code)
         )
         kwargs.update(kwargs_)
-        return LanguageModel(
-            model_name, tokenizer_kwargs=tokenizer_kwargs, **kwargs
-        )
+        return LanguageModel(model_name, tokenizer_kwargs=tokenizer_kwargs, **kwargs)
 
 
 def load_lang(lang):
@@ -147,6 +145,18 @@ def process_tokens_with_tokenization(words: str | list[str], tokenizer):
         ):
             final_tokens.append(token_with_start_of_word)
     return ulist(final_tokens)
+
+
+def get_mean_activations(nn_model, prompts_str, batch_size=32):
+    dataloader = DataLoader(prompts_str, batch_size=batch_size, shuffle=False)
+    acts = []
+    for batch in tqdm(dataloader):
+        acts.append(collect_activations(nn_model, batch))
+    mean_activations = []
+    num_layers = get_num_layers(nn_model)
+    for layer in range(num_layers):
+        mean_activations.append(th.cat([a[layer] for a in acts]).mean(0))
+    return mean_activations
 
 
 def next_token_probs(
@@ -293,7 +303,7 @@ class Prompt:
         return target_probs.cpu(), latent_probs.cpu()
 
     def has_no_collisions(self, ignore_langs: Optional[str | list[str]] = None):
-        tokens = self.target_tokens
+        tokens = self.target_tokens[:]  # Copy the list
         if isinstance(ignore_langs, str):
             ignore_langs = [ignore_langs]
         if ignore_langs is None:

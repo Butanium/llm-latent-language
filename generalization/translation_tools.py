@@ -15,13 +15,14 @@ from munch import munchify
 from cache_decorator import Cache
 from collections import defaultdict
 import ast
-import regex
+import regex as re
 from emoji import emoji_count
 
 from wrpy import WordReference
 import babelnet as bn
 from babelnet.sense import BabelLemmaType, BabelSense
 from babelnet import BabelSynset
+from utils import ulist
 
 
 def get_gpt4_dataset(source_lang, target_langs, num_words=None):
@@ -88,7 +89,7 @@ def wr_translate(source_lang, target_lang, word, single_word=False, noun_only=Tr
                     split = trans.split("TCTraditional")
                     assert len(split) == 2
                     trans = split[0]
-                translations.extend(regex.findall(r"\p{Han}+", trans))
+                translations.extend(re.findall(r"\p{Han}+", trans))
 
     translations = list(dict.fromkeys(translations))  # remove duplicates
     return translations
@@ -128,6 +129,16 @@ id_to_bn_lang = {
 lang_to_id = {v: k for k, v in id_to_bn_lang.items()}
 
 
+@Cache()
+def cached_bn_synsets(word, from_langs, poses=None, to_langs=None):
+    return bn.get_synsets(
+        word,
+        from_langs=[id_to_bn_lang[from_lang] for from_lang in from_langs],
+        to_langs=[id_to_bn_lang[to_lang] for to_lang in to_langs],
+        poses=poses,
+    )
+
+
 @Cache(
     args_to_ignore=("sense_filters", "synset_filters"),
 )
@@ -163,6 +174,27 @@ def get_bn_senses(
     )
 
 
+def get_bn_synsets(word, from_langs, poses=None, to_langs=None):
+    if isinstance(from_langs, str):
+        from_langs = [from_langs]
+    from_langs = sorted(from_langs)
+    if to_langs is None:
+        to_langs = from_langs
+    else:
+        to_langs = sorted(to_langs)
+    return cached_bn_synsets(word, from_langs, poses=poses, to_langs=to_langs)
+
+
+def _synset_filter(synset: BabelSynset):
+    if not synset.is_key_concept:
+        return False  # Removes albums, movies, etc.
+    return True
+
+
+def filter_synsets(synsets):
+    return [synset for synset in synsets if _synset_filter(synset)]
+
+
 def bn_translate(word, source_lang, target_langs, noun_only=True):
     def sense_filter(sense: BabelSense):
         lemma = sense.lemma.lemma
@@ -176,11 +208,6 @@ def bn_translate(word, source_lang, target_langs, noun_only=True):
             return False  # Removes low-quality translations
         return True
 
-    def synset_filter(synset: BabelSynset):
-        if not synset.is_key_concept:
-            return False  # Removes albums, movies, etc.
-        return True
-
     if isinstance(target_langs, str):
         target_langs = [target_langs]
 
@@ -192,7 +219,7 @@ def bn_translate(word, source_lang, target_langs, noun_only=True):
         kwargs["poses"] = [bn.POS.NOUN]
     senses = get_bn_senses(word, **kwargs)
     senses = [sense for sense in senses if sense_filter(sense)]
-    senses = [sense for sense in senses if synset_filter(sense.synset)]
+    senses = [sense for sense in senses if _synset_filter(sense.synset)]
     translations = {lang: [] for lang in target_langs}
     for sense in senses:
         translations[lang_to_id[sense.language]].append(sense)
@@ -243,8 +270,62 @@ def generate_bn_dataset(source_lang, target_langs, num_words=None):
     return df
 
 
+def generate_bn_closure_dataset(lang):
+    source_df = load_lang(lang)
+    source_words = list(source_df["word_translation"].values)
+    word_original = list(source_df["word_original"].values)
+
+    # def sense_filter(sense: BabelSense):
+    #     keep_syn = _synset_filter(sense.synset)
+    #     lemma = sense.lemma.lemma
+    #     if emoji_count(lemma) > 0 or any(  # Removes emojis
+    #         char.isdigit() for char in lemma
+    #     ):  # Remove numbers
+    #         return False
+    #     return keep_syn
+
+    dataset = {
+        "word_original": [],
+        "word": [],
+        "senses": [],
+        "closure": [],
+        "definition": [],
+    }
+    for word, wo in zip(source_words, word_original):
+        synsets = list(
+            filter(
+                _synset_filter,
+                get_bn_synsets(word, from_langs=lang, poses=[bn.POS.NOUN]),
+            )
+        )
+        synsets.sort(key=lambda s: s.synset_degree, reverse=True)
+        closures = []
+        defs = []
+        regex = re.compile(r"\b" + word + r"\b", flags=re.IGNORECASE)
+        for synset in synsets:
+            glosses = synset.glosses()
+            for gloss in glosses:
+                gloss = str(gloss)
+                sub_gloss = re.sub(regex, "_", gloss)
+                if sub_gloss != gloss:
+                    closures.append(sub_gloss)
+                defs.append(gloss)
+        if closures or defs:
+            dataset["word_original"].append(wo)
+            dataset["word"].append(word)
+            dataset["senses"].append(
+                ulist([str(s.lemma).replace("_", " ") for s in synset.senses()])
+            )
+            dataset["closure"].append(closures)
+            dataset["definition"].append(defs)
+    return pd.DataFrame(dataset)
+
+
 def get_bn_dataset(
-    source_lang: str, target_langs: str | list[str], num_words: Optional[int]=None, do_sample=True
+    source_lang: str,
+    target_langs: str | list[str],
+    num_words: Optional[int] = None,
+    do_sample=True,
 ):
     if isinstance(target_langs, str):
         target_langs = [target_langs]

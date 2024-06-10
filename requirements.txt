@@ -13,3 +13,4 @@ cache_decorator
 cloudpickle<3  # Babelnet requires cloudpickle<3
 babelnet -C="--ignore-requires-python"
 emoji
+coolname
