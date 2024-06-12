@@ -8,9 +8,10 @@ from translation_tools import prompts_from_df
 from concurrent.futures import ThreadPoolExecutor
 from translation_tools import generate_bn_dataset as get_translations
 from argparse import ArgumentParser
+import pandas as pd
 
 
-def build_bn_dataset(input_lang, out_langs):
+def build_bn_dataset(input_lang, out_langs, expand=False):
     """
     Patchscope with source hidden from:
     index -1 and Prompt = source_input_lang: A -> source_target_lang:
@@ -22,7 +23,16 @@ def build_bn_dataset(input_lang, out_langs):
     df = get_translations(input_lang, out_langs)
     print(f"{input_lang} -> {out_langs}: Got {len(df)} translations")
     # save it
-    df.to_csv(f"../data/langs/{input_lang}/babelnet.csv", index=False)
+    if expand:
+        original_df = pd.read_csv(f"../data/langs/{input_lang}/babelnet.csv")
+        # merge the two using word_original as the key
+        cols_to_use = df.columns.difference(original_df.columns)
+        cols_to_use = cols_to_use.insert(0, "word_original")
+        df = df[cols_to_use]
+        df = pd.merge(original_df, df, on="word_original", how="inner")
+        df.to_csv(f"../data/langs/{input_lang}/babelnet.csv", index=False)
+    else:
+        df.to_csv(f"../data/langs/{input_lang}/babelnet.csv", index=False)
     for target_lang in out_langs:
         if target_lang == input_lang:
             continue
@@ -49,12 +59,14 @@ if __name__ == "__main__":
     out_langs = langs + ["ja", "ko", "et", "fi", "nl", "hi", "it"]
     parser.add_argument("--langs", "-l", nargs="+", default=langs)
     parser.add_argument("--out_langs", "-o", nargs="+", default=out_langs)
+    parser.add_argument("--expand", "-e", action="store_true")
     args = parser.parse_args()
     langs = args.langs
     out_langs = args.out_langs
+    expand = args.expand
 
     def process_item(input_lang):
-        build_bn_dataset(input_lang, out_langs)
+        build_bn_dataset(input_lang, out_langs, expand)
 
     with ThreadPoolExecutor(max_workers=30) as executor:
         results = list(executor.map(process_item, langs))
