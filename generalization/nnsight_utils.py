@@ -130,6 +130,17 @@ def collect_activations(
     remote=False,
     idx = None
 ):
+    """
+    Collect the hidden states of the last token of each prompt at each layer
+
+    Args:
+        nn_model: The NNSight model
+        prompts: The prompts to collect activations for
+        layers: The layers to collect activations for, default to all layers
+        get_activations: The function to get the activations, default to layer output
+        remote: Whether to run the model on the remote device
+        idx: The index of the token to collect activations for
+    """
     tok_prompts = nn_model.tokenizer(prompts, return_tensors="pt", padding=True)
     # Todo?: This is a hacky way to get the last token index but it works for both left and right padding
     last_token_index = (

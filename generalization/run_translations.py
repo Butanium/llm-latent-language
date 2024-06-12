@@ -32,14 +32,23 @@ if __name__ == "__main__":
     save_path.mkdir(exist_ok=True, parents=True)
     source_notebook_path = root / f"{notebook}{suf}.ipynb"
     exp_id = str(int(time())) + "_" + generate_slug(2)
-    target_notebook_path = (
-        save_path / (args.model.replace("/", "_") + f"_{exp_id}.ipynb"),
+    target_notebook_path = save_path / (
+        args.model.replace("/", "_") + f"_{exp_id}.ipynb"
     )
     kwargs["exp_id"] = exp_id
     print(f"Saving to {target_notebook_path}")
     kwargs["extra_args"] = unknown
-    pm.execute_notebook(
-        source_notebook_path,
-        target_notebook_path,
-        parameters=kwargs,
-    )
+    try:
+        pm.execute_notebook(
+            source_notebook_path,
+            target_notebook_path,
+            parameters=kwargs,
+        )
+    except pm.PapermillExecutionError as e:
+        print(e)
+        print("Error in notebook")
+        delete = input(f"Delete notebook {target_notebook_path}? (y/n)")
+        if delete == "y":
+            target_notebook_path.unlink()
+        else:
+            print(f"Notebook saved")

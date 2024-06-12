@@ -122,10 +122,11 @@ class TargetPromptBatch:
 @th.no_grad
 def patchscope_lens(
     nn_model: NNLanguageModel,
-    source_prompts: list[str] | str,
+    source_prompts: list[str] | str | None = None,
     target_patch_prompts: (
         TargetPromptBatch | list[TargetPrompt] | TargetPrompt | None
     ) = None,
+    hiddens=None,
     scan=True,
     remote=False,
 ):
@@ -151,7 +152,10 @@ def patchscope_lens(
         raise ValueError(
             f"Number of prompts ({len(source_prompts)}) does not match number of patch prompts ({len(target_patch_prompts)})"
         )
-    hiddens = collect_activations(nn_model, source_prompts, remote=remote)
+    if hiddens is None:
+        if source_prompts is None:
+            raise ValueError("Either source_prompts or hiddens must be provided")
+        hiddens = collect_activations(nn_model, source_prompts, remote=remote)
     probs_l = []
     n_layers = get_num_layers(nn_model)
     # Collect the patch activations for each prompt at each layer
@@ -431,9 +435,10 @@ def patch_object_attn_lens(
 
 def object_lens(
     nn_model,
-    source_prompts,
     target_prompts,
     idx,
+    source_prompts=None,
+    hiddens=None,
     steering_vectors=None,
     num_patches=-1,
     scan=True,
@@ -443,10 +448,13 @@ def object_lens(
     num_layers = get_num_layers(nn_model)
     if num_patches == -1:
         num_patches = num_layers
-    hiddens = collect_activations(
-        nn_model,
-        source_prompts,
-    )
+    if hiddens is None:
+        if source_prompts is None:
+            raise ValueError("Either source_prompts or hiddens must be provided")
+        hiddens = collect_activations(
+            nn_model,
+            source_prompts,
+        )
     if steering_vectors is not None:
         for i, (h, s) in enumerate(zip(hiddens, steering_vectors)):
             hiddens[i] = h + s
