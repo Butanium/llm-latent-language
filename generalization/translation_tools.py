@@ -34,7 +34,10 @@ def BabelCache(**kwargs):
 
         def wrapper(*args, **kwargs):
             result = cached_func(*args, **kwargs)
-            res_type = type(result[0]) if isinstance(result, list) else type(result)
+            if result == []:
+                res_type = list
+            else:
+                res_type = type(result[0]) if isinstance(result, list) else type(result)
             if "Online" in str(res_type) and _api_type == BabelAPIType.RPC:
                 # If we are using the RPC API, we can delete the cache and save the offline data instead
                 path = Path(Cache.compute_path(cached_func, *args, **kwargs))
@@ -291,6 +294,8 @@ def generate_bn_dataset(
         source_words = list(original_df["word_translation"].values)
     if num_words is not None:
         source_words = sample(list(source_words), num_words)
+    if isinstance(target_langs, str):
+        target_langs = [target_langs]
     translations = defaultdict(list)
     for word in source_words:  # todo: tqdm
         try:
