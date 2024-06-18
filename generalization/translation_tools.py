@@ -269,7 +269,7 @@ def bn_translate(word, source_lang, target_langs, noun_only=True):
         warn(f"Didn't find any key concept for {word}")
     filtered_senses += best_senses
     translations = {lang: [] for lang in target_langs}
-    for sense in senses:
+    for sense in filtered_senses:
         translations[lang_to_id[sense.language]].append(sense)
     for lang in target_langs:
         # Sorting like this puts the most common translations first :
