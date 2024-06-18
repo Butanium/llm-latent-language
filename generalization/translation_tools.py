@@ -22,6 +22,9 @@ from wrpy import WordReference
 import babelnet as bn
 from babelnet.sense import BabelLemmaType, BabelSense
 from babelnet import BabelSynset
+
+import sys
+sys.path.append('../')
 from utils import ulist
 
 
@@ -249,6 +252,8 @@ def generate_bn_dataset(
         source_words = list(original_df["word_translation"].values)
     if num_words is not None:
         source_words = sample(list(source_words), num_words)
+    if isinstance(target_langs, str):
+        target_langs = [target_langs]
     translations = defaultdict(list)
     for word in source_words:  # todo: tqdm
         try:
