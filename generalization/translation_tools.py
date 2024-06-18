@@ -9,6 +9,7 @@ from exp_tools import (
     process_tokens_with_tokenization,
 )
 import pandas as pd
+from warnings import warn
 from random import sample
 from tqdm.auto import tqdm
 from munch import munchify
@@ -23,6 +24,26 @@ import babelnet as bn
 from babelnet.sense import BabelLemmaType, BabelSense
 from babelnet import BabelSynset
 from utils import ulist
+from babelnet.api import BabelAPIType, _api_type
+from pathlib import Path
+
+
+def BabelCache(**kwargs):
+    def deco(func):
+        cached_func = Cache(**kwargs)(func)
+
+        def wrapper(*args, **kwargs):
+            result = cached_func(*args, **kwargs)
+            res_type = type(result[0]) if isinstance(result, list) else type(result)
+            if "Online" in str(res_type) and _api_type == BabelAPIType.RPC:
+                # If we are using the RPC API, we can delete the cache and save the offline data instead
+                path = Path(Cache.compute_path(cached_func, *args, **kwargs))
+                path.unlink()
+            return cached_func(*args, **kwargs)
+
+        return wrapper
+
+    return deco
 
 
 def get_gpt4_dataset(source_lang, target_langs, num_words=None):
@@ -129,7 +150,15 @@ id_to_bn_lang = {
 lang_to_id = {v: k for k, v in id_to_bn_lang.items()}
 
 
-@Cache()
+@BabelCache()
+def cached_synset_from_id(synset_id, to_langs=None):
+    id = bn.BabelSynsetID(synset_id)
+    return bn.get_synset(
+        id, to_langs=to_langs and [id_to_bn_lang[to_lang] for to_lang in to_langs]
+    )
+
+
+@BabelCache()
 def cached_bn_synsets(word, from_langs, poses=None, to_langs=None):
     return bn.get_synsets(
         word,
@@ -139,7 +168,7 @@ def cached_bn_synsets(word, from_langs, poses=None, to_langs=None):
     )
 
 
-@Cache(
+@BabelCache(
     args_to_ignore=("sense_filters", "synset_filters"),
 )
 def cached_bn_senses(
@@ -153,6 +182,23 @@ def cached_bn_senses(
         to_langs=[id_to_bn_lang[to_lang] for to_lang in to_langs],
         poses=poses,
     )
+
+
+def get_synset_from_id(synset_id, to_langs=None):
+    if to_langs is not None:
+        to_langs = sorted(to_langs)
+    return cached_synset_from_id(synset_id, to_langs=to_langs)
+
+
+def get_bn_synsets(word, from_langs, poses=None, to_langs=None):
+    if isinstance(from_langs, str):
+        from_langs = [from_langs]
+    from_langs = sorted(from_langs)
+    if to_langs is None:
+        to_langs = from_langs
+    else:
+        to_langs = sorted(to_langs)
+    return cached_bn_synsets(word, from_langs, poses=poses, to_langs=to_langs)
 
 
 def get_bn_senses(
@@ -172,17 +218,6 @@ def get_bn_senses(
         synset_filters=synset_filters,
         poses=poses,
     )
-
-
-def get_bn_synsets(word, from_langs, poses=None, to_langs=None):
-    if isinstance(from_langs, str):
-        from_langs = [from_langs]
-    from_langs = sorted(from_langs)
-    if to_langs is None:
-        to_langs = from_langs
-    else:
-        to_langs = sorted(to_langs)
-    return cached_bn_synsets(word, from_langs, poses=poses, to_langs=to_langs)
 
 
 def _synset_filter(synset: BabelSynset):
@@ -219,7 +254,14 @@ def bn_translate(word, source_lang, target_langs, noun_only=True):
         kwargs["poses"] = [bn.POS.NOUN]
     senses = get_bn_senses(word, **kwargs)
     senses = [sense for sense in senses if sense_filter(sense)]
-    senses = [sense for sense in senses if _synset_filter(sense.synset)]
+    max_degree = max([sense.synset.synset_degree for sense in senses], default=0)
+    best_senses = [
+        sense for sense in senses if sense.synset.synset_degree == max_degree
+    ]
+    filtered_senses = [sense for sense in senses if _synset_filter(sense.synset)]
+    if filtered_senses == []:
+        warn(f"Didn't find any key concept for {word}")
+    filtered_senses += best_senses
     translations = {lang: [] for lang in target_langs}
     for sense in senses:
         translations[lang_to_id[sense.language]].append(sense)
@@ -231,8 +273,8 @@ def bn_translate(word, source_lang, target_langs, noun_only=True):
             key=lambda s: s.synset.synset_degree,
             reverse=True,
         )
-        translations[lang] = list(
-            dict.fromkeys([sense.lemma.lemma.replace("_", " ") for sense in sort])
+        translations[lang] = ulist(
+            [sense.lemma.lemma.replace("_", " ") for sense in sort]
         )
     return translations
 
