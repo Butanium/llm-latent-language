@@ -8,7 +8,7 @@ from tqdm.auto import tqdm
 from nnsight.models.UnifiedTransformer import UnifiedTransformer
 from nnsight import LanguageModel
 from transformer_lens import HookedTransformerKeyValueCache as KeyValueCache
-from utils import ulist
+from utils import ulist, get_tokenizer
 from typing import Callable
 from warnings import warn
 from typing import Optional, Union
@@ -281,8 +281,37 @@ class Prompt:
     prompt: str
     target_tokens: list[int]
     latent_tokens: dict[str, list[int]]
-    target_string: str
+    target_strings: str
     latent_strings: dict[str, str | list[str]]
+
+    @classmethod
+    def from_strings(cls, prompt, target_strings, latent_strings, tokenizer):
+        tokenizer = get_tokenizer(tokenizer)
+        target_tokens = process_tokens_with_tokenization(target_strings, tokenizer)
+        latent_tokens = {
+            lang: process_tokens_with_tokenization(words, tokenizer)
+            for lang, words in latent_strings.items()
+        }
+        return cls(
+            target_tokens=target_tokens,
+            latent_tokens=latent_tokens,
+            target_strings=target_strings,
+            latent_strings=latent_strings,
+            prompt=prompt,
+        )
+
+    def get_target_probs(self, probs):
+        target_probs = probs[:, :, self.target_tokens].sum(dim=2)
+        return target_probs.cpu()
+
+    def get_latent_probs(self, probs, layer=None):
+        latent_probs = {
+            lang: probs[:, :, tokens].sum(dim=2).cpu()
+            for lang, tokens in self.latent_tokens.items()
+        }
+        if layer is not None:
+            latent_probs = {lang: probs_[:, layer] for lang, probs_ in latent_probs.items()}
+        return latent_probs
 
     @th.no_grad
     def run(
@@ -295,12 +324,7 @@ class Prompt:
         """
         get_probs = method_to_fn[method]
         probs = get_probs(nn_model, self.prompt)
-        target_probs = probs[:, :, self.target_tokens].sum(dim=2)
-        latent_probs = {
-            lang: probs[:, :, tokens].sum(dim=2)
-            for lang, tokens in self.latent_tokens.items()
-        }
-        return target_probs.cpu(), latent_probs.cpu()
+        return self.get_target_probs(probs), self.get_latent_probs(probs)
 
     def has_no_collisions(self, ignore_langs: Optional[str | list[str]] = None):
         tokens = self.target_tokens[:]  # Copy the list
@@ -363,7 +387,7 @@ def prompts_to_df(prompts, tokenizer=None):
     for i, prompt in enumerate(prompts):
         dic[i] = {
             "prompt": prompt.prompt,
-            "target_string": prompt.target_string,
+            "target_strings": prompt.target_strings,
         }
         for lang, string in prompt.latent_strings.items():
             dic[i][lang + "_string"] = string
