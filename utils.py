@@ -35,7 +35,7 @@ font_manager.fontManager.addfont(str(simsun_path))
 simsun = font_manager.FontProperties(fname=str(simsun_path)).get_name()
 
 plt.rcParams.update({"font.size": 16})
-plt_params = {"linewidth": 2.7, "alpha": 0.8}
+plt_params = dict(linewidth= 2.7, alpha= 0.8, linestyle="-", marker="o")
 
 
 def plot_ci_plus_heatmap(
@@ -123,7 +123,7 @@ def plot_ci(
     df = pd.DataFrame(data_ci)
     # Create the line plot with confidence intervals
     ax.plot(
-        df["x"], df["y"], label=label, color=color, linestyle=linestyle, marker=marker, **plt_params
+        df["x"], df["y"], label=label, color=color, **plt_params
     )
     ax.fill_between(df["x"], df["y_lower"], df["y_upper"], color=color, alpha=0.3)
     if init:
@@ -500,6 +500,11 @@ def ulist(lst):
     """
     return list(dict.fromkeys(lst))
 
+def lfilter(lst, f):
+    """
+    Returns a list with elements from the input list that satisfy the condition.
+    """
+    return list(filter(f, lst))
 
 def display_df(df):
     with pd.option_context(
@@ -511,3 +516,10 @@ def display_df(df):
         None,
     ):
         display(df)
+
+def get_tokenizer(model_or_tokenizer):
+    if isinstance(model_or_tokenizer, LanguageModel) or isinstance(
+        model_or_tokenizer, UnifiedTransformer
+    ):
+        return model_or_tokenizer.tokenizer
+    return model_or_tokenizer
