@@ -1,0 +1,6 @@
+norms_dir: data/norms/
+norms_paths:
+  nl: dutch/rawassociations.csv
+  en: english/final words 2017.xlsx
+  de: german/feature-norms_generalised.txt
+  ja: japanese/JapaneseNorms.csv
