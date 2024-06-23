@@ -23,7 +23,14 @@ from wrpy import WordReference
 import babelnet as bn
 from babelnet.sense import BabelLemmaType, BabelSense
 from babelnet import BabelSynset
+<<<<<<< HEAD
+
+import sys
+sys.path.append('../')
+from utils import ulist
+=======
 from utils import ulist, lfilter
+>>>>>>> e8a67dc26634be296ecbb326f8e3640b1440551f
 from babelnet.api import BabelAPIType, _api_type
 from pathlib import Path
 

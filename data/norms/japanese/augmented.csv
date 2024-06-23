@@ -1,0 +1,109 @@
+concept_en,feature_og,freq,feature,feature_en
+air conditioner,白,9,colors,"['whiteness', 'white', 'colorimetric whiteness']"
+airplane,白,8,colors,"['whiteness', 'white', 'colorimetric whiteness']"
+bag,色も豊富,2,colors,[]
+balloon,色は様々,6,colors,[]
+balloon,色彩が豊か,6,colors,[]
+balloon,赤,2,colors,"['communist', 'communism', 'red', 'redness']"
+basement,灰色の壁,2,colors,[]
+bomb,黒,12,colors,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']"
+bread,茶色,2,colors,"['brown', 'brownness', 'Aquilus']"
+butterfly,きれいな色,2,colors,[]
+butterfly,色が鮮やか,3,colors,[]
+cake,白,6,colors,"['whiteness', 'white', 'colorimetric whiteness']"
+car,色は様々,2,colors,[]
+chair,茶色,2,colors,"['brown', 'brownness', 'Aquilus']"
+church,白,5,colors,"['whiteness', 'white', 'colorimetric whiteness']"
+cockroach,黒,14,colors,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']"
+cockroach,茶色,3,colors,"['brown', 'brownness', 'Aquilus']"
+cockroach,黒光り,2,colors,[]
+comic,白と黒,6,colors,['Shiro to Kuro']
+curry,茶色,13,colors,"['brown', 'brownness', 'Aquilus']"
+dandelion,白,5,colors,"['whiteness', 'white', 'colorimetric whiteness']"
+dandelion,黄色,16,colors,"['yellow', 'yellowness']"
+dandelion,白い綿毛,2,colors,[]
+dandelion,黄色い花,4,colors,[]
+dracula,青白い肌,6,colors,[]
+dracula,黒いマントをつけている,5,colors,[]
+dracula,黒,2,colors,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']"
+dracula,黒い服を着ている,2,colors,[]
+drum,茶色,2,colors,"['brown', 'brownness', 'Aquilus']"
+eel,黒,5,colors,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']"
+fence,灰色,8,colors,"['gray', 'grey', 'greyness', 'grayness']"
+fridge,白,7,colors,"['whiteness', 'white', 'colorimetric whiteness']"
+ghost,透き通っている,11,colors,[]
+ghost,白,2,colors,"['whiteness', 'white', 'colorimetric whiteness']"
+ghost,白い着物を着ている,4,colors,[]
+ghost,青白い,2,colors,[]
+guppy,色が鮮やか,3,colors,[]
+guppy,色彩が豊か,3,colors,[]
+hospital,白,10,colors,"['whiteness', 'white', 'colorimetric whiteness']"
+kettle,銀,2,colors,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']"
+key,銀,8,colors,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']"
+lettuce,緑,15,colors,"['green', 'viridity', 'greenness']"
+lettuce,黄緑,5,colors,"['chartreuse', 'Paris green', 'pea green', 'yellow green', 'yellowish green', 'jade']"
+magazine,カラー,2,colors,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors']"
+magazine,色彩が豊か,2,colors,[]
+microwave,温めているときオレンジになる,3,colors,[]
+octopus,赤,13,colors,"['communist', 'communism', 'red', 'redness']"
+onion,白,6,colors,"['whiteness', 'white', 'colorimetric whiteness']"
+onion,中身は白い,4,colors,[]
+onion,炒めるとあめ色になる,2,colors,[]
+onion,皮が茶色,4,colors,[]
+paper,白,12,colors,"['whiteness', 'white', 'colorimetric whiteness']"
+paper lantern,赤,8,colors,"['communist', 'communism', 'red', 'redness']"
+park,緑,3,colors,"['green', 'viridity', 'greenness']"
+pencil,黒,6,colors,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']"
+pencil,緑,3,colors,"['green', 'viridity', 'greenness']"
+pencil,芯が黒い,4,colors,[]
+pencil case,黒ずんでいく,2,colors,[]
+piano,白と黒,5,colors,['Shiro to Kuro']
+piano,黒,6,colors,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']"
+piano,白と黒の鍵盤,4,colors,[]
+piano,黒白,3,colors,[]
+plate,白,9,colors,"['whiteness', 'white', 'colorimetric whiteness']"
+plate,色は様々,2,colors,[]
+postcard,白,11,colors,"['whiteness', 'white', 'colorimetric whiteness']"
+public phone,緑,21,colors,"['green', 'viridity', 'greenness']"
+pumpkin,オレンジ色,7,colors,"['orangeness', 'orange']"
+pumpkin,緑,8,colors,"['green', 'viridity', 'greenness']"
+pumpkin,皮が緑色,6,colors,[]
+pumpkin,黄色,9,colors,"['yellow', 'yellowness']"
+pumpkin,中がオレンジ,2,colors,[]
+pumpkin,中が黄色,3,colors,[]
+rice,白,16,colors,"['whiteness', 'white', 'colorimetric whiteness']"
+rice cooker,白,3,colors,"['whiteness', 'white', 'colorimetric whiteness']"
+rocket,白,3,colors,"['whiteness', 'white', 'colorimetric whiteness']"
+salmon,赤身,6,colors,[]
+salmon,オレンジ色,5,colors,"['orangeness', 'orange']"
+salmon,ピンク,2,colors,"['P!nk', 'Pink', 'pink']"
+salmon,身がオレンジ色をしている,2,colors,[]
+salmon,銀,2,colors,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']"
+school bus,黄色,2,colors,"['yellow', 'yellowness']"
+shark,青い,2,colors,[]
+shark,黒,3,colors,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']"
+shelf,茶色,5,colors,"['brown', 'brownness', 'Aquilus']"
+ship,白,4,colors,"['whiteness', 'white', 'colorimetric whiteness']"
+shrimp,赤,9,colors,"['communist', 'communism', 'red', 'redness']"
+shrimp,ピンク,2,colors,"['P!nk', 'Pink', 'pink']"
+shrimp,ゆでると赤い,4,colors,[]
+snail,茶色,3,colors,"['brown', 'brownness', 'Aquilus']"
+spider,黒,5,colors,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']"
+sword,銀,4,colors,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']"
+taxi,黒,2,colors,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']"
+tea,緑,9,colors,"['green', 'viridity', 'greenness']"
+tea,茶色,5,colors,"['brown', 'brownness', 'Aquilus']"
+toilet,白,8,colors,"['whiteness', 'white', 'colorimetric whiteness']"
+toilet,便器は白い,2,colors,[]
+tomato,赤,19,colors,"['communist', 'communism', 'red', 'redness']"
+towel,白,6,colors,"['whiteness', 'white', 'colorimetric whiteness']"
+train,銀,3,colors,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']"
+tree,緑,7,colors,"['green', 'viridity', 'greenness']"
+tree,茶色,5,colors,"['brown', 'brownness', 'Aquilus']"
+tree,幹が茶色,2,colors,[]
+tree,緑色の葉がつく,2,colors,[]
+tuna,赤,8,colors,"['communist', 'communism', 'red', 'redness']"
+tuna,赤身,7,colors,[]
+tuna,黒,2,colors,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']"
+turtle,緑,7,colors,"['green', 'viridity', 'greenness']"
+water,透き通っている,16,colors,[]
