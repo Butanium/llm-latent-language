@@ -1,3 +1,4 @@
+import math
 import json
 import gzip
 import _pickle as pickle
@@ -35,7 +36,7 @@ font_manager.fontManager.addfont(str(simsun_path))
 simsun = font_manager.FontProperties(fname=str(simsun_path)).get_name()
 
 plt.rcParams.update({"font.size": 16})
-plt_params = dict(linewidth= 2.7, alpha= 0.8, linestyle="-", marker="o")
+plt_params = dict(linewidth=2.7, alpha=0.8, linestyle="-", marker="o")
 
 
 def plot_ci_plus_heatmap(
@@ -122,16 +123,22 @@ def plot_ci(
 
     df = pd.DataFrame(data_ci)
     # Create the line plot with confidence intervals
-    ax.plot(
-        df["x"], df["y"], label=label, color=color, **plt_params
-    )
+    ax.plot(df["x"], df["y"], label=label, color=color, **plt_params)
     ax.fill_between(df["x"], df["y_lower"], df["y_upper"], color=color, alpha=0.3)
     if init:
         ax.spines[["right", "top"]].set_visible(False)
 
 
 def plot_k(
-    axes, data, label, k=4, color="blue", tik_step=10, plt_params=plt_params, init=True, same_scale=True
+    axes,
+    data,
+    label,
+    k=4,
+    color="blue",
+    tik_step=10,
+    plt_params=plt_params,
+    init=True,
+    same_scale=True,
 ):
     if len(axes) < k:
         raise ValueError("Number of axes must be greater or equal to k")
@@ -155,101 +162,10 @@ def yaml_to_dict(yaml_file):
         return yaml.safe_load(file)
 
 
-def save_pickle(file, path):
-    with open(path, "wb") as f:
-        pickle.dump(file, f)
-
-
-def load_pickle(path):
-    if path.endswith("gz"):
-        with gzip.open(path, "rb") as f:
-            return pickle.load(f)
-    with open(path, "rb") as f:
-        return pickle.load(f)
-
-
-def printr(text):
-    print(f"[running]: {text}")
-
-
-def save_json(data: object, json_path: str) -> None:
-    os.makedirs(os.path.dirname(json_path), exist_ok=True)
-    with open(json_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
-
-
-def prepare_output_dir(base_dir: str = "./runs/") -> str:
-    # create output directory based on current time (using zurich time zone)
-    experiment_dir = os.path.join(
-        base_dir,
-        datetime.now(tz=pytz.timezone("Europe/Zurich")).strftime("%Y-%m-%d_%H-%M-%S"),
-    )
-    os.makedirs(experiment_dir, exist_ok=True)
-    return experiment_dir
-
-
-def get_logger(output_dir) -> Logger:
-    os.makedirs(os.path.dirname(LOG_DIR), exist_ok=True)
-
-    logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
-    formatter = logging.Formatter(
-        "%(asctime)s - %(filename)s - %(levelname)s - %(message)s"
-    )
-
-    # Log to console
-    ch = logging.StreamHandler()
-    ch.setLevel(logging.INFO)
-    ch.setFormatter(formatter)
-    logger.addHandler(ch)
-
-    # Log to file
-    file_path = os.path.join(
-        LOG_DIR, f'{datetime.now().strftime("%Y-%m-%d_%H:%M:%S")}.log'
-    )
-    fh = logging.FileHandler(os.path.join(output_dir, "log.txt"))
-    fh.setLevel(logging.INFO)
-    fh.setFormatter(formatter)
-    logger.addHandler(fh)
-
-    return logger
-
-
-def get_api_key(fname, provider="azure", key=None):
-    print(fname)
-    try:
-        with open(fname) as f:
-            keys = json.load(f)[provider]
-            if key is not None:
-                api_key = keys[key]
-            else:
-                api_key = list(keys.values())[0]
-    except Exception as e:
-        print(f"error: unable to load {provider} api key {key} from file {fname} - {e}")
-        return None
-
-    return api_key
-
-
 def read_json(path_name: str):
     with open(path_name, "r") as f:
         json_file = json.load(f)
     return json_file
-
-
-def printv(msg, v=0, v_min=0, c=None, debug=False):
-    # convenience print function
-    if debug:
-        c = "yellow" if c is None else c
-        v, v_min = 1, 0
-        printc("\n\n>>>>>>>>>>>>>>>>>>>>>>START DEBUG\n\n", c="yellow")
-    if (v > v_min) or debug:
-        if c is not None:
-            printc(msg, c=c)
-        else:
-            print(msg)
-    if debug:
-        printc("\n\nEND DEBUG<<<<<<<<<<<<<<<<<<<<<<<<\n\n", c="yellow")
 
 
 def printc(x, c="r"):
@@ -500,11 +416,13 @@ def ulist(lst):
     """
     return list(dict.fromkeys(lst))
 
+
 def lfilter(lst, f):
     """
     Returns a list with elements from the input list that satisfy the condition.
     """
     return list(filter(f, lst))
+
 
 def display_df(df):
     with pd.option_context(
@@ -517,9 +435,46 @@ def display_df(df):
     ):
         display(df)
 
+
 def get_tokenizer(model_or_tokenizer):
+    """
+    Returns the tokenizer of the given model or the given tokenizer.
+    """
     if isinstance(model_or_tokenizer, LanguageModel) or isinstance(
         model_or_tokenizer, UnifiedTransformer
     ):
         return model_or_tokenizer.tokenizer
     return model_or_tokenizer
+
+
+def plot_several_examples(n_example, plot_func):
+    """
+    Creates a grid of subplots and applies a plotting function to each.
+
+    Parameters:
+    -----------
+    n_example : int
+        Number of examples to plot.
+    plot_func : callable
+        Function to plot each example. Should accept two parameters:
+        - i: int, the index of the current example
+        - ax: matplotlib.axes.Axes, the axes to plot on
+
+    Returns:
+    --------
+    fig : matplotlib.figure.Figure
+        The created figure containing all subplots.
+    """
+    n_cols = math.ceil(math.sqrt(n_example))
+    n_rows = math.ceil(n_example / n_cols)
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4 * n_rows))
+    axes = axes.flatten() if n_example > 1 else [axes]
+
+    for i in range(n_example):
+        plot_func(i, axes[i])
+
+    for i in range(n_example, len(axes)):
+        axes[i].axis("off")
+
+    plt.tight_layout()
+    return fig
