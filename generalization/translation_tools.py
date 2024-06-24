@@ -291,8 +291,8 @@ def bn_translate(
         kwargs["poses"] = [bn.POS.NOUN]
     senses = get_bn_senses(word, **kwargs)
     senses = [sense for sense in senses if sense_filter(sense)]
-    qualified_senses = filter_senses([s for s in senses if _sense_filter(s)])
-    max_degree = max([sense.synset.synset_degree for sense in senses], default=0)
+    qualified_senses = [s for s in senses if _synset_filter(s.synset)]
+    max_degree = max([sense.synset.synset_degree for sense in qualified_senses], default=0)
     best_senses = [
         sense for sense in qualified_senses if sense.synset.synset_degree == max_degree
     ]
