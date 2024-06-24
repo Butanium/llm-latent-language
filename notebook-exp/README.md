@@ -1,0 +1,1 @@
+Those notebooks are templates meant to be run using run_notebook.py from the generalization folder.

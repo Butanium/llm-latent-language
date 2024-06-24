@@ -52,7 +52,7 @@ class AbstractLang:
         return df 
         
     def translate_list_to_en(self, translate_list: list):
-        trans = generate_bn_dataset(self.lang, 'en', translate_list, prune_empty=False)['en'].values
+        trans = generate_bn_dataset(self.lang, 'en', translate_list, prune_empty=False, keep_original_word=True)['en'].values
         return trans
         
     def _add_init(self):

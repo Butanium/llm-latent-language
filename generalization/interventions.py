@@ -2,16 +2,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 import torch as th
 from torch.utils.data import DataLoader
-from pathlib import Path
-import pandas as pd
-from tqdm.auto import tqdm
-from nnsight.models.UnifiedTransformer import UnifiedTransformer
-from nnsight import LanguageModel
-from transformer_lens import HookedTransformerKeyValueCache as KeyValueCache
-from typing import Union
 from warnings import warn
-from typing import Optional, Union, Callable
-import re
 from nnsight_utils import (
     get_layer,
     get_layer_output,
@@ -23,7 +14,49 @@ from nnsight_utils import (
     get_num_layers,
     NNLanguageModel,
     GetModuleOutput,
+    project_on_vocab,
 )
+
+__all__ = [
+    "logit_lens",
+    "TargetPrompt",
+    "repeat_prompt",
+    "TargetPromptBatch",
+    "patchscope_lens",
+    "patchscope_generate",
+    "steer",
+    "skip_layers",
+    "patch_attention_lens",
+    "patch_object_attn_lens",
+    "object_lens",
+]
+
+
+@th.no_grad
+def logit_lens(
+    nn_model: NNLanguageModel, prompts: list[str] | str, scan=True, remote=False
+):
+    """
+    Same as logit_lens but for Llama models directly instead of Transformer_lens models.
+    Get the probabilities of the next token for the last token of each prompt at each layer using the logit lens.
+
+    Args:
+        nn_model: NNSight Language Model
+        prompts: List of prompts or a single prompt
+
+    Returns:
+        A tensor of shape (num_prompts, num_layers, vocab_size) containing the probabilities
+        of the next token for each prompt at each layer. Tensor is on the CPU.
+    """
+    with nn_model.trace(prompts, scan=scan, remote=remote) as tracer:
+        hiddens_l = collect_activations(nn_model, prompts, open_context=False)
+        probs_l = []
+        for hiddens in hiddens_l:
+            logits = project_on_vocab(nn_model, hiddens)
+            probs = logits.softmax(-1).cpu()
+            probs_l.append(probs)
+        probs = th.stack(probs_l).transpose(0, 1).save()
+    return probs
 
 
 @dataclass
@@ -145,17 +178,26 @@ def patchscope_lens(
     """
     if target_patch_prompts is None:
         target_patch_prompts = repeat_prompt()
-    target_patch_prompts = TargetPromptBatch.auto(
-        target_patch_prompts, len(source_prompts)
-    )
-    if len(target_patch_prompts) != len(source_prompts):
-        raise ValueError(
-            f"Number of prompts ({len(source_prompts)}) does not match number of patch prompts ({len(target_patch_prompts)})"
-        )
-    if hiddens is None:
+    if hiddens is not None:
+        if len(set([len(h) for h in hiddens])) > 1:
+            raise ValueError("Inconsistent number of hiddens")
+        num_sources = len(hiddens[0])
+    else:
         if source_prompts is None:
             raise ValueError("Either source_prompts or hiddens must be provided")
+        if isinstance(source_prompts, str):
+            source_prompts = [source_prompts]
+        num_sources = len(source_prompts)
+    target_patch_prompts = TargetPromptBatch.auto(target_patch_prompts, num_sources)
+    if len(target_patch_prompts) != num_sources:
+        raise ValueError(
+            f"Number of sources ({num_sources}) does not match number of patch prompts ({len(target_patch_prompts)})"
+        )
+    if hiddens is None:
         hiddens = collect_activations(nn_model, source_prompts, remote=remote)
+    elif source_prompts is not None:
+        raise ValueError("You cannot provide both source_prompts and hiddens")
+
     probs_l = []
     n_layers = get_num_layers(nn_model)
     # Collect the patch activations for each prompt at each layer
@@ -166,11 +208,11 @@ def patchscope_lens(
             remote=remote,
         ):
             get_layer_output(nn_model, layer)[
-                th.arange(len(source_prompts)), target_patch_prompts.index_to_patch
+                th.arange(num_sources), target_patch_prompts.index_to_patch
             ] = hiddens[layer]
             probs_l.append(get_next_token_probs(nn_model).cpu().save())
     probs = th.cat(probs_l, dim=0)
-    return probs.reshape(n_layers, len(source_prompts), -1).transpose(0, 1)
+    return probs.reshape(n_layers, num_sources, -1).transpose(0, 1)
 
 
 @th.no_grad

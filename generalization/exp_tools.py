@@ -7,14 +7,12 @@ import pandas as pd
 from tqdm.auto import tqdm
 from nnsight.models.UnifiedTransformer import UnifiedTransformer
 from nnsight import LanguageModel
-from transformer_lens import HookedTransformerKeyValueCache as KeyValueCache
 from utils import ulist, get_tokenizer
 from typing import Callable
-from warnings import warn
-from typing import Optional, Union
 import re
-from interventions import *
-from typing import Literal
+from interventions import logit_lens, patchscope_lens, TargetPrompt
+from nnsight_utils import collect_activations, get_num_layers
+from typing import Literal, Optional
 
 DATA_PATH = Path(__file__).resolve().parent.parent / "data"
 
@@ -38,11 +36,6 @@ def load_model(model_name: str, trust_remote_code=False, use_tl=False, **kwargs_
         )
         kwargs.update(kwargs_)
         return LanguageModel(model_name, tokenizer_kwargs=tokenizer_kwargs, **kwargs)
-
-
-def load_lang(lang):
-    path = DATA_PATH / "langs" / lang / "clean.csv"
-    return pd.read_csv(path)
 
 
 def token_prefixes(token_str: str):
@@ -168,85 +161,6 @@ def next_token_probs(
     return out[:, -1].softmax(-1).cpu()
 
 
-@th.no_grad
-def logit_lens(
-    nn_model: UnifiedTransformer, prompts: list[str] | str, scan=True, remote=False
-):
-    """
-    Get the probabilities of the next token for the last token of each prompt at each layer using the logit lens.
-
-    Args:
-        nn_model: NNSight LanguageModel object
-        prompts: List of prompts or a single prompt
-
-    Returns:
-        A tensor of shape (num_prompts, num_layers, vocab_size) containing the probabilities
-        of the next token for each prompt at each layer. Tensor is on the CPU.
-    """
-    nn_model.eval()
-    tok_prompts = nn_model.tokenizer(prompts, return_tensors="pt", padding=True)
-    # Todo?: This is a hacky way to get the last token index but it works for both left and right padding
-    last_token_index = (
-        tok_prompts.attention_mask.flip(1).cumsum(1).bool().int().sum(1).sub(1)
-    )
-    with nn_model.trace(prompts, scan=scan, remote=remote) as tracer:
-        hiddens_l = [
-            layer.output[
-                th.arange(len(tok_prompts.input_ids), device=layer.output.device),
-                last_token_index.to(layer.output.device),
-            ].unsqueeze(1)
-            for layer in nn_model.blocks
-        ]
-        probs_l = []
-        for hiddens in hiddens_l:
-            ln_out = nn_model.ln_final(hiddens)
-            logits = nn_model.unembed(ln_out)
-            probs_l.append(logits.squeeze(1).softmax(-1).cpu())
-        probs = th.stack(probs_l).transpose(0, 1).save()
-    return probs
-
-
-# TODO: merge with logit_lens
-@th.no_grad
-def logit_lens_llama(
-    nn_model: LanguageModel, prompts: list[str] | str, scan=True, remote=False
-):
-    """
-    Same as logit_lens but for Llama models directly instead of Transformer_lens models.
-    Get the probabilities of the next token for the last token of each prompt at each layer using the logit lens.
-
-    Args:
-        nn_model: NNSight LanguageModel object
-        prompts: List of prompts or a single prompt
-
-    Returns:
-        A tensor of shape (num_prompts, num_layers, vocab_size) containing the probabilities
-        of the next token for each prompt at each layer. Tensor is on the CPU.
-    """
-    nn_model.eval()
-    tok_prompts = nn_model.tokenizer(prompts, return_tensors="pt", padding=True)
-    # Todo?: This is a hacky way to get the last token index but it works for both left and right padding
-    last_token_index = (
-        tok_prompts.attention_mask.flip(1).cumsum(1).bool().int().sum(1).sub(1)
-    )
-    with nn_model.trace(prompts, scan=scan, remote=remote) as tracer:
-        hiddens_l = [
-            layer.output[0][
-                th.arange(len(tok_prompts.input_ids)),
-                last_token_index,
-            ]
-            for layer in nn_model.model.layers
-        ]
-        probs_l = []
-        for hiddens in hiddens_l:
-            ln_out = nn_model.model.norm(hiddens)
-            logits = nn_model.lm_head(ln_out)
-            probs = logits.softmax(-1).cpu()
-            probs_l.append(probs)
-        probs = th.stack(probs_l).transpose(0, 1).save()
-    return probs
-
-
 def description_prompt(placeholder="?"):
     return TargetPrompt(
         f"""Jensen Huang is the CEO of NVIDIA, a technology company
@@ -271,7 +185,7 @@ def _next_token_probs_unsqueeze(nn_model, prompt, scan=True):
 method_to_fn = {
     "next_token_probs": _next_token_probs_unsqueeze,
     "logit_lens": logit_lens,
-    "logit_lens_llama": logit_lens_llama,
+    "logit_lens_llama": logit_lens,
     "patchscope_lens": patchscope_lens,
 }
 
@@ -310,7 +224,9 @@ class Prompt:
             for lang, tokens in self.latent_tokens.items()
         }
         if layer is not None:
-            latent_probs = {lang: probs_[:, layer] for lang, probs_ in latent_probs.items()}
+            latent_probs = {
+                lang: probs_[:, layer] for lang, probs_ in latent_probs.items()
+            }
         return latent_probs
 
     @th.no_grad
@@ -378,6 +294,19 @@ def run_prompts(
     return target_probs, latent_probs
 
 
+def filter_prompts_by_prob(prompts, model, treshold=0.3, batch_size=32):
+    if treshold <= 0:
+        return prompts
+    if prompts == []:
+        return []
+    target_probs, _ = run_prompts(
+        model, prompts, batch_size=batch_size, method="next_token_probs"
+    )
+    return [
+        prompt for prompt, prob in zip(prompts, target_probs) if prob.max() >= treshold
+    ]
+
+
 def prompts_to_str(prompts):
     return [prompt.prompt for prompt in prompts]
 
@@ -400,5 +329,8 @@ def prompts_to_df(prompts, tokenizer=None):
     return pd.DataFrame.from_dict(dic)
 
 
-def filter_prompts(prompts, ignore_langs: Optional[str | list[str]] = None):
+def remove_colliding_prompts(prompts, ignore_langs: Optional[str | list[str]] = None):
     return [prompt for prompt in prompts if prompt.has_no_collisions(ignore_langs)]
+
+
+filter_prompts = remove_colliding_prompts  # todo: remove this alias
