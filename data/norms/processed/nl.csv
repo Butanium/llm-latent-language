@@ -1,0 +1,387 @@
+concept_en,concept_nl,feature_en_en,feature_nl,feature_nl_en,freq_en,freq_nl,total_en,total_other,frac_en,frac_nl,diff
+submarine,duikboot,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",0.0,8.0,16.0,11.0,0.0,0.7272727272727273,0.7272727272727273
+asparagus,asperges,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",0.0,9.0,44.0,13.0,0.0,0.6923076923076923,0.6923076923076923
+piano,hamer,red,rood,"['red', 'redness']",0.0,3.0,21.0,5.0,0.0,0.6,0.6
+dove,duif,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",0.0,12.0,25.0,20.0,0.0,0.6,0.6
+cabbage,witte kool,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",7.0,6.0,98.0,9.0,0.07142857142857142,0.6666666666666666,0.5952380952380952
+donkey,ezel,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",1.0,14.0,13.0,21.0,0.07692307692307693,0.6666666666666666,0.5897435897435896
+rat,muis,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",0.0,18.0,5.0,36.0,0.0,0.5,0.5
+dishes,bestek,grey,zilver,"['silver', 'Ag', 'whiteness', 'white', 'colorimetric whiteness', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,10.0,16.0,20.0,0.0,0.5,0.5
+avocado,advocaat,yellow,geel,"['yellow', 'yellowness']",0.0,4.0,19.0,8.0,0.0,0.5,0.5
+flute,dwarsfluit,grey,zilver,"['silver', 'Ag', 'whiteness', 'white', 'colorimetric whiteness', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,12.0,28.0,26.0,0.0,0.46153846153846156,0.46153846153846156
+owl,uil,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",0.0,3.0,7.0,7.0,0.0,0.42857142857142855,0.42857142857142855
+football,voetbal,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",0.0,2.0,5.0,5.0,0.0,0.4,0.4
+lime,citroen,yellow,geel,"['yellow', 'yellowness']",0.0,9.0,96.0,24.0,0.0,0.375,0.375
+avocado,advocaat,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,3.0,19.0,8.0,0.0,0.375,0.375
+saxophone,saxofoon,yellow,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,4.0,7.0,12.0,0.0,0.3333333333333333,0.3333333333333333
+saxophone,saxofoon,brown,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,4.0,7.0,12.0,0.0,0.3333333333333333,0.3333333333333333
+garlic,look,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",0.0,2.0,29.0,6.0,0.0,0.3333333333333333,0.3333333333333333
+basketball,basketbal,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,7.0,28.0,21.0,0.0,0.3333333333333333,0.3333333333333333
+basketball,basketbal,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,7.0,28.0,21.0,0.0,0.3333333333333333,0.3333333333333333
+grape,druif,blue,blauw,"['blue', 'blueness']",0.0,8.0,120.0,25.0,0.0,0.32,0.32
+blueberry,bosbes,red,rood,"['red', 'redness']",0.0,8.0,54.0,25.0,0.0,0.32,0.32
+orange,sinaasappel,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,9.0,21.0,29.0,0.0,0.3103448275862069,0.3103448275862069
+orange,sinaasappel,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,9.0,21.0,29.0,0.0,0.3103448275862069,0.3103448275862069
+tiger,tijger,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,4.0,17.0,13.0,0.0,0.3076923076923077,0.3076923076923077
+plate,bord,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",0.0,3.0,10.0,10.0,0.0,0.3,0.3
+carrot,wortel,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,9.0,65.0,30.0,0.0,0.3,0.3
+carrot,wortel,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,9.0,65.0,30.0,0.0,0.3,0.3
+bean,bonen,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",0.0,6.0,32.0,20.0,0.0,0.3,0.3
+owl,uil,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",0.0,2.0,7.0,7.0,0.0,0.2857142857142857,0.2857142857142857
+peach,perzik,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,7.0,34.0,25.0,0.0,0.28,0.28
+peach,perzik,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,7.0,34.0,25.0,0.0,0.28,0.28
+bee,bij,yellow,geel,"['yellow', 'yellowness']",44.0,7.0,88.0,9.0,0.5,0.7777777777777778,0.2777777777777778
+giraffe,giraf,yellow,geel,"['yellow', 'yellowness']",15.0,8.0,50.0,14.0,0.3,0.5714285714285714,0.2714285714285714
+spoon,lepel,grey,zilver,"['silver', 'Ag', 'whiteness', 'white', 'colorimetric whiteness', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,4.0,12.0,15.0,0.0,0.26666666666666666,0.26666666666666666
+spoon,lepel,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",0.0,4.0,12.0,15.0,0.0,0.26666666666666666,0.26666666666666666
+plum,pruim,blue,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",0.0,7.0,54.0,27.0,0.0,0.25925925925925924,0.25925925925925924
+trumpet,trompet,yellow,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,8.0,5.0,31.0,0.0,0.25806451612903225,0.25806451612903225
+trumpet,trompet,brown,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,8.0,5.0,31.0,0.0,0.25806451612903225,0.25806451612903225
+seagull,meeuw,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",0.0,2.0,19.0,8.0,0.0,0.25,0.25
+lime,limoen,yellow,geel,"['yellow', 'yellowness']",0.0,6.0,96.0,24.0,0.0,0.25,0.25
+gull,meeuw,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",0.0,2.0,8.0,8.0,0.0,0.25,0.25
+dishes,bestek,white,zilver,"['silver', 'Ag', 'whiteness', 'white', 'colorimetric whiteness', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,5.0,16.0,20.0,0.0,0.25,0.25
+tiger,tijger,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",1.0,4.0,17.0,13.0,0.058823529411764705,0.3076923076923077,0.248868778280543
+salmon,zalm,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",0.0,4.0,18.0,17.0,0.0,0.23529411764705882,0.23529411764705882
+eggplant,aubergine,red,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",0.0,7.0,49.0,30.0,0.0,0.23333333333333334,0.23333333333333334
+eggplant,aubergine,blue,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",0.0,7.0,49.0,30.0,0.0,0.23333333333333334,0.23333333333333334
+flute,dwarsfluit,white,zilver,"['silver', 'Ag', 'whiteness', 'white', 'colorimetric whiteness', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,6.0,28.0,26.0,0.0,0.23076923076923078,0.23076923076923078
+potato,aardappel,yellow,geel,"['yellow', 'yellowness']",1.0,2.0,18.0,7.0,0.05555555555555555,0.2857142857142857,0.23015873015873015
+tomato,pompoen,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,9.0,58.0,40.0,0.0,0.225,0.225
+tomato,pompoen,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,9.0,58.0,40.0,0.0,0.225,0.225
+tomato,pompoen,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,9.0,58.0,40.0,0.0,0.225,0.225
+pumpkin,pompoen,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,9.0,69.0,40.0,0.0,0.225,0.225
+pumpkin,pompoen,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,9.0,69.0,40.0,0.0,0.225,0.225
+shark,haai,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",0.0,2.0,6.0,9.0,0.0,0.2222222222222222,0.2222222222222222
+fox,vos,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",5.0,4.0,109.0,16.0,0.045871559633027525,0.25,0.20412844036697247
+wrench,moersleutel,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",0.0,2.0,5.0,10.0,0.0,0.2,0.2
+wrench,engelse sleutel,grey,zilver,"['silver', 'Ag', 'whiteness', 'white', 'colorimetric whiteness', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,2.0,5.0,10.0,0.0,0.2,0.2
+squirrel,eekhoorn,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,2.0,47.0,10.0,0.0,0.2,0.2
+pumpkin,tomaat,red,rood,"['red', 'redness']",0.0,8.0,69.0,40.0,0.0,0.2,0.2
+piano,hamer,blue,blauw,"['blue', 'blueness']",0.0,1.0,21.0,5.0,0.0,0.2,0.2
+football,voetbal,blue,blauw,"['blue', 'blueness']",0.0,1.0,5.0,5.0,0.0,0.2,0.2
+football,voetbal,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,1.0,5.0,5.0,0.0,0.2,0.2
+cab,taxi,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,2.0,57.0,10.0,0.0,0.2,0.2
+bus,koets,gold,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,2.0,23.0,10.0,0.0,0.2,0.2
+bus,koets,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",0.0,2.0,23.0,10.0,0.0,0.2,0.2
+bus,koets,brown,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,2.0,23.0,10.0,0.0,0.2,0.2
+bus,koets,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,2.0,23.0,10.0,0.0,0.2,0.2
+grapefruit,pompelmoes,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,7.0,67.0,37.0,0.0,0.1891891891891892,0.1891891891891892
+grapefruit,pompelmoes,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,7.0,67.0,37.0,0.0,0.1891891891891892,0.1891891891891892
+goldfish,goudvis,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,9.0,26.0,48.0,0.0,0.1875,0.1875
+spider,spin,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",0.0,2.0,15.0,11.0,0.0,0.18181818181818182,0.18181818181818182
+sock,sokken,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,2.0,6.0,11.0,0.0,0.18181818181818182,0.18181818181818182
+sock,sokken,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",0.0,2.0,6.0,11.0,0.0,0.18181818181818182,0.18181818181818182
+lizard,hagedis,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",0.0,2.0,6.0,11.0,0.0,0.18181818181818182,0.18181818181818182
+crowbar,breekijzer,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",0.0,2.0,6.0,11.0,0.0,0.18181818181818182,0.18181818181818182
+crocodile,krokodil,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",0.0,2.0,10.0,11.0,0.0,0.18181818181818182,0.18181818181818182
+bra,beha,red,rood,"['red', 'redness']",0.0,2.0,14.0,11.0,0.0,0.18181818181818182,0.18181818181818182
+belt,riem,grey,zilver,"['silver', 'Ag', 'whiteness', 'white', 'colorimetric whiteness', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,2.0,33.0,11.0,0.0,0.18181818181818182,0.18181818181818182
+grape,druif,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",4.0,5.0,120.0,25.0,0.03333333333333333,0.2,0.16666666666666669
+rat,mus,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",0.0,6.0,5.0,36.0,0.0,0.16666666666666666,0.16666666666666666
+clarinet,klarinet,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",0.0,2.0,12.0,12.0,0.0,0.16666666666666666,0.16666666666666666
+tongue,tong,red,rood,"['red', 'redness']",3.0,6.0,6.0,9.0,0.5,0.6666666666666666,0.16666666666666663
+beetle,kever,red,rood,"['red', 'redness']",0.0,2.0,11.0,13.0,0.0,0.15384615384615385,0.15384615384615385
+peacock,pauw,purple,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",0.0,2.0,16.0,14.0,0.0,0.14285714285714285,0.14285714285714285
+peacock,pauw,red,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",0.0,2.0,16.0,14.0,0.0,0.14285714285714285,0.14285714285714285
+onion,ajuin,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",0.0,1.0,16.0,7.0,0.0,0.14285714285714285,0.14285714285714285
+onion,ajuin,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,16.0,7.0,0.0,0.14285714285714285,0.14285714285714285
+onion,ajuin,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,16.0,7.0,0.0,0.14285714285714285,0.14285714285714285
+onion,ajuin,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,16.0,7.0,0.0,0.14285714285714285,0.14285714285714285
+iguana,leguaan,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",0.0,1.0,38.0,7.0,0.0,0.14285714285714285,0.14285714285714285
+iguana,leguaan,blue,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",0.0,1.0,38.0,7.0,0.0,0.14285714285714285,0.14285714285714285
+iguana,leguaan,purple,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",0.0,1.0,38.0,7.0,0.0,0.14285714285714285,0.14285714285714285
+iguana,leguaan,red,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",0.0,1.0,38.0,7.0,0.0,0.14285714285714285,0.14285714285714285
+iguana,leguaan,yellow,geel,"['yellow', 'yellowness']",0.0,1.0,38.0,7.0,0.0,0.14285714285714285,0.14285714285714285
+chickadee,mees,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",0.0,1.0,23.0,7.0,0.0,0.14285714285714285,0.14285714285714285
+chickadee,mees,blue,blauw,"['blue', 'blueness']",0.0,1.0,23.0,7.0,0.0,0.14285714285714285,0.14285714285714285
+mouse,mus,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",2.0,6.0,80.0,36.0,0.025,0.16666666666666666,0.14166666666666666
+pepper,paprika,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,5.0,19.0,36.0,0.0,0.1388888888888889,0.1388888888888889
+pepper,paprika,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,5.0,19.0,36.0,0.0,0.1388888888888889,0.1388888888888889
+pepper,paprika,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,5.0,19.0,36.0,0.0,0.1388888888888889,0.1388888888888889
+grapefruit,pompelmoes,red,rood,"['red', 'redness']",0.0,5.0,67.0,37.0,0.0,0.13513513513513514,0.13513513513513514
+spoon,lepel,white,zilver,"['silver', 'Ag', 'whiteness', 'white', 'colorimetric whiteness', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,2.0,12.0,15.0,0.0,0.13333333333333333,0.13333333333333333
+ant,mier,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",0.0,2.0,24.0,15.0,0.0,0.13333333333333333,0.13333333333333333
+plum,pruim,red,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",7.0,7.0,54.0,27.0,0.12962962962962962,0.25925925925925924,0.12962962962962962
+grapefruit,pompelmoes,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",4.0,7.0,67.0,37.0,0.05970149253731343,0.1891891891891892,0.12948769665187576
+seagull,meeuw,blue,blauw,"['blue', 'blueness']",0.0,1.0,19.0,8.0,0.0,0.125,0.125
+gull,meeuw,blue,blauw,"['blue', 'blueness']",0.0,1.0,8.0,8.0,0.0,0.125,0.125
+goldfish,goudvis,red,rood,"['red', 'redness']",0.0,6.0,26.0,48.0,0.0,0.125,0.125
+fox,vos,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,2.0,109.0,16.0,0.0,0.125,0.125
+beaver,bever,yellow,geel,"['yellow', 'yellowness']",0.0,1.0,19.0,8.0,0.0,0.125,0.125
+beaver,bever,red,rood,"['red', 'redness']",0.0,1.0,19.0,8.0,0.0,0.125,0.125
+raspberry,framboos,pink,roze,['pink'],3.0,2.0,39.0,10.0,0.07692307692307693,0.2,0.12307692307692308
+blueberry,bosbes,red,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",0.0,3.0,54.0,25.0,0.0,0.12,0.12
+blueberry,bosbes,purple,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",0.0,3.0,54.0,25.0,0.0,0.12,0.12
+zucchini,courgette,purple,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",0.0,2.0,32.0,17.0,0.0,0.11764705882352941,0.11764705882352941
+zucchini,courgette,red,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",0.0,2.0,32.0,17.0,0.0,0.11764705882352941,0.11764705882352941
+zucchini,courgette,blue,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",0.0,2.0,32.0,17.0,0.0,0.11764705882352941,0.11764705882352941
+corn,mais,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",3.0,2.0,43.0,11.0,0.06976744186046512,0.18181818181818182,0.11205073995771671
+shark,haai,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,1.0,6.0,9.0,0.0,0.1111111111111111,0.1111111111111111
+rat,mus,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",0.0,4.0,5.0,36.0,0.0,0.1111111111111111,0.1111111111111111
+pelican,pelikaan,red,rood,"['red', 'redness']",0.0,2.0,9.0,18.0,0.0,0.1111111111111111,0.1111111111111111
+pelican,pelikaan,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,2.0,9.0,18.0,0.0,0.1111111111111111,0.1111111111111111
+pelican,pelikaan,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,2.0,9.0,18.0,0.0,0.1111111111111111,0.1111111111111111
+pelican,pelikaan,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",0.0,2.0,9.0,18.0,0.0,0.1111111111111111,0.1111111111111111
+pelican,pelikaan,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,2.0,9.0,18.0,0.0,0.1111111111111111,0.1111111111111111
+pelican,pelikaan,pink,roze,['pink'],0.0,2.0,9.0,18.0,0.0,0.1111111111111111,0.1111111111111111
+buffalo,bizon,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,1.0,26.0,9.0,0.0,0.1111111111111111,0.1111111111111111
+bison,bizon,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,1.0,10.0,9.0,0.0,0.1111111111111111,0.1111111111111111
+strawberry,aardbei,red,rood,"['red', 'redness']",45.0,9.0,57.0,10.0,0.7894736842105263,0.9,0.1105263157894737
+coffee,koffie,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",18.0,8.0,32.0,12.0,0.5625,0.6666666666666666,0.10416666666666663
+wrench,engelse sleutel,yellow,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,1.0,5.0,10.0,0.0,0.1,0.1
+wrench,engelse sleutel,white,zilver,"['silver', 'Ag', 'whiteness', 'white', 'colorimetric whiteness', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,1.0,5.0,10.0,0.0,0.1,0.1
+wrench,engelse sleutel,yellow,geel,"['yellow', 'yellowness']",0.0,1.0,5.0,10.0,0.0,0.1,0.1
+wrench,engelse sleutel,brown,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,1.0,5.0,10.0,0.0,0.1,0.1
+wrench,engelse sleutel,gold,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,1.0,5.0,10.0,0.0,0.1,0.1
+toad,kikker,yellow,geel,"['yellow', 'yellowness']",0.0,1.0,19.0,10.0,0.0,0.1,0.1
+spinach,spinazie,olive,Olijf,"['olive wood', 'olive grove', 'olive tree', 'olive', 'olive orchard', 'European olive tree', 'Olea europaea']",0.0,1.0,50.0,10.0,0.0,0.1,0.1
+sheep,schaap,yellow,geel,"['yellow', 'yellowness']",0.0,1.0,43.0,10.0,0.0,0.1,0.1
+sheep,schaap,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",0.0,1.0,43.0,10.0,0.0,0.1,0.1
+salad,sla,yellow,geel,"['yellow', 'yellowness']",0.0,1.0,66.0,10.0,0.0,0.1,0.1
+raspberry,framboos,blue,blauw,"['blue', 'blueness']",0.0,1.0,39.0,10.0,0.0,0.1,0.1
+pickle,augurken,red,rood,"['red', 'redness']",0.0,1.0,23.0,10.0,0.0,0.1,0.1
+lemon,citroen,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",0.0,1.0,46.0,10.0,0.0,0.1,0.1
+frog,kikker,yellow,geel,"['yellow', 'yellowness']",0.0,1.0,26.0,10.0,0.0,0.1,0.1
+elephant,olifant,pink,roze,['pink'],0.0,2.0,150.0,20.0,0.0,0.1,0.1
+cherry,kers,pink,roze,['pink'],0.0,1.0,46.0,10.0,0.0,0.1,0.1
+caterpillar,rups,pink,roze,['pink'],0.0,1.0,5.0,10.0,0.0,0.1,0.1
+caterpillar,rups,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,1.0,5.0,10.0,0.0,0.1,0.1
+canary,kanarie,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",0.0,1.0,28.0,10.0,0.0,0.1,0.1
+trumpet,trompet,yellow,geel,"['yellow', 'yellowness']",0.0,3.0,5.0,31.0,0.0,0.0967741935483871,0.0967741935483871
+pineapple,ananas,yellow,geel,"['yellow', 'yellowness']",37.0,9.0,46.0,10.0,0.8043478260869565,0.9,0.09565217391304348
+submarine,duikboot,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,1.0,16.0,11.0,0.0,0.09090909090909091,0.09090909090909091
+submarine,duikboot,blue,blauw,"['blue', 'blueness']",0.0,1.0,16.0,11.0,0.0,0.09090909090909091,0.09090909090909091
+sock,sokken,red,rood,"['red', 'redness']",0.0,1.0,6.0,11.0,0.0,0.09090909090909091,0.09090909090909091
+sock,sokken,blue,blauw,"['blue', 'blueness']",0.0,1.0,6.0,11.0,0.0,0.09090909090909091,0.09090909090909091
+lizard,hagedis,yellow,geel,"['yellow', 'yellowness']",0.0,1.0,6.0,11.0,0.0,0.09090909090909091,0.09090909090909091
+crowbar,koevoet,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,6.0,11.0,0.0,0.09090909090909091,0.09090909090909091
+crowbar,koevoet,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,6.0,11.0,0.0,0.09090909090909091,0.09090909090909091
+crowbar,koevoet,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,6.0,11.0,0.0,0.09090909090909091,0.09090909090909091
+crowbar,koevoet,yellow,geel,"['yellow', 'yellowness']",0.0,1.0,6.0,11.0,0.0,0.09090909090909091,0.09090909090909091
+crowbar,breekijzer,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",0.0,1.0,6.0,11.0,0.0,0.09090909090909091,0.09090909090909091
+coconut,kokosnoot,yellow,geel,"['yellow', 'yellowness']",0.0,1.0,40.0,11.0,0.0,0.09090909090909091,0.09090909090909091
+celery,selder,red,rood,"['red', 'redness']",0.0,1.0,46.0,11.0,0.0,0.09090909090909091,0.09090909090909091
+celery,selder,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",0.0,1.0,46.0,11.0,0.0,0.09090909090909091,0.09090909090909091
+cauliflower,bloemkool,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,1.0,55.0,11.0,0.0,0.09090909090909091,0.09090909090909091
+bra,beha,pink,roze,['pink'],0.0,1.0,14.0,11.0,0.0,0.09090909090909091,0.09090909090909091
+belt,riem,white,zilver,"['silver', 'Ag', 'whiteness', 'white', 'colorimetric whiteness', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,1.0,33.0,11.0,0.0,0.09090909090909091,0.09090909090909091
+belt,riem,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",0.0,1.0,33.0,11.0,0.0,0.09090909090909091,0.09090909090909091
+belt,riem,silver,zilver,"['silver', 'Ag', 'whiteness', 'white', 'colorimetric whiteness', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,1.0,33.0,11.0,0.0,0.09090909090909091,0.09090909090909091
+crow,kraai,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,25.0,12.0,0.0,0.08333333333333333,0.08333333333333333
+crow,kraai,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,25.0,12.0,0.0,0.08333333333333333,0.08333333333333333
+crow,kraai,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,25.0,12.0,0.0,0.08333333333333333,0.08333333333333333
+clarinet,klarinet,brown,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,1.0,12.0,12.0,0.0,0.08333333333333333,0.08333333333333333
+clarinet,klarinet,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,12.0,12.0,0.0,0.08333333333333333,0.08333333333333333
+clarinet,klarinet,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,12.0,12.0,0.0,0.08333333333333333,0.08333333333333333
+clarinet,klarinet,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,12.0,12.0,0.0,0.08333333333333333,0.08333333333333333
+clarinet,klarinet,yellow,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,1.0,12.0,12.0,0.0,0.08333333333333333,0.08333333333333333
+clarinet,klarinet,gold,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,1.0,12.0,12.0,0.0,0.08333333333333333,0.08333333333333333
+blackbird,merel,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,13.0,12.0,0.0,0.08333333333333333,0.08333333333333333
+blackbird,merel,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,13.0,12.0,0.0,0.08333333333333333,0.08333333333333333
+blackbird,merel,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,13.0,12.0,0.0,0.08333333333333333,0.08333333333333333
+blackbird,merel,blue,blauw,"['blue', 'blueness']",0.0,1.0,13.0,12.0,0.0,0.08333333333333333,0.08333333333333333
+blueberry,bosbes,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,2.0,54.0,25.0,0.0,0.08,0.08
+fox,vos,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",5.0,2.0,109.0,16.0,0.045871559633027525,0.125,0.07912844036697247
+tiger,tijger,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",0.0,1.0,17.0,13.0,0.0,0.07692307692307693,0.07692307692307693
+radish,radijs,blue,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",0.0,2.0,63.0,26.0,0.0,0.07692307692307693,0.07692307692307693
+radish,radijs,purple,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",0.0,2.0,63.0,26.0,0.0,0.07692307692307693,0.07692307692307693
+radish,radijs,pink,roze,['pink'],0.0,2.0,63.0,26.0,0.0,0.07692307692307693,0.07692307692307693
+flute,dwarsfluit,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",0.0,2.0,28.0,26.0,0.0,0.07692307692307693,0.07692307692307693
+beetle,kever,brown,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,1.0,11.0,13.0,0.0,0.07692307692307693,0.07692307692307693
+beetle,kever,gold,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,1.0,11.0,13.0,0.0,0.07692307692307693,0.07692307692307693
+beetle,kever,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",0.0,1.0,11.0,13.0,0.0,0.07692307692307693,0.07692307692307693
+beetle,kever,yellow,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,1.0,11.0,13.0,0.0,0.07692307692307693,0.07692307692307693
+asparagus,asperges,red,rood,"['red', 'redness']",0.0,1.0,44.0,13.0,0.0,0.07692307692307693,0.07692307692307693
+plum,pruim,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",0.0,2.0,54.0,27.0,0.0,0.07407407407407407,0.07407407407407407
+peacock,pauw,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",0.0,1.0,16.0,14.0,0.0,0.07142857142857142,0.07142857142857142
+giraffe,giraf,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,50.0,14.0,0.0,0.07142857142857142,0.07142857142857142
+giraffe,giraf,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",0.0,1.0,50.0,14.0,0.0,0.07142857142857142,0.07142857142857142
+chickadee,mees,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",5.0,2.0,23.0,7.0,0.21739130434782608,0.2857142857142857,0.06832298136645962
+spoon,lepel,brown,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,1.0,12.0,15.0,0.0,0.06666666666666667,0.06666666666666667
+spoon,lepel,yellow,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,1.0,12.0,15.0,0.0,0.06666666666666667,0.06666666666666667
+spoon,lepel,gold,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,1.0,12.0,15.0,0.0,0.06666666666666667,0.06666666666666667
+eggplant,aubergine,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,2.0,49.0,30.0,0.0,0.06666666666666667,0.06666666666666667
+mouse,muis,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",8.0,6.0,80.0,36.0,0.1,0.16666666666666666,0.06666666666666665
+apple,appel,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",53.0,8.0,140.0,18.0,0.37857142857142856,0.4444444444444444,0.06587301587301586
+trumpet,trompet,grey,zilver,"['silver', 'Ag', 'whiteness', 'white', 'colorimetric whiteness', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,2.0,5.0,31.0,0.0,0.06451612903225806,0.06451612903225806
+mouse,muis,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",35.0,18.0,80.0,36.0,0.4375,0.5,0.0625
+goldfish,goudvis,brown,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,3.0,26.0,48.0,0.0,0.0625,0.0625
+goldfish,goudvis,yellow,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,3.0,26.0,48.0,0.0,0.0625,0.0625
+goldfish,goudvis,yellow,geel,"['yellow', 'yellowness']",0.0,3.0,26.0,48.0,0.0,0.0625,0.0625
+pumpkin,tomaat,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",1.0,3.0,69.0,40.0,0.014492753623188406,0.075,0.06050724637681159
+salmon,zalm,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,18.0,17.0,0.0,0.058823529411764705,0.058823529411764705
+salmon,zalm,blue,blauw,"['blue', 'blueness']",0.0,1.0,18.0,17.0,0.0,0.058823529411764705,0.058823529411764705
+salmon,zalm,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,18.0,17.0,0.0,0.058823529411764705,0.058823529411764705
+salmon,zalm,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,18.0,17.0,0.0,0.058823529411764705,0.058823529411764705
+penguin,pinguïn,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,46.0,17.0,0.0,0.058823529411764705,0.058823529411764705
+penguin,pinguïn,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,46.0,17.0,0.0,0.058823529411764705,0.058823529411764705
+penguin,pinguïn,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,46.0,17.0,0.0,0.058823529411764705,0.058823529411764705
+pelican,pelikaan,yellow,geel,"['yellow', 'yellowness']",0.0,1.0,9.0,18.0,0.0,0.05555555555555555,0.05555555555555555
+apple,appel,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",0.0,1.0,140.0,18.0,0.0,0.05555555555555555,0.05555555555555555
+tomato,pompoen,yellow,geel,"['yellow', 'yellowness']",0.0,2.0,58.0,40.0,0.0,0.05,0.05
+pumpkin,pompoen,yellow,geel,"['yellow', 'yellowness']",0.0,2.0,69.0,40.0,0.0,0.05,0.05
+dove,duif,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,1.0,25.0,20.0,0.0,0.05,0.05
+bean,bonen,red,rood,"['red', 'redness']",0.0,1.0,32.0,20.0,0.0,0.05,0.05
+donkey,ezel,gold,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,1.0,13.0,21.0,0.0,0.047619047619047616,0.047619047619047616
+donkey,ezel,yellow,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",0.0,1.0,13.0,21.0,0.0,0.047619047619047616,0.047619047619047616
+coconut,kokosnoot,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",20.0,6.0,40.0,11.0,0.5,0.5454545454545454,0.045454545454545414
+peach,perzik,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",0.0,1.0,34.0,25.0,0.0,0.04,0.04
+grape,druif,blue,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",0.0,1.0,120.0,25.0,0.0,0.04,0.04
+radish,radijs,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,63.0,26.0,0.0,0.038461538461538464,0.038461538461538464
+radish,radijs,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,63.0,26.0,0.0,0.038461538461538464,0.038461538461538464
+radish,radijs,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",0.0,1.0,63.0,26.0,0.0,0.038461538461538464,0.038461538461538464
+bean,bonen,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",2.0,2.0,32.0,20.0,0.0625,0.1,0.037500000000000006
+plum,pruim,blue,blauw,"['blue', 'blueness']",0.0,1.0,54.0,27.0,0.0,0.037037037037037035,0.037037037037037035
+plum,pruim,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,1.0,54.0,27.0,0.0,0.037037037037037035,0.037037037037037035
+radish,radijs,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",5.0,3.0,63.0,26.0,0.07936507936507936,0.11538461538461539,0.03601953601953603
+orange,sinaasappel,red,rood,"['red', 'redness']",0.0,1.0,21.0,29.0,0.0,0.034482758620689655,0.034482758620689655
+orange,sinaasappel,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",0.0,1.0,21.0,29.0,0.0,0.034482758620689655,0.034482758620689655
+carrot,wortel,red,rood,"['red', 'redness']",0.0,1.0,65.0,30.0,0.0,0.03333333333333333,0.03333333333333333
+carrot,wortel,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",0.0,1.0,65.0,30.0,0.0,0.03333333333333333,0.03333333333333333
+fox,vos,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",10.0,2.0,109.0,16.0,0.09174311926605505,0.125,0.03325688073394495
+trumpet,trompet,white,zilver,"['silver', 'Ag', 'whiteness', 'white', 'colorimetric whiteness', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,1.0,5.0,31.0,0.0,0.03225806451612903,0.03225806451612903
+trumpet,trompet,silver,zilver,"['silver', 'Ag', 'whiteness', 'white', 'colorimetric whiteness', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,1.0,5.0,31.0,0.0,0.03225806451612903,0.03225806451612903
+lion,leeuw,yellow,geel,"['yellow', 'yellowness']",4.0,3.0,7.0,5.0,0.5714285714285714,0.6,0.02857142857142858
+rat,mus,red,rood,"['red', 'redness']",0.0,1.0,5.0,36.0,0.0,0.027777777777777776,0.027777777777777776
+rat,muis,blue,blauw,"['blue', 'blueness']",0.0,1.0,5.0,36.0,0.0,0.027777777777777776,0.027777777777777776
+mouse,mus,red,rood,"['red', 'redness']",0.0,1.0,80.0,36.0,0.0,0.027777777777777776,0.027777777777777776
+mouse,muis,blue,blauw,"['blue', 'blueness']",0.0,1.0,80.0,36.0,0.0,0.027777777777777776,0.027777777777777776
+ant,mier,red,rood,"['red', 'redness']",9.0,6.0,24.0,15.0,0.375,0.4,0.025000000000000022
+goldfish,goudvis,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,1.0,26.0,48.0,0.0,0.020833333333333332,0.020833333333333332
+goldfish,goudvis,blue,blauw,"['blue', 'blueness']",0.0,1.0,26.0,48.0,0.0,0.020833333333333332,0.020833333333333332
+goldfish,goudvis,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",0.0,1.0,26.0,48.0,0.0,0.020833333333333332,0.020833333333333332
+bean,bonen,yellow,geel,"['yellow', 'yellowness']",1.0,1.0,32.0,20.0,0.03125,0.05,0.018750000000000003
+banana,banaan,yellow,geel,"['yellow', 'yellowness']",48.0,8.0,55.0,9.0,0.8727272727272727,0.8888888888888888,0.016161616161616155
+wasp,wesp,yellow,geel,"['yellow', 'yellowness']",14.0,7.0,22.0,11.0,0.6363636363636364,0.6363636363636364,0.0
+wasp,wesp,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",8.0,4.0,22.0,11.0,0.36363636363636365,0.36363636363636365,0.0
+turtle,schildpad,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",74.0,8.0,74.0,8.0,1.0,1.0,0.0
+pig,varken,pink,roze,['pink'],31.0,8.0,31.0,8.0,1.0,1.0,0.0
+peacock,pauw,blue,blauw,"['blue', 'blueness']",8.0,7.0,16.0,14.0,0.5,0.5,0.0
+pea,erwten,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",19.0,9.0,19.0,9.0,1.0,1.0,0.0
+parsley,peterselie,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",28.0,9.0,28.0,9.0,1.0,1.0,0.0
+doctor,dokter,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",17.0,8.0,17.0,8.0,1.0,1.0,0.0
+deer,hert,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",7.0,5.0,7.0,5.0,1.0,1.0,0.0
+cucumber,komkommer,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",45.0,10.0,45.0,10.0,1.0,1.0,0.0
+grape,druif,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",40.0,8.0,120.0,25.0,0.3333333333333333,0.32,-0.013333333333333308
+banana,banaan,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",7.0,1.0,55.0,9.0,0.12727272727272726,0.1111111111111111,-0.016161616161616155
+cauliflower,bloemkool,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",46.0,9.0,55.0,11.0,0.8363636363636363,0.8181818181818182,-0.018181818181818077
+chickadee,mees,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",7.0,2.0,23.0,7.0,0.30434782608695654,0.2857142857142857,-0.018633540372670843
+radish,radijs,red,rood,"['red', 'redness']",23.0,9.0,63.0,26.0,0.36507936507936506,0.34615384615384615,-0.018925518925518914
+sheep,schaap,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",31.0,7.0,43.0,10.0,0.7209302325581395,0.7,-0.020930232558139528
+lion,leeuw,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",3.0,2.0,7.0,5.0,0.42857142857142855,0.4,-0.028571428571428525
+eggplant,aubergine,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",13.0,7.0,49.0,30.0,0.2653061224489796,0.23333333333333334,-0.03197278911564627
+goldfish,goudvis,gold,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",6.0,9.0,26.0,48.0,0.23076923076923078,0.1875,-0.04326923076923078
+penguin,pinguïn,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",24.0,8.0,46.0,17.0,0.5217391304347826,0.47058823529411764,-0.051150895140664954
+plum,pruim,red,rood,"['red', 'redness']",7.0,2.0,54.0,27.0,0.12962962962962962,0.07407407407407407,-0.05555555555555555
+giraffe,giraf,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",7.0,1.0,50.0,14.0,0.14,0.07142857142857142,-0.06857142857142859
+zucchini,courgette,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",6.0,2.0,32.0,17.0,0.1875,0.11764705882352941,-0.06985294117647059
+cauliflower,bloemkool,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",9.0,1.0,55.0,11.0,0.16363636363636364,0.09090909090909091,-0.07272727272727272
+radish,radijs,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",12.0,3.0,63.0,26.0,0.19047619047619047,0.11538461538461539,-0.07509157509157507
+bra,beha,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",5.0,3.0,14.0,11.0,0.35714285714285715,0.2727272727272727,-0.08441558441558444
+belt,riem,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",15.0,4.0,33.0,11.0,0.45454545454545453,0.36363636363636365,-0.09090909090909088
+pineapple,ananas,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",9.0,1.0,46.0,10.0,0.1956521739130435,0.1,-0.09565217391304348
+pepper,paprika,yellow,geel,"['yellow', 'yellowness']",5.0,6.0,19.0,36.0,0.2631578947368421,0.16666666666666666,-0.09649122807017543
+toad,kikker,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",19.0,9.0,19.0,10.0,1.0,0.9,-0.09999999999999998
+spinach,spinazie,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",50.0,9.0,50.0,10.0,1.0,0.9,-0.09999999999999998
+salad,sla,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",66.0,9.0,66.0,10.0,1.0,0.9,-0.09999999999999998
+pickle,augurken,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",23.0,9.0,23.0,10.0,1.0,0.9,-0.09999999999999998
+lemon,citroen,yellow,geel,"['yellow', 'yellowness']",46.0,9.0,46.0,10.0,1.0,0.9,-0.09999999999999998
+frog,kikker,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",26.0,9.0,26.0,10.0,1.0,0.9,-0.09999999999999998
+elephant,olifant,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",150.0,18.0,150.0,20.0,1.0,0.9,-0.09999999999999998
+cherry,kers,red,rood,"['red', 'redness']",46.0,9.0,46.0,10.0,1.0,0.9,-0.09999999999999998
+canary,kanarie,yellow,geel,"['yellow', 'yellowness']",28.0,9.0,28.0,10.0,1.0,0.9,-0.09999999999999998
+coffee,koffie,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",14.0,4.0,32.0,12.0,0.4375,0.3333333333333333,-0.10416666666666669
+bean,bonen,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",5.0,1.0,32.0,20.0,0.15625,0.05,-0.10625
+strawberry,aardbei,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",12.0,1.0,57.0,10.0,0.21052631578947367,0.1,-0.11052631578947367
+buffalo,bizon,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",26.0,8.0,26.0,9.0,1.0,0.8888888888888888,-0.11111111111111116
+bison,bizon,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",10.0,8.0,10.0,9.0,1.0,0.8888888888888888,-0.11111111111111116
+corn,mais,yellow,geel,"['yellow', 'yellowness']",40.0,9.0,43.0,11.0,0.9302325581395349,0.8181818181818182,-0.11205073995771664
+pepper,paprika,red,rood,"['red', 'redness']",7.0,9.0,19.0,36.0,0.3684210526315789,0.25,-0.11842105263157893
+apple,appel,red,rood,"['red', 'redness']",87.0,9.0,140.0,18.0,0.6214285714285714,0.5,-0.12142857142857144
+penguin,pinguïn,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",22.0,6.0,46.0,17.0,0.4782608695652174,0.35294117647058826,-0.12531969309462915
+tomato,tomaat,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",12.0,3.0,58.0,40.0,0.20689655172413793,0.075,-0.13189655172413794
+coconut,kokosnoot,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",20.0,4.0,40.0,11.0,0.5,0.36363636363636365,-0.13636363636363635
+giraffe,giraf,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",14.0,2.0,50.0,14.0,0.28,0.14285714285714285,-0.13714285714285718
+peach,perzik,yellow,geel,"['yellow', 'yellowness']",8.0,2.0,34.0,25.0,0.23529411764705882,0.08,-0.1552941176470588
+ant,mier,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",15.0,7.0,24.0,15.0,0.625,0.4666666666666667,-0.15833333333333333
+grape,druif,purple,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",24.0,1.0,120.0,25.0,0.2,0.04,-0.16
+tongue,tong,pink,roze,['pink'],3.0,3.0,6.0,9.0,0.5,0.3333333333333333,-0.16666666666666669
+lime,limoen,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",48.0,8.0,96.0,24.0,0.5,0.3333333333333333,-0.16666666666666669
+goldfish,goudvis,gold,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",6.0,3.0,26.0,48.0,0.23076923076923078,0.0625,-0.16826923076923078
+grape,druif,red,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",26.0,1.0,120.0,25.0,0.21666666666666667,0.04,-0.17666666666666667
+grape,druif,red,rood,"['red', 'redness']",26.0,1.0,120.0,25.0,0.21666666666666667,0.04,-0.17666666666666667
+sheep,schaap,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",12.0,1.0,43.0,10.0,0.27906976744186046,0.1,-0.17906976744186046
+spider,spin,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",15.0,9.0,15.0,11.0,1.0,0.8181818181818182,-0.18181818181818177
+crocodile,krokodil,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",10.0,9.0,10.0,11.0,1.0,0.8181818181818182,-0.18181818181818177
+celery,selder,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",46.0,9.0,46.0,11.0,1.0,0.8181818181818182,-0.18181818181818177
+bra,beha,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",9.0,5.0,14.0,11.0,0.6428571428571429,0.45454545454545453,-0.18831168831168837
+peach,perzik,red,rood,"['red', 'redness']",8.0,1.0,34.0,25.0,0.23529411764705882,0.04,-0.1952941176470588
+squirrel,eekhoorn,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",47.0,8.0,47.0,10.0,1.0,0.8,-0.19999999999999996
+caterpillar,rups,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",5.0,8.0,5.0,10.0,1.0,0.8,-0.19999999999999996
+cab,taxi,yellow,geel,"['yellow', 'yellowness']",57.0,8.0,57.0,10.0,1.0,0.8,-0.19999999999999996
+pepper,paprika,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",7.0,6.0,19.0,36.0,0.3684210526315789,0.16666666666666666,-0.20175438596491227
+giraffe,giraf,brown,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",14.0,1.0,50.0,14.0,0.28,0.07142857142857142,-0.2085714285714286
+raspberry,framboos,red,rood,"['red', 'redness']",36.0,7.0,39.0,10.0,0.9230769230769231,0.7,-0.22307692307692317
+potato,aardappel,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",17.0,5.0,18.0,7.0,0.9444444444444444,0.7142857142857143,-0.23015873015873012
+peach,perzik,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",18.0,7.0,34.0,25.0,0.5294117647058824,0.28,-0.24941176470588233
+crow,kraai,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",25.0,9.0,25.0,12.0,1.0,0.75,-0.25
+beaver,bever,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",19.0,6.0,19.0,8.0,1.0,0.75,-0.25
+carrot,wortel,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",19.0,1.0,65.0,30.0,0.2923076923076923,0.03333333333333333,-0.258974358974359
+blueberry,bosbes,blue,blauw,"['blue', 'blueness']",27.0,6.0,54.0,25.0,0.5,0.24,-0.26
+donkey,ezel,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",6.0,4.0,13.0,21.0,0.46153846153846156,0.19047619047619047,-0.2710622710622711
+lizard,hagedis,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",6.0,8.0,6.0,11.0,1.0,0.7272727272727273,-0.2727272727272727
+bee,bij,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",44.0,2.0,88.0,9.0,0.5,0.2222222222222222,-0.2777777777777778
+zucchini,courgette,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",26.0,9.0,32.0,17.0,0.8125,0.5294117647058824,-0.28308823529411764
+radish,radijs,red,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",23.0,2.0,63.0,26.0,0.36507936507936506,0.07692307692307693,-0.28815628815628813
+bean,bonen,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",24.0,9.0,32.0,20.0,0.75,0.45,-0.3
+plate,bord,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",10.0,7.0,10.0,10.0,1.0,0.7,-0.30000000000000004
+grapefruit,pompelmoes,yellow,geel,"['yellow', 'yellowness']",33.0,7.0,67.0,37.0,0.4925373134328358,0.1891891891891892,-0.3033481242436466
+mouse,mus,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",35.0,4.0,80.0,36.0,0.4375,0.1111111111111111,-0.3263888888888889
+shark,haai,grey,grijs,"['gray', 'grey', 'greyness', 'grayness']",6.0,6.0,6.0,9.0,1.0,0.6666666666666666,-0.33333333333333337
+garlic,look,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",29.0,4.0,29.0,6.0,1.0,0.6666666666666666,-0.33333333333333337
+blackbird,merel,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",13.0,8.0,13.0,12.0,1.0,0.6666666666666666,-0.33333333333333337
+chickadee,mees,yellow,geel,"['yellow', 'yellowness']",11.0,1.0,23.0,7.0,0.4782608695652174,0.14285714285714285,-0.33540372670807456
+grapefruit,pompelmoes,pink,roze,['pink'],30.0,4.0,67.0,37.0,0.44776119402985076,0.10810810810810811,-0.33965308592174265
+goldfish,goudvis,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",14.0,9.0,26.0,48.0,0.5384615384615384,0.1875,-0.35096153846153844
+peacock,pauw,blue,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",8.0,2.0,16.0,14.0,0.5,0.14285714285714285,-0.35714285714285715
+iguana,leguaan,green,GROEN,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",19.0,1.0,38.0,7.0,0.5,0.14285714285714285,-0.35714285714285715
+iguana,leguaan,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",19.0,1.0,38.0,7.0,0.5,0.14285714285714285,-0.35714285714285715
+belt,riem,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",18.0,2.0,33.0,11.0,0.5454545454545454,0.18181818181818182,-0.3636363636363636
+seagull,meeuw,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",19.0,5.0,19.0,8.0,1.0,0.625,-0.375
+gull,meeuw,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",8.0,5.0,8.0,8.0,1.0,0.625,-0.375
+blueberry,bosbes,blue,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",27.0,3.0,54.0,25.0,0.5,0.12,-0.38
+carrot,wortel,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",46.0,9.0,65.0,30.0,0.7076923076923077,0.3,-0.40769230769230774
+donkey,ezel,brown,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",6.0,1.0,13.0,21.0,0.46153846153846156,0.047619047619047616,-0.41391941391941395
+fox,vos,red,rood,"['red', 'redness']",89.0,6.0,109.0,16.0,0.8165137614678899,0.375,-0.4415137614678899
+lime,citroen,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",48.0,1.0,96.0,24.0,0.5,0.041666666666666664,-0.4583333333333333
+beetle,kever,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",11.0,7.0,11.0,13.0,1.0,0.5384615384615384,-0.46153846153846156
+salmon,zalm,pink,roze,['pink'],18.0,9.0,18.0,17.0,1.0,0.5294117647058824,-0.47058823529411764
+plum,pruim,purple,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",40.0,7.0,54.0,27.0,0.7407407407407407,0.25925925925925924,-0.48148148148148145
+eggplant,aubergine,purple,paars,"['purpleness', 'purple', 'violet', 'reddish blue']",36.0,7.0,49.0,30.0,0.7346938775510204,0.23333333333333334,-0.5013605442176872
+sock,sokken,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",6.0,5.0,6.0,11.0,1.0,0.45454545454545453,-0.5454545454545454
+onion,ajuin,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",16.0,3.0,16.0,7.0,1.0,0.42857142857142855,-0.5714285714285714
+tomato,tomaat,red,rood,"['red', 'redness']",46.0,8.0,58.0,40.0,0.7931034482758621,0.2,-0.5931034482758621
+cabbage,witte kool,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",91.0,3.0,98.0,9.0,0.9285714285714286,0.3333333333333333,-0.5952380952380953
+tiger,tijger,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",16.0,4.0,17.0,13.0,0.9411764705882353,0.3076923076923077,-0.6334841628959276
+crowbar,koevoet,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",6.0,4.0,6.0,11.0,1.0,0.36363636363636365,-0.6363636363636364
+dove,duif,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",25.0,7.0,25.0,20.0,1.0,0.35,-0.65
+saxophone,saxofoon,gold,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",7.0,4.0,7.0,12.0,1.0,0.3333333333333333,-0.6666666666666667
+clarinet,klarinet,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",12.0,4.0,12.0,12.0,1.0,0.3333333333333333,-0.6666666666666667
+basketball,basketbal,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",28.0,7.0,28.0,21.0,1.0,0.3333333333333333,-0.6666666666666667
+orange,sinaasappel,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",21.0,9.0,21.0,29.0,1.0,0.3103448275862069,-0.6896551724137931
+owl,uil,brown,bruin,"['John Brown', 'Brown', 'brown', 'brownness', 'Aquilus']",7.0,2.0,7.0,7.0,1.0,0.2857142857142857,-0.7142857142857143
+pelican,pelikaan,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",9.0,5.0,9.0,18.0,1.0,0.2777777777777778,-0.7222222222222222
+trumpet,trompet,gold,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",5.0,8.0,5.0,31.0,1.0,0.25806451612903225,-0.7419354838709677
+dishes,bestek,silver,zilver,"['silver', 'Ag', 'whiteness', 'white', 'colorimetric whiteness', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",16.0,5.0,16.0,20.0,1.0,0.25,-0.75
+pumpkin,pompoen,orange,oranje,"['pumpkin', 'tomato', 'orangeness', 'orange', 'amber', 'gold', 'golden brown']",68.0,9.0,69.0,40.0,0.9855072463768116,0.225,-0.7605072463768117
+flute,dwarsfluit,silver,zilver,"['silver', 'Ag', 'whiteness', 'white', 'colorimetric whiteness', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",28.0,6.0,28.0,26.0,1.0,0.23076923076923078,-0.7692307692307692
+asparagus,asperges,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",44.0,3.0,44.0,13.0,1.0,0.23076923076923078,-0.7692307692307692
+piano,hamer,black,zwart,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",21.0,1.0,21.0,5.0,1.0,0.2,-0.8
+football,voetbal,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",5.0,1.0,5.0,5.0,1.0,0.2,-0.8
+bus,koets,yellow,goud,"['gold', 'Au', 'yellow', 'yellowness', 'amber', 'golden brown']",23.0,2.0,23.0,10.0,1.0,0.2,-0.8
+rat,muis,white,wit,"['whiteness', 'white', 'colorimetric whiteness', 'humor', 'humour', 'wittiness', 'witticism']",5.0,6.0,5.0,36.0,1.0,0.16666666666666666,-0.8333333333333334
+spoon,lepel,silver,zilver,"['silver', 'Ag', 'whiteness', 'white', 'colorimetric whiteness', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",12.0,2.0,12.0,15.0,1.0,0.13333333333333333,-0.8666666666666667
+avocado,advocaat,green,groen,"['environmental awareness', 'environmentalism', 'green', 'viridity', 'greenness']",19.0,1.0,19.0,8.0,1.0,0.125,-0.875
+wrench,engelse sleutel,silver,zilver,"['silver', 'Ag', 'whiteness', 'white', 'colorimetric whiteness', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",5.0,1.0,5.0,10.0,1.0,0.1,-0.9
+submarine,duikboot,yellow,geel,"['yellow', 'yellowness']",16.0,1.0,16.0,11.0,1.0,0.09090909090909091,-0.9090909090909091

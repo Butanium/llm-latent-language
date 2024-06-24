@@ -1,0 +1,33 @@
+concept_en,concept_ja,feature_en_en,feature_ja,feature_ja_en,freq_en,freq_ja,total_en,total_other,frac_en,frac_ja,diff
+sword,sword,grey,銀,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,8.0,5.0,12.0,0.0,0.6666666666666666,0.6666666666666666
+key,key,grey,銀,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,16.0,5.0,24.0,0.0,0.6666666666666666,0.6666666666666666
+shrimp,shrimp,red,赤,"['communist', 'communism', 'red', 'redness']",8.0,9.0,28.0,11.0,0.2857142857142857,0.8181818181818182,0.5324675324675325
+cockroach,cockroach,black,黒,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']",8.0,14.0,20.0,17.0,0.4,0.8235294117647058,0.4235294117647058
+salmon,salmon,orange,オレンジ色,"['orangeness', 'orange']",0.0,5.0,18.0,13.0,0.0,0.38461538461538464,0.38461538461538464
+pumpkin,pumpkin,yellow,黄色,"['yellow', 'yellowness']",0.0,9.0,69.0,24.0,0.0,0.375,0.375
+pumpkin,pumpkin,green,緑,"['green', 'viridity', 'greenness']",1.0,8.0,69.0,24.0,0.014492753623188406,0.3333333333333333,0.3188405797101449
+salmon,salmon,grey,銀,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,4.0,18.0,13.0,0.0,0.3076923076923077,0.3076923076923077
+lettuce,lettuce,yellow,黄緑,"['chartreuse', 'Paris green', 'pea green', 'yellow green', 'yellowish green', 'jade']",0.0,5.0,126.0,25.0,0.0,0.2,0.2
+salmon,salmon,silver,銀,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,2.0,18.0,13.0,0.0,0.15384615384615385,0.15384615384615385
+dandelion,dandelion,white,白,"['whiteness', 'white', 'colorimetric whiteness']",4.0,5.0,47.0,21.0,0.0851063829787234,0.23809523809523808,0.15298885511651467
+lettuce,lettuce,green,緑,"['green', 'viridity', 'greenness']",63.0,15.0,126.0,25.0,0.5,0.6,0.09999999999999998
+tree,tree,brown,茶色,"['brown', 'brownness', 'Aquilus']",28.0,5.0,73.0,12.0,0.3835616438356164,0.4166666666666667,0.03310502283105027
+tomato,tomato,red,赤,"['communist', 'communism', 'red', 'redness']",46.0,19.0,46.0,19.0,1.0,1.0,0.0
+toilet,toilet,white,白,"['whiteness', 'white', 'colorimetric whiteness']",24.0,8.0,24.0,8.0,1.0,1.0,0.0
+spider,spider,black,黒,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']",15.0,5.0,15.0,5.0,1.0,1.0,0.0
+rice,rice,white,白,"['whiteness', 'white', 'colorimetric whiteness']",40.0,16.0,40.0,16.0,1.0,1.0,0.0
+plate,plate,white,白,"['whiteness', 'white', 'colorimetric whiteness']",10.0,9.0,10.0,9.0,1.0,1.0,0.0
+piano,piano,black,黒,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']",21.0,6.0,21.0,6.0,1.0,1.0,0.0
+paper,paper,white,白,"['whiteness', 'white', 'colorimetric whiteness']",8.0,12.0,8.0,12.0,1.0,1.0,0.0
+onion,onion,white,白,"['whiteness', 'white', 'colorimetric whiteness']",16.0,6.0,16.0,6.0,1.0,1.0,0.0
+fridge,fridge,white,白,"['whiteness', 'white', 'colorimetric whiteness']",16.0,7.0,16.0,7.0,1.0,1.0,0.0
+airplane,airplane,white,白,"['whiteness', 'white', 'colorimetric whiteness']",5.0,8.0,5.0,8.0,1.0,1.0,0.0
+tree,tree,green,緑,"['green', 'viridity', 'greenness']",45.0,7.0,73.0,12.0,0.6164383561643836,0.5833333333333334,-0.03310502283105021
+dandelion,dandelion,yellow,黄色,"['yellow', 'yellowness']",43.0,16.0,47.0,21.0,0.9148936170212766,0.7619047619047619,-0.15298885511651472
+lettuce,lettuce,green,黄緑,"['chartreuse', 'Paris green', 'pea green', 'yellow green', 'yellowish green', 'jade']",63.0,5.0,126.0,25.0,0.5,0.2,-0.3
+cockroach,cockroach,brown,茶色,"['brown', 'brownness', 'Aquilus']",12.0,3.0,20.0,17.0,0.6,0.17647058823529413,-0.4235294117647058
+shrimp,shrimp,pink,ピンク,"['P!nk', 'Pink', 'pink']",20.0,2.0,28.0,11.0,0.7142857142857143,0.18181818181818182,-0.5324675324675325
+sword,sword,silver,銀,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",5.0,4.0,5.0,12.0,1.0,0.3333333333333333,-0.6666666666666667
+key,key,silver,銀,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",5.0,8.0,5.0,24.0,1.0,0.3333333333333333,-0.6666666666666667
+pumpkin,pumpkin,orange,オレンジ色,"['orangeness', 'orange']",68.0,7.0,69.0,24.0,0.9855072463768116,0.2916666666666667,-0.693840579710145
+salmon,salmon,pink,ピンク,"['P!nk', 'Pink', 'pink']",18.0,2.0,18.0,13.0,1.0,0.15384615384615385,-0.8461538461538461
