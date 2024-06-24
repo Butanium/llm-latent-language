@@ -4,7 +4,7 @@ from typing import Tuple
 import sys
 sys.path.append('src/') 
 
-from utils import get_api_key
+from utils2 import get_api_key
 
 
 @attrs

@@ -39,6 +39,7 @@ class EnglishData(AbstractLang):
             fn = fn(self.lang)
             data = aux[aux['BR_Label'] == self.feature_mapping[f]].copy()
             data = data.rename(columns={'Concept': 'concept_en', 'Features': 'feature_en', 'Prod_Freq': 'freq'}).drop('BR_Label', axis=1)
+            data = data[data['feature_en'].isin(fn)]
             data['feature'] = f
             df = pd.concat([df, data], axis=0)
 

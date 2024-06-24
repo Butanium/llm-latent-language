@@ -11,6 +11,12 @@ nnsight
 munch
 cache_decorator
 cloudpickle<3  # Babelnet requires cloudpickle<3
-babelnet -C="--ignore-requires-python"
+# make sure to download
+# babelnet -C="--ignore-requires-python"
 emoji
 coolname
+openpyxl
+hydra-core
+omegaconf
+retry 
+tiktoken
