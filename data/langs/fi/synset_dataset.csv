@@ -83,7 +83,6 @@ hair,bn:00042526n,"['karvoitus', 'karva', 'hius', 'jouhi']","['Karvat ovat nisä
 hammer,bn:00042730n,['vasara'],"['Vasara on työkalu, jolla on tarkoitus keskittää iskuvoimaa kapeaan pisteeseen.', 'Työkalu']"
 hand,bn:00042759n,"['käsi', 'jalka', 'käpälä', 'manus']",['Käsi (lat.']
 hat,bn:00017718n,"['hattu', 'lakki', 'päähine']","['Hattu on tavallisesti jäykästä materiaalista valmistettu päähine, jossa on kupu ja usein lieri.', 'päähine']"
-head,bn:00012681n,"['Nous', 'Psyyke', 'mieli', 'pää', 'psyyke', 'nous', 'järki', 'älli']","['Nous (m.kreik.', 'Mieli ymmärretään yksilön sisäisenä, henkisenä olemuksena, jossa ajatukset, tunteet ja tietoisuus ilmenevät.', 'Psyykellä', 'ihmismieli ja sen osa-alueet', 'sisäinen henkinen olemus']"
 heart,bn:00043383n,"['sydän', 'sydänlihas', 'pumppu']","['Sydän (lat.', 'lihasseinäinen ontto elin, joka ylläpitää pumppaamalla verenkiertoa ja -painetta', 'Lihaksikas elin, joka kierrättää verta kehossa.']"
 horn,bn:00022750n,"['munniharppu', 'torvi', 'kornetti', 'vaskitorvi', 'trumpetti', 'vaskipuhallin']","['Trumpetti on vaskisoitinperheen korkein soitin.', 'Kornetti', 'Trumpentinsukuinen vaskipuhallin', 'Vaskipuhallin', 'musiikkisoitin']"
 horse,bn:00031345n,"['hevonen', 'Equus caballus']","['Kesyhevonen on yksi hevosen alalajeista.', 'hevosen alalaji']"
@@ -124,14 +123,11 @@ pocket,bn:00063155n,['tasku'],"['Tasku on vaatekappaleen, laukun tai muun esinee
 pot,bn:00015106n,"['potta', 'pytty', 'yöastia', 'käymälä', 'pönttö', 'wc-pönttö', 'vessa', 'wc-istuin']","['Käymälä on paikka, huonetila tai rakennus, jota käytetään tarpeiden tekemiseen eli ulostamiseen ja virtsaamiseen.', 'Ulostamiseen ja virtsaamiseen tarkoitettu paikka']"
 potato,bn:00047481n,"['peruna', 'potaatti', 'pottu']","['Peruna on koisokasvien heimoon kuuluva kasvi, jonka mukulaa käytetään ravintona.', 'ravinnoksi käytettävä perunakasvin mukula', 'Koisokasvien heimoon kuuluva ravintokasvi']"
 prison,bn:00064468n,"['linna', 'vankila', 'tyrmä']","['Vankila on laitos, jossa säilytetään vankeja.', 'laitos, jossa pidetään lainrikkojia', 'Paikka, jossa yksilöiden henkilökohtaista vapautta on rajoitettu.']"
-pump,bn:00043383n,"['sydän', 'sydänlihas', 'pumppu']","['Sydän (lat.', 'lihasseinäinen ontto elin, joka ylläpitää pumppaamalla verenkiertoa ja -painetta', 'Lihaksikas elin, joka kierrättää verta kehossa.']"
 rail,bn:00077838n,"['rautatie', 'rata', 'junarata', 'raide', 'Raide', 'raiteet']","['Raide tarkoittaa kahden kiskon ja pölkytyksen muodostamaa yksittäistä väylää, joka muodostaa alustan raideliikenteelle ja ottaa vastaan liikenteen kuormat.', 'Kahden kiskon ja pölkytyksen muodostama yksittäinen väylä']"
 rat,bn:00056119n,"['hiiri', 'kotihiiret', 'Kotihiiret']","['Kotihiiret on varsinaisten hiirten ja rottien alaheimoon kuuluva jyrsijäsuku, johon kuuluu noin 40 lajia.', 'Hiiriksi kutsutaan monia pieniä, etenkin pitkähäntäisiä jyrsijöitä.', 'Pieni jyrsijä', 'pieni jyrsijä']"
 receipt,bn:00000746n,"['lasku', 'tili', 'ravintolalasku', 'tavaralasku']","['Lasku on tosite tai ilmoitus, joka sisältää myydyn tuotteen tai palvelun tiedot sekä sovitun hinnan.']"
-ring,bn:00008287n,['sormus'],"['Sormus on sormessa koruna tai jonkin symbolina pidettävä rengas.', 'Sormeen puettava rengas']"
 rod,bn:00022813n,"['ruumiinrangaistus', 'ruumiillinen rangaistus']","['Ruumiinrangaistus on yksilölle hänen tekemänsä oikeudenloukkauksen vuoksi määrätty rangaistus, joka kohdistuu hänen ruumiilliseen koskemattomuuteensa.', 'Kivun tahallinen aiheuttaminen rangaistuksena']"
 roof,bn:00068220n,"['ulkokatto', 'katto']","['Katto on rakennusta, huonetta tai vastaavaa tilaa päältä päin suojaava rakennusosa, tai yleensä jonkin tilan yläpinta.', 'huoneen, rakennuksen tai tilan yläpinta']"
-root,bn:00042526n,"['karvoitus', 'karva', 'hius', 'jouhi']","['Karvat ovat nisäkkäiden ihon ulkopinnassa kasvavia, sarveisaineesta muodostuneita epidermisiä ulokekkeita.']"
 sail,bn:00068849n,"['purjealus', 'purjehdusalus', 'purjelaiva']","['Purjealus on vesiliikennealus, joka kulkee vedessä tuulen voiman vaikuttaessa sen purjeisiin.']"
 school,bn:00069619n,"['yliopisto', 'koulu']","['Koulu on usein valtiollinen instituutio, jonka tehtävänä on järjestää virallista, tutkintoihin johtavaa koulutusta.']"
 scissors,bn:00060209n,['sakset'],"['Sakset on käsityökalu, joka on tarkoitettu erilaisten ohuiden materiaalien leikkaamiseen ja katkaisemiseen.', 'Leikkaustyökalu', 'käsityökalu ohuiden materiaalien leikkaamiseen']"
@@ -163,7 +159,6 @@ throat,bn:00061897n,"['kurkku', 'pharynx', 'nielu']",['Kurkku on kaulan etuosa; 
 thumb,bn:00063376n,"['peukalo', 'pollex']","['Peukalo on ihmisen kädessä laitimmainen sormi; oikeassa kädessä – kämmenen osoittaessa alaspäin – vasemmanpuoleisin ja vasemmassa oikeanpuoleisin.', 'Sormi']"
 ticket,bn:00033665n,"['hinta', 'tariffi', 'taksa', 'julkisen liikenteen maksu', 'ajomaksu', 'matkalipun hinta']",['julkisen liikenteen käytöstä maksettava hinta']
 toe,bn:00077465n,['varvas'],"['Varvas on jalkaterän kärjessä sijaitseva puikkomainen uloke.', 'jalkaterän osa']"
-tongue,bn:00071172n,['kenkä'],"['Kenkä on nauhalla, soljella tai vastaavalla kiinnitettävä tai avonainen jalkine.']"
 tooth,bn:00077593n,"['hammas', 'Hammas']","['Hammas on kova kalkkipitoinen suussa sijaitseva muodostelma, jollaisia on monilla selkärankaisilla.', 'suussa sijaitseva muodostelma']"
 train,bn:00066028n,"['juna', 'opettaa', 'harjoittaa']","['Juna on rautatiellä kulkeva kulkuväline, jossa on vaihteleva määrä vaunuja.', 'Liikenneväline', 'Kiskoajoneuvo']"
 tray,bn:00078102n,"['tarjotin', 'tarjottimellinen', 'Tarjotin']",['Tarjotin on tarjoiluun tarkoitettu väline.']

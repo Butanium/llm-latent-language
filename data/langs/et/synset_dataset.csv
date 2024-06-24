@@ -80,7 +80,6 @@ hair,bn:00042526n,"['karv', 'karvad']","['Karvad on valgust moodustunud kiud, mi
 hammer,bn:00042730n,"['haamer', 'vasar']",['Vasar ehk haamer on tööriist materjali või objekti löögiga töötlemiseks.']
 hand,bn:00042759n,['labakäsi'],"['Labakäsi ehk käelaba on käe osa, mille moodustavad kämmal ja sõrmed.']"
 hat,bn:00017718n,"['müts', 'kübar']","['Kübar on vormitud põhjaga ja laiema servaga peakate.', 'liik peakatteid']"
-head,bn:00012681n,"['nous', 'psüühika', 'Psüühika', 'Nous', 'vaim', 'Vaim']","['Nous on vanakreeka sõna, mida on muu hulgas filosoofias mitmes tähenduses tarvitatud.', 'Vaim on vaimufilosoofias vaimunähtuste kogum.', 'Psüühika on individuaalsele kogemusele toetuv käitumist organiseerivate protsesside süsteem.']"
 heart,bn:00043383n,['süda'],['Süda on vereringet või hemolümfiringet tagav elund.']
 horn,bn:00022750n,"['kornet', 'parmupill', 'trompet', 'Kornet']","['Trompet on kõrgeima registriga vaskpuhkpill.', 'Kornet on ovaaliks keeratud silindrilise, otsast laieneva toruga ning kausshuulikuga vaskpuhkpill.']"
 horse,bn:00031345n,['hobune'],"['Hobune on kabjaliste seltsi hobuslaste sugukonda kuuluv kodustatud loom, metshobuse alamliik Equus ferus caballus.']"
@@ -119,14 +118,11 @@ pocket,bn:00063155n,"['tasku', 'Tasku']","['Tasku on riietusesemele sisse- või 
 pot,bn:00015106n,"['käimla', 'Käimla']","['Käimla on koht, ruum või hoone, kus inimesed käivad roojamas ja urineerimas.']"
 potato,bn:00047481n,"['kartul', 'harilik kartul']","['Harilik kartul on maavitsaliste sugukonna maavitsa perekonda kuuluv üheaastane rohttaim.', 'Kartul on maavitsaliste sugukonna maavitsa perekonda kuuluva hariliku kartuli mugul.', 'mugultoiduaine']"
 prison,bn:00064468n,['vangla'],['Vangla on vabadusekaotusega karistatud isikute või ka eeluurimise all olevate isikute kinnipidamiskoht.']
-pump,bn:00043383n,['süda'],['Süda on vereringet või hemolümfiringet tagav elund.']
 rail,bn:00077838n,"['rööbastee', 'Rööbastee']","['Rööbastee koosneb harilikult kahest paralleelsest rööpast, mis paiknevad liipritel.']"
 rat,bn:00056119n,"['Hiir', 'hiir']",['Hiir on näriliste seltsi hiirlaste sugukonda kuuluv loomade perekond.']
 receipt,bn:00000746n,['arve'],"['Arve ehk faktuur on majanduses müüja poolt ostjale esitatav dokument kauba maksumuse, tasumise tähtaja ja tingimuste kohta.']"
-ring,bn:00008287n,['sõrmus'],['Sõrmus on enamasti metallist rõnga- või spiraalikujuline sõrmeehe.']
 rod,bn:00022813n,"['ihunuhtlus', 'Ihunuhtlus']",['Ihunuhtlus on kehavigastust või valu tekitav karistus.']
 roof,bn:00068220n,['katus'],"['Katus on ehitise ülemine osa, mis koosneb eri materjalidest ja konstruktsioonilistest elementidest, et toetuda ehitise seintele ja tugedele.', 'ehitist kattev osa']"
-root,bn:00042526n,"['karv', 'karvad']","['Karvad on valgust moodustunud kiud, mis kasvavad dermises asuvatest karvanääpsudest.']"
 sail,bn:00068849n,"['purjekas', 'purjelaev']","['Purjelaev on purjedele mõjuva tuule jõul liikumiseks ehk purjetamiseks mõeldud laev.', 'purjede abil liikuv laev']"
 school,bn:00069619n,"['ülikool', 'kool']",['Kool on haridusasutus õppimise ja õpetamise jaoks; õpiruumi ja õppekeskkonda võimaldav institutsioon.']
 scissors,bn:00060209n,"['käärid', 'Käärid']","['Käärid on kahe samal tasandil teineteisele vastu liikuva teraga käsitööriist, mida kasutatakse õhukese või peenikese materjali lõikamiseks.']"
@@ -155,7 +151,6 @@ tail,bn:00075904n,['saba'],"['Saba on mitmel loomarühmal keha osa, mis jääb p
 thread,bn:00077028n,"['kedrus', 'lõng', 'niit']","['Lõng on kiudude ketramisel saadav saadud põimitud kiududega või ühe pika kiuna esinev materjal riide, silmkoeesemete jms kudumiseks, tikkimiseks jne.']"
 thumb,bn:00063376n,['pöial'],"['Pöial on inimese kõige lühem ja jämedam sõrm.', 'jämedaim sõrm']"
 toe,bn:00077465n,['varvas'],"['Varvas on imetaja, roomaja või linnu maha toetuva jäseme hargnenud ja osaliselt küünisega kaetud osa.']"
-tongue,bn:00071172n,"['king', 'kingad']","['Kingad on nahast jalanõud, millel on tugev tald ja konts, ja mis ei ulatu pahkluust kõrgemale.', 'Jalanõu']"
 tooth,bn:00077593n,"['Hambad', 'hammas', 'hambad']","['Hambad on paljudel selgroogsetel loomadel suus leiduvad luustunud seedeelundkonna elundid.', 'väiksed luutükid toidu purustamiseks suus, lõualuu küljes kinni']"
 train,bn:00066028n,['rong'],"['Raudteerong on enamasti paljudest üksteise järele haagitud reisi-, platvorm- ja kaubavagunitest ning ühest või mitmest vedurist koosnev raudtee veerem.']"
 tree,bn:00078131n,['puu'],"['Puu on hästi välja kujunenud varrega puittaim, mis võib saavutada suured mõõtmed.', 'Tüvega puittaim']"
