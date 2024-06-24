@@ -1,33 +1,121 @@
 concept_en,concept_ja,feature_en_en,feature_ja,feature_ja_en,freq_en,freq_ja,total_en,total_other,frac_en,frac_ja,diff
-sword,sword,grey,銀,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,8.0,5.0,12.0,0.0,0.6666666666666666,0.6666666666666666
-key,key,grey,銀,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,16.0,5.0,24.0,0.0,0.6666666666666666,0.6666666666666666
-shrimp,shrimp,red,赤,"['communist', 'communism', 'red', 'redness']",8.0,9.0,28.0,11.0,0.2857142857142857,0.8181818181818182,0.5324675324675325
-cockroach,cockroach,black,黒,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']",8.0,14.0,20.0,17.0,0.4,0.8235294117647058,0.4235294117647058
-salmon,salmon,orange,オレンジ色,"['orangeness', 'orange']",0.0,5.0,18.0,13.0,0.0,0.38461538461538464,0.38461538461538464
-pumpkin,pumpkin,yellow,黄色,"['yellow', 'yellowness']",0.0,9.0,69.0,24.0,0.0,0.375,0.375
-pumpkin,pumpkin,green,緑,"['green', 'viridity', 'greenness']",1.0,8.0,69.0,24.0,0.014492753623188406,0.3333333333333333,0.3188405797101449
-salmon,salmon,grey,銀,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,4.0,18.0,13.0,0.0,0.3076923076923077,0.3076923076923077
-lettuce,lettuce,yellow,黄緑,"['chartreuse', 'Paris green', 'pea green', 'yellow green', 'yellowish green', 'jade']",0.0,5.0,126.0,25.0,0.0,0.2,0.2
-salmon,salmon,silver,銀,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,2.0,18.0,13.0,0.0,0.15384615384615385,0.15384615384615385
-dandelion,dandelion,white,白,"['whiteness', 'white', 'colorimetric whiteness']",4.0,5.0,47.0,21.0,0.0851063829787234,0.23809523809523808,0.15298885511651467
-lettuce,lettuce,green,緑,"['green', 'viridity', 'greenness']",63.0,15.0,126.0,25.0,0.5,0.6,0.09999999999999998
-tree,tree,brown,茶色,"['brown', 'brownness', 'Aquilus']",28.0,5.0,73.0,12.0,0.3835616438356164,0.4166666666666667,0.03310502283105027
-tomato,tomato,red,赤,"['communist', 'communism', 'red', 'redness']",46.0,19.0,46.0,19.0,1.0,1.0,0.0
-toilet,toilet,white,白,"['whiteness', 'white', 'colorimetric whiteness']",24.0,8.0,24.0,8.0,1.0,1.0,0.0
-spider,spider,black,黒,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']",15.0,5.0,15.0,5.0,1.0,1.0,0.0
-rice,rice,white,白,"['whiteness', 'white', 'colorimetric whiteness']",40.0,16.0,40.0,16.0,1.0,1.0,0.0
-plate,plate,white,白,"['whiteness', 'white', 'colorimetric whiteness']",10.0,9.0,10.0,9.0,1.0,1.0,0.0
-piano,piano,black,黒,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']",21.0,6.0,21.0,6.0,1.0,1.0,0.0
+water,water,,透き通っている,[],0.0,16.0,16.0,16.0,0.0,1.0,1.0
+towel,towel,white,白,"['whiteness', 'white', 'colorimetric whiteness']",0.0,6.0,12.0,6.0,0.0,1.0,1.0
+comic,comic,,白と黒,['Shiro to Kuro'],0.0,6.0,7.0,6.0,0.0,1.0,1.0
+fence,fence,grey,灰色,"['gray', 'grey', 'greyness', 'grayness']",2.0,16.0,22.0,16.0,0.09090909090909091,1.0,0.9090909090909091
+paper lantern,paper lantern,red,赤,"['communist', 'communism', 'red', 'redness']",2.0,8.0,12.0,8.0,0.16666666666666666,1.0,0.8333333333333334
+butterfly,butterfly,,色が鮮やか,[],0.0,3.0,17.0,5.0,0.0,0.6,0.6
+key,key,silver,銀,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",5.0,8.0,12.0,8.0,0.4166666666666667,1.0,0.5833333333333333
+ghost,ghost,,透き通っている,[],0.0,11.0,12.0,19.0,0.0,0.5789473684210527,0.5789473684210527
+guppy,guppy,,色彩が豊か,[],0.0,3.0,13.0,6.0,0.0,0.5,0.5
+guppy,guppy,,色が鮮やか,[],0.0,3.0,13.0,6.0,0.0,0.5,0.5
+pencil,pencil,black,黒,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']",0.0,6.0,20.0,13.0,0.0,0.46153846153846156,0.46153846153846156
+balloon,balloon,,色は様々,[],0.0,6.0,16.0,14.0,0.0,0.42857142857142855,0.42857142857142855
+balloon,balloon,,色彩が豊か,[],0.0,6.0,16.0,14.0,0.0,0.42857142857142855,0.42857142857142855
+dracula,dracula,,青白い肌,[],0.0,6.0,14.0,15.0,0.0,0.4,0.4
+butterfly,butterfly,,きれいな色,[],0.0,2.0,17.0,5.0,0.0,0.4,0.4
+tea,tea,green,緑,"['green', 'viridity', 'greenness']",2.0,9.0,8.0,14.0,0.25,0.6428571428571429,0.3928571428571429
+rice,rice,white,白,"['whiteness', 'white', 'colorimetric whiteness']",40.0,16.0,65.0,16.0,0.6153846153846154,1.0,0.3846153846153846
+shrimp,shrimp,red,赤,"['communist', 'communism', 'red', 'redness']",8.0,9.0,35.0,15.0,0.22857142857142856,0.6,0.37142857142857144
+tea,tea,brown,茶色,"['brown', 'brownness', 'Aquilus']",0.0,5.0,8.0,14.0,0.0,0.35714285714285715,0.35714285714285715
+salmon,salmon,,赤身,[],0.0,6.0,23.0,17.0,0.0,0.35294117647058826,0.35294117647058826
+cockroach,cockroach,black,黒,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']",8.0,14.0,20.0,19.0,0.4,0.7368421052631579,0.33684210526315783
+dracula,dracula,,黒いマントをつけている,[],0.0,5.0,14.0,15.0,0.0,0.3333333333333333,0.3333333333333333
+pencil,pencil,,芯が黒い,[],0.0,4.0,20.0,13.0,0.0,0.3076923076923077,0.3076923076923077
+salmon,salmon,orange,オレンジ色,"['orangeness', 'orange']",0.0,5.0,23.0,17.0,0.0,0.29411764705882354,0.29411764705882354
+piano,piano,,白と黒,['Shiro to Kuro'],0.0,5.0,39.0,18.0,0.0,0.2777777777777778,0.2777777777777778
+shrimp,shrimp,,ゆでると赤い,[],0.0,4.0,35.0,15.0,0.0,0.26666666666666666,0.26666666666666666
+pumpkin,pumpkin,yellow,黄色,"['yellow', 'yellowness']",0.0,9.0,69.0,35.0,0.0,0.2571428571428571,0.2571428571428571
+onion,onion,,皮が茶色,[],0.0,4.0,26.0,16.0,0.0,0.25,0.25
+onion,onion,,中身は白い,[],0.0,4.0,26.0,16.0,0.0,0.25,0.25
+lettuce,lettuce,,黄緑,"['chartreuse', 'Paris green', 'pea green', 'yellow green', 'yellowish green', 'jade']",0.0,5.0,63.0,20.0,0.0,0.25,0.25
+tomato,tomato,red,赤,"['communist', 'communism', 'red', 'redness']",46.0,19.0,60.0,19.0,0.7666666666666667,1.0,0.23333333333333328
+pencil,pencil,green,緑,"['green', 'viridity', 'greenness']",0.0,3.0,20.0,13.0,0.0,0.23076923076923078,0.23076923076923078
+piano,piano,,白と黒の鍵盤,[],0.0,4.0,39.0,18.0,0.0,0.2222222222222222,0.2222222222222222
+pumpkin,pumpkin,green,緑,"['green', 'viridity', 'greenness']",1.0,8.0,69.0,35.0,0.014492753623188406,0.22857142857142856,0.21407867494824015
+ghost,ghost,,白い着物を着ている,[],0.0,4.0,12.0,19.0,0.0,0.21052631578947367,0.21052631578947367
+toilet,toilet,,便器は白い,[],0.0,2.0,24.0,10.0,0.0,0.2,0.2
+bomb,bomb,black,黒,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']",4.0,12.0,5.0,12.0,0.8,1.0,0.19999999999999996
+plate,plate,,色は様々,[],0.0,2.0,13.0,11.0,0.0,0.18181818181818182,0.18181818181818182
+pumpkin,pumpkin,,皮が緑色,[],0.0,6.0,69.0,35.0,0.0,0.17142857142857143,0.17142857142857143
+piano,piano,,黒白,[],0.0,3.0,39.0,18.0,0.0,0.16666666666666666,0.16666666666666666
+dandelion,dandelion,,黄色い花,[],0.0,4.0,62.0,27.0,0.0,0.14814814814814814,0.14814814814814814
+dracula,dracula,,黒い服を着ている,[],0.0,2.0,14.0,15.0,0.0,0.13333333333333333,0.13333333333333333
+tree,tree,,緑色の葉がつく,[],0.0,2.0,75.0,16.0,0.0,0.125,0.125
+tree,tree,,幹が茶色,[],0.0,2.0,75.0,16.0,0.0,0.125,0.125
+onion,onion,,炒めるとあめ色になる,[],0.0,2.0,26.0,16.0,0.0,0.125,0.125
+dandelion,dandelion,white,白,"['whiteness', 'white', 'colorimetric whiteness']",4.0,5.0,62.0,27.0,0.06451612903225806,0.18518518518518517,0.12066905615292711
+salmon,salmon,,身がオレンジ色をしている,[],0.0,2.0,23.0,17.0,0.0,0.11764705882352941,0.11764705882352941
+salmon,salmon,silver,銀,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",0.0,2.0,23.0,17.0,0.0,0.11764705882352941,0.11764705882352941
+ghost,ghost,,青白い,[],0.0,2.0,12.0,19.0,0.0,0.10526315789473684,0.10526315789473684
+cockroach,cockroach,,黒光り,[],0.0,2.0,20.0,19.0,0.0,0.10526315789473684,0.10526315789473684
+pumpkin,pumpkin,,中が黄色,[],0.0,3.0,69.0,35.0,0.0,0.08571428571428572,0.08571428571428572
+dandelion,dandelion,,白い綿毛,[],0.0,2.0,62.0,27.0,0.0,0.07407407407407407,0.07407407407407407
+pumpkin,pumpkin,,中がオレンジ,[],0.0,2.0,69.0,35.0,0.0,0.05714285714285714,0.05714285714285714
+plate,plate,white,白,"['whiteness', 'white', 'colorimetric whiteness']",10.0,9.0,13.0,11.0,0.7692307692307693,0.8181818181818182,0.04895104895104896
+turtle,turtle,green,緑,"['green', 'viridity', 'greenness']",74.0,7.0,76.0,7.0,0.9736842105263158,1.0,0.02631578947368418
+balloon,balloon,red,赤,"['communist', 'communism', 'red', 'redness']",2.0,2.0,16.0,14.0,0.125,0.14285714285714285,0.01785714285714285
 paper,paper,white,白,"['whiteness', 'white', 'colorimetric whiteness']",8.0,12.0,8.0,12.0,1.0,1.0,0.0
-onion,onion,white,白,"['whiteness', 'white', 'colorimetric whiteness']",16.0,6.0,16.0,6.0,1.0,1.0,0.0
 fridge,fridge,white,白,"['whiteness', 'white', 'colorimetric whiteness']",16.0,7.0,16.0,7.0,1.0,1.0,0.0
 airplane,airplane,white,白,"['whiteness', 'white', 'colorimetric whiteness']",5.0,8.0,5.0,8.0,1.0,1.0,0.0
-tree,tree,green,緑,"['green', 'viridity', 'greenness']",45.0,7.0,73.0,12.0,0.6164383561643836,0.5833333333333334,-0.03310502283105021
-dandelion,dandelion,yellow,黄色,"['yellow', 'yellowness']",43.0,16.0,47.0,21.0,0.9148936170212766,0.7619047619047619,-0.15298885511651472
-lettuce,lettuce,green,黄緑,"['chartreuse', 'Paris green', 'pea green', 'yellow green', 'yellowish green', 'jade']",63.0,5.0,126.0,25.0,0.5,0.2,-0.3
-cockroach,cockroach,brown,茶色,"['brown', 'brownness', 'Aquilus']",12.0,3.0,20.0,17.0,0.6,0.17647058823529413,-0.4235294117647058
-shrimp,shrimp,pink,ピンク,"['P!nk', 'Pink', 'pink']",20.0,2.0,28.0,11.0,0.7142857142857143,0.18181818181818182,-0.5324675324675325
-sword,sword,silver,銀,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",5.0,4.0,5.0,12.0,1.0,0.3333333333333333,-0.6666666666666667
-key,key,silver,銀,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",5.0,8.0,5.0,24.0,1.0,0.3333333333333333,-0.6666666666666667
-pumpkin,pumpkin,orange,オレンジ色,"['orangeness', 'orange']",68.0,7.0,69.0,24.0,0.9855072463768116,0.2916666666666667,-0.693840579710145
-salmon,salmon,pink,ピンク,"['P!nk', 'Pink', 'pink']",18.0,2.0,18.0,13.0,1.0,0.15384615384615385,-0.8461538461538461
+turtle,turtle,green_and_brown,,,2.0,0.0,76.0,7.0,0.02631578947368421,0.0,-0.02631578947368421
+tree,tree,colours_of_leaves_change_in_fall,,,2.0,0.0,75.0,16.0,0.02666666666666667,0.0,-0.02666666666666667
+dandelion,dandelion,white_or_yellow,,,2.0,0.0,62.0,27.0,0.03225806451612903,0.0,-0.03225806451612903
+tomato,tomato,has_green_stem,,,2.0,0.0,60.0,19.0,0.03333333333333333,0.0,-0.03333333333333333
+fence,fence,brown,,,1.0,0.0,22.0,16.0,0.045454545454545456,0.0,-0.045454545454545456
+shrimp,shrimp,blue,,,2.0,0.0,35.0,15.0,0.05714285714285714,0.0,-0.05714285714285714
+tree,tree,brown,茶色,"['brown', 'brownness', 'Aquilus']",28.0,5.0,75.0,16.0,0.37333333333333335,0.3125,-0.06083333333333335
+rice,rice,white_or_brown,,,5.0,0.0,65.0,16.0,0.07692307692307693,0.0,-0.07692307692307693
+onion,onion,yellow,,,2.0,0.0,26.0,16.0,0.07692307692307693,0.0,-0.07692307692307693
+onion,onion,red,,,2.0,0.0,26.0,16.0,0.07692307692307693,0.0,-0.07692307692307693
+salmon,salmon,colour_salmon,,,2.0,0.0,23.0,17.0,0.08695652173913043,0.0,-0.08695652173913043
+fence,fence,white_picket_fence,,,2.0,0.0,22.0,16.0,0.09090909090909091,0.0,-0.09090909090909091
+pencil,pencil,different_colours,,,2.0,0.0,20.0,13.0,0.1,0.0,-0.1
+dandelion,dandelion,yellow,黄色,"['yellow', 'yellowness']",43.0,16.0,62.0,27.0,0.6935483870967742,0.5925925925925926,-0.10095579450418168
+onion,onion,different_colours,,,3.0,0.0,26.0,16.0,0.11538461538461539,0.0,-0.11538461538461539
+onion,onion,purple,,,3.0,0.0,26.0,16.0,0.11538461538461539,0.0,-0.11538461538461539
+butterfly,butterfly,different_colours,,,2.0,0.0,17.0,5.0,0.11764705882352941,0.0,-0.11764705882352941
+water,water,looks_blue,,,2.0,0.0,16.0,16.0,0.125,0.0,-0.125
+water,water,transparent,,,2.0,0.0,16.0,16.0,0.125,0.0,-0.125
+piano,piano,has_black_and_white_keys,,,5.0,0.0,39.0,18.0,0.1282051282051282,0.0,-0.1282051282051282
+salmon,salmon,red,,,3.0,0.0,23.0,17.0,0.13043478260869565,0.0,-0.13043478260869565
+shrimp,shrimp,white,,,5.0,0.0,35.0,15.0,0.14285714285714285,0.0,-0.14285714285714285
+dracula,dracula,red,,,2.0,0.0,14.0,15.0,0.14285714285714285,0.0,-0.14285714285714285
+guppy,guppy,different_colours,,,2.0,0.0,13.0,6.0,0.15384615384615385,0.0,-0.15384615384615385
+tree,tree,green,緑,"['green', 'viridity', 'greenness']",45.0,7.0,75.0,16.0,0.6,0.4375,-0.16249999999999998
+paper lantern,paper lantern,bright,,,2.0,0.0,12.0,8.0,0.16666666666666666,0.0,-0.16666666666666666
+toilet,toilet,white,白,"['whiteness', 'white', 'colorimetric whiteness']",24.0,8.0,24.0,10.0,1.0,0.8,-0.19999999999999996
+tomato,tomato,green,,,12.0,0.0,60.0,19.0,0.2,0.0,-0.2
+bomb,bomb,red,,,1.0,0.0,5.0,12.0,0.2,0.0,-0.2
+piano,piano,black,黒,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']",21.0,6.0,39.0,18.0,0.5384615384615384,0.3333333333333333,-0.20512820512820512
+dandelion,dandelion,green,,,13.0,0.0,62.0,27.0,0.20967741935483872,0.0,-0.20967741935483872
+dracula,dracula,black,黒,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']",5.0,2.0,14.0,15.0,0.35714285714285715,0.13333333333333333,-0.22380952380952382
+plate,plate,different_colours,,,3.0,0.0,13.0,11.0,0.23076923076923078,0.0,-0.23076923076923078
+onion,onion,white,白,"['whiteness', 'white', 'colorimetric whiteness']",16.0,6.0,26.0,16.0,0.6153846153846154,0.375,-0.24038461538461542
+towel,towel,colourful,,,3.0,0.0,12.0,6.0,0.25,0.0,-0.25
+lettuce,lettuce,green,緑,"['green', 'viridity', 'greenness']",63.0,15.0,63.0,20.0,1.0,0.75,-0.25
+comic,comic,in_black_and_white_or_colour,,,2.0,0.0,7.0,6.0,0.2857142857142857,0.0,-0.2857142857142857
+rice,rice,brown,,,20.0,0.0,65.0,16.0,0.3076923076923077,0.0,-0.3076923076923077
+piano,piano,white,,,13.0,0.0,39.0,18.0,0.3333333333333333,0.0,-0.3333333333333333
+paper lantern,paper lantern,different_colours,,,4.0,0.0,12.0,8.0,0.3333333333333333,0.0,-0.3333333333333333
+paper lantern,paper lantern,colourful,,,4.0,0.0,12.0,8.0,0.3333333333333333,0.0,-0.3333333333333333
+tea,tea,black,,,3.0,0.0,8.0,14.0,0.375,0.0,-0.375
+tea,tea,different_colours,,,3.0,0.0,8.0,14.0,0.375,0.0,-0.375
+balloon,balloon,different_colours,,,6.0,0.0,16.0,14.0,0.375,0.0,-0.375
+guppy,guppy,aqua,,,5.0,0.0,13.0,6.0,0.38461538461538464,0.0,-0.38461538461538464
+ghost,ghost,transparent,,,5.0,0.0,12.0,19.0,0.4166666666666667,0.0,-0.4166666666666667
+shrimp,shrimp,pink,ピンク,"['P!nk', 'Pink', 'pink']",20.0,2.0,35.0,15.0,0.5714285714285714,0.13333333333333333,-0.4380952380952381
+cockroach,cockroach,brown,茶色,"['brown', 'brownness', 'Aquilus']",12.0,3.0,20.0,19.0,0.6,0.15789473684210525,-0.4421052631578947
+guppy,guppy,colourful,,,6.0,0.0,13.0,6.0,0.46153846153846156,0.0,-0.46153846153846156
+ghost,ghost,white,白,"['whiteness', 'white', 'colorimetric whiteness']",7.0,2.0,12.0,19.0,0.5833333333333334,0.10526315789473684,-0.47807017543859653
+dracula,dracula,pale,,,7.0,0.0,14.0,15.0,0.5,0.0,-0.5
+balloon,balloon,colourful,,,8.0,0.0,16.0,14.0,0.5,0.0,-0.5
+key,key,gold,,,7.0,0.0,12.0,8.0,0.5833333333333334,0.0,-0.5833333333333334
+salmon,salmon,pink,ピンク,"['P!nk', 'Pink', 'pink']",18.0,2.0,23.0,17.0,0.782608695652174,0.11764705882352941,-0.6649616368286445
+comic,comic,looks_colourful,,,5.0,0.0,7.0,6.0,0.7142857142857143,0.0,-0.7142857142857143
+water,water,clear,,,12.0,0.0,16.0,16.0,0.75,0.0,-0.75
+towel,towel,different_colours,,,9.0,0.0,12.0,6.0,0.75,0.0,-0.75
+fence,fence,white,,,17.0,0.0,22.0,16.0,0.7727272727272727,0.0,-0.7727272727272727
+pumpkin,pumpkin,orange,オレンジ色,"['orangeness', 'orange']",68.0,7.0,69.0,35.0,0.9855072463768116,0.2,-0.7855072463768116
+butterfly,butterfly,colourful,,,15.0,0.0,17.0,5.0,0.8823529411764706,0.0,-0.8823529411764706
+pencil,pencil,yellow,,,18.0,0.0,20.0,13.0,0.9,0.0,-0.9
