@@ -1,22 +1,18 @@
 concept_en,concept_de,feature_en_en,feature_de,feature_de_en,freq_en,freq_de,total_en,total_other,frac_en,frac_de,diff
 ring,Reifen,black,schwarz,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,5.0,11.0,5.0,0.0,1.0,1.0
 rat,Maus,grey,grau,"['gray', 'grey', 'greyness', 'grayness']",0.0,8.0,5.0,8.0,0.0,1.0,1.0
-carrot,Mohrrübe,,orange,"['France Télécom', 'Orange S.A.', 'orangeness']",0.0,7.0,65.0,9.0,0.0,0.7777777777777778,0.7777777777777778
-tomato,Kürbis,,orange,"['France Télécom', 'Orange S.A.', 'orangeness']",0.0,5.0,60.0,7.0,0.0,0.7142857142857143,0.7142857142857143
-pumpkin,Kürbis,,orange,"['France Télécom', 'Orange S.A.', 'orangeness']",0.0,5.0,69.0,7.0,0.0,0.7142857142857143,0.7142857142857143
+tomato,Kürbis,orange,orange,"['orangeness', 'orange']",0.0,5.0,60.0,7.0,0.0,0.7142857142857143,0.7142857142857143
 frog,Kröte,brown,braun,"['brown', 'brownness', 'Aquilus']",0.0,3.0,26.0,5.0,0.0,0.6,0.6
 vanilla,Vanille,black,schwarz,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,6.0,11.0,14.0,0.0,0.42857142857142855,0.42857142857142855
 pen,Feder,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",0.0,2.0,41.0,5.0,0.0,0.4,0.4
-meat,Fleisch,pink,rosa,"['rose', 'rosebush', 'pink']",0.0,2.0,15.0,5.0,0.0,0.4,0.4
+meat,Fleisch,pink,rosa,"['rose', 'rosebush', 'Rosa', 'pink']",0.0,2.0,15.0,5.0,0.0,0.4,0.4
 crown,Zahnkrone,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",0.0,3.0,26.0,8.0,0.0,0.375,0.375
 bull,Bulle,black,schwarz,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,3.0,5.0,8.0,0.0,0.375,0.375
-raspberry,Himbeere,pink,rosa,"['rose', 'rosebush', 'pink']",3.0,3.0,41.0,7.0,0.07317073170731707,0.42857142857142855,0.35540069686411146
+raspberry,Himbeere,pink,rosa,"['rose', 'rosebush', 'Rosa', 'pink']",3.0,3.0,41.0,7.0,0.07317073170731707,0.42857142857142855,0.35540069686411146
 newspaper,Papier,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",11.0,12.0,24.0,15.0,0.4583333333333333,0.8,0.34166666666666673
 tea,Tee,brown,braun,"['brown', 'brownness', 'Aquilus']",0.0,2.0,8.0,6.0,0.0,0.3333333333333333,0.3333333333333333
 straw,Halm,green,grün,"['green', 'viridity', 'greenness']",0.0,6.0,96.0,18.0,0.0,0.3333333333333333,0.3333333333333333
 plate,Nummernschild,black,schwarz,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,3.0,23.0,9.0,0.0,0.3333333333333333,0.3333333333333333
-flame,Feuer,,orange,"['France Télécom', 'Orange S.A.', 'orangeness']",0.0,3.0,25.0,9.0,0.0,0.3333333333333333,0.3333333333333333
-fire,Feuer,,orange,"['France Télécom', 'Orange S.A.', 'orangeness']",0.0,3.0,95.0,9.0,0.0,0.3333333333333333,0.3333333333333333
 cheese,Käse,red,rot,"['red', 'redness']",0.0,5.0,33.0,15.0,0.0,0.3333333333333333,0.3333333333333333
 bear,Bär,brown,braun,"['brown', 'brownness', 'Aquilus']",22.0,10.0,54.0,14.0,0.4074074074074074,0.7142857142857143,0.3068783068783069
 plant,Gewächs,green,grün,"['green', 'viridity', 'greenness']",54.0,8.0,108.0,10.0,0.5,0.8,0.30000000000000004
@@ -25,10 +21,12 @@ vanilla,Vanille,yellow,gelb,"['yellow', 'yellowness']",0.0,4.0,11.0,14.0,0.0,0.2
 tomato,Kürbis,yellow,gelb,"['yellow', 'yellowness']",0.0,2.0,60.0,7.0,0.0,0.2857142857142857,0.2857142857142857
 pumpkin,Kürbis,yellow,gelb,"['yellow', 'yellowness']",0.0,2.0,69.0,7.0,0.0,0.2857142857142857,0.2857142857142857
 hair,Haar,grey,grau,"['gray', 'grey', 'greyness', 'grayness']",0.0,2.0,9.0,7.0,0.0,0.2857142857142857,0.2857142857142857
+basketball,Basketball,black,schwarz,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,2.0,28.0,7.0,0.0,0.2857142857142857,0.2857142857142857
 tongue,Zunge,red,rot,"['red', 'redness']",3.0,6.0,6.0,8.0,0.5,0.75,0.25
 crown,Horn,grey,grau,"['gray', 'grey', 'greyness', 'grayness']",0.0,2.0,26.0,8.0,0.0,0.25,0.25
 bull,Bulle,brown,braun,"['brown', 'brownness', 'Aquilus']",0.0,2.0,5.0,8.0,0.0,0.25,0.25
 salmon,Lachs,red,rot,"['red', 'redness']",3.0,3.0,23.0,8.0,0.13043478260869565,0.375,0.24456521739130435
+jeans,Jeans,blue,blau,"['blue', 'blueness']",22.0,16.0,44.0,22.0,0.5,0.7272727272727273,0.2272727272727273
 mouse,Maus,grey,grau,"['gray', 'grey', 'greyness', 'grayness']",35.0,8.0,45.0,8.0,0.7777777777777778,1.0,0.2222222222222222
 carrot,Mohrrübe,red,rot,"['red', 'redness']",0.0,2.0,65.0,9.0,0.0,0.2222222222222222,0.2222222222222222
 fire,Feuer,yellow,gelb,"['yellow', 'yellowness']",11.0,3.0,95.0,9.0,0.11578947368421053,0.3333333333333333,0.2175438596491228
@@ -36,27 +34,27 @@ deer,Hirsch,brown,braun,"['brown', 'brownness', 'Aquilus']",7.0,4.0,12.0,5.0,0.5
 toad,Kröte,brown,braun,"['brown', 'brownness', 'Aquilus']",12.0,3.0,31.0,5.0,0.3870967741935484,0.6,0.2129032258064516
 pig,Schweinchen,black,schwarz,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,1.0,32.0,5.0,0.0,0.2,0.2
 meat,Fleisch,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",0.0,1.0,15.0,5.0,0.0,0.2,0.2
+rose,Rose,red,rot,"['red', 'redness']",38.0,5.0,71.0,7.0,0.5352112676056338,0.7142857142857143,0.17907444668008055
 flame,Feuer,yellow,gelb,"['yellow', 'yellowness']",4.0,3.0,25.0,9.0,0.16,0.3333333333333333,0.1733333333333333
 coconut,Kokosnuss,brown,braun,"['brown', 'brownness', 'Aquilus']",20.0,8.0,80.0,19.0,0.25,0.42105263157894735,0.17105263157894735
 watermelon,Wassermelone,red,rot,"['red', 'redness']",12.0,8.0,36.0,16.0,0.3333333333333333,0.5,0.16666666666666669
-walnut,Walnuss,green,grün,"['green', 'viridity', 'greenness']",0.0,1.0,19.0,6.0,0.0,0.16666666666666666,0.16666666666666666
 tea,Tee,red,rot,"['red', 'redness']",0.0,1.0,8.0,6.0,0.0,0.16666666666666666,0.16666666666666666
-sun,Sonne,red,rot,"['red', 'redness']",0.0,1.0,52.0,6.0,0.0,0.16666666666666666,0.16666666666666666
 leather,Leder,brown,braun,"['brown', 'brownness', 'Aquilus']",25.0,4.0,39.0,5.0,0.6410256410256411,0.8,0.15897435897435896
 stone,Stein,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",0.0,1.0,22.0,7.0,0.0,0.14285714285714285,0.14285714285714285
+rose,Rose,green,grün,"['green', 'viridity', 'greenness']",0.0,1.0,71.0,7.0,0.0,0.14285714285714285,0.14285714285714285
 leaf,Blatt,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",0.0,1.0,31.0,7.0,0.0,0.14285714285714285,0.14285714285714285
 blueberry,Heidelbeere,purple,lila,"['purpleness', 'purple', 'violet', 'reddish blue']",0.0,1.0,27.0,7.0,0.0,0.14285714285714285,0.14285714285714285
+basketball,Basketball,brown,braun,"['brown', 'brownness', 'Aquilus']",0.0,1.0,28.0,7.0,0.0,0.14285714285714285,0.14285714285714285
 strawberry,Erdbeere,red,rot,"['red', 'redness']",45.0,9.0,59.0,10.0,0.7627118644067796,0.9,0.1372881355932204
 paper,Presse,red,rot,"['red', 'redness']",0.0,2.0,8.0,15.0,0.0,0.13333333333333333,0.13333333333333333
 newspaper,Presse,red,rot,"['red', 'redness']",0.0,2.0,24.0,15.0,0.0,0.13333333333333333,0.13333333333333333
 crown,Krone,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",0.0,1.0,26.0,8.0,0.0,0.125,0.125
-crown,Horn,,beige,['ecru'],0.0,1.0,26.0,8.0,0.0,0.125,0.125
 crown,Horn,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",0.0,1.0,26.0,8.0,0.0,0.125,0.125
+crown,Horn,,beige,"['ecru', 'beige']",0.0,1.0,26.0,8.0,0.0,0.125,0.125
 cream,Handcrème,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",6.0,10.0,12.0,16.0,0.5,0.625,0.125
+bull,Bulle,,beige,"['ecru', 'beige']",0.0,1.0,5.0,8.0,0.0,0.125,0.125
 bull,Bulle,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",0.0,1.0,5.0,8.0,0.0,0.125,0.125
-bull,Bulle,,beige,['ecru'],0.0,1.0,5.0,8.0,0.0,0.125,0.125
-ash,Asche,black,schwarz,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,1.0,14.0,9.0,0.0,0.1111111111111111,0.1111111111111111
-strawberry,Erdbeere,pink,rosa,"['rose', 'rosebush', 'pink']",0.0,1.0,59.0,10.0,0.0,0.1,0.1
+strawberry,Erdbeere,pink,rosa,"['rose', 'rosebush', 'Rosa', 'pink']",0.0,1.0,59.0,10.0,0.0,0.1,0.1
 plant,Anlage,blue,blau,"['blue', 'blueness']",0.0,1.0,108.0,10.0,0.0,0.1,0.1
 banana,Banane,black,schwarz,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",0.0,2.0,55.0,20.0,0.0,0.1,0.1
 cabbage,Kohl,green,grün,"['green', 'viridity', 'greenness']",91.0,6.0,120.0,7.0,0.7583333333333333,0.8571428571428571,0.09880952380952379
@@ -67,6 +65,8 @@ brick,Ziegelstein,grey,grau,"['gray', 'grey', 'greyness', 'grayness']",0.0,2.0,2
 tea,Tee,green,grün,"['green', 'viridity', 'greenness']",2.0,2.0,8.0,6.0,0.25,0.3333333333333333,0.08333333333333331
 sugar,Zucker,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",25.0,11.0,50.0,19.0,0.5,0.5789473684210527,0.07894736842105265
 pen,Stift,red,rot,"['red', 'redness']",5.0,1.0,41.0,5.0,0.12195121951219512,0.2,0.07804878048780489
+fire,Feuer,orange,orange,"['orangeness', 'orange']",25.0,3.0,95.0,9.0,0.2631578947368421,0.3333333333333333,0.07017543859649122
+carrot,Mohrrübe,orange,orange,"['orangeness', 'orange']",46.0,7.0,65.0,9.0,0.7076923076923077,0.7777777777777778,0.07008547008547006
 cheese,Käse,yellow,gelb,"['yellow', 'yellowness']",11.0,6.0,33.0,15.0,0.3333333333333333,0.4,0.06666666666666671
 paper,Papier,yellow,gelb,"['yellow', 'yellowness']",0.0,1.0,8.0,15.0,0.0,0.06666666666666667,0.06666666666666667
 newspaper,Papier,yellow,gelb,"['yellow', 'yellowness']",0.0,1.0,24.0,15.0,0.0,0.06666666666666667,0.06666666666666667
@@ -75,7 +75,7 @@ watermelon,Wassermelone,yellow,gelb,"['yellow', 'yellowness']",0.0,1.0,36.0,16.0
 cream,Creme,yellow,gelb,"['yellow', 'yellowness']",0.0,1.0,12.0,16.0,0.0,0.0625,0.0625
 snow,Schnee,yellow,gelb,"['yellow', 'yellowness']",0.0,1.0,50.0,17.0,0.0,0.058823529411764705,0.058823529411764705
 straw,Stroh,yellow,gelb,"['yellow', 'yellowness']",48.0,10.0,96.0,18.0,0.5,0.5555555555555556,0.05555555555555558
-straw,Stroh,,gold,"['Au', 'amber', 'golden brown']",0.0,1.0,96.0,18.0,0.0,0.05555555555555555,0.05555555555555555
+straw,Stroh,gold,gold,"['gold', 'Au', 'amber', 'golden brown']",0.0,1.0,96.0,18.0,0.0,0.05555555555555555,0.05555555555555555
 corn,Maiskolben,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",0.0,1.0,83.0,18.0,0.0,0.05555555555555555,0.05555555555555555
 sugar,Zucker,brown,braun,"['brown', 'brownness', 'Aquilus']",0.0,1.0,50.0,19.0,0.0,0.05263157894736842,0.05263157894736842
 sugar,Würfelzucker,brown,braun,"['brown', 'brownness', 'Aquilus']",0.0,1.0,50.0,19.0,0.0,0.05263157894736842,0.05263157894736842
@@ -87,11 +87,11 @@ cow,Kuh,black,schwarz,"['black', 'color', 'coloring', 'colouring', 'complexion',
 teeth,Zahn,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",17.0,12.0,19.0,13.0,0.8947368421052632,0.9230769230769231,0.028340080971659964
 cheese,Käse,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",8.0,4.0,33.0,15.0,0.24242424242424243,0.26666666666666666,0.024242424242424232
 corn,Maiskolben,green,grün,"['green', 'viridity', 'greenness']",3.0,1.0,83.0,18.0,0.03614457831325301,0.05555555555555555,0.019410977242302542
+flame,Feuer,orange,orange,"['orangeness', 'orange']",8.0,3.0,25.0,9.0,0.32,0.3333333333333333,0.013333333333333308
+toilet,Toilette,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",24.0,6.0,24.0,6.0,1.0,1.0,0.0
 tire,Reifen,black,schwarz,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",44.0,5.0,44.0,5.0,1.0,1.0,0.0
 milk,Milch,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",37.0,12.0,37.0,12.0,1.0,1.0,0.0
 lettuce,Kopfsalat,green,grün,"['green', 'viridity', 'greenness']",63.0,8.0,63.0,8.0,1.0,1.0,0.0
-lemon,Zitrone,yellow,gelb,"['yellow', 'yellowness']",46.0,13.0,46.0,13.0,1.0,1.0,0.0
-jeans,Jeansjacke,blue,blau,"['blue', 'blueness']",22.0,6.0,22.0,6.0,1.0,1.0,0.0
 cotton,Watte,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",29.0,7.0,29.0,7.0,1.0,1.0,0.0
 bride,Braut,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",84.0,14.0,84.0,14.0,1.0,1.0,0.0
 cow,Kuh,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",19.0,2.0,46.0,5.0,0.41304347826086957,0.4,-0.013043478260869545
@@ -119,12 +119,12 @@ snow,Schnee,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",50.0,
 bear,Bär,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",11.0,2.0,54.0,14.0,0.2037037037037037,0.14285714285714285,-0.06084656084656084
 banana,Banane,yellow,gelb,"['yellow', 'yellowness']",48.0,16.0,55.0,20.0,0.8727272727272727,0.8,-0.07272727272727264
 banana,Banane,green,grün,"['green', 'viridity', 'greenness']",7.0,1.0,55.0,20.0,0.12727272727272726,0.05,-0.07727272727272726
+rose,Rose,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",16.0,1.0,71.0,7.0,0.22535211267605634,0.14285714285714285,-0.0824949698189135
 salmon,Kröte,colour_salmon,,,2.0,0.0,23.0,8.0,0.08695652173913043,0.0,-0.08695652173913043
 coconut,Kokos,brown,braun,"['brown', 'brownness', 'Aquilus']",20.0,3.0,80.0,19.0,0.25,0.15789473684210525,-0.09210526315789475
 cauliflower,Blumenkohl,green,grün,"['green', 'viridity', 'greenness']",9.0,1.0,55.0,14.0,0.16363636363636364,0.07142857142857142,-0.09220779220779221
 plate,Teller,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",10.0,3.0,23.0,9.0,0.43478260869565216,0.3333333333333333,-0.10144927536231885
 plate,Nummernschild,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",10.0,3.0,23.0,9.0,0.43478260869565216,0.3333333333333333,-0.10144927536231885
-ash,Asche,grey,grau,"['gray', 'grey', 'greyness', 'grayness']",14.0,8.0,14.0,9.0,1.0,0.8888888888888888,-0.11111111111111116
 watermelon,Wassermelone,green,grün,"['green', 'viridity', 'greenness']",18.0,6.0,36.0,16.0,0.5,0.375,-0.125
 cabbage,Brust,brown,,,15.0,0.0,120.0,7.0,0.125,0.0,-0.125
 plate,Nummernschild,different_colours,,,3.0,0.0,23.0,9.0,0.13043478260869565,0.0,-0.13043478260869565
@@ -132,13 +132,11 @@ pen,Stift,black,schwarz,"['black', 'color', 'coloring', 'colouring', 'complexion
 stone,Stein,grey,grau,"['gray', 'grey', 'greyness', 'grayness']",22.0,6.0,22.0,7.0,1.0,0.8571428571428571,-0.1428571428571429
 leaf,Blatt,green,grün,"['green', 'viridity', 'greenness']",31.0,6.0,31.0,7.0,1.0,0.8571428571428571,-0.1428571428571429
 blueberry,Heidelbeere,blue,blau,"['blue', 'blueness']",27.0,6.0,27.0,7.0,1.0,0.8571428571428571,-0.1428571428571429
-salmon,Lachs,pink,rosa,"['rose', 'rosebush', 'pink']",18.0,5.0,23.0,8.0,0.782608695652174,0.625,-0.15760869565217395
+salmon,Lachs,pink,rosa,"['rose', 'rosebush', 'Rosa', 'pink']",18.0,5.0,23.0,8.0,0.782608695652174,0.625,-0.15760869565217395
 leather,Leder,black,schwarz,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",14.0,1.0,39.0,5.0,0.358974358974359,0.2,-0.15897435897435896
-walnut,Walnuss,brown,braun,"['brown', 'brownness', 'Aquilus']",19.0,5.0,19.0,6.0,1.0,0.8333333333333334,-0.16666666666666663
-sun,Sonne,yellow,gelb,"['yellow', 'yellowness']",52.0,5.0,52.0,6.0,1.0,0.8333333333333334,-0.16666666666666663
 watermelon,Wassermelone,pink,,,6.0,0.0,36.0,16.0,0.16666666666666666,0.0,-0.16666666666666666
 brick,Ziegelstein,red,rot,"['red', 'redness']",14.0,8.0,28.0,24.0,0.5,0.3333333333333333,-0.16666666666666669
-pig,Schweinchen,pink,rosa,"['rose', 'rosebush', 'pink']",31.0,4.0,32.0,5.0,0.96875,0.8,-0.16874999999999996
+pig,Schweinchen,pink,rosa,"['rose', 'rosebush', 'Rosa', 'pink']",31.0,4.0,32.0,5.0,0.96875,0.8,-0.16874999999999996
 mouse,Maus,white,,,8.0,0.0,45.0,8.0,0.17777777777777778,0.0,-0.17777777777777778
 sugar,Würfelzucker,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",25.0,6.0,50.0,19.0,0.5,0.3157894736842105,-0.1842105263157895
 cream,Creme,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",6.0,5.0,12.0,16.0,0.5,0.3125,-0.1875
@@ -147,30 +145,30 @@ hair,Haar,red,rot,"['red', 'redness']",3.0,1.0,9.0,7.0,0.3333333333333333,0.1428
 crown,Horn,silver,,,5.0,0.0,26.0,8.0,0.19230769230769232,0.0,-0.19230769230769232
 paper,Papier,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",8.0,12.0,8.0,15.0,1.0,0.8,-0.19999999999999996
 tomato,Toilettenpapier,green,,,12.0,0.0,60.0,7.0,0.2,0.0,-0.2
-strawberry,Stroh,green,,,12.0,0.0,59.0,10.0,0.2033898305084746,0.0,-0.2033898305084746
+strawberry,Strohhalm,green,,,12.0,0.0,59.0,10.0,0.2033898305084746,0.0,-0.2033898305084746
 tea,Tee,black,schwarz,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",3.0,1.0,8.0,6.0,0.375,0.16666666666666666,-0.20833333333333334
 toad,Kröte,green,grün,"['green', 'viridity', 'greenness']",19.0,2.0,31.0,5.0,0.6129032258064516,0.4,-0.2129032258064516
 deer,Hirsch,white,weiß,"['whiteness', 'white', 'colorimetric whiteness']",5.0,1.0,12.0,5.0,0.4166666666666667,0.2,-0.21666666666666667
+jeans,Jeansjacke,blue,blau,"['blue', 'blueness']",22.0,6.0,44.0,22.0,0.5,0.2727272727272727,-0.2272727272727273
+rose,Rose,pink,,,17.0,0.0,71.0,7.0,0.23943661971830985,0.0,-0.23943661971830985
 bear,Bär,black,schwarz,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness']",21.0,2.0,54.0,14.0,0.3888888888888889,0.14285714285714285,-0.24603174603174605
-tongue,Zunge,pink,rosa,"['rose', 'rosebush', 'pink']",3.0,2.0,6.0,8.0,0.5,0.25,-0.25
+tongue,Zunge,pink,rosa,"['rose', 'rosebush', 'Rosa', 'pink']",3.0,2.0,6.0,8.0,0.5,0.25,-0.25
 fire,Feuer,red,rot,"['red', 'redness']",46.0,2.0,95.0,9.0,0.4842105263157895,0.2222222222222222,-0.26198830409356727
-fire,Feuer,orange,,,25.0,0.0,95.0,9.0,0.2631578947368421,0.0,-0.2631578947368421
+pumpkin,Kürbis,orange,orange,"['orangeness', 'orange']",68.0,5.0,69.0,7.0,0.9855072463768116,0.7142857142857143,-0.27122153209109734
 carrot,Tüte,green,,,19.0,0.0,65.0,9.0,0.2923076923076923,0.0,-0.2923076923076923
 raspberry,Himbeere,red,rot,"['red', 'redness']",36.0,4.0,41.0,7.0,0.8780487804878049,0.5714285714285714,-0.3066202090592335
-flame,Feuer,orange,,,8.0,0.0,25.0,9.0,0.32,0.0,-0.32
 pen,Stift,blue,blau,"['blue', 'blueness']",22.0,1.0,41.0,5.0,0.5365853658536586,0.2,-0.33658536585365856
 tea,Tee,different_colours,,,3.0,0.0,8.0,6.0,0.375,0.0,-0.375
 plant,Anlage,green,grün,"['green', 'viridity', 'greenness']",54.0,1.0,108.0,10.0,0.5,0.1,-0.4
 cheese,Fleisch,orange,,,14.0,0.0,33.0,15.0,0.42424242424242425,0.0,-0.42424242424242425
+basketball,Basketball,orange,orange,"['orangeness', 'orange']",28.0,4.0,28.0,7.0,1.0,0.5714285714285714,-0.4285714285714286
 straw,Strohhalm,yellow,gelb,"['yellow', 'yellowness']",48.0,1.0,96.0,18.0,0.5,0.05555555555555555,-0.4444444444444444
 newspaper,Presse,black,,,13.0,0.0,24.0,15.0,0.5416666666666666,0.0,-0.5416666666666666
 meat,Fleisch,red,rot,"['red', 'redness']",15.0,2.0,15.0,5.0,1.0,0.4,-0.6
 frog,Kröte,green,grün,"['green', 'viridity', 'greenness']",26.0,2.0,26.0,5.0,1.0,0.4,-0.6
-carrot,Tüte,orange,,,46.0,0.0,65.0,9.0,0.7076923076923077,0.0,-0.7076923076923077
-tomato,Toilettenpapier,red,,,46.0,0.0,60.0,7.0,0.7666666666666667,0.0,-0.7666666666666667
+tomato,Kürbis,red,,,46.0,0.0,60.0,7.0,0.7666666666666667,0.0,-0.7666666666666667
 crown,Seemann,gold,,,21.0,0.0,26.0,8.0,0.8076923076923077,0.0,-0.8076923076923077
 bull,Bulle,red,rot,"['red', 'redness']",5.0,1.0,5.0,8.0,1.0,0.125,-0.875
-pumpkin,Gummi,orange,,,68.0,0.0,69.0,7.0,0.9855072463768116,0.0,-0.9855072463768116
 vanilla,Vanille,white,,,11.0,0.0,11.0,14.0,1.0,0.0,-1.0
 ring,Reifen,gold,,,11.0,0.0,11.0,5.0,1.0,0.0,-1.0
 rat,Maus,white,,,5.0,0.0,5.0,8.0,1.0,0.0,-1.0
