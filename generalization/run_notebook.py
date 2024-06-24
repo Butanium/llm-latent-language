@@ -22,6 +22,8 @@ if __name__ == "__main__":
     parser.add_argument("--model-path", type=str, default=None)
     parser.add_argument("--trust-remote-code", default=False, action="store_true")
     parser.add_argument("--llama", default=False, action="store_true")
+    parser.add_argument("--paper-only", "-po", action="store_true")
+
     args, unknown = parser.parse_known_args()
     kwargs = dict(vars(args))
     kwargs.pop("llama")

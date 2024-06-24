@@ -157,6 +157,19 @@ def plot_k(
             ax.set_ylim(0, 1)
 
 
+def k_subplots(k) -> tuple[plt.Figure, list[plt.Axes]]:
+    """
+    Returns a figure and axes for plotting k examples.
+    """
+    n_cols = math.ceil(math.sqrt(k))
+    n_rows = math.ceil(k / n_cols)
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4 * n_rows))
+    axes = axes.flatten() if k > 1 else [axes]
+    for i in range(k, len(axes)):
+        axes[i].axis("off")
+    return fig, axes
+
+
 def yaml_to_dict(yaml_file):
     with open(yaml_file, "r") as file:
         return yaml.safe_load(file)
@@ -445,36 +458,3 @@ def get_tokenizer(model_or_tokenizer):
     ):
         return model_or_tokenizer.tokenizer
     return model_or_tokenizer
-
-
-def plot_several_examples(n_example, plot_func):
-    """
-    Creates a grid of subplots and applies a plotting function to each.
-
-    Parameters:
-    -----------
-    n_example : int
-        Number of examples to plot.
-    plot_func : callable
-        Function to plot each example. Should accept two parameters:
-        - i: int, the index of the current example
-        - ax: matplotlib.axes.Axes, the axes to plot on
-
-    Returns:
-    --------
-    fig : matplotlib.figure.Figure
-        The created figure containing all subplots.
-    """
-    n_cols = math.ceil(math.sqrt(n_example))
-    n_rows = math.ceil(n_example / n_cols)
-    fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4 * n_rows))
-    axes = axes.flatten() if n_example > 1 else [axes]
-
-    for i in range(n_example):
-        plot_func(i, axes[i])
-
-    for i in range(n_example, len(axes)):
-        axes[i].axis("off")
-
-    plt.tight_layout()
-    return fig
