@@ -22,7 +22,11 @@ from wrpy import WordReference
 import babelnet as bn
 from babelnet.sense import BabelLemmaType, BabelSense
 from babelnet import BabelSynset
-from utils import ulist, lfilter, str_or_list_to_list
+
+
+import sys
+sys.path.append('../')
+from utils import ulist, lfilter
 from babelnet.api import BabelAPIType, _api_type
 from pathlib import Path
 

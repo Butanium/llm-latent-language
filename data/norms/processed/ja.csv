@@ -1,9 +1,10 @@
 concept_en,concept_ja,feature_en_en,feature_ja,feature_ja_en,freq_en,freq_ja,total_en,total_other,frac_en,frac_ja,diff
 water,water,,透き通っている,[],0.0,16.0,16.0,16.0,0.0,1.0,1.0
 towel,towel,white,白,"['whiteness', 'white', 'colorimetric whiteness']",0.0,6.0,12.0,6.0,0.0,1.0,1.0
-comic,comic,,白と黒,['Shiro to Kuro'],0.0,6.0,7.0,6.0,0.0,1.0,1.0
+comic,comic,,白と黒,[],0.0,6.0,7.0,6.0,0.0,1.0,1.0
 fence,fence,grey,灰色,"['gray', 'grey', 'greyness', 'grayness']",2.0,16.0,22.0,16.0,0.09090909090909091,1.0,0.9090909090909091
 paper lantern,paper lantern,red,赤,"['communist', 'communism', 'red', 'redness']",2.0,8.0,12.0,8.0,0.16666666666666666,1.0,0.8333333333333334
+shark,shark,black,黒,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']",0.0,3.0,6.0,5.0,0.0,0.6,0.6
 butterfly,butterfly,,色が鮮やか,[],0.0,3.0,17.0,5.0,0.0,0.6,0.6
 key,key,silver,銀,"['silver', 'Ag', 'ash gray', 'silver gray', 'ash grey', 'silver grey']",5.0,8.0,12.0,8.0,0.4166666666666667,1.0,0.5833333333333333
 ghost,ghost,,透き通っている,[],0.0,11.0,12.0,19.0,0.0,0.5789473684210527,0.5789473684210527
@@ -12,6 +13,7 @@ guppy,guppy,,色が鮮やか,[],0.0,3.0,13.0,6.0,0.0,0.5,0.5
 pencil,pencil,black,黒,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']",0.0,6.0,20.0,13.0,0.0,0.46153846153846156,0.46153846153846156
 balloon,balloon,,色は様々,[],0.0,6.0,16.0,14.0,0.0,0.42857142857142855,0.42857142857142855
 balloon,balloon,,色彩が豊か,[],0.0,6.0,16.0,14.0,0.0,0.42857142857142855,0.42857142857142855
+shark,shark,,青い,[],0.0,2.0,6.0,5.0,0.0,0.4,0.4
 dracula,dracula,,青白い肌,[],0.0,6.0,14.0,15.0,0.0,0.4,0.4
 butterfly,butterfly,,きれいな色,[],0.0,2.0,17.0,5.0,0.0,0.4,0.4
 tea,tea,green,緑,"['green', 'viridity', 'greenness']",2.0,9.0,8.0,14.0,0.25,0.6428571428571429,0.3928571428571429
@@ -23,7 +25,7 @@ cockroach,cockroach,black,黒,"['black', 'color', 'coloring', 'colouring', 'comp
 dracula,dracula,,黒いマントをつけている,[],0.0,5.0,14.0,15.0,0.0,0.3333333333333333,0.3333333333333333
 pencil,pencil,,芯が黒い,[],0.0,4.0,20.0,13.0,0.0,0.3076923076923077,0.3076923076923077
 salmon,salmon,orange,オレンジ色,"['orangeness', 'orange']",0.0,5.0,23.0,17.0,0.0,0.29411764705882354,0.29411764705882354
-piano,piano,,白と黒,['Shiro to Kuro'],0.0,5.0,39.0,18.0,0.0,0.2777777777777778,0.2777777777777778
+piano,piano,,白と黒,[],0.0,5.0,39.0,18.0,0.0,0.2777777777777778,0.2777777777777778
 shrimp,shrimp,,ゆでると赤い,[],0.0,4.0,35.0,15.0,0.0,0.26666666666666666,0.26666666666666666
 pumpkin,pumpkin,yellow,黄色,"['yellow', 'yellowness']",0.0,9.0,69.0,35.0,0.0,0.2571428571428571,0.2571428571428571
 onion,onion,,皮が茶色,[],0.0,4.0,26.0,16.0,0.0,0.25,0.25
@@ -55,7 +57,7 @@ pumpkin,pumpkin,,中がオレンジ,[],0.0,2.0,69.0,35.0,0.0,0.05714285714285714
 plate,plate,white,白,"['whiteness', 'white', 'colorimetric whiteness']",10.0,9.0,13.0,11.0,0.7692307692307693,0.8181818181818182,0.04895104895104896
 turtle,turtle,green,緑,"['green', 'viridity', 'greenness']",74.0,7.0,76.0,7.0,0.9736842105263158,1.0,0.02631578947368418
 balloon,balloon,red,赤,"['communist', 'communism', 'red', 'redness']",2.0,2.0,16.0,14.0,0.125,0.14285714285714285,0.01785714285714285
-paper,paper,white,白,"['whiteness', 'white', 'colorimetric whiteness']",8.0,12.0,8.0,12.0,1.0,1.0,0.0
+spider,spider,black,黒,"['black', 'color', 'coloring', 'colouring', 'complexion', 'colour', 'lists of colors', 'blackness', 'inkiness', 'outlaw', 'crook', 'criminal', 'malefactor', 'felon']",15.0,5.0,15.0,5.0,1.0,1.0,0.0
 fridge,fridge,white,白,"['whiteness', 'white', 'colorimetric whiteness']",16.0,7.0,16.0,7.0,1.0,1.0,0.0
 airplane,airplane,white,白,"['whiteness', 'white', 'colorimetric whiteness']",5.0,8.0,5.0,8.0,1.0,1.0,0.0
 turtle,turtle,green_and_brown,,,2.0,0.0,76.0,7.0,0.02631578947368421,0.0,-0.02631578947368421
@@ -104,14 +106,14 @@ tea,tea,different_colours,,,3.0,0.0,8.0,14.0,0.375,0.0,-0.375
 balloon,balloon,different_colours,,,6.0,0.0,16.0,14.0,0.375,0.0,-0.375
 guppy,guppy,aqua,,,5.0,0.0,13.0,6.0,0.38461538461538464,0.0,-0.38461538461538464
 ghost,ghost,transparent,,,5.0,0.0,12.0,19.0,0.4166666666666667,0.0,-0.4166666666666667
-shrimp,shrimp,pink,ピンク,"['P!nk', 'Pink', 'pink']",20.0,2.0,35.0,15.0,0.5714285714285714,0.13333333333333333,-0.4380952380952381
+shrimp,shrimp,pink,ピンク,['pink'],20.0,2.0,35.0,15.0,0.5714285714285714,0.13333333333333333,-0.4380952380952381
 cockroach,cockroach,brown,茶色,"['brown', 'brownness', 'Aquilus']",12.0,3.0,20.0,19.0,0.6,0.15789473684210525,-0.4421052631578947
 guppy,guppy,colourful,,,6.0,0.0,13.0,6.0,0.46153846153846156,0.0,-0.46153846153846156
 ghost,ghost,white,白,"['whiteness', 'white', 'colorimetric whiteness']",7.0,2.0,12.0,19.0,0.5833333333333334,0.10526315789473684,-0.47807017543859653
 dracula,dracula,pale,,,7.0,0.0,14.0,15.0,0.5,0.0,-0.5
 balloon,balloon,colourful,,,8.0,0.0,16.0,14.0,0.5,0.0,-0.5
 key,key,gold,,,7.0,0.0,12.0,8.0,0.5833333333333334,0.0,-0.5833333333333334
-salmon,salmon,pink,ピンク,"['P!nk', 'Pink', 'pink']",18.0,2.0,23.0,17.0,0.782608695652174,0.11764705882352941,-0.6649616368286445
+salmon,salmon,pink,ピンク,['pink'],18.0,2.0,23.0,17.0,0.782608695652174,0.11764705882352941,-0.6649616368286445
 comic,comic,looks_colourful,,,5.0,0.0,7.0,6.0,0.7142857142857143,0.0,-0.7142857142857143
 water,water,clear,,,12.0,0.0,16.0,16.0,0.75,0.0,-0.75
 towel,towel,different_colours,,,9.0,0.0,12.0,6.0,0.75,0.0,-0.75
@@ -119,3 +121,4 @@ fence,fence,white,,,17.0,0.0,22.0,16.0,0.7727272727272727,0.0,-0.772727272727272
 pumpkin,pumpkin,orange,オレンジ色,"['orangeness', 'orange']",68.0,7.0,69.0,35.0,0.9855072463768116,0.2,-0.7855072463768116
 butterfly,butterfly,colourful,,,15.0,0.0,17.0,5.0,0.8823529411764706,0.0,-0.8823529411764706
 pencil,pencil,yellow,,,18.0,0.0,20.0,13.0,0.9,0.0,-0.9
+shark,shark,grey,,,6.0,0.0,6.0,5.0,1.0,0.0,-1.0
