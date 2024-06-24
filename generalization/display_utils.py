@@ -1,34 +1,22 @@
 import math
 import json
-import gzip
-import _pickle as pickle
-import logging
 import yaml
 import json
-from logging import Logger
-import re
-from datetime import datetime
 import os
-import pytz
 from matplotlib import pyplot as plt
 import matplotlib as mpl
 import seaborn as sns
 import numpy as np
 import pandas as pd
 import torch as th
-from transformers import StoppingCriteria
 from matplotlib import markers, font_manager
 from pathlib import Path
-from transformer_lens.loading_from_pretrained import OFFICIAL_MODEL_NAMES, MODEL_ALIASES
-from transformer_lens import HookedTransformerKeyValueCache as KeyValueCache
-
-from nnsight import LanguageModel
-from nnsight.models.UnifiedTransformer import UnifiedTransformer
 from contextlib import nullcontext
 from IPython.display import display
+from nnsight import LanguageModel
+from nnsight.models.UnifiedTransformer import UnifiedTransformer
 
-
-PATH = Path(os.path.dirname(os.path.realpath(__file__)))
+PATH = Path(os.path.dirname(os.path.realpath(__file__))).parent
 
 markers_list = [None] + list(markers.MarkerStyle.markers.keys())
 simsun_path = PATH / "data/SimSun.ttf"
@@ -157,6 +145,19 @@ def plot_k(
             ax.set_ylim(0, 1)
 
 
+def k_subplots(k) -> tuple[plt.Figure, list[plt.Axes]]:
+    """
+    Returns a figure and axes for plotting k examples.
+    """
+    n_cols = math.ceil(math.sqrt(k))
+    n_rows = math.ceil(k / n_cols)
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4 * n_rows))
+    axes = axes.flatten() if k > 1 else [axes]
+    for i in range(k, len(axes)):
+        axes[i].axis("off")
+    return fig, axes
+
+
 def yaml_to_dict(yaml_file):
     with open(yaml_file, "r") as file:
         return yaml.safe_load(file)
@@ -191,121 +192,6 @@ def printc(x, c="r"):
     }
     reset_color = "\033[0m"
     print(f"{m2.get(m1.get(c, c), c)}{x}{reset_color}")
-
-
-def extract_dictionary(x):
-    if isinstance(x, str):
-        regex = r"{.*?}"
-        match = re.search(regex, x, re.MULTILINE | re.DOTALL)
-        if match:
-            try:
-                json_str = match.group()
-                json_str = json_str.replace("'", '"')
-                dict_ = json.loads(json_str)
-                return dict_
-            except Exception as e:
-                print(f"unable to extract dictionary - {e}")
-                return None
-
-        else:
-            return None
-    else:
-        return None
-
-
-class StopOnTokens(StoppingCriteria):
-    def __init__(self, stop_tokens):
-        """
-        Args:
-            stop_tokens (int or List[int]): The token(s) to stop generation at.
-        """
-        if isinstance(stop_tokens, int):
-            stop_tokens = [stop_tokens]
-        self.stop_tokens = stop_tokens
-
-    def __call__(self, input_ids, _scores, **_kwargs):
-        if input_ids[0][-1] in self.stop_tokens:
-            return True  # Stop generation
-        return False  # Continue generation
-
-    def __len__(self):
-        return 1
-
-    def __iter__(self):
-        yield self
-
-    def from_string(string, tokenizer):
-        """
-        Initialize the stop tokens as all the tokens that start or end with the given string.
-        """
-        stop_tokens = [
-            i
-            for i in range(tokenizer.vocab_size)
-            if tokenizer.decode(i).startswith(string)
-            or tokenizer.decode(i).endswith(string)
-            or string in tokenizer.decode(i)
-        ]
-        return StopOnTokens(stop_tokens)
-
-
-class StopOnSequence(StoppingCriteria):
-    def __init__(self, stop_sequence):
-        """
-        Args:
-            stop_sequence (List[int]): The sequence to stop generation at.
-        """
-        self.stop_sequence = stop_sequence
-        self.state = 0
-
-    def __call__(self, input_ids, _scores, **_kwargs):
-        if input_ids[0][-1] == self.stop_sequence[self.state]:
-            self.state += 1
-            if self.state == len(self.stop_sequence):
-                return True
-        else:
-            self.state = 0
-        return False
-
-    def __len__(self):
-        return 1
-
-    def __iter__(self):
-        yield self
-
-    def from_string(string, tokenizer):
-        """
-        Initialize the stop tokens as all the tokens that start or end with the given string.
-        """
-        stop_sequence = [tokenizer(string, add_special_tokens=False)]
-        return StopOnSequence(stop_sequence)
-
-
-def add_model_to_transformer_lens(official_name, alias=None):
-    """
-    Hacky way to add a model to transformer_lens even if it's not in the official list.
-    """
-    if alias is None:
-        alias = official_name
-    if official_name not in OFFICIAL_MODEL_NAMES:
-        OFFICIAL_MODEL_NAMES.append(official_name)
-        MODEL_ALIASES[official_name] = [alias]
-    else:
-        print(f"Model {official_name} already in the official transformer lens models.")
-
-
-def expend_tl_cache(cache: KeyValueCache, batch_size: int):
-    """
-    Expend the cache to the given batch size.
-    """
-    for entry in cache:
-        entry.past_keys = entry.past_keys.expand(batch_size, *entry.past_keys.shape[1:])
-        entry.past_values = entry.past_values.expand(
-            batch_size, *entry.past_values.shape[1:]
-        )
-    cache.previous_attention_mask = cache.previous_attention_mask.expand(
-        batch_size, *cache.previous_attention_mask.shape[1:]
-    )
-    return cache
 
 
 def plot_topk_tokens(
@@ -410,20 +296,6 @@ def plot_topk_tokens(
         plt.show()
 
 
-def ulist(lst):
-    """
-    Returns a list with unique elements from the input list.
-    """
-    return list(dict.fromkeys(lst))
-
-
-def lfilter(lst, f):
-    """
-    Returns a list with elements from the input list that satisfy the condition.
-    """
-    return list(filter(f, lst))
-
-
 def display_df(df):
     with pd.option_context(
         "display.max_colwidth",
@@ -435,46 +307,3 @@ def display_df(df):
     ):
         display(df)
 
-
-def get_tokenizer(model_or_tokenizer):
-    """
-    Returns the tokenizer of the given model or the given tokenizer.
-    """
-    if isinstance(model_or_tokenizer, LanguageModel) or isinstance(
-        model_or_tokenizer, UnifiedTransformer
-    ):
-        return model_or_tokenizer.tokenizer
-    return model_or_tokenizer
-
-
-def plot_several_examples(n_example, plot_func):
-    """
-    Creates a grid of subplots and applies a plotting function to each.
-
-    Parameters:
-    -----------
-    n_example : int
-        Number of examples to plot.
-    plot_func : callable
-        Function to plot each example. Should accept two parameters:
-        - i: int, the index of the current example
-        - ax: matplotlib.axes.Axes, the axes to plot on
-
-    Returns:
-    --------
-    fig : matplotlib.figure.Figure
-        The created figure containing all subplots.
-    """
-    n_cols = math.ceil(math.sqrt(n_example))
-    n_rows = math.ceil(n_example / n_cols)
-    fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4 * n_rows))
-    axes = axes.flatten() if n_example > 1 else [axes]
-
-    for i in range(n_example):
-        plot_func(i, axes[i])
-
-    for i in range(n_example, len(axes)):
-        axes[i].axis("off")
-
-    plt.tight_layout()
-    return fig

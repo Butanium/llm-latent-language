@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import Optional
 from exp_tools import (
     Prompt,
-    load_lang,
     process_tokens,
     DATA_PATH,
     process_tokens_with_tokenization,
@@ -30,6 +29,16 @@ sys.path.append('../')
 from utils import ulist, lfilter
 from babelnet.api import BabelAPIType, _api_type
 from pathlib import Path
+
+
+def load_lang(lang):
+    path = DATA_PATH / "langs" / lang / "clean.csv"
+    return pd.read_csv(path)
+
+
+def load_cloze(lang):
+    path = DATA_PATH / "langs" / lang / "cloze_dataset.csv"
+    return pd.read_csv(path)
 
 
 def BabelCache(**kwargs):
@@ -257,14 +266,14 @@ def filter_senses(senses):
 
 
 def bn_translate(
-    word, source_lang, target_langs, noun_only=True, key_concept_only=True
+    word, source_lang, target_langs, noun_only=True, key_concept_only=True, keep_original_word=False
 ):
     def sense_filter(sense: BabelSense):
         lemma = sense.lemma.lemma
         if (
             sense._lemma.lemma_type
             != BabelLemmaType.HIGH_QUALITY  # Removes low-quality translations
-            or lemma.lower() == word.lower()  # Removes the original word
+            or (not keep_original_word and lemma.lower() == word.lower())  # Removes the original word
             or emoji_count(lemma) > 0  # Removes emojis
             or any(char.isdigit() for char in lemma)  # Remove numbers
         ):
@@ -282,18 +291,20 @@ def bn_translate(
         kwargs["poses"] = [bn.POS.NOUN]
     senses = get_bn_senses(word, **kwargs)
     senses = [sense for sense in senses if sense_filter(sense)]
+    qualified_senses = filter_senses([s for s in senses if _sense_filter(s)])
     max_degree = max([sense.synset.synset_degree for sense in senses], default=0)
     best_senses = [
-        sense for sense in senses if sense.synset.synset_degree == max_degree
+        sense for sense in qualified_senses if sense.synset.synset_degree == max_degree
     ]
-    filtered_senses = [
-        sense for sense in senses if _synset_filter(sense.synset, key_concept_only)
-    ]
-    if filtered_senses == [] and key_concept_only:
+    if key_concept_only:
+        qualified_senses = [
+            sense for sense in senses if _synset_filter(sense.synset, key_concept_only)
+        ]
+    if qualified_senses == [] and key_concept_only:
         warn(f"Didn't find any key concept for {word}, adding the best non-key concept")
-    filtered_senses += best_senses
+    qualified_senses += best_senses
     translations = {lang: [] for lang in target_langs}
-    for sense in filtered_senses:
+    for sense in qualified_senses:
         translations[lang_to_id[sense.language]].append(sense)
     for lang in target_langs:
         # Sorting like this puts the most common translations first :
@@ -324,18 +335,62 @@ def get_bn_dataset(
         else:
             df = df.head(num_words)
 
-    def map_entry(entry):
-        return ast.literal_eval(entry)
-
     out_df = pd.DataFrame()
     for lang in target_langs:
-        out_df[lang] = df[lang].map(map_entry)
-    out_df[source_lang] = df[source_lang].map(map_entry)
+        out_df[lang] = df[lang].map(ast.literal_eval)
+    out_df[source_lang] = df[source_lang].map(ast.literal_eval)
     assert (
         out_df.map(lambda x: x != []).all(axis=1)
     ).all(), "Some translations are empty"
     out_df["word_original"] = df["word_original"]
     return out_df
+
+
+def get_cloze_dataset(
+    langs: str | list[str],
+    num_words: Optional[int] = None,
+    do_sample=True,
+    drop_no_defs=False,
+):
+    langs = str_or_list_to_list(langs)
+    dfs = {}
+    for lang in langs:
+        df = load_cloze(lang)
+        to_eval = [
+            "definitions_wo_ref",
+            "senses",
+            "original_definitions",
+            "clozes",
+            "clozes_with_start_of_word",
+        ]
+        for col in to_eval:
+            df[col] = df[col].map(eval)
+        if drop_no_defs:
+            df = df[df["definitions_wo_ref"].map(lambda x: x != [])]
+        if num_words is not None:
+            if do_sample:
+                df = df.sample(num_words)
+            else:
+                df = df.head(num_words)
+        dfs[lang] = df
+    # Join on synset
+    merged_df: pd.DataFrame = dfs[langs[0]]
+    original_cols = merged_df.columns
+    for lang in langs[1:]:
+        merged_df = merged_df.merge(
+            dfs[lang],
+            on=["synset", "word_original"],
+            how="inner",
+            suffixes=("", f"_{lang}"),
+        )
+    # add _lang suffix to columns
+    merged_df = merged_df.rename(
+        columns={
+            col: f"{col}_{langs[0]}" if col not in ["word_original", "synset"] else col
+            for col in original_cols
+        }
+    )
+    return merged_df
 
 
 def filter_translations(
@@ -381,8 +436,25 @@ lang2name = {
 }
 
 
-def prompts_from_df(input_lang: str, target_lang: str, df: pd.DataFrame, n: int = 5):
+def prompts_from_df(
+    input_lang: str,
+    target_lang: str,
+    df: pd.DataFrame,
+    n: int = 5,
+    input_lang_name=None,
+    target_lang_name=None,
+):
     prompts = []
+    pref_input = (
+        input_lang_name if input_lang_name is not None else lang2name[input_lang]
+    )
+    pref_target = (
+        target_lang_name if target_lang_name is not None else lang2name[target_lang]
+    )
+    if pref_input:
+        pref_input += ": "
+    if pref_target:
+        pref_target += ": "
     for idx, row in df.iterrows():
         idxs = df.index.tolist()
         idxs.remove(idx)
@@ -396,11 +468,11 @@ def prompts_from_df(input_lang: str, target_lang: str, df: pd.DataFrame, n: int 
                 in_word = in_word[0]
             if isinstance(target_word, list):
                 target_word = target_word[0]
-            prompt += f'{lang2name[input_lang]}: "{in_word}" - {lang2name[target_lang]}: "{target_word}"\n'
+            prompt += f'{pref_input}"{in_word}" - {pref_target}"{target_word}"\n'
         in_word = row[input_lang]
         if isinstance(in_word, list):
             in_word = in_word[0]
-        prompt += f'{lang2name[input_lang]}: "{in_word}" - {lang2name[target_lang]}: "'
+        prompt += f'{pref_input}"{in_word}" - {pref_target}"'
         prompts.append(prompt)
     return prompts
 
@@ -414,6 +486,8 @@ def translation_prompts(
     n=5,
     only_best=False,
     augment_tokens=True,
+    input_lang_name=None,
+    target_lang_name=None,
 ) -> list[Prompt]:
     """
     Get a translation prompt from input_lang to target_lang for each row in the dataframe.
@@ -439,7 +513,14 @@ def translation_prompts(
         len(df) > n
     ), f"Not enough translations from {input_lang} to {target_lang} for n={n}"
     prompts = []
-    prompts_str = prompts_from_df(input_lang, target_lang, df, n=n)
+    prompts_str = prompts_from_df(
+        input_lang,
+        target_lang,
+        df,
+        n=n,
+        input_lang_name=input_lang_name,
+        target_lang_name=target_lang_name,
+    )
     for prompt, (_, row) in zip(prompts_str, df.iterrows()):
         target_words = row[target_lang]
         if only_best and isinstance(target_words, list):
@@ -474,3 +555,16 @@ def translation_prompts(
                 )
             )
     return prompts
+
+
+def cloze_prompts(df, tokenizer, lang, latent_langs, **kwargs):
+    return translation_prompts(
+        df,
+        tokenizer,
+        f"definitions_wo_ref_{lang}",
+        f"senses_{lang}",
+        [f"senses_{l}" for l in latent_langs],
+        input_lang_name="",
+        target_lang_name="",
+        **kwargs,
+    )

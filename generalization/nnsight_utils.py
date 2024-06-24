@@ -3,6 +3,7 @@ from nnsight.models.LanguageModel import LanguageModelProxy, LanguageModel
 from nnsight.envoy import Envoy
 import torch as th
 from typing import Union, Callable
+from contextlib import nullcontext
 
 NNLanguageModel = Union[UnifiedTransformer, LanguageModel]
 GetModuleOutput = Callable[[NNLanguageModel, int], LanguageModelProxy]
@@ -110,6 +111,25 @@ def get_logits(nn_model: NNLanguageModel) -> LanguageModelProxy:
         return nn_model.lm_head.output
 
 
+def project_on_vocab(
+    nn_model: NNLanguageModel, h: LanguageModelProxy
+) -> LanguageModelProxy:
+    """
+    Project the hidden states on the vocabulary, after applying the model's last layer norm
+    Args:
+        nn_model: The NNSight model
+        h: The hidden states to project
+    Returns:
+        The Proxy for the hidden states projected on the vocabulary
+    """
+    if isinstance(nn_model, UnifiedTransformer):
+        ln_out = nn_model.ln_final(h)
+        return nn_model.unembed(ln_out)
+    else:
+        ln_out = nn_model.model.norm(h)
+        return nn_model.lm_head(ln_out)
+
+
 def get_next_token_probs(nn_model: NNLanguageModel) -> LanguageModelProxy:
     """
     Get the probabilities of the model
@@ -128,7 +148,8 @@ def collect_activations(
     layers=None,
     get_activations: GetModuleOutput = get_layer_output,
     remote=False,
-    idx = None
+    idx=None,
+    open_context=True,
 ):
     """
     Collect the hidden states of the last token of each prompt at each layer
@@ -140,29 +161,42 @@ def collect_activations(
         get_activations: The function to get the activations, default to layer output
         remote: Whether to run the model on the remote device
         idx: The index of the token to collect activations for
+        open_context: Whether to open a trace context to collect activations. Set to false if you want to
+            use this function in a context that already has a trace context open
+
+    Returns:
+        The hidden states of the last token of each prompt at each layer, moved to cpu. If open_context is False, returns a list of
+        Proxies.
     """
     tok_prompts = nn_model.tokenizer(prompts, return_tensors="pt", padding=True)
     # Todo?: This is a hacky way to get the last token index but it works for both left and right padding
-    last_token_index = (
-        tok_prompts.attention_mask.flip(1).cumsum(1).bool().int().sum(1)
-    )
+    last_token_index = tok_prompts.attention_mask.flip(1).cumsum(1).bool().int().sum(1)
     if idx is None:
         idx = last_token_index.sub(1)  # Default to the last token
     elif idx < 0:
         idx = last_token_index + idx
     else:
-        raise ValueError("positive index is currently not supported due to left padding")
+        raise ValueError(
+            "positive index is currently not supported due to left padding"
+        )
     if layers is None:
         layers = range(get_num_layers(nn_model))
+
+    def wrap(h):
+        if open_context:
+            return h.cpu().save()
+        return h
+
     # Collect the hidden states of the last token of each prompt at each layer
-    with nn_model.trace(prompts, remote=remote):
+    context = nn_model.trace(prompts, remote=remote) if open_context else nullcontext()
+    with context:
         hiddens = [
-            get_activations(nn_model, layer)[
-                th.arange(len(tok_prompts.input_ids)),
-                idx,
-            ]
-            .cpu()
-            .save()
+            wrap(
+                get_activations(nn_model, layer)[
+                    th.arange(len(tok_prompts.input_ids)),
+                    idx,
+                ]
+            )
             for layer in layers
         ]
     return hiddens

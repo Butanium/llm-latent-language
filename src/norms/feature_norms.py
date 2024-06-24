@@ -29,7 +29,7 @@ def prepare_list_of_clayman():
         
         df = pd.read_csv(path)
         df = df[df['BR_Label'].isin(feats)]
-        en_words = generate_bn_dataset(file_info[lang]['feature_lang'], 'en', df['Feature'].to_list(), prune_empty=False)['en'].values
+        en_words = generate_bn_dataset(file_info[lang]['feature_lang'], 'en', df['Feature'].to_list(), prune_empty=False, keep_original_word=True)['en'].values
         print(en_words)
         df['en_feature'] = en_words
         

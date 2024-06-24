@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import json
 import gzip
 import _pickle as pickle
@@ -19,11 +20,15 @@ import torch as th
 from transformers import StoppingCriteria
 from matplotlib import markers, font_manager
 from pathlib import Path
+=======
+from transformers import StoppingCriteria
+>>>>>>> 2915af4bf062d6d1c3622a9d3c2187dcde99d31e
 from transformer_lens.loading_from_pretrained import OFFICIAL_MODEL_NAMES, MODEL_ALIASES
 from transformer_lens import HookedTransformerKeyValueCache as KeyValueCache
 
 from nnsight import LanguageModel
 from nnsight.models.UnifiedTransformer import UnifiedTransformer
+<<<<<<< HEAD
 from contextlib import nullcontext
 from IPython.display import display
 
@@ -306,6 +311,9 @@ def extract_dictionary(x):
     else:
         return None
 
+=======
+from display_utils import *  # todo: remove this legacy import
+>>>>>>> 2915af4bf062d6d1c3622a9d3c2187dcde99d31e
 
 class StopOnTokens(StoppingCriteria):
     def __init__(self, stop_tokens):
@@ -402,6 +410,7 @@ def expend_tl_cache(cache: KeyValueCache, batch_size: int):
     return cache
 
 
+<<<<<<< HEAD
 def plot_topk_tokens(
     next_token_probs,
     tokenizer,
@@ -504,12 +513,18 @@ def plot_topk_tokens(
         plt.show()
 
 
+=======
+>>>>>>> 2915af4bf062d6d1c3622a9d3c2187dcde99d31e
 def ulist(lst):
     """
     Returns a list with unique elements from the input list.
     """
     return list(dict.fromkeys(lst))
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2915af4bf062d6d1c3622a9d3c2187dcde99d31e
 def lfilter(lst, f):
     """
     Returns a list with elements from the input list that satisfy the condition.
@@ -517,6 +532,7 @@ def lfilter(lst, f):
     return list(filter(f, lst))
 
 
+<<<<<<< HEAD
 def display_df(df):
     with pd.option_context(
         "display.max_colwidth",
@@ -530,8 +546,27 @@ def display_df(df):
 
 
 def get_tokenizer(model_or_tokenizer):
+=======
+def get_tokenizer(model_or_tokenizer):
+    """
+    Returns the tokenizer of the given model or the given tokenizer.
+    """
+>>>>>>> 2915af4bf062d6d1c3622a9d3c2187dcde99d31e
     if isinstance(model_or_tokenizer, LanguageModel) or isinstance(
         model_or_tokenizer, UnifiedTransformer
     ):
         return model_or_tokenizer.tokenizer
+<<<<<<< HEAD
     return model_or_tokenizer
+=======
+    return model_or_tokenizer
+
+
+def str_or_list_to_list(s):
+    """
+    Returns a list of the given string or list.
+    """
+    if isinstance(s, str):
+        return [s]
+    return s
+>>>>>>> 2915af4bf062d6d1c3622a9d3c2187dcde99d31e
