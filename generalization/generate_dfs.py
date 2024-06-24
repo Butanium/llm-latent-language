@@ -95,7 +95,6 @@ def generate_synset_dataset(lang, source_df):
         "word_original": [],
         "synset": [],
         "senses": [],
-        "clozes": [],
         "definitions": [],
     }
     for id, wo in zip(synset_ids, word_original):
@@ -113,6 +112,7 @@ def generate_synset_dataset(lang, source_df):
     df = df_.drop_duplicates(subset=["synset"])
     if len(df_) != len(df):
         print(f"Found {len(df_) - len(df)} words associated with the same synset")
+    return df
 
 
 def generate_bn_cloze_dataset(lang, placeholder="___"):
@@ -311,7 +311,7 @@ def main_cloze_dataset(args):
         _ = list(executor.map(process_item, args.langs))
 
 
-def main_synset_dataset():
+def main_synset_dataset_base():
     build_synset_dataset(
         pd.read_csv(DATA_PATH / "basic_english_picturable_words.csv")["word"], "en"
     ).to_csv(DATA_PATH / "synset_dataset.csv", index=False)
