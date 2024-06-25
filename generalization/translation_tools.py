@@ -2,10 +2,7 @@ from __future__ import annotations
 
 from typing import Optional
 from exp_tools import (
-    Prompt,
-    process_tokens,
     DATA_PATH,
-    process_tokens_with_tokenization,
 )
 import pandas as pd
 from warnings import warn
@@ -24,9 +21,7 @@ from babelnet.sense import BabelLemmaType, BabelSense
 from babelnet import BabelSynset
 
 
-import sys
-sys.path.append('../')
-from utils import ulist, lfilter
+from utils import ulist, lfilter, str_or_list_to_list
 from babelnet.api import BabelAPIType, _api_type
 from pathlib import Path
 
@@ -416,155 +411,3 @@ def filter_translations(
     print(f"Filtered to {len(translation_df)} translations")
     return translation_df
 
-
-lang2name = {
-    "fr": "Français",
-    "de": "Deutsch",
-    "ru": "Русский",
-    "en": "English",
-    "zh": "中文",
-    "es": "Español",
-    "ko": "한국어",
-    "ja": "日本語",
-    "it": "Italiano",
-    "nl": "Nederlands",
-    "et": "Eesti",
-    "fi": "Suomi",
-    "hi": "हिन्दी",
-    "A": "A",
-    "B": "B",
-}
-
-
-def prompts_from_df(
-    input_lang: str,
-    target_lang: str,
-    df: pd.DataFrame,
-    n: int = 5,
-    input_lang_name=None,
-    target_lang_name=None,
-):
-    prompts = []
-    pref_input = (
-        input_lang_name if input_lang_name is not None else lang2name[input_lang]
-    )
-    pref_target = (
-        target_lang_name if target_lang_name is not None else lang2name[target_lang]
-    )
-    if pref_input:
-        pref_input += ": "
-    if pref_target:
-        pref_target += ": "
-    for idx, row in df.iterrows():
-        idxs = df.index.tolist()
-        idxs.remove(idx)
-        fs_idxs = sample(idxs, n)
-        prompt = ""
-        for fs_idx in fs_idxs:
-            fs_row = df.loc[fs_idx]
-            in_word = fs_row[input_lang]
-            target_word = fs_row[target_lang]
-            if isinstance(in_word, list):
-                in_word = in_word[0]
-            if isinstance(target_word, list):
-                target_word = target_word[0]
-            prompt += f'{pref_input}"{in_word}" - {pref_target}"{target_word}"\n'
-        in_word = row[input_lang]
-        if isinstance(in_word, list):
-            in_word = in_word[0]
-        prompt += f'{pref_input}"{in_word}" - {pref_target}"'
-        prompts.append(prompt)
-    return prompts
-
-
-def translation_prompts(
-    df,
-    tokenizer,
-    input_lang: str,
-    target_lang: str,
-    latent_langs: str | list[str] | None = None,
-    n=5,
-    only_best=False,
-    augment_tokens=True,
-    input_lang_name=None,
-    target_lang_name=None,
-) -> list[Prompt]:
-    """
-    Get a translation prompt from input_lang to target_lang for each row in the dataframe.
-
-    Args:
-        df: DataFrame containing translations
-        tokenizer: Huggingface tokenizer
-        input_lang: Language to translate from
-        target_lang: Language to translate to
-        n: Number of few-shot examples for each translation
-        only_best: If True, only use the best translation for each row
-        augment_tokens: If True, take the subwords, _word for each word
-
-    Returns:
-        List of Prompt objects
-    """
-    tok_vocab = tokenizer.get_vocab()
-    if isinstance(latent_langs, str):
-        latent_langs = [latent_langs]
-    if latent_langs is None:
-        latent_langs = []
-    assert (
-        len(df) > n
-    ), f"Not enough translations from {input_lang} to {target_lang} for n={n}"
-    prompts = []
-    prompts_str = prompts_from_df(
-        input_lang,
-        target_lang,
-        df,
-        n=n,
-        input_lang_name=input_lang_name,
-        target_lang_name=target_lang_name,
-    )
-    for prompt, (_, row) in zip(prompts_str, df.iterrows()):
-        target_words = row[target_lang]
-        if only_best and isinstance(target_words, list):
-            target_words = target_words[0]
-        if augment_tokens:
-            target_tokens = process_tokens(target_words, tok_vocab)
-        else:
-            target_tokens = process_tokens_with_tokenization(target_words, tokenizer)
-        latent_tokens = {}
-        latent_words = {}
-        for lang in latent_langs:
-            l_words = row[lang]
-            if only_best and isinstance(l_words, list):
-                l_words = l_words[0]
-            latent_words[lang] = l_words
-            if augment_tokens:
-                latent_tokens[lang] = process_tokens(l_words, tok_vocab)
-            else:
-                latent_tokens[lang] = process_tokens_with_tokenization(
-                    l_words, tokenizer
-                )
-        if len(target_tokens) and all(
-            len(latent_tokens_) for latent_tokens_ in latent_tokens.values()
-        ):
-            prompts.append(
-                Prompt(
-                    prompt,
-                    target_tokens,
-                    latent_tokens,
-                    target_words,
-                    latent_words,
-                )
-            )
-    return prompts
-
-
-def cloze_prompts(df, tokenizer, lang, latent_langs, **kwargs):
-    return translation_prompts(
-        df,
-        tokenizer,
-        f"definitions_wo_ref_{lang}",
-        f"senses_{lang}",
-        [f"senses_{l}" for l in latent_langs],
-        input_lang_name="",
-        target_lang_name="",
-        **kwargs,
-    )

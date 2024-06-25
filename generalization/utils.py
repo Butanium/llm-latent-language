@@ -6,18 +6,6 @@ from nnsight import LanguageModel
 from nnsight.models.UnifiedTransformer import UnifiedTransformer
 from display_utils import *  # todo: remove this legacy import
 
-
-def save_yaml(content, path):
-    with open(path, 'w') as f:
-        yaml.dump(content, f, default_flow_style=False)
-
-
-def load_yaml(path):
-    with open(path, 'r') as f:
-        content = yaml.safe_load(f)
-    return content
-
-
 class StopOnTokens(StoppingCriteria):
     def __init__(self, stop_tokens):
         """
