@@ -5,7 +5,10 @@ from dataclasses import dataclass
 from utils import get_tokenizer, ulist
 import torch as th
 import re
+import sys
 
+sys.path.append("../src/")
+from association_prompt import LoadAssociations
 
 SPACE_TOKENS = ["▁", "Ġ", " "]
 
@@ -118,12 +121,19 @@ class Prompt:
     latent_strings: dict[str, str | list[str]]
 
     @classmethod
-    def from_strings(cls, prompt, target_strings, latent_strings, tokenizer):
+    def from_strings(
+        cls, prompt, target_strings, latent_strings, tokenizer, augment_token=False
+    ):
+        tok_vocab = tokenizer.get_vocab()
+        process_toks = (
+            (lambda s: process_tokens(s, tok_vocab))
+            if augment_token
+            else (lambda s: process_tokens_with_tokenization(s, tokenizer))
+        )
         tokenizer = get_tokenizer(tokenizer)
-        target_tokens = process_tokens_with_tokenization(target_strings, tokenizer)
+        target_tokens = process_toks(target_strings)
         latent_tokens = {
-            lang: process_tokens_with_tokenization(words, tokenizer)
-            for lang, words in latent_strings.items()
+            lang: process_toks(words) for lang, words in latent_strings.items()
         }
         return cls(
             target_tokens=target_tokens,
@@ -322,3 +332,21 @@ def cloze_prompts(df, tokenizer, lang, latent_langs=None, **kwargs):
         target_lang_name="",
         **kwargs,
     )
+
+
+def color_prompts(tokenizer, lang, n=4):
+    associations = LoadAssociations(lang)
+    prompts = associations.generate_all_prompts(n)
+    en_colors = associations.en_colors
+    lang_colors = associations.other_colors
+    color_prompts = []
+    for prompt, target_string in prompts:
+        latent_strings = {f"{color}_en": color for color in en_colors}
+        lang_latent_strings = {f"{en_color}_{lang}": color for en_color, color in zip(en_colors, lang_colors)}
+        latent_strings.update(lang_latent_strings)
+        color_prompts.append(
+            Prompt.from_strings(
+                prompt, target_string, latent_strings, tokenizer, augment_token=True
+            )
+        )
+    return color_prompts
