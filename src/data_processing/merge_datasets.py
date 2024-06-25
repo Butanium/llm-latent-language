@@ -47,7 +47,8 @@ class MergeProtocol:
     def _return_en_concept(self, en_features, other_feats):
         feats = [None]
         for f in en_features: 
-            if f in other_feats:
+            temp_f = f"'{f}'"
+            if temp_f in other_feats:
                 feats.append(f)
         if len(feats) > 1:
             feats = feats[1:]
