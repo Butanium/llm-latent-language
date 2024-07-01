@@ -36,7 +36,6 @@ if __name__ == "__main__":
     args, unknown = parser.parse_known_args()
     kwargs = dict(vars(args))
     notebook = kwargs.pop("notebook")
-    print(f"Running {notebook} with {kwargs}")
     save_path = root / "results" / notebook
     save_path.mkdir(exist_ok=True, parents=True)
     source_notebook_path = notebook_root / f"{notebook}.ipynb"
@@ -47,6 +46,9 @@ if __name__ == "__main__":
     kwargs["exp_id"] = exp_id
     print(f"Saving to {target_notebook_path}")
     kwargs["extra_args"] = unknown
+    print(f"Running {notebook} with {kwargs}")
+
+
     try:
         pm.execute_notebook(
             source_notebook_path,
@@ -58,7 +60,7 @@ if __name__ == "__main__":
         if isinstance(e, pm.PapermillExecutionError):
             print("Error in notebook")
         delete = input(f"Delete notebook {target_notebook_path}? (y/n)")
-        if delete == "y":
+        if delete.lower() == "y":
             target_notebook_path.unlink()
         else:
             print(f"Notebook saved")

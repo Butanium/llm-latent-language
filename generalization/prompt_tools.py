@@ -205,6 +205,7 @@ def prompts_from_df(
     n: int = 5,
     input_lang_name=None,
     target_lang_name=None,
+    cut_at_obj=False,
 ):
     prompts = []
     pref_input = (
@@ -234,7 +235,9 @@ def prompts_from_df(
         in_word = row[input_lang]
         if isinstance(in_word, list):
             in_word = in_word[0]
-        prompt += f'{pref_input}"{in_word}" - {pref_target}"'
+        prompt += f'{pref_input}"{in_word}'
+        if not cut_at_obj:
+            prompt += '" - {pref_target}"'
         prompts.append(prompt)
     return prompts
 
@@ -250,6 +253,7 @@ def translation_prompts(
     augment_tokens=True,
     input_lang_name=None,
     target_lang_name=None,
+    cut_at_obj=False,
 ) -> list[Prompt]:
     """
     Get a translation prompt from input_lang to target_lang for each row in the dataframe.
@@ -282,6 +286,7 @@ def translation_prompts(
         n=n,
         input_lang_name=input_lang_name,
         target_lang_name=target_lang_name,
+        cut_at_obj=cut_at_obj,
     )
     for prompt, (_, row) in zip(prompts_str, df.iterrows()):
         target_words = row[target_lang]
@@ -342,7 +347,10 @@ def color_prompts(tokenizer, lang, n=4):
     color_prompts = []
     for prompt, target_string in prompts:
         latent_strings = {f"{color}_en": color for color in en_colors}
-        lang_latent_strings = {f"{en_color}_{lang}": color for en_color, color in zip(en_colors, lang_colors)}
+        lang_latent_strings = {
+            f"{en_color}_{lang}": color
+            for en_color, color in zip(en_colors, lang_colors)
+        }
         latent_strings.update(lang_latent_strings)
         color_prompts.append(
             Prompt.from_strings(
@@ -350,3 +358,56 @@ def color_prompts(tokenizer, lang, n=4):
             )
         )
     return color_prompts
+
+
+def get_obj_id(sample_prompt, tokenizer):
+    """
+    For a prompt with the format '..."object" - X: "', return the index of the last token of the object.
+    """
+    split = sample_prompt.split('"')
+    start = '"'.join(split[:-2])
+    end = '"' + '"'.join(split[-2:])
+    tok_start = tokenizer.encode(start, add_special_tokens=False)
+    tok_end = tokenizer.encode(end, add_special_tokens=False)
+    full = tokenizer.encode(sample_prompt, add_special_tokens=False)
+    if tok_start + tok_end != full:
+        raise ValueError("This is weird, check code")
+    idx = -len(tok_end) - 1
+    return idx
+
+
+def lang_few_shot_prompts(
+    df,
+    tokenizer,
+    langs,
+    target_lang,
+    latent_langs=None,
+    lang_per_prompt=None,
+    n_per_lang=1,
+    num_prompts=200,
+):
+    if lang_per_prompt is None:
+        lang_per_prompt = len(langs)
+    if latent_langs is None:
+        latent_langs = []
+    prompts = []
+    for _ in range(num_prompts):
+        lang_sample = sample(langs, lang_per_prompt)
+        concepts = df.sample(n_per_lang * lang_per_prompt)
+        prompt = ""
+        for i, lang in enumerate(lang_sample):
+            for j in range(n_per_lang):
+                row = concepts.iloc[i * n_per_lang + j]
+                obj = row[f"senses_{lang}"][0]
+                prompt += f"{obj}: {lang}\n"
+        prompt += "_:"
+        if len(tokenizer.encode("_:", add_special_tokens=False)) != 2:
+            raise ValueError(
+                "Weird tokenization going on, patchscope index might be wrong"
+            )
+        prompts.append(
+            Prompt.from_strings(
+                prompt, target_lang, {l: l for l in latent_langs}, tokenizer
+            )
+        )
+    return prompts
