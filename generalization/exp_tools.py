@@ -38,11 +38,11 @@ def load_model(model_name: str, trust_remote_code=False, use_tl=False, **kwargs_
         return LanguageModel(model_name, tokenizer_kwargs=tokenizer_kwargs, **kwargs)
 
 
-def get_mean_activations(nn_model, prompts_str, batch_size=32):
+def get_mean_activations(nn_model, prompts_str, batch_size=32, remote=False):
     dataloader = DataLoader(prompts_str, batch_size=batch_size, shuffle=False)
     acts = []
     for batch in tqdm(dataloader):
-        acts.append(collect_activations(nn_model, batch))
+        acts.append(collect_activations(nn_model, batch, remote=remote))
     mean_activations = []
     num_layers = get_num_layers(nn_model)
     for layer in range(num_layers):
@@ -75,7 +75,7 @@ A spoon is a utensil used for eating food
     )
 
 
-def _next_token_probs_unsqueeze(nn_model, prompt, scan=True):
+def next_token_probs_unsqueeze(nn_model, prompt, scan=True):
     probs = next_token_probs(nn_model, prompt)
     return probs.unsqueeze(1)  # Add a fake layer dimension
 
@@ -99,7 +99,7 @@ def run_prompts(
     probs = []
     scan = True
     if get_probs is None:
-        get_probs = _next_token_probs_unsqueeze
+        get_probs = next_token_probs_unsqueeze
     elif isinstance(get_probs, str):
         raise ValueError("get_probs must be a callable, update your code")  # todo fix and remove
     if method_kwargs is None:
@@ -125,7 +125,7 @@ def filter_prompts_by_prob(prompts, model, treshold=0.3, batch_size=32):
     if prompts == []:
         return []
     target_probs, _ = run_prompts(
-        model, prompts, batch_size=batch_size, method="next_token_probs"
+        model, prompts, batch_size=batch_size, get_probs=next_token_probs_unsqueeze
     )
     return [
         prompt for prompt, prob in zip(prompts, target_probs) if prob.max() >= treshold

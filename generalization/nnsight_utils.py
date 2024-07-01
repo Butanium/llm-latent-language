@@ -146,7 +146,7 @@ def collect_activations(
     nn_model: NNLanguageModel,
     prompts,
     layers=None,
-    get_activations: GetModuleOutput = get_layer_output,
+    get_activations: GetModuleOutput | None = None,
     remote=False,
     idx=None,
     open_context=True,
@@ -168,6 +168,8 @@ def collect_activations(
         The hidden states of the last token of each prompt at each layer, moved to cpu. If open_context is False, returns a list of
         Proxies.
     """
+    if get_activations is None:
+        get_activations = get_layer_output
     tok_prompts = nn_model.tokenizer(prompts, return_tensors="pt", padding=True)
     # Todo?: This is a hacky way to get the last token index but it works for both left and right padding
     last_token_index = tok_prompts.attention_mask.flip(1).cumsum(1).bool().int().sum(1)

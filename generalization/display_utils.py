@@ -145,53 +145,19 @@ def plot_k(
             ax.set_ylim(0, 1)
 
 
-def k_subplots(k) -> tuple[plt.Figure, list[plt.Axes]]:
+def k_subplots(k, size=(5, 4)) -> tuple[plt.Figure, list[plt.Axes]]:
     """
     Returns a figure and axes for plotting k examples.
     """
     n_cols = math.ceil(math.sqrt(k))
     n_rows = math.ceil(k / n_cols)
-    fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4 * n_rows))
+    fig, axes = plt.subplots(
+        n_rows, n_cols, figsize=(size[0] * n_cols, size[1] * n_rows)
+    )
     axes = axes.flatten() if k > 1 else [axes]
     for i in range(k, len(axes)):
         axes[i].axis("off")
     return fig, axes
-
-
-def yaml_to_dict(yaml_file):
-    with open(yaml_file, "r") as file:
-        return yaml.safe_load(file)
-
-
-def read_json(path_name: str):
-    with open(path_name, "r") as f:
-        json_file = json.load(f)
-    return json_file
-
-
-def printc(x, c="r"):
-    m1 = {
-        "r": "red",
-        "g": "green",
-        "y": "yellow",
-        "w": "white",
-        "b": "blue",
-        "p": "pink",
-        "t": "teal",
-        "gr": "gray",
-    }
-    m2 = {
-        "red": "\033[91m",
-        "green": "\033[92m",
-        "yellow": "\033[93m",
-        "blue": "\033[94m",
-        "pink": "\033[95m",
-        "teal": "\033[96m",
-        "white": "\033[97m",
-        "gray": "\033[90m",
-    }
-    reset_color = "\033[0m"
-    print(f"{m2.get(m1.get(c, c), c)}{x}{reset_color}")
 
 
 def plot_topk_tokens(
@@ -259,11 +225,7 @@ def plot_topk_tokens(
                 figsize=(max_token_length_sum * k * 0.25, num_layers / 2),
             )
         else:
-            fig, axes = plt.subplots(
-                1, len(next_token_probs), figsize=(15 * len(next_token_probs), 10)
-            )
-        if len(next_token_probs) == 1:
-            axes = [axes]
+            fig, axes = k_subplots(len(next_token_probs), size=(12, 8))
         for i, (ax, top_probs, top_token_indices) in enumerate(
             zip(axes, top_probs_list, top_token_indices_list)
         ):
@@ -296,6 +258,22 @@ def plot_topk_tokens(
         plt.show()
 
 
+def plot_results(ax, target_probs, latent_probs, target_lang):
+    colors = sns.color_palette("tab10", 1 + len(latent_probs))
+    plot_ci(ax, target_probs, label=target_lang, color=colors[0])
+    for i, (label, probs) in enumerate(latent_probs.items()):
+        plot_ci(ax, probs, label=label, color=colors[i + 1], init=False)
+
+
+def plot_k_results(axes, target_probs, latent_probs, target_lang, k=None):
+    if k is None:
+        k = len(target_probs)
+    colors = sns.color_palette("tab10", 1 + len(latent_probs))
+    plot_k(axes, target_probs, label=target_lang, color=colors[0], k=k)
+    for i, (label, probs) in enumerate(latent_probs.items()):
+        plot_k(axes, probs, label=label, color=colors[i + 1], init=False, k=k)
+
+
 def display_df(df):
     with pd.option_context(
         "display.max_colwidth",
@@ -307,3 +285,27 @@ def display_df(df):
     ):
         display(df)
 
+
+def printc(x, c="r"):
+    m1 = {
+        "r": "red",
+        "g": "green",
+        "y": "yellow",
+        "w": "white",
+        "b": "blue",
+        "p": "pink",
+        "t": "teal",
+        "gr": "gray",
+    }
+    m2 = {
+        "red": "\033[91m",
+        "green": "\033[92m",
+        "yellow": "\033[93m",
+        "blue": "\033[94m",
+        "pink": "\033[95m",
+        "teal": "\033[96m",
+        "white": "\033[97m",
+        "gray": "\033[90m",
+    }
+    reset_color = "\033[0m"
+    print(f"{m2.get(m1.get(c, c), c)}{x}{reset_color}")

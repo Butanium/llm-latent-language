@@ -10,8 +10,7 @@ notebook_root = root.parent / "notebook-exp"
 if __name__ == "__main__":
     os.chdir(root)
     parser = ArgumentParser()
-    parser.add_argument("--notebook", "-n", type=str, default="translation")
-    parser.add_argument("--check_translation_performance", type=bool, default=False)  # todo legacy remove
+    parser.add_argument("--notebook", "-n", type=str, required=True)
     parser.add_argument(
         "--langs", "-l", type=str, default=["fr", "de", "ru", "en", "zh"], nargs="+"
     )
@@ -20,13 +19,6 @@ if __name__ == "__main__":
     parser.add_argument("--trust-remote-code", default=False, action="store_true")
     parser.add_argument("--device", "-d", type=str, default="auto")
     parser.add_argument("--batch-size", "-b", type=int, default=32)
-    parser.add_argument(
-        "--method", "-mt", type=str, default="logit_lens"
-    )  # todo: move to notebook kwargs
-    # parser.add_argument("--thinking-langs", "-t", type=str, default=["en"], nargs="+")
-    parser.add_argument(
-        "--llama", default=False, action="store_true"
-    )  # todo remove legacy by fixing logit lens
     parser.add_argument(
         "--paper-only",
         "-po",
@@ -43,13 +35,11 @@ if __name__ == "__main__":
 
     args, unknown = parser.parse_known_args()
     kwargs = dict(vars(args))
-    kwargs.pop("llama")
     notebook = kwargs.pop("notebook")
-    suf = "_llama" if args.llama else ""
     print(f"Running {notebook} with {kwargs}")
     save_path = root / "results" / notebook
     save_path.mkdir(exist_ok=True, parents=True)
-    source_notebook_path = notebook_root / f"{notebook}{suf}.ipynb"
+    source_notebook_path = notebook_root / f"{notebook}.ipynb"
     exp_id = str(int(time())) + "_" + generate_slug(2)
     target_notebook_path = save_path / (
         args.model.replace("/", "_") + f"_{exp_id}.ipynb"
@@ -63,9 +53,10 @@ if __name__ == "__main__":
             target_notebook_path,
             parameters=kwargs,
         )
-    except pm.PapermillExecutionError as e:
+    except (pm.PapermillExecutionError, KeyboardInterrupt) as e:
         print(e)
-        print("Error in notebook")
+        if isinstance(e, pm.PapermillExecutionError):
+            print("Error in notebook")
         delete = input(f"Delete notebook {target_notebook_path}? (y/n)")
         if delete == "y":
             target_notebook_path.unlink()

@@ -13,7 +13,7 @@ class LoadAssociations:
     lang: str = field()
     full_lang: str = field(default=None)
     full_feat: str = field(default=None)
-    df = pd.DataFrame = field(default=None)
+    df: pd.DataFrame = field(default=None)
 
     data_dir: str = field(default=DATA_PATH / "norms/processed/")
     data_path: str = field(default=None)
