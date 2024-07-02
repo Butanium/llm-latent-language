@@ -237,7 +237,7 @@ def prompts_from_df(
             in_word = in_word[0]
         prompt += f'{pref_input}"{in_word}'
         if not cut_at_obj:
-            prompt += '" - {pref_target}"'
+            prompt += f'" - {pref_target}"'
         prompts.append(prompt)
     return prompts
 
