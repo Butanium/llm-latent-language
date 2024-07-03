@@ -1,5 +1,7 @@
 import pandas as pd
-from random import sample
+from random import sample, shuffle
+from itertools import product
+from copy import deepcopy
 from typing import Optional, Callable
 from dataclasses import dataclass
 from utils import get_tokenizer, ulist
@@ -411,3 +413,65 @@ def lang_few_shot_prompts(
             )
         )
     return prompts
+
+
+def get_prompt_pairs(
+    source_df,
+    target_df,
+    _source_prompts,
+    _target_prompts,
+    source_input_lang,
+    source_output_lang,
+    input_lang,
+    target_lang,
+    extra_langs,
+    num_pairs,
+    merge_extra_langs=True,
+):
+    collected_pairs = 0
+    source_prompts = []
+    target_prompts = []
+    source_target = list(product(source_df.iterrows(), target_df.iterrows()))
+    shuffle(source_target)
+    selected_source_rows = set()
+    selected_target_rows = set()
+    for (i, source_row), (j, target_row) in source_target:
+        if source_row["word_original"] == target_row["word_original"]:
+            continue
+        src_p = deepcopy(_source_prompts[i])
+        targ_p = deepcopy(_target_prompts[j])
+        targ_p.latent_tokens[f"src {source_output_lang}"] = src_p.target_tokens
+        targ_p.latent_tokens[f"src {target_lang}"] = src_p.latent_tokens[target_lang]
+        targ_p.latent_strings[f"src {source_output_lang}"] = src_p.target_strings
+        targ_p.latent_strings[f"src {target_lang}"] = src_p.latent_strings[target_lang]
+        for lang in extra_langs:
+            if merge_extra_langs:
+                targ_p.latent_tokens[f"src + tgt {lang}"] = ulist(
+                    targ_p.latent_tokens[lang] + src_p.latent_tokens[lang]
+                )
+                targ_p.latent_strings[f"src + tgt {lang}"] = ulist(
+                    targ_p.latent_strings[lang] + src_p.latent_strings[lang]
+                )
+            else:
+                targ_p.latent_tokens[f"src {lang}"] = src_p.latent_tokens[lang]
+                targ_p.latent_strings[f"src {lang}"] = src_p.latent_strings[lang]
+        if targ_p.has_no_collisions(
+            ignore_langs=extra_langs if merge_extra_langs else None
+        ):
+            source_prompts.append(src_p)
+            target_prompts.append(targ_p)
+            collected_pairs += 1
+            selected_source_rows.add(i)
+            selected_target_rows.add(j)
+        if collected_pairs >= num_pairs:
+            break
+    if collected_pairs < num_pairs:
+        print(
+            f"Could only collect {collected_pairs} pairs for {source_input_lang} -> {source_output_lang} - {input_lang} -> {target_lang}, skipping..."
+        )
+        return None, None
+    print(
+        f"Collected {collected_pairs} pairs for {source_input_lang} -> {source_output_lang} - {input_lang} -> {target_lang}"
+        f" with {len(selected_source_rows)} source concepts and {len(selected_target_rows)} target concepts"
+    )
+    return source_prompts, target_prompts
