@@ -89,11 +89,9 @@ def plot_ci(
     data,
     label,
     color="blue",
-    linestyle="-",
     tik_step=10,
     init=True,
     plt_params=plt_params,
-    marker="o",
 ):
     if init:
         upper = max(round(data.shape[1] / 10) * 10 + 1, data.shape[1] + 1)

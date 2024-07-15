@@ -326,6 +326,29 @@ def translation_prompts(
     return prompts
 
 
+def random_prompts(df, tokenizer, n=5, **kwargs):
+    """
+    Given a df with several languages, generate a prompt where there is no logical connection between
+    the languages and concepts. E.g.
+    A: "apple" - B: "chien"
+    A: "柠檬" - B: "Käse"
+    """
+    langs = [col for col in df.columns if col != "word_original"]
+    concepts = []
+    for _, row in df.iterrows():
+        for lang in langs:
+            concepts.append(row[lang])
+    concepts2 = concepts.copy()
+    shuffle(concepts)
+    shuffle(concepts2)
+    df2 = pd.DataFrame({"A": concepts, "B": concepts2})
+    prompts = translation_prompts(df2, tokenizer, "A", "B", n=n, **kwargs)
+    for p in prompts:
+        p.target_tokens = []
+        p.target_strings = []
+    return prompts
+
+
 def cloze_prompts(df, tokenizer, lang, latent_langs=None, **kwargs):
     if latent_langs is None:
         latent_langs = []
@@ -360,22 +383,6 @@ def color_prompts(tokenizer, lang, n=4):
             )
         )
     return color_prompts
-
-
-def get_obj_id(sample_prompt, tokenizer):
-    """
-    For a prompt with the format '..."object" - X: "', return the index of the last token of the object.
-    """
-    split = sample_prompt.split('"')
-    start = '"'.join(split[:-2])
-    end = '"' + '"'.join(split[-2:])
-    tok_start = tokenizer.encode(start, add_special_tokens=False)
-    tok_end = tokenizer.encode(end, add_special_tokens=False)
-    full = tokenizer.encode(sample_prompt, add_special_tokens=False)
-    if tok_start + tok_end != full:
-        raise ValueError("This is weird, check code")
-    idx = -len(tok_end) - 1
-    return idx
 
 
 def lang_few_shot_prompts(
@@ -428,6 +435,7 @@ def get_prompt_pairs(
     num_pairs,
     merge_extra_langs=True,
 ):
+    check_source_tokens = source_input_lang and source_output_lang is not None
     collected_pairs = 0
     source_prompts = []
     target_prompts = []
@@ -440,19 +448,26 @@ def get_prompt_pairs(
             continue
         src_p = deepcopy(_source_prompts[i])
         targ_p = deepcopy(_target_prompts[j])
-        targ_p.latent_tokens[f"src {source_output_lang}"] = src_p.target_tokens
-        targ_p.latent_tokens[f"src {target_lang}"] = src_p.latent_tokens[target_lang]
-        targ_p.latent_strings[f"src {source_output_lang}"] = src_p.target_strings
-        targ_p.latent_strings[f"src {target_lang}"] = src_p.latent_strings[target_lang]
+        if check_source_tokens:
+            targ_p.latent_tokens[f"src {source_output_lang}"] = src_p.target_tokens
+            targ_p.latent_tokens[f"src {target_lang}"] = src_p.latent_tokens[
+                target_lang
+            ]
+            targ_p.latent_strings[f"src {source_output_lang}"] = src_p.target_strings
+            targ_p.latent_strings[f"src {target_lang}"] = src_p.latent_strings[
+                target_lang
+            ]
         for lang in extra_langs:
             if merge_extra_langs:
                 targ_p.latent_tokens[f"src + tgt {lang}"] = ulist(
-                    targ_p.latent_tokens[lang] + src_p.latent_tokens[lang]
+                    targ_p.latent_tokens[lang]
+                    + (src_p.latent_tokens[lang] if check_source_tokens else [])
                 )
                 targ_p.latent_strings[f"src + tgt {lang}"] = ulist(
-                    targ_p.latent_strings[lang] + src_p.latent_strings[lang]
+                    targ_p.latent_strings[lang]
+                    + (src_p.latent_strings[lang] if check_source_tokens else [])
                 )
-            else:
+            elif check_source_tokens:
                 targ_p.latent_tokens[f"src {lang}"] = src_p.latent_tokens[lang]
                 targ_p.latent_strings[f"src {lang}"] = src_p.latent_strings[lang]
         if targ_p.has_no_collisions(
@@ -475,3 +490,19 @@ def get_prompt_pairs(
         f" with {len(selected_source_rows)} source concepts and {len(selected_target_rows)} target concepts"
     )
     return source_prompts, target_prompts
+
+
+def get_obj_id(sample_prompt, tokenizer):
+    """
+    For a prompt with the format '..."object" - X: "', return the index of the last token of the object.
+    """
+    split = sample_prompt.split('"')
+    start = '"'.join(split[:-2])
+    end = '"' + '"'.join(split[-2:])
+    tok_start = tokenizer.encode(start, add_special_tokens=False)
+    tok_end = tokenizer.encode(end, add_special_tokens=False)
+    full = tokenizer.encode(sample_prompt, add_special_tokens=False)
+    if tok_start + tok_end != full:
+        raise ValueError("This is weird, check code")
+    idx = -len(tok_end) - 1
+    return idx
