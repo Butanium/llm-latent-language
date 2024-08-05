@@ -220,10 +220,12 @@ def plot_topk_tokens(
             fig, axes = plt.subplots(
                 1,
                 len(next_token_probs),
-                figsize=(max_token_length_sum * k * 0.25, num_layers / 2),
+                figsize=(max_token_length_sum * k * 0.25, num_layers / 2 + 1),
             )
         else:
             fig, axes = k_subplots(len(next_token_probs), size=(12, 8))
+        if len(next_token_probs) == 1:
+            axes = [axes]
         for i, (ax, top_probs, top_token_indices) in enumerate(
             zip(axes, top_probs_list, top_token_indices_list)
         ):

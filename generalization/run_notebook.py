@@ -9,6 +9,7 @@ root = Path(__file__).parent
 notebook_root = root.parent / "notebook-exp"
 if __name__ == "__main__":
     os.chdir(root)
+    t = time()
     parser = ArgumentParser()
     parser.add_argument("--notebook", "-n", type=str, required=True)
     parser.add_argument(
@@ -26,13 +27,43 @@ if __name__ == "__main__":
         help="Only run the paper experiment cell instead of all combinations",
     )
     parser.add_argument(
+        "--skip-paper",
+        "-sp",
+        action="store_true",
+        help="Skip the paper experiment cell",
+    )
+    parser.add_argument(
         "--prob-treshold",
-        "-fp",
+        "-pt",
         type=float,
-        default=0.3,
+        default=0.0,
         help="Keep only prompts that the model is confident about. Set to 0 to keep all prompts.",
     )
-
+    parser.add_argument(
+        "--map-source-lang",
+        "-msl",
+        type=str,
+        required=False,
+    )
+    parser.add_argument(
+        "--map-target-lang",
+        "-mtl",
+        type=str,
+        required=False,
+    )
+    parser.add_argument(
+        "--num-few-shot",
+        "-nfs",
+        type=int,
+        default=5,
+        help="Number of few shot examples",
+    )
+    parser.add_argument(
+        "--use-tl",
+        # "-utl",
+        action="store_true",
+        help="Use Transformer Lens",
+    )
     args, unknown = parser.parse_known_args()
     kwargs = dict(vars(args))
     notebook = kwargs.pop("notebook")
@@ -48,13 +79,13 @@ if __name__ == "__main__":
     kwargs["extra_args"] = unknown
     print(f"Running {notebook} with {kwargs}")
 
-
     try:
         pm.execute_notebook(
             source_notebook_path,
             target_notebook_path,
             parameters=kwargs,
         )
+        print(f"Execution time: {time()-t:.2f}s")
     except (pm.PapermillExecutionError, KeyboardInterrupt) as e:
         print(e)
         if isinstance(e, pm.PapermillExecutionError):

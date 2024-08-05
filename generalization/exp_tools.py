@@ -13,8 +13,11 @@ import re
 from interventions import logit_lens, patchscope_lens, TargetPrompt
 from nnsight_utils import collect_activations, get_num_layers
 from typing import Literal, Optional
+from prompt_tools import Prompt
+from interventions import NNLanguageModel
 
 DATA_PATH = Path(__file__).resolve().parent.parent / "data"
+GetProbFunction = Callable[[NNLanguageModel, str | list[str], bool], th.Tensor]
 
 
 def load_model(model_name: str, trust_remote_code=False, use_tl=False, **kwargs_):
@@ -50,11 +53,9 @@ def get_mean_activations(nn_model, prompts_str, batch_size=32, remote=False):
     return mean_activations
 
 
-def next_token_probs(
-    nn_model: UnifiedTransformer | LanguageModel, prompt: str | list[str]
-):
+def next_token_probs(nn_model: NNLanguageModel, prompt: str | list[str]):
     out = nn_model.trace(prompt, trace=False)
-    if isinstance(nn_model, LanguageModel):
+    if not isinstance(nn_model, UnifiedTransformer):
         out = out.logits
     return out[:, -1].softmax(-1).cpu()
 
@@ -75,21 +76,34 @@ A spoon is a utensil used for eating food
     )
 
 
-def next_token_probs_unsqueeze(nn_model, prompt, scan=True):
+def next_token_probs_unsqueeze(
+    nn_model: NNLanguageModel, prompt: str | list[str], scan=True
+) -> th.Tensor:
     probs = next_token_probs(nn_model, prompt)
     return probs.unsqueeze(1)  # Add a fake layer dimension
 
 
 @th.no_grad
 def run_prompts(
-    nn_model,
-    prompts,
-    batch_size=32,
-    get_probs: Callable = None,
-    method_kwargs=None,
-):
+    nn_model: NNLanguageModel,
+    prompts: list[Prompt],
+    batch_size: int = 32,
+    get_probs: GetProbFunction | None = None,
+    method_kwargs: dict | None = None,
+    scan: bool = True,
+    tqdm=tqdm,
+) -> tuple[th.Tensor, dict[str, th.Tensor]]:
     """
     Run a list of prompts through the model and return the probabilities of the next token for both the target and latent languages.
+
+    Args:
+        nn_model: The NNSight model
+        prompts: A list of prompts
+        batch_size: The batch size to use
+        get_probs: The function to get the probabilities of the next token, default to next token prediction
+        method_kwargs: The kwargs to pass to the get_probs function
+        scan: Whether to use nnsight's scan
+        tqdm: The tqdm function to use, default to tqdm.auto.tqdm. Use None to disable tqdm
 
     Returns:
         Two tensors target_probs and latent_probs of shape (num_prompts, num_layers)
@@ -97,16 +111,15 @@ def run_prompts(
     str_prompts = [prompt.prompt for prompt in prompts]
     dataloader = DataLoader(str_prompts, batch_size=batch_size)
     probs = []
-    scan = True
     if get_probs is None:
         get_probs = next_token_probs_unsqueeze
-    elif isinstance(get_probs, str):
-        raise ValueError("get_probs must be a callable, update your code")  # todo fix and remove
     if method_kwargs is None:
         method_kwargs = {}
+    if tqdm is None:
+        tqdm = lambda x, **kwargs: x
     for prompt_batch in tqdm(dataloader, total=len(dataloader), desc="Running prompts"):
         probs.append(get_probs(nn_model, prompt_batch, scan=scan, **method_kwargs))
-        scan = False
+        scan = False  # Not sure if this is a good idea
     probs = th.cat(probs)
     target_probs = []
     latent_probs = {lang: [] for lang in prompts[0].latent_tokens.keys()}

@@ -2,6 +2,7 @@ from nnsight.models.UnifiedTransformer import UnifiedTransformer
 from nnsight.models.LanguageModel import LanguageModelProxy, LanguageModel
 from nnsight.envoy import Envoy
 import torch as th
+from torch.utils.data import DataLoader
 from typing import Union, Callable
 from contextlib import nullcontext
 
@@ -166,7 +167,7 @@ def collect_activations(
 
     Returns:
         The hidden states of the last token of each prompt at each layer, moved to cpu. If open_context is False, returns a list of
-        Proxies.
+        Proxies. Dimensions are (num_layers, num_prompts, hidden_size)
     """
     if get_activations is None:
         get_activations = get_layer_output
@@ -192,7 +193,7 @@ def collect_activations(
     # Collect the hidden states of the last token of each prompt at each layer
     context = nn_model.trace(prompts, remote=remote) if open_context else nullcontext()
     with context:
-        hiddens = [
+        acts = [
             wrap(
                 get_activations(nn_model, layer)[
                     th.arange(len(tok_prompts.input_ids)),
@@ -201,4 +202,41 @@ def collect_activations(
             )
             for layer in layers
         ]
-    return hiddens
+    return th.stack(acts)
+
+
+def collect_activations_batched(
+    nn_model: NNLanguageModel,
+    prompts,
+    batch_size,
+    layers=None,
+    get_activations: GetModuleOutput | None = None,
+    remote=False,
+    idx=None,
+    tqdm=None,
+):
+    """
+    Collect the hidden states of the last token of each prompt at each layer in batches
+
+    Args:
+        nn_model: The NNSight model
+        prompts: The prompts to collect activations for
+        batch_size: The batch size to use
+        layers: The layers to collect activations for, default to all layers
+        get_activations: The function to get the activations, default to layer output
+        remote: Whether to run the model on the remote device
+        idx: The index of the token to collect activations for
+
+    Returns:
+        The hidden states of the last token of each prompt at each layer, moved to cpu. Dimensions are (num_layers, num_prompts, hidden_size)
+    """
+    dataloader = DataLoader(prompts, batch_size=batch_size)
+    if tqdm is not None:
+        dataloader = tqdm(dataloader)
+    acts = []
+    for batch in dataloader:
+        acts_batch = collect_activations(
+            nn_model, batch, layers, get_activations, remote, idx
+        )
+        acts.append(acts_batch)
+    return th.cat(acts, dim=1)

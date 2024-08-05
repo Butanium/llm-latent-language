@@ -121,6 +121,7 @@ class Prompt:
     latent_tokens: dict[str, list[int]]
     target_strings: str
     latent_strings: dict[str, str | list[str]]
+    input_string: Optional[str | list[str]] = None
 
     @classmethod
     def from_strings(
@@ -256,7 +257,8 @@ def translation_prompts(
     input_lang_name=None,
     target_lang_name=None,
     cut_at_obj=False,
-) -> list[Prompt]:
+    return_strings=False,
+) -> list[Prompt] | list[str]:
     """
     Get a translation prompt from input_lang to target_lang for each row in the dataframe.
 
@@ -290,6 +292,8 @@ def translation_prompts(
         target_lang_name=target_lang_name,
         cut_at_obj=cut_at_obj,
     )
+    if return_strings:
+        return prompts_str
     for prompt, (_, row) in zip(prompts_str, df.iterrows()):
         target_words = row[target_lang]
         if only_best and isinstance(target_words, list):
@@ -321,6 +325,7 @@ def translation_prompts(
                     latent_tokens,
                     target_words,
                     latent_words,
+                    row[input_lang],
                 )
             )
     return prompts
@@ -349,10 +354,10 @@ def random_prompts(df, tokenizer, n=5, **kwargs):
     return prompts
 
 
-def cloze_prompts(df, tokenizer, lang, latent_langs=None, **kwargs):
+def def_prompt(df, tokenizer, lang, latent_langs=None, **kwargs):
     if latent_langs is None:
         latent_langs = []
-    return translation_prompts(
+    prompts = translation_prompts(
         df,
         tokenizer,
         f"definitions_wo_ref_{lang}",
@@ -362,6 +367,10 @@ def cloze_prompts(df, tokenizer, lang, latent_langs=None, **kwargs):
         target_lang_name="",
         **kwargs,
     )
+    for p in prompts:
+        p.latent_tokens = {k.split("_")[-1]: v for k, v in p.latent_tokens.items()}
+        p.latent_strings = {k.split("_")[-1]: v for k, v in p.latent_strings.items()}
+    return prompts
 
 
 def color_prompts(tokenizer, lang, n=4):
@@ -422,7 +431,7 @@ def lang_few_shot_prompts(
     return prompts
 
 
-def get_prompt_pairs(
+def get_shifted_prompt_pairs(
     source_df,
     target_df,
     _source_prompts,
@@ -435,7 +444,9 @@ def get_prompt_pairs(
     num_pairs,
     merge_extra_langs=True,
 ):
-    check_source_tokens = source_input_lang and source_output_lang is not None
+    check_source_tokens = (
+        source_input_lang is not None or source_output_lang is not None
+    )
     collected_pairs = 0
     source_prompts = []
     target_prompts = []
@@ -506,3 +517,9 @@ def get_obj_id(sample_prompt, tokenizer):
         raise ValueError("This is weird, check code")
     idx = -len(tok_end) - 1
     return idx
+
+
+def insert_between_chars(word, separator="-"):
+    if isinstance(word, list):
+        return [insert_between_chars(w, separator) for w in word]
+    return separator.join(word)
