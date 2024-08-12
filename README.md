@@ -1,3 +1,3 @@
-This repo is still wip and a cleaned up brach will be created to reproduce our new paper https://openreview.net/forum?id=0ku2hIm4BS
+This repo was our playground for experiments that lead to e.g. https://openreview.net/forum?id=0ku2hIm4BS
 
-Overall the code to reproduce it is in the generalization folder.
+The code is very messy. If you want to reproduce our results / check the code we recommend looking at: https://github.com/Butanium/llm-lang-agnostic
