@@ -16,7 +16,13 @@ if __name__ == "__main__":
         "--langs", "-l", type=str, default=["fr", "de", "ru", "en", "zh"], nargs="+"
     )
     parser.add_argument("--model", "-m", type=str)
-    parser.add_argument("--model-path", type=str, default=None)
+    parser.add_argument("--model-path", type=str)
+    parser.add_argument(
+        "--remote",
+        default=False,
+        action="store_true",
+        help="Use ndif remote execution",
+    )
     parser.add_argument("--trust-remote-code", default=False, action="store_true")
     parser.add_argument("--device", "-d", type=str, default="auto")
     parser.add_argument("--batch-size", "-b", type=int, default=32)
@@ -90,7 +96,7 @@ if __name__ == "__main__":
         print(e)
         if isinstance(e, pm.PapermillExecutionError):
             print("Error in notebook")
-        delete = input(f"Delete notebook {target_notebook_path}? (y/n)")
+        delete = input(f"Delete notebook {target_notebook_path} ? (y/n)")
         if delete.lower() == "y":
             target_notebook_path.unlink()
         else:

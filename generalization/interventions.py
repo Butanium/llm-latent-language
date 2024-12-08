@@ -203,7 +203,10 @@ def patchscope_lens(
     probs_l = []
     n_layers = get_num_layers(nn_model)
     # Collect the patch activations for each prompt at each layer
+    # times = []
     for layer in range(n_layers):
+        # from contexttimer import Timer
+        # with Timer(factor=1000) as t:
         with nn_model.trace(
             target_patch_prompts.prompts,
             scan=layer == 0,
@@ -213,6 +216,10 @@ def patchscope_lens(
                 th.arange(num_sources), target_patch_prompts.index_to_patch
             ] = latents[layer]
             probs_l.append(get_next_token_probs(nn_model).cpu().save())
+    # times.append(t.elapsed)
+    # print(f"Layer {layer} took {t.elapsed}ms")
+    # import matplotlib.pyplot as plt
+    # plt.plot(times)
     probs = th.cat([p.value for p in probs_l], dim=0)
     return probs.reshape(n_layers, num_sources, -1).transpose(0, 1)
 
@@ -277,7 +284,7 @@ def patchscope_generate(
 def patchscope_intervention(
     nn_model: NNLanguageModel,
     source_prompts: list[str] | str,
-    target_patch_prompts: TargetPromptBatch | list[TargetPrompt] | TargetPrompt,
+    target_patch_prompts: TargetPromptBatch | list[TargetPrompt] | TargetPrompt | None,
     source_layer: int,
     target_layer: int,
     start_skip: Optional[int] = None,
@@ -426,13 +433,26 @@ def patch_attention_lens(
 
 
 def patch_object_attn_lens(
-    nn_model,
-    source_prompts,
-    target_prompts,
-    attn_idx_patch,
-    num_patches=5,
+    nn_model: NNLanguageModel,
+    source_prompts: list[str] | str,
+    target_prompts: list[str] | str,
+    attn_idx_patch: int,
+    num_patches: int = 5,
     scan=True,
 ):
+    """
+    A complex lens that makes the model attend to the hidden states of the last token of the source prompts instead of the attn_idx_patch token of the target prompts at last token prediction. For each layer, this intervention is performed for num_patches layers.
+    Args:
+        nn_model: The NNSight model
+        source_prompts: The prompts to get the hidden states of the last token from
+        target_prompts: The prompts to predict the next token for
+        attn_idx_patch: The index of the token to patch in the target prompts
+        num_patches: The number of layers to patch for each layer
+
+    Returns:
+        A tensor of shape (num_prompts, num_layers, vocab_size) containing the probabilities
+
+    """
     if isinstance(source_prompts, str):
         source_prompts = [source_prompts]
     if isinstance(target_prompts, str):
@@ -449,30 +469,17 @@ def patch_object_attn_lens(
         source_prompts,
         get_activations=get_act,
     )
-    clean_inputs = []
-    with nn_model.trace(target_prompts, scan=scan):
-        for layer in range(num_layers):
-            clean_inputs.append(get_layer(nn_model, layer).input)
     for layer in range(num_layers):
-        next_layers = list(range(layer, min(num_layers, layer + num_patches)))
-        corr_attn = []
         with nn_model.trace(target_prompts, scan=layer == 0 and scan):
-            for next_layer in next_layers:
-                get_layer(nn_model, next_layer).input = clean_inputs[next_layer]
+            for next_layer in range(layer, min(num_layers, layer + num_patches)):
                 get_attention(nn_model, next_layer).input[1]["hidden_states"][
                     :, attn_idx_patch
                 ] = source_hiddens[next_layer]
-                corr_attn.append(
-                    get_attention_output(nn_model, next_layer)[:, -1].save()
-                )
-        with nn_model.trace(target_prompts, scan=layer == 0 and scan):
-            for i, next_layer in enumerate(next_layers):
-                get_attention(nn_model, next_layer).output[0][:, -1] = corr_attn[i]
             probs = get_next_token_probs(nn_model).cpu().save()
             probs_l.append(probs)
     return (
         th.cat([p.value for p in probs_l], dim=0)
-        .reshape(num_layers, len(target_prompts), -1)  # todo num_layers
+        .reshape(num_layers, len(target_prompts), -1)
         .transpose(0, 1)
     )
 
@@ -653,13 +660,16 @@ def run_latent_prompt(
     return probs.value
 
 
+from contexttimer import Timer
+
+
 def latent_prompt_lens(
     nn_model: NNLanguageModel,
     latent_prompts: list[LatentPrompt] | LatentPrompt,
     prompts: list[str] | str | None = None,
     latents: list[th.Tensor] | th.Tensor | None = None,
     collect_from_single_layer: bool = True,
-    patch_from_layer: int = 0,
+    patch_from_layer: int | None = 0,
     patch_until_layer: int | None = None,
     remote=False,
     scan=True,
@@ -684,7 +694,9 @@ def latent_prompt_lens(
         )
 
     probs = []
+    # times = []
     for layer in range(get_num_layers(nn_model)):
+        # with Timer(factor=1000) as t:
         if collect_from_single_layer:
             latents_ = latents[layer].unsqueeze(0)
             if patch_until_layer is None:
@@ -694,18 +706,26 @@ def latent_prompt_lens(
         else:
             patch_until_layer_ = layer
             latents_ = latents
+        if patch_from_layer is None:
+            patch_from_layer_ = layer
+        else:
+            patch_from_layer_ = patch_from_layer
         probs.append(
             run_latent_prompt(
                 nn_model,
                 latent_prompts,
                 latents=latents_,
                 collect_from_single_layer=collect_from_single_layer,
-                patch_from_layer=patch_from_layer,
+                patch_from_layer=patch_from_layer_,
                 patch_until_layer=patch_until_layer_,
                 remote=remote,
-                scan=scan,
+                scan=scan and layer == 0,
             )
         )
+    # times.append(t.elapsed)
+    # print(f"Layer {layer} took {t.elapsed}ms")
+    # import matplotlib.pyplot as plt
+    # plt.plot(times)
     return th.stack(probs).transpose(0, 1)
 
 

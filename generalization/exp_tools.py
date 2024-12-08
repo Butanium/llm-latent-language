@@ -10,6 +10,7 @@ from nnsight import LanguageModel
 from utils import ulist, get_tokenizer
 from typing import Callable
 import re
+from transformers import AutoTokenizer
 from interventions import logit_lens, patchscope_lens, TargetPrompt
 from nnsight_utils import collect_activations, get_num_layers
 from typing import Literal, Optional
@@ -29,6 +30,12 @@ def load_model(model_name: str, trust_remote_code=False, use_tl=False, **kwargs_
     if use_tl:
         kwargs["device"] = "cuda" if th.cuda.is_available() else "cpu"
         kwargs["processing"] = False
+        tokenizer_kwargs = kwargs_.pop("tokenizer_kwargs", {})
+        tokenizer_kwargs.update(
+            dict(add_prefix_space=False, trust_remote_code=trust_remote_code)
+        )
+        tokenizer = AutoTokenizer.from_pretrained(model_name, **tokenizer_kwargs)
+        kwargs["tokenizer"] = tokenizer
         kwargs.update(kwargs_)
         return UnifiedTransformer(model_name, **kwargs)
     else:
@@ -77,7 +84,7 @@ A spoon is a utensil used for eating food
 
 
 def next_token_probs_unsqueeze(
-    nn_model: NNLanguageModel, prompt: str | list[str], scan=True
+    nn_model: NNLanguageModel, prompt: str | list[str], **_kwargs
 ) -> th.Tensor:
     probs = next_token_probs(nn_model, prompt)
     return probs.unsqueeze(1)  # Add a fake layer dimension
@@ -138,7 +145,9 @@ def filter_prompts_by_prob(prompts, model, treshold=0.3, batch_size=32):
     if prompts == []:
         return []
     target_probs, _ = run_prompts(
-        model, prompts, batch_size=batch_size, get_probs=next_token_probs_unsqueeze
+        model,
+        prompts,
+        batch_size=batch_size,
     )
     return [
         prompt for prompt, prob in zip(prompts, target_probs) if prob.max() >= treshold
